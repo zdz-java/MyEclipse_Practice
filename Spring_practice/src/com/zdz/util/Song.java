@@ -1,4 +1,4 @@
-package com.zdz.bean;
+package com.zdz.util;
 
 public class Song {
 	private String lir;

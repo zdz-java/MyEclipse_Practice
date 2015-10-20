@@ -1,5 +1,7 @@
 package com.zdz.bean;
 
+import com.zdz.util.Song;
+
 public class Singer implements Performer {
 	private Song song;
 
@@ -7,17 +9,21 @@ public class Singer implements Performer {
 	public void perform() {
 		sing();
 	}
-	public Singer()
-	{
-		
+
+	public Singer() {
+
 	}
-	public Singer(Song song)
-	{
+
+	public Singer(Song song) {
 		this.song = song;
 	}
-	public void setSong(Song song)
-	{
+
+	public void setSong(Song song) {
 		this.song = song;
+	}
+	public Song getSong()
+	{
+		return song;
 	}
 	public void sing() {
 		if (song != null) {
@@ -26,4 +32,16 @@ public class Singer implements Performer {
 			System.out.println("I'm sorry,I'm not read.");
 		}
 	}
+	
+	public void warmUp()
+	{
+		System.out.println(this.getClass().getName()+"[init-method]:"+"I'm dancing to warm up");
+	}
+	
+	public void thank()
+	{
+		System.out.println("thank everyone to watch my show");
+	}
+	
+	
 }

@@ -3,10 +3,31 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="song" class="com.zdz.bean.Song">
+	<bean id="song" class="com.zdz.util.Song">
 		<constructor-arg value="两只老虎，两只老虎。跑得快，跑得快"/>
 	</bean>
-	<bean id="singer" class="com.zdz.bean.Singer">
+	
+	<bean id="player" class="com.zdz.bean.Player">
+		<property name="instruments">
+			<list>
+				<ref bean="guita"/>
+				<ref bean="flute"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="guita" class="com.zdz.util.Guitar">
+	</bean>
+	<bean id="flute" class="com.zdz.util.Flute">
+	</bean>
+	
+	
+	<bean id="singer" class="com.zdz.bean.Singer" init-method="warmUp" destroy-method="thank">
 		<property name="song" ref="song"></property>
 	</bean>
+	<bean id="mocker" class="com.zdz.bean.Mocker">
+		<property name="song" ref="#{singer.song.toUpcase()}">
+		</property>
+	</bean>
+	
+	
 </beans>

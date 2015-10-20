@@ -7,9 +7,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zdz.bean.Performer;
 import com.zdz.bean.Singer;
-import com.zdz.bean.Song;
+import com.zdz.util.Song;
 
-public class SingerTest {
+public class BeanTest {
 //	@Test
 //	public void singerTestOrigin() {
 //		Song twoTiger = new Song();
@@ -19,11 +19,25 @@ public class SingerTest {
 //		Performer angelababy = new Singer(twoTiger);
 //		angelababy.perform();
 //	}
+//	@Test
+//	public void singerTestSpringXML()
+//	{
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+//		Performer angelababy = (Performer)ac.getBean("singer");
+//		angelababy.perform();
+//	}
 	@Test
-	public void singerTestSpringXML()
+	public void PlayerTest()
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		Performer angelababy = (Performer)ac.getBean("singer");
+		Performer angelababy = (Performer)ac.getBean("player");
+		angelababy.perform();
+	}
+	@Test
+	public void mockerTest()
+	{
+		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		Performer angelababy = (Performer)ac.getBean("mocker");
 		angelababy.perform();
 	}
 }
