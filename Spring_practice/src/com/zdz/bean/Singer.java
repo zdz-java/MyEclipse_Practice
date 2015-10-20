@@ -1,7 +1,11 @@
 package com.zdz.bean;
 
-import com.zdz.util.Song;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
+import com.zdz.util.Song;
+@Component
 public class Singer implements Performer {
 	private Song song;
 
@@ -17,7 +21,8 @@ public class Singer implements Performer {
 	public Singer(Song song) {
 		this.song = song;
 	}
-
+	@Autowired
+	@Qualifier(value="song")
 	public void setSong(Song song) {
 		this.song = song;
 	}

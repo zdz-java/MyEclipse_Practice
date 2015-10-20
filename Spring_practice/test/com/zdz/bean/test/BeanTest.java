@@ -19,25 +19,25 @@ public class BeanTest {
 //		Performer angelababy = new Singer(twoTiger);
 //		angelababy.perform();
 //	}
+	@Test
+	public void singerTestSpringXML()
+	{
+		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		Performer angelababy = (Performer)ac.getBean("singer");
+		angelababy.perform();
+	}
 //	@Test
-//	public void singerTestSpringXML()
+//	public void PlayerTest()
 //	{
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-//		Performer angelababy = (Performer)ac.getBean("singer");
+//		Performer angelababy = (Performer)ac.getBean("player");
 //		angelababy.perform();
 //	}
-	@Test
-	public void PlayerTest()
-	{
-		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		Performer angelababy = (Performer)ac.getBean("player");
-		angelababy.perform();
-	}
-	@Test
-	public void mockerTest()
-	{
-		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		Performer angelababy = (Performer)ac.getBean("mocker");
-		angelababy.perform();
-	}
+//	@Test
+//	public void mockerTest()
+//	{
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+//		Performer angelababy = (Performer)ac.getBean("mocker");
+//		angelababy.perform();
+//	}
 }

@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="song" class="com.zdz.util.Song">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- <context:annotation-config/> -->
+	 <context:component-scan base-package="com.zdz.bean" />
+	 <context:component-scan base-package="com.zdz.util" />
+<!-- 	<bean id="song" class="com.zdz.util.Song">
 		<constructor-arg value="两只老虎，两只老虎。跑得快，跑得快"/>
 	</bean>
-	
+	<bean id="dida" class="com.zdz.util.Song">
+		<constructor-arg value="didadidadidadida"/>
+	</bean> -->
+<!-- 	<bean id="singer" class="com.zdz.bean.Singer" init-method="warmUp" destroy-method="thank">
+		<property name="song" ref="song"></property>
+	</bean> -->
 	<bean id="player" class="com.zdz.bean.Player">
 		<property name="instruments">
 			<list>
@@ -19,15 +31,12 @@
 	</bean>
 	<bean id="flute" class="com.zdz.util.Flute">
 	</bean>
-	
-	
-	<bean id="singer" class="com.zdz.bean.Singer" init-method="warmUp" destroy-method="thank">
-		<property name="song" ref="song"></property>
-	</bean>
-	<bean id="mocker" class="com.zdz.bean.Mocker">
-		<property name="song" ref="#{singer.song.toUpcase()}">
+			
+<!-- 	<bean id="mocker" class="com.zdz.bean.Mocker">
+		<property name="song" value="#{singer.song}">
 		</property>
-	</bean>
+	</bean> -->
+	
 	
 	
 </beans>
