@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-     xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
-	
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
 	<!-- <context:annotation-config/> -->
-	 <context:component-scan base-package="com.zdz.bean" />
-	 <context:component-scan base-package="com.zdz.util" />
-<!-- 	<bean id="song" class="com.zdz.util.Song">
-		<constructor-arg value="两只老虎，两只老虎。跑得快，跑得快"/>
-	</bean>
-	<bean id="dida" class="com.zdz.util.Song">
-		<constructor-arg value="didadidadidadida"/>
-	</bean> -->
-<!-- 	<bean id="singer" class="com.zdz.bean.Singer" init-method="warmUp" destroy-method="thank">
-		<property name="song" ref="song"></property>
-	</bean> -->
+	<context:component-scan base-package="com.zdz.bean" />
+	<context:component-scan base-package="com.zdz.util" />
+	<!-- <bean id="song" class="com.zdz.util.Song"> <constructor-arg value="两只老虎，两只老虎。跑得快，跑得快"/> 
+		</bean> <bean id="dida" class="com.zdz.util.Song"> <constructor-arg value="didadidadidadida"/> 
+		</bean> -->
+	<!-- <bean id="singer" class="com.zdz.bean.Singer" init-method="warmUp" 
+		destroy-method="thank"> <property name="song" ref="song"></property> </bean> -->
+
+	<!-- <bean id="mocker" class="com.zdz.bean.Mocker"> <property name="song" 
+		value="#{singer.song}"> </property> </bean> -->
+
 	<bean id="player" class="com.zdz.bean.Player">
 		<property name="instruments">
 			<list>
-				<ref bean="guita"/>
-				<ref bean="flute"/>
+				<ref bean="guita" />
+				<ref bean="flute" />
 			</list>
 		</property>
 	</bean>
@@ -31,12 +33,17 @@
 	</bean>
 	<bean id="flute" class="com.zdz.util.Flute">
 	</bean>
-			
-<!-- 	<bean id="mocker" class="com.zdz.bean.Mocker">
-		<property name="song" value="#{singer.song}">
-		</property>
-	</bean> -->
 	
-	
-	
+	<aop:config>
+		<aop:aspect ref="audiance">
+			<aop:pointcut expression="execution(* com.zdz.bean.Player.perform(..))"
+				id="performance" />
+			<aop:before pointcut-ref="perfomance" method="siteDowm" />
+			<aop:after pointcut-ref="perfomance" method="cheer" />
+			<aop:after-throwing pointcut-ref="perfomance"
+				method="booing" />
+		</aop:aspect>
+	</aop:config>
+
+
 </beans>
