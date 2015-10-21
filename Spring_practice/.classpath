@@ -22,5 +22,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring4.1.6Sourse"/>
+	<classpathentry kind="lib" path="E:/aspectj-1.6.13/lib/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="E:/aspectj-1.6.13/lib/aspectjtools.jar"/>
+	<classpathentry kind="lib" path="E:/aspectj-1.6.13/lib/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="E:/aspectj-1.6.13/lib/org.aspectj.matcher.jar"/>
+	<classpathentry kind="lib" path="E:/aopalliance/aopalliance.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

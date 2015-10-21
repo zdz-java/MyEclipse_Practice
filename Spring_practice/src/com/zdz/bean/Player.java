@@ -10,14 +10,24 @@ public class Player implements Performer {
 
 	@Override
 	public void perform() {
+		
 		if (instruments.size() > 0) {
 			for (Instrument instrument : instruments)
 			{
 				instrument.work();
+				try {
+					Thread.sleep(10);
+					System.out.println("take a rest...");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
+			
 		}else {
 			System.out.println("I'm sorry,but My instrument lost.");
+//			throw new NullPointerException();
 		}
+		
 	}
 
 	public void addInstruments(Instrument instrument) {
