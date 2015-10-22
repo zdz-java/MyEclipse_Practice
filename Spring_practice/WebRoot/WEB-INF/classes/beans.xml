@@ -10,36 +10,57 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- <context:annotation-config/> -->
-	<!-- <context:component-scan base-package="com.zdz.bean" /> <context:component-scan 
-		base-package="com.zdz.util" /> -->
-	<!-- <bean id="song" class="com.zdz.util.Song">
-		<constructor-arg value="两只老虎，两只老虎。跑得快，跑得快" />
-	</bean> -->
-	<!-- <bean id="dida" class="com.zdz.util.Song">
-		<constructor-arg value="didadidadidadida" />
-	</bean> -->
+	<context:component-scan base-package="com.zdz.bean" />
+	<context:component-scan base-package="com.zdz.util" />
+	
+	<aop:aspectj-autoproxy/>
+	<!-- <bean id="song" class="com.zdz.util.Song"> <constructor-arg value="两只老虎，两只老虎。跑得快，跑得快" 
+		/> </bean> -->
+	<!-- <bean id="dida" class="com.zdz.util.Song"> <constructor-arg value="didadidadidadida" 
+		/> </bean> -->
 	<!-- <bean id="singer" class="com.zdz.bean.Singer" init-method="warmUp" 
-		destroy-method="thank"> <property name="song" ref="song"></property> </bean>
- -->
+		destroy-method="thank"> <property name="song" ref="song"></property> </bean> -->
 	<!-- <bean id="mocker" class="com.zdz.bean.Mocker"> <property name="song" 
 		value="#{singer.song}"> </property> </bean> -->
 
-	<!-- <bean id="player" class="com.zdz.bean.Player"> <property name="instruments"> 
-		<list> <ref bean="guita" /> <ref bean="flute" /> </list> </property> </bean> 
-		<bean id="guita" class="com.zdz.util.Guitar"> </bean> <bean id="flute" class="com.zdz.util.Flute"> 
-		</bean> <bean id="audiance" class="com.zdz.bean.Audience"></bean> <aop:config> 
-		<aop:aspect ref="audiance"> <aop:pointcut expression="execution(* com.zdz.bean.Player.perform(..))" 
-		id="performance" /> <aop:before pointcut-ref="performance" method="siteDown" 
-		/> <aop:after pointcut-ref="performance" method="cheer" /> <aop:after-throwing 
-		pointcut-ref="performance" method="booing" /> <aop:around pointcut-ref="performance" 
-		method="timeCount"/> </aop:aspect> </aop:config> -->
-	<bean id="magician" class="com.zdz.bean.Magician">
+
+
+	<bean id="player" class="com.zdz.bean.Player">
+		<property name="instruments">
+			<list>
+				<ref bean="guita" />
+				<ref bean="flute" />
+			</list>
+		</property>
+	</bean>
+	<bean id="guita" class="com.zdz.util.Guitar">
+	</bean>
+	<bean id="flute" class="com.zdz.util.Flute">
+	</bean>
+	<bean id="audiance" class="com.zdz.bean.Audience"></bean>
+	
+	<!-- <aop:config>
+		<aop:aspect ref="audiance">
+			<aop:pointcut expression="execution(* com.zdz.bean.Player.perform(..))"
+				id="performance" />
+			<aop:before pointcut-ref="performance" method="siteDown" />
+			<aop:after pointcut-ref="performance" method="cheer" />
+			<aop:after-throwing pointcut-ref="performance"
+				method="booing" />
+			<aop:around pointcut-ref="performance" method="timeCount" />
+		</aop:aspect>
+	</aop:config> -->
+
+
+
+
+	<!-- <bean id="magician" class="com.zdz.bean.Magician">
 	</bean>
 	<bean id="volunteer" class="com.zdz.util.Volunteer">
-		<!-- <property name="thought" value="hehe"></property> -->
-	</bean>
-	
-	<aop:config>
+		<property name="thought" value="hehe"></property>
+	</bean> -->
+
+	<!-- <aop:config>
 		<aop:aspect ref="magician">
 			<aop:pointcut
 				expression="execution(* com.zdz.util.Volunteer.thinkOfSomething(..)) and args(thought)"
@@ -47,7 +68,7 @@
 			<aop:before method="interceptThought" pointcut-ref="thinking"
 				arg-names="thought" />
 		</aop:aspect>
-	</aop:config>
+	</aop:config> -->
 
 
 </beans>

@@ -1,8 +1,11 @@
 package com.zdz.util;
 
-public class Volunteer implements Thinker{
+import org.springframework.stereotype.Component;
+
+@Component
+public class Volunteer {
 	private String thought;
-	@Override
+	
 	public void thinkOfSomething(String thought) {
 		this.thought = thought;
 	}

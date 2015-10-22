@@ -47,7 +47,8 @@ public class BeanTest {
 	public void VolunteerTest()
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		Thinker weige = (Thinker)ac.getBean("volunteer");
+//		Thinker weige = (Thinker)ac.getBean("volunteer");
+		Volunteer weige = (Volunteer)ac.getBean("volunteer");
 		Magician liuqian = (Magician)ac.getBean("magician");
 		
 		weige.thinkOfSomething("he will never know what I'm thinking now");
