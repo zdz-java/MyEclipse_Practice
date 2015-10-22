@@ -26,7 +26,7 @@ public class BeanTest {
 //	public void singerTestSpringXML()
 //	{
 //		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-//		Performer angelababy = (Performer)ac.getBean("singer");
+//		Performer angelababy = (Singer)ac.getBean("singer");
 //		angelababy.perform();
 //	}
 //	@Test
@@ -47,8 +47,9 @@ public class BeanTest {
 	public void VolunteerTest()
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		Thinker weige = (Thinker)ac.getBean("volunteer");
 		Magician liuqian = (Magician)ac.getBean("magician");
-		Thinker weige = (Volunteer)ac.getBean("volunteer");
+		
 		weige.thinkOfSomething("he will never know what I'm thinking now");
 		System.out.println(liuqian.getThought());
 	}

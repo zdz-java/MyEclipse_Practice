@@ -12,4 +12,8 @@ public class Volunteer implements Thinker{
 		return thought;
 	}
 
+//	public void setThought(String thought)
+//	{
+//		this.thought = thought;
+//	}
 }
