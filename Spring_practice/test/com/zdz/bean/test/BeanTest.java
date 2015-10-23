@@ -4,10 +4,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
 import com.zdz.bean.Magician;
 import com.zdz.bean.Performer;
 import com.zdz.bean.Singer;
+import com.zdz.bean.Student;
+import com.zdz.dao.TestDao;
+import com.zdz.dao.TestDaoImpl;
 import com.zdz.util.Song;
 import com.zdz.util.Thinker;
 import com.zdz.util.Volunteer;
@@ -43,15 +47,29 @@ public class BeanTest {
 //		Performer angelababy = (Performer)ac.getBean("mocker");
 //		angelababy.perform();
 //	}
+//	@Test
+//	public void VolunteerTest()
+//	{
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+////		Thinker weige = (Thinker)ac.getBean("volunteer");
+//		Volunteer weige = (Volunteer)ac.getBean("volunteer");
+//		Magician liuqian = (Magician)ac.getBean("magician");
+//		
+//		weige.thinkOfSomething("he will never know what I'm thinking now");
+//		System.out.println(liuqian.getThought());
+//	}
 	@Test
-	public void VolunteerTest()
+	public void daoTest()
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-//		Thinker weige = (Thinker)ac.getBean("volunteer");
-		Volunteer weige = (Volunteer)ac.getBean("volunteer");
-		Magician liuqian = (Magician)ac.getBean("magician");
-		
-		weige.thinkOfSomething("he will never know what I'm thinking now");
-		System.out.println(liuqian.getThought());
+//		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
+		TestDao td = (TestDaoImpl)ac.getBean("testDaoImpl");
+		Student student = new Student();
+		student.setId(1);
+		student.setName("weige");
+		student.setScore(90);
+		student.setSex("w");
+		student.setStudent_number(8);
+		td.insert(student);
 	}
 }
