@@ -24,11 +24,15 @@
 		<property name="password" value="root" />
 	</bean>
 
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource"/>
 	</bean>
 	
-	<bean id="testDaoImpl" class="com.zdz.dao.TestDaoImpl">
+	<!-- <bean id="testDaoImpl" class="com.zdz.dao.TestDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean> -->
+	
+	<bean id="jdbcTestDaoImpl" class="com.zdz.dao.JdbcTestDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
 

@@ -10,6 +10,7 @@ import com.zdz.bean.Magician;
 import com.zdz.bean.Performer;
 import com.zdz.bean.Singer;
 import com.zdz.bean.Student;
+import com.zdz.dao.JdbcTestDaoImpl;
 import com.zdz.dao.TestDao;
 import com.zdz.dao.TestDaoImpl;
 import com.zdz.util.Song;
@@ -58,18 +59,33 @@ public class BeanTest {
 //		weige.thinkOfSomething("he will never know what I'm thinking now");
 //		System.out.println(liuqian.getThought());
 //	}
+//	@Test
+//	public void daoTest()
+//	{
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+////		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
+//		TestDao td = (TestDaoImpl)ac.getBean("testDaoImpl");
+//		Student student = new Student();
+//		student.setId(1);
+//		student.setName("weige");
+//		student.setScore(90);
+//		student.setSex("w");
+//		student.setStudent_number(8);
+//		td.insert(student);
+//	}
+	
 	@Test
-	public void daoTest()
+	public void jdbcDaoTest()
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 //		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
-		TestDao td = (TestDaoImpl)ac.getBean("testDaoImpl");
+		TestDao td = (JdbcTestDaoImpl)ac.getBean("jdbcTestDaoImpl");
 		Student student = new Student();
-		student.setId(1);
-		student.setName("weige");
-		student.setScore(90);
-		student.setSex("w");
-		student.setStudent_number(8);
+		student.setId(3);
+		student.setName("zdz");
+		student.setScore(100);
+		student.setSex("m");
+		student.setStudent_number(23);
 		td.insert(student);
 	}
 }
