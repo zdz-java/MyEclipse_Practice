@@ -8,9 +8,9 @@ public class TestDaoImpl implements TestDao {
 	private SimpleJdbcTemplate jdbcTemplate;
 	@Override
 	public void insert(Student student) {
-		String sql = "insert into test (id,name,sex,student_number,score) values(?,?,?,?,?)";
-		jdbcTemplate.update(sql,student.getId(),student.getName(),student.getSex(),student.getStudent_number(),student.getScore());
-		
+		String sql = "insert into test (name,sex,student_number,score) values(?,?,?,?)";
+		jdbcTemplate.update(sql,student.getName(),student.getSex(),student.getStudent_number(),student.getScore());
+		throw new NullPointerException();
 	}
 
 	@Override

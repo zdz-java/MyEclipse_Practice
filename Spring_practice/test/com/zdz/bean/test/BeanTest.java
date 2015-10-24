@@ -79,13 +79,12 @@ public class BeanTest {
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 //		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
-		TestDao td = (JdbcTestDaoImpl)ac.getBean("jdbcTestDaoImpl");
+		TestDao td = (TestDao)ac.getBean("testDaoImpl");
 		Student student = new Student();
-		student.setId(3);
-		student.setName("zdz");
-		student.setScore(100);
+		student.setName("Z10");
+		student.setScore(1);
 		student.setSex("m");
-		student.setStudent_number(23);
+		student.setStudent_number(24);
 		td.insert(student);
 	}
 }

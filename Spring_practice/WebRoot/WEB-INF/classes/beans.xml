@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- <context:annotation-config/> -->
+	<!-- 注解扫描 -->
 	<context:component-scan base-package="com.zdz.bean" />
 	<context:component-scan base-package="com.zdz.util" />
-
+	<!-- 切面注解扫描 -->
 	<aop:aspectj-autoproxy />
 
-
+	<tx:annotation-driven/>
+	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -23,18 +27,35 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
-
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<constructor-arg ref="dataSource"/>
+	<!-- dao使用的模版 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+		<constructor-arg ref="dataSource" />
 	</bean>
+
+	<!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="insert" isolation="SERIALIZABLE" />
+		</tx:attributes>
+	</tx:advice> -->
+	<!-- 事务管理覆盖的切点 -->
+	<!-- <aop:config>
+		<aop:advisor pointcut="execution(* *..TestDao.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config> -->
 	
-	<!-- <bean id="testDaoImpl" class="com.zdz.dao.TestDaoImpl">
+	
+	<bean id="testDaoImpl" class="com.zdz.dao.TestDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<!-- <bean id="jdbcTestDaoImpl" class="com.zdz.dao.JdbcTestDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean> -->
-	
-	<bean id="jdbcTestDaoImpl" class="com.zdz.dao.JdbcTestDaoImpl">
-		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-	</bean>
 
 	<!-- <bean id="song" class="com.zdz.util.Song"> <constructor-arg value="两只老虎，两只老虎。跑得快，跑得快" 
 		/> </bean> -->
