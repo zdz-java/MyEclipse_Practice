@@ -81,7 +81,7 @@ public class BeanTest {
 //		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
 		TestDao td = (TestDao)ac.getBean("testDaoImpl");
 		Student student = new Student();
-		student.setName("Z10");
+		student.setName("Z11");
 		student.setScore(1);
 		student.setSex("m");
 		student.setStudent_number(24);

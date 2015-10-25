@@ -21,7 +21,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring4.1.6Sourse"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring3.2.4"/>
 	<classpathentry kind="lib" path="E:/aspectj-1.6.13/lib/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="E:/aspectj-1.6.13/lib/aspectjtools.jar"/>
 	<classpathentry kind="lib" path="E:/aspectj-1.6.13/lib/aspectjweaver.jar"/>
@@ -31,5 +31,6 @@
 	<classpathentry kind="lib" path="E:/dbcp/commons-collections-3.1.jar"/>
 	<classpathentry kind="lib" path="E:/dbcp/commons-dbcp.jar"/>
 	<classpathentry kind="lib" path="E:/dbcp/commons-pool.jar"/>
+	<classpathentry kind="lib" path="E:/jar/commons-logging-1.1.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
