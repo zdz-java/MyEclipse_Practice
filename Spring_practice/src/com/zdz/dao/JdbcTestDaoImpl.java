@@ -17,5 +17,11 @@ public class JdbcTestDaoImpl extends SimpleJdbcDaoSupport implements TestDao{
 	public String getNameById(int id) {
 		return null;
 	}
+
+	@Override
+	public Student getOne() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -13,8 +13,8 @@
 
 	<!-- <context:annotation-config/> -->
 	<!-- 注解扫描 -->
-	<context:component-scan base-package="com.zdz.bean" />
-	<context:component-scan base-package="com.zdz.util" />
+	<context:component-scan base-package="com.zdz" />
+
 	<!-- 切面注解扫描 -->
 	<aop:aspectj-autoproxy />
 

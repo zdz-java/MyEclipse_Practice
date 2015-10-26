@@ -13,6 +13,7 @@ import com.zdz.bean.Student;
 import com.zdz.dao.JdbcTestDaoImpl;
 import com.zdz.dao.TestDao;
 import com.zdz.dao.TestDaoImpl;
+import com.zdz.springmvc.service.TestService;
 import com.zdz.util.Song;
 import com.zdz.util.Thinker;
 import com.zdz.util.Volunteer;
@@ -80,11 +81,22 @@ public class BeanTest {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 //		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
 		TestDao td = (TestDao)ac.getBean("testDaoImpl");
-		Student student = new Student();
-		student.setName("Z11");
-		student.setScore(1);
-		student.setSex("m");
-		student.setStudent_number(24);
-		td.insert(student);
+//		Student student = new Student();
+//		student.setName("Z11");
+//		student.setScore(1);
+//		student.setSex("m");
+//		student.setStudent_number(24);
+//		td.insert(student);
+		
+		Student s =td.getOne();
+		System.out.println(s.getName());
+		
+	}
+	@Test
+	public void testServiceTest()
+	{
+		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		TestService ts = (TestService)ac.getBean("testService");
+		System.out.println(ts.getOne().getName());
 	}
 }

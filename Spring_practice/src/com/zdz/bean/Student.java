@@ -1,6 +1,12 @@
 package com.zdz.bean;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 121L;
 	private int id;
 	public int getId() {
 		return id;
