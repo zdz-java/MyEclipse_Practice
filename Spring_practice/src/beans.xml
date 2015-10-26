@@ -18,7 +18,7 @@
 	<!-- 切面注解扫描 -->
 	<aop:aspectj-autoproxy />
 
-	<tx:annotation-driven/>
+	<tx:annotation-driven />
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
@@ -37,25 +37,22 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="insert" isolation="SERIALIZABLE" />
-		</tx:attributes>
-	</tx:advice> -->
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+		<tx:attributes> <tx:method name="insert" isolation="SERIALIZABLE" /> </tx:attributes> 
+		</tx:advice> -->
 	<!-- 事务管理覆盖的切点 -->
-	<!-- <aop:config>
-		<aop:advisor pointcut="execution(* *..TestDao.*(..))"
-			advice-ref="txAdvice" />
-	</aop:config> -->
-	
-	
+	<!-- <aop:config> <aop:advisor pointcut="execution(* *..TestDao.*(..))" 
+		advice-ref="txAdvice" /> </aop:config> -->
+
+
 	<bean id="testDaoImpl" class="com.zdz.dao.TestDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
-
-	<!-- <bean id="jdbcTestDaoImpl" class="com.zdz.dao.JdbcTestDaoImpl">
+	<bean id="testDao" class="com.zdz.dao.TestDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-	</bean> -->
+	</bean>
+	<!-- <bean id="jdbcTestDaoImpl" class="com.zdz.dao.JdbcTestDaoImpl"> <property 
+		name="jdbcTemplate" ref="jdbcTemplate"></property> </bean> -->
 
 	<!-- <bean id="song" class="com.zdz.util.Song"> <constructor-arg value="两只老虎，两只老虎。跑得快，跑得快" 
 		/> </bean> -->

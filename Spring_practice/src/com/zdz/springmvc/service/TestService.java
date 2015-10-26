@@ -20,7 +20,7 @@ public class TestService {
 	public TestDao getTestDao() {
 		return testDao;
 	}
-	@Autowired
+//	@Autowired
 	public void setTestDao(TestDao testDao) {
 		this.testDao = testDao;
 	}

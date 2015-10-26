@@ -3,6 +3,17 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
+	<listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+    <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+    	classpath:beans.xml
+    </param-value>
+</context-param>
 	<display-name>Spring_practice</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -21,4 +32,5 @@
 		<servlet-name>zdz</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
 </web-app>
