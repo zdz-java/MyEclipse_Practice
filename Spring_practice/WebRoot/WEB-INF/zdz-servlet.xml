@@ -28,5 +28,13 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	<!-- <bean name="/hello" class="com.zdz.springmvc.controller.HelloWorldController"></bean> -->
+	<bean name="/hello" class="com.zdz.springmvc.controller.HelloWorldController">
+		<!-- <property name="supportedMethods" value="POST"></property> -->
+	</bean>
+	<bean name="/forwardToServlet" class="org.springframework.web.servlet.mvc.ServletForwardingController">
+		<property name="servletName" value="forwarding"/>
+	</bean>
+	<bean name="/abstract" class="com.zdz.springmvc.controller.MyAbstractCommandController">
+		<property name="commandClass" value="com.zdz.bean.User"></property>
+	</bean>
 </beans>

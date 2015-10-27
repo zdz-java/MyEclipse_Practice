@@ -4,12 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.mvc.Controller;
 
-public class HelloWorldController implements Controller {
+public class HelloWorldController extends AbstractController {
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest request,
+	public ModelAndView handleRequestInternal(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		// 添加模型数据 可以是任意的POJO对象
@@ -18,5 +19,7 @@ public class HelloWorldController implements Controller {
 		mv.setViewName("hello");
 		return mv;
 	}
+
+	
 
 }

@@ -38,5 +38,9 @@
 		<servlet-name>zdz</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<servlet>  
+    	<servlet-name>forwarding</servlet-name>  
+    	<servlet-class>com.zdz.springmvc.servlet.ForwardingServlet</servlet-class>  
+	</servlet>  
 	
 </web-app>
