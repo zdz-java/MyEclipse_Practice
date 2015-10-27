@@ -37,4 +37,9 @@
 	<bean name="/abstract" class="com.zdz.springmvc.controller.MyAbstractCommandController">
 		<property name="commandClass" value="com.zdz.bean.User"></property>
 	</bean>
+	<bean name="/simpleForm" class="com.zdz.springmvc.controller.RegisterSimpleFormController">
+		<property name="formView" value="register"/>
+		<property name="successView" value="redirect:/hello"/>
+	</bean>
+	<!-- <bean name="/success" ></bean> -->
 </beans>
