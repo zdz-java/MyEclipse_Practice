@@ -14,6 +14,7 @@
 	<!-- <context:annotation-config/> -->
 	<!-- 注解扫描 -->
 	<context:component-scan base-package="com.zdz" />
+	<!-- <context:component-scan base-package="com.zdz.springmvc.service" /> -->
 
 	<!-- 切面注解扫描 -->
 	<aop:aspectj-autoproxy />
@@ -48,9 +49,12 @@
 	<bean id="testDaoImpl" class="com.zdz.dao.TestDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
 	</bean>
-	<bean id="testDao" class="com.zdz.dao.TestDaoImpl">
+<!-- 	<bean id="testDao" class="com.zdz.dao.TestDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
-	</bean>
+	</bean> -->
+	<!-- <bean id="testService" class="com.zdz.springmvc.service.TestService">
+		<property name="testDao" ref="testDaoImpl"></property>
+	</bean> -->
 	<!-- <bean id="jdbcTestDaoImpl" class="com.zdz.dao.JdbcTestDaoImpl"> <property 
 		name="jdbcTemplate" ref="jdbcTemplate"></property> </bean> -->
 
