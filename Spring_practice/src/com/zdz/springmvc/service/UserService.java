@@ -1,11 +1,27 @@
 package com.zdz.springmvc.service;
 
-import com.zdz.bean.User;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.zdz.bean.User;
+import com.zdz.dao.UserDao;
+@Component
 public class UserService {
+	private UserDao userDao;
+	
+	public UserDao getUserDao() {
+		return userDao;
+	}
+	@Autowired
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
 	public void create(User user)
 	{
-		
+		userDao.create(user);
 	}
 
 	public void update(User user) {
@@ -23,9 +39,9 @@ public class UserService {
 		
 	}
 
-	public Object list() {
+	public List list() {
 		// TODO Auto-generated method stub
-		return null;
+		return userDao.list();
 	}
 	
 }

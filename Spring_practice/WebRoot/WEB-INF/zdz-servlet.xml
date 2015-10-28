@@ -76,7 +76,7 @@
 		<!-- <property name="prefix" value="/WEB-INF/public-resources/"/> <property 
 			name="suffix" value=".html"/> -->
 	</bean>
-	<bean id="userService" class="com.zdz.springmvc.service.UserService" />
+	<!-- <bean id="userService" class="com.zdz.springmvc.service.UserService" /> -->
 	<bean name="/user/**" class="com.zdz.springmvc.controller.UserController">
 		<property name="userService" ref="userService" />
 		<property name="createView" value="user/create" />

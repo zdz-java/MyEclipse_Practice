@@ -1,5 +1,7 @@
 package com.zdz.bean.test;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -10,10 +12,12 @@ import com.zdz.bean.Magician;
 import com.zdz.bean.Performer;
 import com.zdz.bean.Singer;
 import com.zdz.bean.Student;
+import com.zdz.bean.User;
 import com.zdz.dao.JdbcTestDaoImpl;
 import com.zdz.dao.TestDao;
 import com.zdz.dao.TestDaoImpl;
 import com.zdz.springmvc.service.TestService;
+import com.zdz.springmvc.service.UserService;
 import com.zdz.util.Song;
 import com.zdz.util.Thinker;
 import com.zdz.util.Volunteer;
@@ -75,28 +79,51 @@ public class BeanTest {
 //		td.insert(student);
 //	}
 	
+//	@Test
+//	public void jdbcDaoTest()
+//	{
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+////		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
+//		TestDao td = (TestDao)ac.getBean("testDaoImpl");
+////		Student student = new Student();
+////		student.setName("Z11");
+////		student.setScore(1);
+////		student.setSex("m");
+////		student.setStudent_number(24);
+////		td.insert(student);
+//		
+//		Student s =td.getOne();
+//		System.out.println(s.getName());
+//		
+//	}
+//	@Test
+//	public void testServiceTest()
+//	{
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+//		TestService ts = (TestService)ac.getBean("testService");
+//		System.out.println(ts.getOne().getName());
+//	}
+//	@Test
+//	public void testUserDaoCreate()
+//	{
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+//		UserService us = (UserService)ac.getBean("userService");
+//		User user = new User();
+//		user.setUsername("z");
+//		user.setRealname("zdz");
+//		us.create(user);
+//	}
 	@Test
-	public void jdbcDaoTest()
+	public void testUserDaoList()
 	{
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-//		SimpleJdbcTemplate sjt = (SimpleJdbcTemplate)ac.getBean("jdbcTemplate");
-		TestDao td = (TestDao)ac.getBean("testDaoImpl");
-//		Student student = new Student();
-//		student.setName("Z11");
-//		student.setScore(1);
-//		student.setSex("m");
-//		student.setStudent_number(24);
-//		td.insert(student);
+		UserService us = (UserService)ac.getBean("userService");
+		List<User> list = us.list();
+		for(Object u:list)
+		{
+			System.out.println(u);
+		}
 		
-		Student s =td.getOne();
-		System.out.println(s.getName());
-		
-	}
-	@Test
-	public void testServiceTest()
-	{
-		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		TestService ts = (TestService)ac.getBean("testService");
-		System.out.println(ts.getOne().getName());
 	}
 }
+
