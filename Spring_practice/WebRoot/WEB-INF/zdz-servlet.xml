@@ -87,4 +87,5 @@
 		<!-- 使用PropertiesMethodNameResolver来解析功能处理方法名 -->
 		<!--property name="methodNameResolver" ref="propertiesMethodNameResolver"/ -->
 	</bean>
+	<bean name="/dataBind" class="com.zdz.springmvc.controller.DataBinderTestController"></bean>
 </beans>
