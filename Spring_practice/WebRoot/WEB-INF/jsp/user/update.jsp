@@ -5,17 +5,13 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
-
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'register.jsp' starting page</title>
+<title>My JSP 'update.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -29,13 +25,11 @@
 </head>
 
 <body>
-	<form method="post">
-		username:<input type="text" name="username" value="${user.username}"><br />
-		password:<input type="password" name="username"><br /> city:<select>
-			<c:forEach items="${cityList}" var="city">
-				<option>${city}</option>
-			</c:forEach>
-		</select><br /> <input type="submit" value="注册" /><input type="submit" name="_cancel" value="取消"/>  
+	<form action="${pageContext.request.contextPath}/user/update"
+		method="post">
+		用户名： <input type="text" name="username" value="${command.username}" /><br />
+		真实姓名：<input type="text" name="realname" value="${command.realname}" /><br />
+		<input type="submit" value="更新" />
 	</form>
 </body>
 </html>

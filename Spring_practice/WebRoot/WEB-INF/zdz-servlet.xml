@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -9,12 +8,13 @@
         http://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-   	<!-- 即使添加了这一段也无法进行静态资源的访问，待解决 -->
-	<mvc:resources mapping="/resources/**" location="/public-resources/"/>
-	<mvc:annotation-driven/>
-	<context:component-scan base-package="com.zdz"/>
+	<!-- 即使添加了这一段也无法进行静态资源的访问，待解决 -->
+	<mvc:resources mapping="/resources/**" location="/public-resources/" />
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.zdz" />
 	<!-- HandlerMapping -->
-	<bean class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	<bean
+		class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 	<!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" 
 		/> -->
 	<!-- HandlerAdapter -->
@@ -31,15 +31,60 @@
 	<bean name="/hello" class="com.zdz.springmvc.controller.HelloWorldController">
 		<!-- <property name="supportedMethods" value="POST"></property> -->
 	</bean>
-	<bean name="/forwardToServlet" class="org.springframework.web.servlet.mvc.ServletForwardingController">
-		<property name="servletName" value="forwarding"/>
+	<bean name="/forwardToServlet"
+		class="org.springframework.web.servlet.mvc.ServletForwardingController">
+		<property name="servletName" value="forwarding" />
 	</bean>
-	<bean name="/abstract" class="com.zdz.springmvc.controller.MyAbstractCommandController">
+	<bean name="/abstract"
+		class="com.zdz.springmvc.controller.MyAbstractCommandController">
 		<property name="commandClass" value="com.zdz.bean.User"></property>
 	</bean>
-	<bean name="/simpleForm" class="com.zdz.springmvc.controller.RegisterSimpleFormController">
-		<property name="formView" value="register"/>
-		<property name="successView" value="redirect:/hello"/>
+	<bean name="/simpleForm"
+		class="com.zdz.springmvc.controller.RegisterSimpleFormController">
+		<property name="formView" value="register" />
+		<!-- 使用hello视图代替success -->
+		<property name="successView" value="redirect:/success" />
 	</bean>
-	<!-- <bean name="/success" ></bean> -->
+	<bean name="/cancelForm"
+		class="com.zdz.springmvc.controller.CanCancelRegisterSimpleFormController">
+		<property name="formView" value="register" />
+		<!-- 使用hello视图代替 -->
+		<property name="successView" value="redirect:/success" />
+		<property name="cancelView" value="redirect:/cancel" />
+	</bean>
+	<bean name="/infoFillWizard"
+		class="com.zdz.springmvc.controller.InfoFillWizardFormController">
+		<property name="pages">
+			<list>
+				<value>wizard/baseInfo</value>
+				<value>wizard/schoolInfo</value>
+				<value>wizard/workInfo</value>
+			</list>
+		</property>
+	</bean>
+	<!-- <bean name="/success" class="com.zdz.springmvc.controller.SuccessController"></bean> -->
+	<bean name="/success"
+		class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="success" />
+	</bean>
+	<bean name="/cancel"
+		class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+		<property name="viewName" value="cancel" />
+	</bean>
+	<bean name="/public-resources/*.html"
+		class="org.springframework.web.servlet.mvc.UrlFilenameViewController">
+		<!-- <property name="prefix" value="/WEB-INF/public-resources/"/> <property 
+			name="suffix" value=".html"/> -->
+	</bean>
+	<bean id="userService" class="com.zdz.springmvc.service.UserService" />
+	<bean name="/user/**" class="com.zdz.springmvc.controller.UserController">
+		<property name="userService" ref="userService" />
+		<property name="createView" value="user/create" />
+		<property name="updateView" value="user/update" />
+		<property name="deleteView" value="user/delete" />
+		<property name="listView" value="user/list" />
+		<property name="redirectToListView" value="redirect:/user/list" />
+		<!-- 使用PropertiesMethodNameResolver来解析功能处理方法名 -->
+		<!--property name="methodNameResolver" ref="propertiesMethodNameResolver"/ -->
+	</bean>
 </beans>

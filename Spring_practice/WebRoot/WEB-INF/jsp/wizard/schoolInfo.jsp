@@ -15,7 +15,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>My JSP 'register.jsp' starting page</title>
+<title>My JSP 'schoolInfo.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -30,12 +30,19 @@
 
 <body>
 	<form method="post">
-		username:<input type="text" name="username" value="${user.username}"><br />
-		password:<input type="password" name="username"><br /> city:<select>
-			<c:forEach items="${cityList}" var="city">
-				<option>${city}</option>
+		学校类型：<select name="schoolInfo.schoolType">
+			<c:forEach items="${schoolTypeList }" var="schoolType">
+				<option value="${schoolType }"
+					<c:if test="${user.schoolInfo.schoolType eq schoolType}">  
+           selected="selected"  
+       </c:if>>
+					${schoolType}</option>
 			</c:forEach>
-		</select><br /> <input type="submit" value="注册" /><input type="submit" name="_cancel" value="取消"/>  
+		</select><br /> 学校名称：<input type="text" name="schoolInfo.schoolName"
+			value="${user.schoolInfo.schoolName}" /><br /> 专业：<input type="text"
+			name="schoolInfo.specialty" value="${user.schoolInfo.specialty}" /><br />
+		<input type="submit" name="_target0" value="上一步" /> <input
+			type="submit" name="_target2" value="下一步" />
 	</form>
 </body>
 </html>
