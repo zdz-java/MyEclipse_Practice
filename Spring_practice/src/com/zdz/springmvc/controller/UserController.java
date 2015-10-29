@@ -71,6 +71,7 @@ public class UserController extends MultiActionController {
 			// 如果是get请求 我们转向 新增页面
 			return getCreateView();
 		}
+System.out.println(user.getUsername());
 		userService.create(user);
 		// 直接重定向到列表页面
 		return getRedirectToListView();

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
    <form method="post">
 		username:<input type="text" name="username" value="${user.username}"><br />
-		realname:<input type="text" name="realname" value="${user.realname}"><br /><br /> <input type="submit" value="×¢²á" /><input type="submit" name="_cancel" value="È¡Ïû"/>  
+		realname:<input type="text" name="realname" value="${user.realname}"><br /><br /> <input type="submit" value="æ³¨å†Œ" /><input type="submit" name="_cancel" value="å–æ¶ˆ"/>  
 	</form>
   </body>
 </html>

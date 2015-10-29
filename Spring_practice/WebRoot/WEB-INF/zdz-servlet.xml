@@ -76,7 +76,8 @@
 		<!-- <property name="prefix" value="/WEB-INF/public-resources/"/> <property 
 			name="suffix" value=".html"/> -->
 	</bean>
-	<!-- <bean id="userService" class="com.zdz.springmvc.service.UserService" /> -->
+	<!-- <bean id="userService" class="com.zdz.springmvc.service.UserService" 
+		/> -->
 	<bean name="/user/**" class="com.zdz.springmvc.controller.UserController">
 		<property name="userService" ref="userService" />
 		<property name="createView" value="user/create" />
@@ -88,4 +89,18 @@
 		<!--property name="methodNameResolver" ref="propertiesMethodNameResolver"/ -->
 	</bean>
 	<bean name="/dataBind" class="com.zdz.springmvc.controller.DataBinderTestController"></bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="fileEncodings" value="utf-8" />
+		<property name="cacheSeconds" value="120" />
+	</bean>
+
+	<bean name="/error" class="com.zdz.springmvc.controller.ErrorController" />
+	<bean name="/dataBindError"
+		class="com.zdz.springmvc.controller.DataBinderErrorTestController">
+		<property name="formView" value="bindAndValidate/input" />
+		<property name="successView" value="bindAndValidate/success" />
+	</bean>
 </beans>
