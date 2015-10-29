@@ -9,14 +9,22 @@
          http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<!-- 即使添加了这一段也无法进行静态资源的访问，待解决 -->
-	<mvc:resources mapping="/resources/**" location="/public-resources/" />
-	<mvc:annotation-driven />
-	<context:component-scan base-package="com.zdz" />
+	<!-- <mvc:resources mapping="/resources/**" location="/public-resources/" /> -->
+	<!-- <mvc:annotation-driven /> -->
+	<!-- <context:component-scan base-package="com.zdz" /> -->
 	<!-- HandlerMapping -->
-	<bean
-		class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	<!-- <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" 
+	<!-- <bean class="org.springframework.web.portlet.mvc.annotation.DefaultAnnotationHandlerMapping" 
 		/> -->
+
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="handlerInterceptor1" />
+				<ref bean="handlerInterceptor2" />
+			</list>
+		</property>
+	</bean>
 	<!-- HandlerAdapter -->
 	<bean
 		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
@@ -103,4 +111,7 @@
 		<property name="formView" value="bindAndValidate/input" />
 		<property name="successView" value="bindAndValidate/success" />
 	</bean>
+	<bean name="/test" class="com.zdz.springmvc.controller.TestController"></bean>
+	<bean id="handlerInterceptor1" class="com.zdz.springmvc.interceptor.HandlerInterceptor1" />
+	<bean id="handlerInterceptor2" class="com.zdz.springmvc.interceptor.HandlerInterceptor2" />
 </beans>
