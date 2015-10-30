@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
+import com.zdz.mybatis.inter.UserOperation;
 import com.zdz.mybatis.model.User;
 
 public class MyBatisTest {
@@ -27,12 +28,24 @@ public class MyBatisTest {
 	public static SqlSessionFactory getSession() {
 		return sqlSessionFactory;
 	}
+//	@Test
+//	public void firstTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			User user = (User) session.selectOne(
+//					"com.zdz.mybatis.model.UserMapper.selectUserByID", 1);
+//			System.out.println(user.getUserAddress());
+//			System.out.println(user.getUserName());
+//		} finally {
+//			session.close();
+//		}
+//	}
 	@Test
-	public void firstTest() {
+	public void secondTest() {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			User user = (User) session.selectOne(
-					"com.yihaomen.mybatis.models.UserMapper.selectUserByID", 1);
+			UserOperation userOperation = session.getMapper(UserOperation.class);
+			User user = (User) userOperation.selectUserByID(1);
 			System.out.println(user.getUserAddress());
 			System.out.println(user.getUserName());
 		} finally {
