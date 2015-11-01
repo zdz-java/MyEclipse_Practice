@@ -17,4 +17,5 @@
 	<bean class="com.zdz.springmvc.controller.HelloWorldController"></bean>
 	<bean class="com.zdz.springmvc.controller.RequestContentTypeController"></bean>
 	<bean class="com.zdz.springmvc.controller.SessionAttributeController"></bean>
+	<bean class="com.zdz.springmvc.controller.DataBinderTestController"></bean>
 </beans>
