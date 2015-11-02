@@ -3,6 +3,14 @@ package com.zdz.springmvc.model;
 public class PhoneNumberModel {
 	private String areaCode;// 区号
 	private String phoneNumber;// 电话号码
+	public PhoneNumberModel()
+	{
+		
+	}
+	public PhoneNumberModel(String string, String string2) {
+		areaCode = string;
+		phoneNumber = string2;
+	}
 	public String getAreaCode() {
 		return areaCode;
 	}
