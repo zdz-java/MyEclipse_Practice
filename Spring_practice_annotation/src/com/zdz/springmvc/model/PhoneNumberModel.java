@@ -15,5 +15,8 @@ public class PhoneNumberModel {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+	public String toString()
+	{
+		return "Phone:[areaCode:"+areaCode+" phoneNumber:"+phoneNumber+" ]";
+	}
 }

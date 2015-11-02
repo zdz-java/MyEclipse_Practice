@@ -2,6 +2,7 @@
     <wb-module deploy-name="Spring_practice_annotation">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="context-root" value="Spring_practice_annotation"/>
         <property name="java-output-path" value="/Spring_practice_annotation/WebRoot/WEB-INF/classes"/>
     </wb-module>

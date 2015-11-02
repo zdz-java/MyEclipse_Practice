@@ -6,7 +6,9 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
 	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="webBindingInitializer" ref="webBindingInitializer" />
+	</bean>
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
@@ -18,4 +20,19 @@
 	<bean class="com.zdz.springmvc.controller.RequestContentTypeController"></bean>
 	<bean class="com.zdz.springmvc.controller.SessionAttributeController"></bean>
 	<bean class="com.zdz.springmvc.controller.DataBinderTestController"></bean>
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean
+					class="com.zdz.springmvc.converter.StringToPhoneNumberConverter" />
+				<!-- <bean class="com.zdz.springmvc.converter.StringToDateConverter"> 
+					<constructor-arg value="yyyy-MM-dd" /> </bean> -->
+			</list>
+		</property>
+	</bean>
+	<bean id="webBindingInitializer"
+		class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+		<property name="conversionService" ref="conversionService" />
+	</bean>
 </beans>
