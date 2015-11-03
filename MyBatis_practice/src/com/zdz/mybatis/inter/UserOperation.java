@@ -2,6 +2,7 @@ package com.zdz.mybatis.inter;
 
 import java.util.List;
 
+import com.zdz.mybatis.model.Article;
 import com.zdz.mybatis.model.User;
 
 public interface UserOperation {
@@ -10,4 +11,5 @@ public interface UserOperation {
 	abstract public int addUser(User user);
 	abstract public void updateUser(User user);
 	abstract public void deleteUser(int id);
+	abstract public List<Article> getUserArticles(int id);
 }

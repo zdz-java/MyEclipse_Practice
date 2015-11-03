@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
 import com.zdz.mybatis.inter.UserOperation;
+import com.zdz.mybatis.model.Article;
 import com.zdz.mybatis.model.User;
 
 public class MyBatisTest {
@@ -73,4 +74,19 @@ public class MyBatisTest {
 			session.close();
 		}
 	}
+	@Test
+	public void getUserArticles(int userid){
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            UserOperation userOperation=session.getMapper(UserOperation.class);           
+            List<Article> articles = userOperation.getUserArticles(userid);
+            for(Article article:articles){
+                System.out.println(article.getTitle()+":"+article.getContent()+
+                        ":作者是:"+article.getUser().getUserName()+":地址:"+
+                         article.getUser().getUserAddress());
+            }
+        } finally {
+            session.close();
+        }
+    }
 }
