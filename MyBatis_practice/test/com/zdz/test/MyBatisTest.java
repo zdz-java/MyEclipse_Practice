@@ -42,40 +42,41 @@ public class MyBatisTest {
 //			session.close();
 //		}
 //	}
+//	@Test
+//	public void secondTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session.getMapper(UserOperation.class);
+//			User user = (User) userOperation.selectUserByID(1);
+//			System.out.println(user.getUserAddress());
+//			System.out.println(user.getUserName());
+//			
+//			String userName = "zdz"; 
+//			List<User> users = userOperation.selectUsers(userName);
+//            for(User u:users){
+//                System.out.println(u.getId()+":"+u.getUserName()+":"+u.getUserAddress());
+//            }
+//            
+//            user.setUserAge("20");
+//            userOperation.updateUser(user);
+//            
+//            userOperation.deleteUser(5);
+//            
+////            User toInsert = new User();
+////            toInsert.setUserAddress("changsha");
+////            toInsert.setUserName("wiege");
+////            toInsert.setUserAge("22");
+////            userOperation.addUser(toInsert);
+//            session.commit();
+////            System.out.println(toInsert.getId());
+//            
+//		} finally {
+//			session.close();
+//		}
+//	}
 	@Test
-	public void secondTest() {
-		SqlSession session = sqlSessionFactory.openSession();
-		try {
-			UserOperation userOperation = session.getMapper(UserOperation.class);
-			User user = (User) userOperation.selectUserByID(1);
-			System.out.println(user.getUserAddress());
-			System.out.println(user.getUserName());
-			
-			String userName = "zdz"; 
-			List<User> users = userOperation.selectUsers(userName);
-            for(User u:users){
-                System.out.println(u.getId()+":"+u.getUserName()+":"+u.getUserAddress());
-            }
-            
-            user.setUserAge("20");
-            userOperation.updateUser(user);
-            
-            userOperation.deleteUser(5);
-            
-//            User toInsert = new User();
-//            toInsert.setUserAddress("changsha");
-//            toInsert.setUserName("wiege");
-//            toInsert.setUserAge("22");
-//            userOperation.addUser(toInsert);
-            session.commit();
-//            System.out.println(toInsert.getId());
-            
-		} finally {
-			session.close();
-		}
-	}
-	@Test
-	public void getUserArticles(int userid){
+	public void getUserArticle(){		
+		int userid =1;
         SqlSession session = sqlSessionFactory.openSession();
         try {
             UserOperation userOperation=session.getMapper(UserOperation.class);           

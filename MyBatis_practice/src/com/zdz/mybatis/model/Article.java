@@ -1,20 +1,19 @@
 package com.zdz.mybatis.model;
 
 public class Article {
-    
-    private int id;
+    private int aid;
     private User user;
     private String title;
     private String content;
     
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
     
-    public User getUser() {
+    public int getAid() {
+		return aid;
+	}
+	public void setAid(int aid) {
+		this.aid = aid;
+	}
+	public User getUser() {
         return user;
     }
     public void setUser(User user) {
