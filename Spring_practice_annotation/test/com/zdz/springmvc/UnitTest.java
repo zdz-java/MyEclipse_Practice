@@ -3,18 +3,21 @@ package com.zdz.springmvc;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.format.number.CurrencyFormatter;
 import org.springframework.format.support.DefaultFormattingConversionService;
 
 import com.zdz.springmvc.converter.StringToPhoneNumberConverter;
 import com.zdz.springmvc.formatter.PhoneNumberFormatter;
+import com.zdz.springmvc.model.FormatterModel;
 import com.zdz.springmvc.model.PhoneNumberModel;
 
 public class UnitTest {
@@ -87,15 +90,80 @@ public class UnitTest {
 				conversionService.convert("￥1,234.13", BigDecimal.class));
 		LocaleContextHolder.setLocale(null);
 	}
-	
-	@Test  
-    public void testDIYFormatter() {  
-        DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();  
-        conversionService.addFormatter(new PhoneNumberFormatter());  
-  
-        PhoneNumberModel phoneNumber = new PhoneNumberModel("010", "12345678");  
-        Assert.assertEquals("010-12345678", conversionService.convert(phoneNumber, String.class));  
-          
-        Assert.assertEquals("010", conversionService.convert("010-12345678", PhoneNumberModel.class).getAreaCode());  
-    }  
+
+	@Test
+	public void testDIYFormatter() {
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+		conversionService.addFormatter(new PhoneNumberFormatter());
+
+		PhoneNumberModel phoneNumber = new PhoneNumberModel("010", "12345678");
+		Assert.assertEquals("010-12345678",
+				conversionService.convert(phoneNumber, String.class));
+
+		Assert.assertEquals(
+				"010",
+				conversionService.convert("010-12345678",
+						PhoneNumberModel.class).getAreaCode());
+	}
+
+	@Test
+	public void testFieldFormatter() throws SecurityException,
+			NoSuchFieldException {
+		// 默认自动注册对@NumberFormat和@DateTimeFormat的支持
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+
+		// 准备测试模型对象
+		FormatterModel model = new FormatterModel();
+		model.setTotalCount(10000);
+		model.setDiscount(0.51);
+		model.setSumMoney(10000.13);
+		model.setRegisterDate(new Date(2012 - 1900, 4, 1));
+		model.setOrderDate(new Date(2012 - 1900, 4, 1, 20, 18, 18));
+
+		// 获取类型信息
+		TypeDescriptor descriptor = new TypeDescriptor(
+				FormatterModel.class.getDeclaredField("totalCount"));
+		TypeDescriptor stringDescriptor = TypeDescriptor.valueOf(String.class);
+
+		Assert.assertEquals("10,000", conversionService.convert(
+				model.getTotalCount(), descriptor, stringDescriptor));
+		Assert.assertEquals(model.getTotalCount(), conversionService.convert(
+				"10,000", stringDescriptor, descriptor));
+
+	}
+
+	public void testDifferentField() throws NoSuchFieldException, SecurityException {
+		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+
+		// 准备测试模型对象
+		FormatterModel model = new FormatterModel();
+		model.setTotalCount(10000);
+		model.setDiscount(0.51);
+		model.setSumMoney(10000.13);
+		model.setRegisterDate(new Date(2012 - 1900, 4, 1));
+		model.setOrderDate(new Date(2012 - 1900, 4, 1, 20, 18, 18));
+
+		// 获取类型信息
+		TypeDescriptor descriptor = new TypeDescriptor(
+				FormatterModel.class.getDeclaredField("totalCount"));
+		TypeDescriptor stringDescriptor = TypeDescriptor.valueOf(String.class);
+
+		Assert.assertEquals("10,000", conversionService.convert(
+				model.getTotalCount(), descriptor, stringDescriptor));
+		Assert.assertEquals(model.getTotalCount(), conversionService.convert(
+				"10,000", stringDescriptor, descriptor));
+		descriptor = new TypeDescriptor(
+				FormatterModel.class.getDeclaredField("registerDate"));
+		Assert.assertEquals("2012-05-01", conversionService.convert(
+				model.getRegisterDate(), descriptor, stringDescriptor));
+		Assert.assertEquals(model.getRegisterDate(), conversionService.convert(
+				"2012-05-01", stringDescriptor, descriptor));
+
+		descriptor = new TypeDescriptor(
+				FormatterModel.class.getDeclaredField("orderDate"));
+		Assert.assertEquals("2012-05-01 20:18:18", conversionService.convert(
+				model.getOrderDate(), descriptor, stringDescriptor));
+		Assert.assertEquals(model.getOrderDate(), conversionService.convert(
+				"2012-05-01 20:18:18", stringDescriptor, descriptor));
+	}
 }

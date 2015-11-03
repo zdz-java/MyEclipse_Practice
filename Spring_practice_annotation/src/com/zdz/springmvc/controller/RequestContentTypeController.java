@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zdz.springmvc.model.DataBinderTestModel;
+import com.zdz.springmvc.model.FormatterModel;
 import com.zdz.springmvc.model.User;
 
 @Controller
@@ -127,4 +128,9 @@ public class RequestContentTypeController {
 	{
 		return Arrays.asList("浙江","北京");
 	}
+	
+	@RequestMapping(value = "/format")  
+	public String format(@ModelAttribute("model") FormatterModel formatModel) {  
+	    return "format/success";  
+	}   
 }

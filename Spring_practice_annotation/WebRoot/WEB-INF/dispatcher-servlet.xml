@@ -24,10 +24,15 @@
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<bean
-					class="com.zdz.springmvc.converter.StringToPhoneNumberConverter" />
-				<!-- <bean class="com.zdz.springmvc.converter.StringToDateConverter"> 
+				<bean class="com.zdz.springmvc.converter.StringToPhoneNumberConverter" />
+				<be<!-- an class="com.zdz.springmvc.converter.StringToDateConverter"> 
 					<constructor-arg value="yyyy-MM-dd" /> </bean> -->
+			</list>
+		</property>
+		<property name="formatters">
+			<list>
+				<bean
+					class="com.zdz.springmvc.formatter.PhoneNumberFormatter" />
 			</list>
 		</property>
 	</bean>
@@ -35,4 +40,5 @@
 		class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
 		<property name="conversionService" ref="conversionService" />
 	</bean>
+
 </beans>
