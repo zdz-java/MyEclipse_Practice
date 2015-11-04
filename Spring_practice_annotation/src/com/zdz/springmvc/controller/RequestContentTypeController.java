@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zdz.springmvc.model.DataBinderTestModel;
 import com.zdz.springmvc.model.FormatterModel;
+import com.zdz.springmvc.model.PhoneNumberModel;
+import com.zdz.springmvc.model.PhoneNumberModelHolder;
 import com.zdz.springmvc.model.User;
 
 @Controller
@@ -123,14 +125,33 @@ public class RequestContentTypeController {
 //	{
 //		
 //	}
-	@RequestMapping("cityList")
+	@ModelAttribute("cityList")
 	public List<String> cityList()
 	{
 		return Arrays.asList("浙江","北京");
 	}
-	
-	@RequestMapping(value = "/format")  
-	public String format(@ModelAttribute("model") FormatterModel formatModel) {  
+	/*出错的原因是FormatterModel中的PhoneNumberModel字段没能添加自定义的注解*/
+	@RequestMapping(value = "/formattt")  
+	public String format(@ModelAttribute("modeltt") FormatterModel formatModel) {  
 	    return "format/success";  
 	}   
+	
+	@RequestMapping(value = "testmodel")
+	public String modeltt(User user)
+	{
+		System.out.println(user);
+//		System.out.println(user.getSchoolInfo().getSchoolName());
+		return "model";
+	}
+	
+	@ModelAttribute("cityList2")  
+	public List<String> cityListtest() {  
+	    return Arrays.asList("北京", "山东");  
+	}   
+	@RequestMapping("formatterClass")
+	public String testClassFormatterWork(@ModelAttribute("phone")PhoneNumberModelHolder pnm)
+	{
+		System.out.println(pnm.getPhoneNumber());
+		return "format/formatterClass";
+	}
 }

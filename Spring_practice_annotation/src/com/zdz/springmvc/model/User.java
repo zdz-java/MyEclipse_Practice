@@ -8,8 +8,8 @@ public class User {
 	private String username;
 	private String password;
 	private String realname;
-    private WorkInfoModel workInfo=new WorkInfoModel();  
-    private SchoolInfoModel schoolInfo= new SchoolInfoModel(); 
+    private WorkInfoModel workInfo;  
+    private SchoolInfoModel schoolInfo; 
     
 	public String getUsername() {
 		return username;

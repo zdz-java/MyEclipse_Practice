@@ -32,22 +32,22 @@
 
 <body>
 	totalCount:
-	<spring:bind path="model.totalCount">${status.value}</spring:bind>
+	<spring:bind path="modeltt.totalCount">${status.value}</spring:bind>
 	<br /> discount:
-	<spring:bind path="model.discount">${status.value}</spring:bind>
+	<spring:bind path="modeltt.discount">${status.value}</spring:bind>
 	<br /> sumMoney:
-	<spring:bind path="model.sumMoney">${status.value}</spring:bind>
+	<spring:bind path="modeltt.sumMoney">${status.value}</spring:bind>
 	<br /> phoneNumber:
-	<spring:bind path="model.phoneNumber">${status.value}</spring:bind>
+	<spring:bind path="modeltt.phoneNumber">${status.value}</spring:bind>
 	<br />
 	<!-- 如果没有配置org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor将会报错 -->
 	phoneNumber:
-	<spring:eval expression="model.phoneNumber"></spring:eval>
+	<spring:eval expression="modeltt.phoneNumber"></spring:eval>
 	<br />
 
 	<br />
 	<br />
-	<form:form commandName="model">
+	<form:form commandName="modeltt">
 		<form:input path="phoneNumber" />
 		<br />
 		<form:input path="sumMoney" />
