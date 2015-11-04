@@ -30,5 +30,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <c:forEach items="${articles}" var="item">  
         ${item.aid }--${item.title }--${item.content }<br />
     </c:forEach>
+    ${pageStr} 
   </body>
 </html>
