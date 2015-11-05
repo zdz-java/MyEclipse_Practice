@@ -1,10 +1,14 @@
 package com.zdz.test;
 
 import java.io.Reader;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -15,6 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zdz.mybatis.inter.UserOperation;
 import com.zdz.mybatis.model.Article;
+import com.zdz.mybatis.model.Blog;
 import com.zdz.mybatis.model.User;
 
 public class MyBatisTest {
@@ -45,41 +50,41 @@ public class MyBatisTest {
 	// session.close();
 	// }
 	// }
-	@Test
-	public void secondTest() {
-		SqlSession session = sqlSessionFactory.openSession();
-		try {
-			UserOperation userOperation = session
-					.getMapper(UserOperation.class);
-			// User user = (User) userOperation.selectUserByID(1);
-			// System.out.println(user.getUserAddress());
-			// System.out.println(user.getUserName());
-
-			// String userName = "zdz";
-			// List<User> users = userOperation.selectUsers(userName);
-			// for (User u : users) {
-			// System.out.println(u.getId() + ":" + u.getUserName() + ":"
-			// + u.getUserAddress());
-			// }
-
-			// user.setUserAge("20");
-			// userOperation.updateUser(user);
-
-			// userOperation.deleteUser(5);
-			for (int i = 1; i < 10; i++) {
-				User toInsert = new User();
-				toInsert.setUserAddress("changsha");
-				toInsert.setUserName("wiege");
-				toInsert.setUserAge(""+i);
-				userOperation.addUser(toInsert);
-			}
-			session.commit();
-			// System.out.println(toInsert.getId());
-
-		} finally {
-			session.close();
-		}
-	}
+//	@Test
+//	public void secondTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session
+//					.getMapper(UserOperation.class);
+//			// User user = (User) userOperation.selectUserByID(1);
+//			// System.out.println(user.getUserAddress());
+//			// System.out.println(user.getUserName());
+//
+//			// String userName = "zdz";
+//			// List<User> users = userOperation.selectUsers(userName);
+//			// for (User u : users) {
+//			// System.out.println(u.getId() + ":" + u.getUserName() + ":"
+//			// + u.getUserAddress());
+//			// }
+//
+//			// user.setUserAge("20");
+//			// userOperation.updateUser(user);
+//
+//			// userOperation.deleteUser(5);
+//			for (int i = 1; i < 10; i++) {
+//				User toInsert = new User();
+//				toInsert.setUserAddress("changsha");
+//				toInsert.setUserName("wiege");
+//				toInsert.setUserAge(""+i);
+//				userOperation.addUser(toInsert);
+//			}
+//			session.commit();
+//			// System.out.println(toInsert.getId());
+//
+//		} finally {
+//			session.close();
+//		}
+//	}
 	// @Test
 	// public void getUserArticle() {
 	// int userid = 1;
@@ -118,4 +123,116 @@ public class MyBatisTest {
 	// .println(article.getContent() + "--" + article.getTitle());
 	// }
 	// }
+	
+//	@Test
+//	public void ifTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session
+//					.getMapper(UserOperation.class);
+//			Blog blog = new Blog();
+//			blog.setOwner(1);
+//			List<Blog> list = userOperation.dynamicIfTest(blog);
+//			for(Blog b:list)
+//			{
+//				System.out.print(b);
+//			}
+//			session.commit();
+//
+//		} finally {
+//			session.close();
+//		}
+//	}
+	
+//	@Test
+//	public void chooseTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session
+//					.getMapper(UserOperation.class);
+//			Blog blog = new Blog();
+//			blog.setTitle("2");
+//			List<Blog> list = userOperation.dynamicChooseTest(blog);
+//			for(Blog b:list)
+//			{
+//				System.out.print(b);
+//			}
+//			session.commit();
+//
+//		} finally {
+//			session.close();
+//		}
+//	}
+	
+//	@Test
+//	public void trimTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session
+//					.getMapper(UserOperation.class);
+//			Blog blog = new Blog();
+//			blog.setTitle("3");
+//			blog.setContent("4");
+//			List<Blog> list = userOperation.dynamicChooseTest(blog);
+//			for(Blog b:list)
+//			{
+//				System.out.print(b);
+//			}
+//			session.commit();
+//
+//		} finally {
+//			session.close();
+//		}
+//	}
+//	@Test
+//	public void foreachTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session
+//					.getMapper(UserOperation.class);
+//			List<Integer> bids = new LinkedList<>();
+//			bids.add(1);
+//			bids.add(3);
+//			List<Blog> list = userOperation.dynamicForeachTest(bids);
+//			for(Blog b:list)
+//			{
+//				System.out.println(b);
+//			}
+//			session.commit();
+//
+//		} finally {
+//			session.close();
+//		}
+//	}
+//	@Test
+//	关于Map的foreach单元测试没有通过，暂时不清楚怎么使用。
+//	public void foreachTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session
+//					.getMapper(UserOperation.class);
+//			Map map = new HashMap();
+////			List<Integer> bids = new LinkedList<>();
+////			bids.add(1);
+////			bids.add(3);
+////
+////			map.put("3", bids);
+////			List<Blog> list = userOperation.dynamicForeach3Test(map);
+//			Blog blog = new Blog();
+//			blog.setTitle("1");
+//			blog.setBid(1);
+//			List ls = new LinkedList<>();
+//			ls.add(blog);
+//			map.put("1", ls);
+//			List<Blog> list = userOperation.dynamicForeach3Test(map);
+//			for(Blog b:list)
+//			{
+//				System.out.println(b);
+//			}
+//			session.commit();
+//
+//		} finally {
+//			session.close();
+//		}
+//	}
 }

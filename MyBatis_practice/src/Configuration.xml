@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias alias="User" type="com.zdz.mybatis.model.User" />
 		<typeAlias alias="Article" type="com.zdz.mybatis.model.Article" />
+		<typeAlias alias="Blog" type="com.zdz.mybatis.model.Blog" />
 	</typeAliases>
 	
 	<plugins>
