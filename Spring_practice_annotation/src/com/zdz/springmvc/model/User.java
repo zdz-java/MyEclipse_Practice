@@ -3,6 +3,7 @@ package com.zdz.springmvc.model;
 import javax.validation.constraints.NotNull;
 
 
+
 public class User {
 	@NotNull(message="{username.not.empty}")
 	private String username;

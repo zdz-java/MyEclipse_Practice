@@ -46,12 +46,14 @@ public class HelloWorldController {
 		return "hello";
 	}
 
-	@RequestMapping(value = "/validate/hello")
-	public String testValid(@Valid @ModelAttribute("user") User user,
+	@RequestMapping("/validate/hello")
+	public String validate(@Valid @ModelAttribute("user") User user,
 			Errors errors) {
+
 		if (errors.hasErrors()) {
 			return "validate/error";
 		}
-		return "redirect:/success";
+		return "success";
 	}
+
 }
