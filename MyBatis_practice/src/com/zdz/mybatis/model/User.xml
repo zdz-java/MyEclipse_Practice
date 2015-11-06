@@ -142,4 +142,10 @@
 			#{item}
 		</foreach>
 	</select>
+
+	<select id="selectBlogByBids" resultType="Blog">
+<![CDATA[
+   Select * FROM t_blog Where bid >= #{param1} AND bid <= #{param2}
+]]>
+	</select>
 </mapper>

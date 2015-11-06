@@ -17,6 +17,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.zdz.mybatis.dao.BlogDao;
+import com.zdz.mybatis.dao.BlogDaoImpl;
 import com.zdz.mybatis.inter.UserOperation;
 import com.zdz.mybatis.model.Article;
 import com.zdz.mybatis.model.Blog;
@@ -235,4 +237,29 @@ public class MyBatisTest {
 //			session.close();
 //		}
 //	}
+	
+//	@Test
+//	public void mutiParamTest() {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		try {
+//			UserOperation userOperation = session
+//					.getMapper(UserOperation.class);
+//			List<Blog> list = userOperation.selectBlogByBids(2,3);
+//			for(Blog b:list)
+//			{
+//				System.out.println(b);
+//			}
+//			session.commit();
+//
+//		} finally {
+//			session.close();
+//		}
+//	}
+	
+	@Test
+	public void suppoterTest() {
+		BlogDao bd = new BlogDaoImpl(getSession());
+		Blog blog = bd.getBlogByBid(1);
+		System.out.println(blog);
+	}
 }

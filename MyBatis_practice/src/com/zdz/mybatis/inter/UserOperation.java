@@ -35,4 +35,6 @@ public interface UserOperation {
 	public List<Blog> dynamicForeachTest(List<Integer> bids);
 
 	public List<Blog> dynamicForeach3Test(Map<String, Object> params);
+
+	public List<Blog> selectBlogByBids(int beginBid,int endBid);
 }

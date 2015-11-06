@@ -29,5 +29,6 @@
 
 	<mappers>
 		<mapper resource="com/zdz/mybatis/model/User.xml" />
+		<mapper resource="com/zdz/mybatis/model/Blog.xml" />
 	</mappers>
 </configuration>
