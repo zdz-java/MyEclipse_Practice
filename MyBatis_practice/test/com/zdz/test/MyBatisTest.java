@@ -1,5 +1,7 @@
 package com.zdz.test;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -19,9 +21,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.zdz.mybatis.dao.BlogDao;
 import com.zdz.mybatis.dao.BlogDaoImpl;
+import com.zdz.mybatis.inter.StudentOperation;
 import com.zdz.mybatis.inter.UserOperation;
 import com.zdz.mybatis.model.Article;
 import com.zdz.mybatis.model.Blog;
+import com.zdz.mybatis.model.Student;
 import com.zdz.mybatis.model.User;
 
 public class MyBatisTest {
@@ -256,10 +260,23 @@ public class MyBatisTest {
 //		}
 //	}
 	
+//	@Test
+//	public void suppoterTest() {
+//		BlogDao bd = new BlogDaoImpl(getSession());
+//		Blog blog = bd.getBlogByBid(1);
+//		System.out.println(blog);
+//	}
+	
 	@Test
-	public void suppoterTest() {
-		BlogDao bd = new BlogDaoImpl(getSession());
-		Blog blog = bd.getBlogByBid(1);
-		System.out.println(blog);
+	public void testAPI() throws IOException
+	{
+		String resource = "Configuration.xml";
+		String environment = "spring_practice";
+		Reader reader = Resources.getResourceAsReader(resource);
+		SqlSessionFactory ssf = new SqlSessionFactoryBuilder().build(reader,environment);
+		SqlSession ss = ssf.openSession();
+		StudentOperation studentOperation = ss.getMapper(StudentOperation.class);
+		System.out.println(studentOperation.selectStudentById(1));
+		
 	}
 }

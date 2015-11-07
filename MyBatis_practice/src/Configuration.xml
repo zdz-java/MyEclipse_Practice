@@ -6,6 +6,7 @@
 		<typeAlias alias="User" type="com.zdz.mybatis.model.User" />
 		<typeAlias alias="Article" type="com.zdz.mybatis.model.Article" />
 		<typeAlias alias="Blog" type="com.zdz.mybatis.model.Blog" />
+		<typeAlias alias="Student" type="com.zdz.mybatis.model.Student"/>
 	</typeAliases>
 	
 	<plugins>
@@ -25,10 +26,21 @@
 				<property name="password" value="root" />
 			</dataSource>
 		</environment>
+		
+		<environment id="spring_practice">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://127.0.0.1:3306/spring_practice" />
+				<property name="username" value="root" />
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
 	</environments>
 
 	<mappers>
 		<mapper resource="com/zdz/mybatis/model/User.xml" />
 		<mapper resource="com/zdz/mybatis/model/Blog.xml" />
+		<mapper resource="com/zdz/mybatis/model/Student.xml" />
 	</mappers>
 </configuration>

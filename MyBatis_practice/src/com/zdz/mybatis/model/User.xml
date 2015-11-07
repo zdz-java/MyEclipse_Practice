@@ -148,4 +148,5 @@
    Select * FROM t_blog Where bid >= #{param1} AND bid <= #{param2}
 ]]>
 	</select>
+
 </mapper>
