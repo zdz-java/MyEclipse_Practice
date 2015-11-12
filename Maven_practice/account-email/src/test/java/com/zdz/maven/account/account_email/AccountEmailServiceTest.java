@@ -1,5 +1,7 @@
 package com.zdz.maven.account.account_email;
 
+import static junit.framework.Assert.assertEquals;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
@@ -16,35 +18,39 @@ import com.icegreen.greenmail.util.ServerSetup;
 import com.zdz.maven.account.email.AccountEmailService;
 import com.zdz.maven.account.exception.AccountEmailException;
 
-public class AccoutEmailServiceTest {
+public class AccountEmailServiceTest {
+
 	private GreenMail greenMail;
+
 	@Before
-	public void startMailServer()
-	{
+	public void startMailServer() throws Exception {
 		greenMail = new GreenMail(ServerSetup.SMTP);
 		greenMail.setUser("test@zdz.com", "123456");
 		greenMail.start();
 	}
+
 	@Test
-	public void testSendMail() throws AccountEmailException, MessagingException
-	{
-//		由于在resource目录下的xml找不到所以复制了在根目录下，可能maven会找不到
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("account-email.xml");
-		AccountEmailService accountEmailService = (AccountEmailService)ctx.getBean("accountEmailService");
+	public void testSendMail() throws Exception {
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"account-email.xml");
+		AccountEmailService accountEmailService = (AccountEmailService) ctx
+				.getBean("accountEmailService");
+
 		String subject = "Test Subject";
 		String htmlText = "<h3>Test</h3>";
-		accountEmailService.sendMail("test@zdz.com", subject, htmlText);
-		
+		accountEmailService.sendMail("test2@zdz.com", subject, htmlText);
+
+		greenMail.waitForIncomingEmail(2000, 1);
+
 		Message[] msgs = greenMail.getReceivedMessages();
-		Assert.assertEquals(1,msgs.length);
-		Assert.assertEquals(subject,msgs[0].getSubject());
-		Assert.assertEquals(htmlText,GreenMailUtil.getBody(msgs[0]).trim());
+		assertEquals(1, msgs.length);
+		assertEquals(subject, msgs[0].getSubject());
+		assertEquals(htmlText, GreenMailUtil.getBody(msgs[0]).trim());
+		System.out.println("this is in the AccoutEmailServiceTest Class");
 	}
-	
+
 	@After
-	public void stopMailServer()
-	{
+	public void stopMailServer() throws Exception {
 		greenMail.stop();
 	}
-	
 }
