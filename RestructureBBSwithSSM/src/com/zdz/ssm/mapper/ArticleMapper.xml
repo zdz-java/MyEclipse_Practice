@@ -3,7 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdz.ssm.mapper.ArticleMapper">
-  <select id="getArticleById" resultType="Article">
-    select * from Article where id = #{id}
-  </select>
+	<resultMap type="Article" id="articlelist">
+		<id property="id" column="id"/>
+		<result property="pid" column="pid"/>
+		<result property="rootId" column="rootid"/>
+		<result property="title" column="title"/>
+		<result property="cont" column="cont"/>
+		<result property="pdate" column="pdate"/>
+		<result property="isLeaf" column="isleaf"/>
+		<result property="username" column="username"/>
+	</resultMap>
+	<select id="getArticleById" resultType="Article">
+		select * from article where id = #{id}
+	</select>
+	<insert id="save" useGeneratedKeys="true" parameterType="Article" keyProperty="id">
+		insert into article(pid,rootid,title,cont,pdate,isleaf,username) values(#{pid},#{rootId},#{title},#{cont},#{pdate},#{isLeaf},#{username})
+	</insert>
+	<delete id="deleteById">
+		delete from article where id=#{id}
+	</delete>
 </mapper>
