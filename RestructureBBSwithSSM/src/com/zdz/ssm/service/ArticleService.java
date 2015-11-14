@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.zdz.ssm.dao.ArticleDao;
 import com.zdz.ssm.model.Article;
 
-@Component
+//@Component
+@Service
 public class ArticleService {
 	private ArticleDao articleDao;
 
