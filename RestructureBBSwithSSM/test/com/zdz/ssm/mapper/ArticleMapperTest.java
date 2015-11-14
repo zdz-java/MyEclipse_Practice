@@ -3,6 +3,8 @@ package com.zdz.ssm.mapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -43,9 +45,41 @@ public class ArticleMapperTest {
 		article.setPdate(new Date());
 		articleMapper.save(article);
 		ss.commit();
-		
+
 		articleMapper.deleteById(article.getId());
 		ss.commit();
 	}
+
+	@Test
+	public void getArticlesByRootidTest() {
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+		List<Article> articles = articleMapper.getArticlesByRootid(1);
+		
+		Article a = articles.get(0);
+		Assert.assertEquals(a.getTitle(),"mbmn");
+		a = articles.get(1);
+		Assert.assertEquals(a.getTitle(),"aaaaaaaaaa");
+	}
+
+	@Test
+	public void getTotalTest() {
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+		
+		Assert.assertEquals(articleMapper.getTotal(), 38);
+	}
 	
+	@Test
+	public void getSplitPageListTest() {
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+		List<Article> articles = articleMapper.getSplitPageList(2,2);
+		
+//		System.out.println(articles.get(0).getTitle());
+		Article a = articles.get(0);
+		Assert.assertEquals(a.getTitle(),"a");
+		a = articles.get(1);
+		Assert.assertEquals(a.getTitle(),"zzz");
+	}
 }

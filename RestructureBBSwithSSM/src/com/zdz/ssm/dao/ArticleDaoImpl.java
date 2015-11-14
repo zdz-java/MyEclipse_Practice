@@ -2,44 +2,79 @@ package com.zdz.ssm.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.junit.Assert;
+
+import com.zdz.ssm.mapper.ArticleMapper;
 import com.zdz.ssm.model.Article;
 
 public class ArticleDaoImpl implements ArticleDao{
+//	是否该设置成为单例的？
+	private SqlSessionFactory sqlSessionFactory;
+
+	public SqlSessionFactory getSqlSessionFactory() {
+		return sqlSessionFactory;
+	}
+
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
+	}
 
 	@Override
 	public int save(Article article) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+
+	    articleMapper.save(article);
+	    ss.commit();
+	    return article.getId();
 	}
 
 	@Override
 	public List<Article> getSplitPageList(int pageSize, int pageNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		int begin = (pageNumber-1)*pageSize;
+		int size = pageSize;
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+
+		return articleMapper.getSplitPageList(begin, size);
 	}
 
 	@Override
 	public int getSplitPageTotalNumber(int pageSize) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+
+		int totalRecords = articleMapper.getTotal();
+		int totalPageNumber = totalRecords%pageSize==0 ? totalRecords/pageSize : totalRecords/pageSize+1;
+		
+		return totalPageNumber;
 	}
 
 	@Override
 	public List<Article> getArticlesByRootid(int rootId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+
+		return articleMapper.getArticlesByRootid(rootId);
 	}
 
 	@Override
 	public Article getArticleById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+
+		return articleMapper.getArticleById(id);
 	}
 
 	@Override
 	public void deleteById(int id) {
-		// TODO Auto-generated method stub
-		
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+
+		articleMapper.deleteById(id);
+		ss.commit();
 	}
 
 }

@@ -13,7 +13,7 @@
 		<result property="isLeaf" column="isleaf"/>
 		<result property="username" column="username"/>
 	</resultMap>
-	<select id="getArticleById" resultType="Article">
+	<select id="getArticleById" resultMap="articlelist">
 		select * from article where id = #{id}
 	</select>
 	<insert id="save" useGeneratedKeys="true" parameterType="Article" keyProperty="id">
@@ -22,4 +22,13 @@
 	<delete id="deleteById">
 		delete from article where id=#{id}
 	</delete>
+	<select id="getArticlesByRootid" resultMap="articlelist">
+		select * from article where rootid = #{rootId}
+	</select>
+	<select id="getTotal" resultType="int">
+		select count(*) from article where pid = 0;
+	</select>
+		<select id="getSplitPageList" resultMap="articlelist">
+		select * from article where pid = 0 order by pdate desc limit #{param1},#{param2}
+	</select>
 </mapper>
