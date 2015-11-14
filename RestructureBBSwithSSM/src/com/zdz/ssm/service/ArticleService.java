@@ -2,17 +2,20 @@ package com.zdz.ssm.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.zdz.ssm.dao.ArticleDao;
 import com.zdz.ssm.model.Article;
 
-
+@Component
 public class ArticleService {
 	private ArticleDao articleDao;
 
 	public ArticleDao getArticleDao() {
 		return articleDao;
 	}
-
+	@Autowired
 	public void setArticleDao(ArticleDao articleDao) {
 		this.articleDao = articleDao;
 	}

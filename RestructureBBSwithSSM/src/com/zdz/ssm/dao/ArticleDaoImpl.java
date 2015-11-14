@@ -5,10 +5,12 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.zdz.ssm.mapper.ArticleMapper;
 import com.zdz.ssm.model.Article;
-
+@Component
 public class ArticleDaoImpl implements ArticleDao{
 //	是否该设置成为单例的？
 	private SqlSessionFactory sqlSessionFactory;
@@ -16,7 +18,7 @@ public class ArticleDaoImpl implements ArticleDao{
 	public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}
-
+	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
