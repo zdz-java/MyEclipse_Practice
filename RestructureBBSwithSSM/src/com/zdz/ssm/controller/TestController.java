@@ -16,6 +16,7 @@ public class TestController {
 	public ArticleService getArticleService() {
 		return articleService;
 	}
+//	这里的自动装配是否需要手动建立容器将Bean取出，推迟到晚上完成
 	@Autowired
 	public void setArticleService(ArticleService articleService) {
 		this.articleService = articleService;
