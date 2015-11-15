@@ -6,6 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zdz.ssm.service.ArticleService;
 
@@ -16,7 +17,6 @@ public class TestController {
 	public ArticleService getArticleService() {
 		return articleService;
 	}
-//	这里的自动装配是否需要手动建立容器将Bean取出，推迟到晚上完成
 	@Autowired
 	public void setArticleService(ArticleService articleService) {
 		this.articleService = articleService;
@@ -25,10 +25,7 @@ public class TestController {
 	@RequestMapping(value = "/hello")
 	public String test()
 	{
-//		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-//		TestController tc =  (TestController)ac.getBean("TestController");
-//		System.out.println(tc.articleService.getArticleById(11));
-		System.out.println(articleService.getArticleById(11));
+		System.out.println(articleService.getArticleById(11).getTitle());
 		return "hello";
 	}
 }

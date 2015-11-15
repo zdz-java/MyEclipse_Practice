@@ -9,16 +9,15 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
+  <!-- 原因不知，此处配置文件的扫描出的controller不能用，只能在-servlet文件中再次添加扫描 -->
    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/applicationContext.xml</param-value>
-    </context-param>
-  
-   <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-  
+    	<param-name>contextConfigLocation</param-name>
+   	 	<param-value>
+    		classpath:applicationContext.xml
+    	</param-value>
+	</context-param>
+
+    
     <servlet>
         <servlet-name>zdz</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -29,4 +28,8 @@
         <servlet-name>zdz</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
+     <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 </web-app>

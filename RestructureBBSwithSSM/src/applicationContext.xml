@@ -21,4 +21,6 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:Configuration.xml" />
 	</bean>
+	
+	<bean class="com.zdz.ssm.controller.TestController"></bean>
 </beans>

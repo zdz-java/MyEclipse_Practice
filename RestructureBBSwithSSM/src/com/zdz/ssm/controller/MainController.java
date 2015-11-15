@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,13 +28,14 @@ public class MainController {
 
 	@RequestMapping("/articleFlat")
 //	这里应该要给pageNumber赋一个默认值，并且要暴露下面的参数值
-	public String splitPage(@RequestParam(value = "pageNumber") int pageNumber) {
+	public String splitPage(@RequestParam(value = "pageNumber",required=false,defaultValue="1") int pageNumber,Model model) {
+		
 		final int PAGESIZE = 4;
 		int totalPageNumber;
 		List<Article> articles;
 		int lastPageNumber;
 		int nextPageNumber;
-
+		
 		totalPageNumber = articleService.getSplitPageTotalNumber(PAGESIZE);
 		if (pageNumber<=0) {
 			pageNumber = 1;
@@ -43,7 +46,12 @@ public class MainController {
 		lastPageNumber = pageNumber-1;
 		nextPageNumber = pageNumber+1;
 		articles = articleService.getSplitPageList(PAGESIZE, pageNumber);
-
+		
+		model.addAttribute("totalPageNumber", totalPageNumber);
+		model.addAttribute("lastPageNumber", lastPageNumber);
+		model.addAttribute("nextPageNumber", nextPageNumber);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("articles", articles);
 		
 		return "articleFlat";
 	}
