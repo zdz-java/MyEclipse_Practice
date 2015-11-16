@@ -78,5 +78,13 @@ public class ArticleDaoImpl implements ArticleDao{
 		articleMapper.deleteById(id);
 		ss.commit();
 	}
+	@Override
+	public void update(Article article) {
+		SqlSession ss = sqlSessionFactory.openSession();
+		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
+
+		articleMapper.update(article);
+		ss.commit();
+	}
 
 }

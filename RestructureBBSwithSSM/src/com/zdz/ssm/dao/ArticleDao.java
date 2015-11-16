@@ -18,4 +18,5 @@ public interface ArticleDao {
 
 	void deleteById(int id);
 
+	void update(Article article);
 }

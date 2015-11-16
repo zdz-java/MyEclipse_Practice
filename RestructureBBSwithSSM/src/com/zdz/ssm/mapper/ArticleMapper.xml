@@ -31,4 +31,7 @@
 		<select id="getSplitPageList" resultMap="articlelist">
 		select * from article where pid = 0 order by pdate desc limit #{param1},#{param2}
 	</select>
+	<update id="update">
+		update article set pid=#{pid},rootid=#{rootId},title=#{title},cont=#{cont},pdate=#{pdate},isleaf=#{isLeaf},username=#{username} where id = #{id}
+	</update>
 </mapper>

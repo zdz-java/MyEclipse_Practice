@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*,java.sql.*"
 	pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
@@ -36,10 +35,7 @@
 					<td width="99%"><p class="jive-breadcrumbs">
 							<a href="articleFlat">首页</a> &#187; <a href="articleFlat">简易BBSS</a>
 						</p>
-						<p class="jive-page-title">
-							主题:
-							<s:property value="firstArticle.title" />
-						</p></td>
+						<p class="jive-page-title">主题: ${firstArticle.title}</p></td>
 					<td width="1%"><div class="jive-accountbox"></div></td>
 				</tr>
 			</tbody>
@@ -49,16 +45,16 @@
 				<tbody>
 					<tr>
 						<td class="jive-icon"><a
-							href="reply?id=<s:property value="firstArticle.id"/>&rootId=<s:property value="firstArticle.rootId"/>"><img
+							href="reply?id=${firstArticle.id}&rootId=${firstArticle.rootId}"><img
 								src="images/reply-16x16.gif" alt="回复本主题 " border="0" height="16"
 								width="16"></a></td>
 						<td class="jive-icon-label"><a id="jive-reply-thread"
-							href="reply?id=<s:property value="firstArticle.id"/>&rootid=<s:property value="firstArticle.rootId"/>">回复本主题</a>
+							href="reply?id=${firstArticle.id}&rootid=${firstArticle.rootId}">回复本主题</a>
 						</td>
 						<td><a href="articleFlat"><img
 								src="images/arrow-left-16x16.gif" alt="返回到主题列表" border="0"
 								height="16" hspace="6" width="16"></a></td>
-						<td><a href="articleFlat">返回到主题列表 </td>
+						<td><a href="articleFlat">返回到主题列表 </a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -73,107 +69,104 @@
 									<div class="jive-messagebox">
 
 										<!-- this is the begin of the iterator -->
-										<s:iterator value="articles" status="status">
-
-											<table summary="Message" border="0" cellpadding="0"
-												cellspacing="0" width="100%">
-												<tbody>
-													<tr id="jive-message-780144" class="jive-odd" valign="top">
-														<td class="jive-first" width="1%">
-															<!-- ¸�Ə¢µôable -->
-															<table border="0" cellpadding="0" cellspacing="0"
-																width="150">
-																<tbody>
-																	<tr>
-																		<td><table border="0" cellpadding="0"
-																				cellspacing="0" width="100%">
-																				<tbody>
-																					<tr valign="top">
-																						<td style="padding: 0px;" width="1%"><nobr>
-																								<a href="" title="发帖昵称"><s:property
-																										value="username" /></a>
-																							</nobr></td>
-																						<td style="padding: 0px;" width="99%"><img
-																							class="jive-status-level-image"
-																							src="images/level3.gif" title="世界新手" alt=""
-																							border="0"><br></td>
-																					</tr>
-																				</tbody>
-																			</table> <img class="jive-avatar"
-																			src="images/avatar-display.png" alt="" border="0">
-																			<br> <br> <span class="jive-description">
-																				发表 34 <br> 点数: 100<br> 注册:<s:property
-																					value="pdate" /> <br> <a
-																				href="http://user.qzone.qq.com/424486138"
-																				target="_blank"><font color="red">访问我的空间</font></a>
-																		</span></td>
-																	</tr>
-																</tbody>
-															</table> <!--个人信息table结束-->
-
-														</td>
-														<td class="jive-last" width="99%"><table border="0"
-																cellpadding="0" cellspacing="0" width="100%">
-																<tbody>
-																	<tr valign="top">
-																		<td width="1%"></td>
-																		<td width="97%"><span class="jive-subject">
-																				<s:if test="#status.count==1">
-                                		楼主
-                                	</s:if> <s:else>	
-                                		第 <s:property value="#status.count" /> 楼
-                                	
-                                		 ------- <s:property value="title" />
-																				</s:else>
-																		</span></td>
-																		<td class="jive-rating-buttons" nowrap="nowrap"
-																			width="1%"></td>
-																		<td width="1%"><div class="jive-buttons">
-																				<table border="0" cellpadding="0" cellspacing="0">
+									
+											<c:forEach items="${articles}" var="article" varStatus="status">
+												<table summary="Message" border="0" cellpadding="0"
+													cellspacing="0" width="100%">
+													<tbody>
+														<tr id="jive-message-780144" class="jive-odd" valign="top">
+															<td class="jive-first" width="1%">
+																<!-- ¸�Ə¢µôable -->
+																<table border="0" cellpadding="0" cellspacing="0"
+																	width="150">
+																	<tbody>
+																		<tr>
+																			<td><table border="0" cellpadding="0"
+																					cellspacing="0" width="100%">
 																					<tbody>
-																						<tr>
-																							<td>&nbsp;</td>
-																							<td class="jive-icon"><a
-																								href="reply?id=<s:property value="id"/>&rootid=<s:property value="rootId"/>"
-																								title="回复本主题"><img
-																									src="images/reply-16x16.gif" alt="回复本主题"
-																									border="0" height="16" width="16"></a></td>
-																							<td class="jive-icon-label"><a
-																								href="reply?id=<s:property value="id"/>&rootid=<s:property value="rootId"/>"
-																								title="回复本主题">回复</a></td>
+																						<tr valign="top">
+																							<td style="padding: 0px;" width="1%"><nobr>
+																									<a href="" title="发帖昵称">${article.username}</a>
+																								</nobr></td>
+																							<td style="padding: 0px;" width="99%"><img
+																								class="jive-status-level-image"
+																								src="images/level3.gif" title="世界新手" alt=""
+																								border="0"><br></td>
 																						</tr>
 																					</tbody>
-																				</table>
-																			</div></td>
-																	</tr>
-																	<tr>
-																		<td colspan="4"
-																			style="border-top: 1px solid rgb(204, 204, 204);"><br>
-																			<s:property value="cont" escape="false" /><br> <br></td>
-																	</tr>
-																	<tr>
-																		<td colspan="4" style="font-size: 9pt;"><img
-																			src="images/sigline.gif"><br> <font
-																			color="#568ac2">Stay hungry Stay foolish</font> <br>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td colspan="4"
-																			style="border-top: 1px solid rgb(204, 204, 204); font-size: 9pt; table-layout: fixed;">-<a
-																			href="http://user.qzone.qq.com/424486138"><font
-																				color="#666666">我的QQ空间</font></a>
-																		</td>
-																	</tr>
-																</tbody>
-															</table></td>
-													</tr>
-												</tbody>
-											</table>
+																				</table> <img class="jive-avatar"
+																				src="images/avatar-display.png" alt="" border="0">
+																				<br> <br> <span class="jive-description">
+																					发表 34 <br> 点数: 100<br> 注册:${article.pdate} <br> <a
+																					href="http://user.qzone.qq.com/424486138"
+																					target="_blank"><font color="red">访问我的空间</font></a>
+																			</span></td>
+																		</tr>
+																	</tbody>
+																</table> <!--个人信息table结束-->
 
-
-										</s:iterator>
+															</td>
+															<td class="jive-last" width="99%"><table border="0"
+																	cellpadding="0" cellspacing="0" width="100%">
+																	<tbody>
+																		<tr valign="top">
+																			<td width="1%"></td>
+																			<td width="97%"><span class="jive-subject">
+																					<c:choose><c:when test="${status.count==1}">
+                                		楼主
+                                	</c:when> <c:otherwise>	
+                                		第 ${status.count} 楼
+                                	
+                                		 ------- ${article.title}
+																					</c:otherwise></c:choose>
+																			</span></td>
+																			<td class="jive-rating-buttons" nowrap="nowrap"
+																				width="1%"></td>
+																			<td width="1%"><div class="jive-buttons">
+																					<table border="0" cellpadding="0" cellspacing="0">
+																						<tbody>
+																							<tr>
+																								<td>&nbsp;</td>
+																								<td class="jive-icon"><a
+																									href="reply?id=${article.id}&rootid=${article.rootId}"
+																									title="回复本主题"><img
+																										src="images/reply-16x16.gif" alt="回复本主题"
+																										border="0" height="16" width="16"></a></td>
+																								<td class="jive-icon-label"><a
+																									href="reply?id=${article.id}&rootid=${article.rootId}"
+																									title="回复本主题">回复</a></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</div></td>
+																		</tr>
+																		<tr>
+																			<td colspan="4"
+																				style="border-top: 1px solid rgb(204, 204, 204);"><br>
+																				${article.cont}<!-- escape="false" 不清楚这个属性的作用--><br>
+																				<br></td>
+																		</tr>
+																		<tr>
+																			<td colspan="4" style="font-size: 9pt;"><img
+																				src="images/sigline.gif"><br> <font
+																				color="#568ac2">Stay hungry Stay foolish</font> <br>
+																			</td>
+																		</tr>
+																		<tr>
+																			<td colspan="4"
+																				style="border-top: 1px solid rgb(204, 204, 204); font-size: 9pt; table-layout: fixed;">-<a
+																				href="http://user.qzone.qq.com/424486138"><font
+																					color="#666666">我的QQ空间</font></a>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table></td>
+														</tr>
+													</tbody>
+												</table>
+										
 										<!-- this is the end of the iterator -->
-<s:debug/>
+										</c:forEach>
 									</div>
 								</div>
 							</div>

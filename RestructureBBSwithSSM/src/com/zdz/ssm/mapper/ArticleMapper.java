@@ -11,4 +11,5 @@ public interface ArticleMapper {
 	public List<Article> getArticlesByRootid(int rootId);
 	public int getTotal();
 	public List<Article> getSplitPageList(int begin, int size);
+	public void update(Article article);
 }	
