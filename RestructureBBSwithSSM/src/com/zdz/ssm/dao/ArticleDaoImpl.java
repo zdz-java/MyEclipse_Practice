@@ -13,16 +13,20 @@ import com.zdz.ssm.model.Article;
 @Component
 public class ArticleDaoImpl implements ArticleDao{
 //	是否该设置成为单例的？
-	private SqlSessionFactory sqlSessionFactory;
+	private static SqlSessionFactory sqlSessionFactory;
 
-	public SqlSessionFactory getSqlSessionFactory() {
-		return sqlSessionFactory;
-	}
+//	public SqlSessionFactory getSqlSessionFactory() {
+//		return sqlSessionFactory;
+//	}
+//	@Autowired
+//	public static void setSqlSessionFactory(SqlSessionFactory ssf) {
+//		sqlSessionFactory = ssf;
+//	}
 	@Autowired
-	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
-		this.sqlSessionFactory = sqlSessionFactory;
+	public ArticleDaoImpl(SqlSessionFactory ssf)
+	{
+		sqlSessionFactory = ssf;
 	}
-
 	@Override
 	public int save(Article article) {
 		SqlSession ss = sqlSessionFactory.openSession();
@@ -30,6 +34,7 @@ public class ArticleDaoImpl implements ArticleDao{
 
 	    articleMapper.save(article);
 	    ss.commit();
+	    ss.close();
 	    return article.getId();
 	}
 
@@ -39,8 +44,10 @@ public class ArticleDaoImpl implements ArticleDao{
 		int size = pageSize;
 		SqlSession ss = sqlSessionFactory.openSession();
 		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
-
-		return articleMapper.getSplitPageList(begin, size);
+		List<Article> articles = articleMapper.getSplitPageList(begin, size);
+		ss.commit();
+		ss.close();
+		return articles;
 	}
 
 	@Override
@@ -50,7 +57,8 @@ public class ArticleDaoImpl implements ArticleDao{
 
 		int totalRecords = articleMapper.getTotal();
 		int totalPageNumber = totalRecords%pageSize==0 ? totalRecords/pageSize : totalRecords/pageSize+1;
-		
+		ss.commit();
+		ss.close();
 		return totalPageNumber;
 	}
 
@@ -58,16 +66,20 @@ public class ArticleDaoImpl implements ArticleDao{
 	public List<Article> getArticlesByRootid(int rootId) {
 		SqlSession ss = sqlSessionFactory.openSession();
 		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
-
-		return articleMapper.getArticlesByRootid(rootId);
+		List<Article> articles = articleMapper.getArticlesByRootid(rootId);
+		ss.commit();
+		ss.close();
+		return articles;
 	}
 
 	@Override
 	public Article getArticleById(int id) {
 		SqlSession ss = sqlSessionFactory.openSession();
 		ArticleMapper articleMapper = ss.getMapper(ArticleMapper.class);
-
-		return articleMapper.getArticleById(id);
+		Article article = articleMapper.getArticleById(id);
+		ss.commit();
+		ss.close();
+		return article;
 	}
 
 	@Override
@@ -77,6 +89,7 @@ public class ArticleDaoImpl implements ArticleDao{
 
 		articleMapper.deleteById(id);
 		ss.commit();
+		ss.close();
 	}
 	@Override
 	public void update(Article article) {
@@ -85,6 +98,7 @@ public class ArticleDaoImpl implements ArticleDao{
 
 		articleMapper.update(article);
 		ss.commit();
+		ss.close();
 	}
 
 }

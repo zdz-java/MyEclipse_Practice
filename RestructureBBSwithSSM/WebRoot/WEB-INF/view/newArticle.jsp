@@ -1,4 +1,5 @@
 <%@page pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
@@ -54,19 +55,19 @@
 			</tbody>
 		</table>
 		<br>
-		<form action="newArticle" name="form" method="post"
-			onSubmit="return checkdata()">
+		<sf:form action="newArticle" commandName="article" method="post"
+			onSubmit="return checkdata()" >
 
-			<td>发帖昵称：<input type="text" name="username"
+			<td>发帖昵称：<sf:input type="text" path="username"
 				style="height: 20px; width: 155px"
-				onBlur="checkUserName(this.value.toLowerCase())"><br>
+				onBlur="checkUserName(this.value.toLowerCase())"/><br>
 			<span id="usernameErr"></span>
-			<td><br> <input type="hidden" name="post" value="true">
+			<td><br> 
 				标 题：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text"
 				name="title" style="height: 20px; width: 155px"><br> <br>
-				内容：<textarea class="ckeditor" name="cont" rows="20" cols="100"></textarea><br>
+				内容：<sf:textarea class="ckeditor" path="cont" rows="20" cols="100"/><br>
 				<input type="submit" name="submit" id="submit" value="submit">
-		</form>
+		</sf:form>
 
 		<!-- this is the ckeditor coding -->
 		<script type="text/javascript">

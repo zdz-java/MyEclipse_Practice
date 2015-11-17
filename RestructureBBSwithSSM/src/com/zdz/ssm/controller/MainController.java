@@ -3,11 +3,14 @@ package com.zdz.ssm.controller;
 import java.sql.Date;
 import java.util.List;
 
+import javax.ws.rs.POST;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.zdz.ssm.model.Article;
@@ -31,7 +34,6 @@ public class MainController {
 	public String splitPage(
 			@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
 			Model model) {
-
 		final int PAGESIZE = 4;
 		int totalPageNumber;
 		List<Article> articles;
@@ -79,8 +81,8 @@ public class MainController {
 		return "delete";
 	}
 
-	@RequestMapping(value = "/newArticle", params = "post")
-	public String newArticle(@RequestParam Article article) {
+	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
+	public String newArticle(Article article) {
 		int rootid = -1;
 		article.setIsLeaf(true);
 		article.setPdate(new Date(System.currentTimeMillis()));
@@ -89,11 +91,12 @@ public class MainController {
 		rootid = articleService.save(article);
 		article.setRootId(rootid);
 		articleService.update(article);
-		return "articleFlat";
+		return "forward:/articleFlat";
 	}
 
-	@RequestMapping(value = "/newArticle", params = "!post")
-	public String showNewArticle() {
+	@RequestMapping(value = "/newArticle", method = RequestMethod.GET)
+	public String showNewArticle(Model model) {
+		model.addAttribute("article",new Article());
 		return "newArticle";
 	}
 
