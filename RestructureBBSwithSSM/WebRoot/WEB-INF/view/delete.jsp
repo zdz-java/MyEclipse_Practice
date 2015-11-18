@@ -52,10 +52,10 @@
 			删除操作完成！
 			</h3>
 			<script language="JavaScript1.2" type="text/javascript">
-				delayURL('articleFlat', '3000')
+				delayURL('backgroundAdmin', '3000')
 			</script>
 			<span id="time">3</span>秒后自动跳转，如未跳转请点击 <a href="javascript:"
-				onClick="delayURL('articleFlat','0000')">此处...</a>
+				onClick="delayURL('backgroundAdmin','0000')">此处...</a>
 	</div>
 </body>
 </html>

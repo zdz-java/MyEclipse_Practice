@@ -1,5 +1,6 @@
 <%@page pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ include file="_SessionCheck.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
@@ -64,12 +65,11 @@
 		<table border="0" cellpadding="3" cellspacing="0" width="100%">
 			<tbody>
 				<tr valign="top">
-					<td><span class="nobreak"> 共 <s:property
-								value="totalPageNumber" /> 页 <span class="jive-paginator">
+					<td><span class="nobreak"> 共 ${totalPageNumber} 页 <span class="jive-paginator">
 								[ <a
-								href="articleFlat?pageNumber=<s:property value='lastPageNumber'/>">上一页</a>
-								]第 <s:property value="pageNumber" /> 页 [ <a
-								href="articleFlat?pageNumber=<s:property value='nextPageNumber'/>">下一页</a>
+								href="articleFlat?pageNumber=${lastPageNumber}">上一页</a>
+								]第 ${pageNumber} 页 [ <a
+								href="articleFlat?pageNumber=${nextPageNumber}">下一页</a>
 								]
 						</span>
 					</span></td>
@@ -93,7 +93,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<s:iterator value="articles">
+										<c:forEach items="${articles}" var="article" varStatus="status" >
 											<tr class="jive-even">
 												<td class="jive-first" nowrap="nowrap" width="1%"><div
 														class="jive-bullet">
@@ -101,26 +101,24 @@
 															height="16" width="16">
 													</div></td>
 												<td nowrap="nowrap" width="1%"><a
-													href="delete!delete?id=<s:property value="id"/>">删除</a>
+													href="delete?id=${article.id}">删除</a>
 												</td>
 												<td class="jive-thread-name" width="95%"><a
 													id="jive-thread-1"
-													href="articleFlatDetail?id=<s:property value="id"/>&rootid=<s:property value="rootId"/>"><s:property
-															value="title" /></a></td>
+													href="articleFlatDetail?id=${article.id}&rootid=${article.rootId}">${article.title}</a></td>
 												<td class="jive-author" nowrap="nowrap" width="1%"><span
-													class=""> <a href=""><s:property
-																value="username" /></a>
+													class=""> <a href="">${article.username}</a>
 												</span></td>
 												<td class="jive-view-count" width="1%">104</td>
 												<td class="jive-msg-count" width="1%">5</td>
 												<td class="jive-last" nowrap="nowrap" width="1%"><div
 														class="jive-last-post">
-														<s:property value="pdate" />
+														${article.pdate}
 														<br>
 													</div></td>
 											</tr>
 
-										</s:iterator>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

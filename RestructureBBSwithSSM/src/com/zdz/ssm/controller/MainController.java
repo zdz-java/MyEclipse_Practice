@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,5 +113,37 @@ public class MainController {
 		article.setPdate(new Date());
 		articleService.save(article);
 		return "replyDeal";
+	}
+	@RequestMapping(value="/login")
+	public String login()
+	{
+		return "login";
+	}
+	@RequestMapping(value="/backgroundAdmin")
+	public String backgroundAdmin(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,Model model)
+	{
+		final int PAGESIZE = 4;
+		int totalPageNumber;
+		List<Article> articles;
+		int lastPageNumber;
+		int nextPageNumber;
+
+		totalPageNumber = articleService.getSplitPageTotalNumber(PAGESIZE);
+		if (pageNumber <= 0) {
+			pageNumber = 1;
+		} else if (pageNumber > totalPageNumber) {
+			pageNumber = totalPageNumber;
+		}
+		lastPageNumber = pageNumber - 1;
+		nextPageNumber = pageNumber + 1;
+		articles = articleService.getSplitPageList(PAGESIZE, pageNumber);
+
+		model.addAttribute("totalPageNumber", totalPageNumber);
+		model.addAttribute("lastPageNumber", lastPageNumber);
+		model.addAttribute("nextPageNumber", nextPageNumber);
+		model.addAttribute("pageNumber", pageNumber);
+		model.addAttribute("articles", articles);
+		
+		return "backgroundAdmin";
 	}
 }
