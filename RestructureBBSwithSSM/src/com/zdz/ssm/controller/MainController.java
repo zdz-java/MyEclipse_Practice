@@ -1,14 +1,11 @@
 package com.zdz.ssm.controller;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
-
-import javax.ws.rs.POST;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,10 +97,20 @@ public class MainController {
 		return "newArticle";
 	}
 
-	@RequestMapping("/replyDeal")
-	public String replyDeal() {
-
+	@RequestMapping(value = "/reply" ,method = RequestMethod.GET)
+	public String reply(@RequestParam(value="id")int pid,@RequestParam(value="rootid")int rootId,Model model) {
+		Article article = new Article();
+		article.setPid(pid);
+		article.setRootId(rootId);
+		model.addAttribute("article",article);
+		return "reply";
+	}
+	
+	@RequestMapping(value = "/reply" ,method = RequestMethod.POST)
+	public String replyToPersist(Article article) {
+		article.setIsLeaf(true);
+		article.setPdate(new Date());
+		articleService.save(article);
 		return "replyDeal";
 	}
-
 }

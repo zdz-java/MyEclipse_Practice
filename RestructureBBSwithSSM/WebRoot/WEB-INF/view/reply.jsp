@@ -1,5 +1,5 @@
 <%@page pageEncoding="UTF-8"%>
-<%@taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
@@ -41,18 +41,16 @@
     </tbody>
   </table>
   <br>
-  <form action="replyDeal!replyDeal" name="form" method="post" >
-    <input type="hidden" name="pid" value="<s:property value="id"/>">
-    <input type="hidden" name="rootid" value="<s:property value="rootid"/>">
-    
-   <td>发帖昵称：<input type="text" name="username" style="height: 20px; width: 155px" onBlur="checkUserName(this.value.toLowerCase())"><br><span id="usernameErr"></span><td>
+  <sf:form action="reply" commandName="article" method="post" >   
+  	<sf:hidden path="pid"/>
+  	<sf:hidden path="rootId"/> 
+   <td>发帖昵称：<sf:input type="text" path="username" style="height: 20px; width: 155px" onBlur="checkUserName(this.value.toLowerCase())"/><br><span id="usernameErr"></span><td>
     <br>
-    <input type="hidden" name="post" value="1">
-          标 题：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" name="title" style="height: 20px; width: 155px"><br>
+          标 题：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<sf:input type="text" path="title" style="height: 20px; width: 155px"/><br>
   	<br>
-  	内容：<textarea class="ckeditor" name="cont" rows="20" cols="100"></textarea><br>
+  	内容：<sf:textarea class="ckeditor" path="cont" rows="20" cols="100"/><br>
   	<input type="submit" name="submit" id="submit" value="提交">
-  </form>
+  </sf:form>
   
 <!-- this is the ckeditor coding -->  
 <script type="text/javascript">
