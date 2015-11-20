@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 给出的sql脚本中没有给出该表，先写下去，需要的时候再补充 -->
+<mapper namespace="com.zdz.crm.mapper.BasDictMapper">
+
+</mapper>
