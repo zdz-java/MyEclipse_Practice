@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="BasDict" type="com.zdz.crm.model.BasDict"/>
 		<typeAlias alias="SysUser" type="com.zdz.crm.model.SysUser"/>
+		<typeAlias alias="SysRole" type="com.zdz.crm.model.SysRole"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

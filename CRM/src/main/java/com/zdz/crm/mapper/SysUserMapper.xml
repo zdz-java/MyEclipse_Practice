@@ -6,13 +6,78 @@
 
 	<resultMap id="sysUserResultMap" type="SysUser">
 		<id property="usrId" column="usr_id" />
-		<!-- <result property="sysRole" column="" /> -->
 		<result property="usrName" column="usr_name" />
 		<result property="usrPassword" column="usr_password" />
 		<result property="usrFlag" column="usr_flag" />
+		<!-- 这里使用了三种方案进行关联，但是只有使用select能够有效，不知道原因，也不知道如果不使用select，如何能够知道对应哪个表 -->
+		<association property="sysRole" javaType="SysRole" column="usr_role_id"
+			select="getRoleById">
+		</association>
+		<!-- <association property="sysRole" column="usr_role_id" javaType="SysRole"> 
+			<id property="roleId" column="role_id" /> <result property="roleName" column="role_name" 
+			/> <result property="roleDesc" column="role_desc" /> <result property="roleFlag" 
+			column="role_flag" /> </association> -->
+		<!-- <association property="sysRole" column="usr_role_id" javaType="SysRole" 
+			resultMap="sysRoleResultMap"> </association> -->
 	</resultMap>
+	<resultMap id="sysRoleResultMap" type="SysRole">
+		<id property="roleId" column="role_id" />
+		<result property="roleName" column="role_name" />
+		<result property="roleDesc" column="role_desc" />
+		<result property="roleFlag" column="role_flag" />
+	</resultMap>
+	<select id="getRoleById" resultMap="sysRoleResultMap">
+		select * from sys_role where
+		role_id = #{roleId}
+	</select>
 
 	<select id="findById" resultMap="sysUserResultMap">
-		select * from sys_user where usr_id = #{id}
+		select * from sys_user where
+		usr_id = #{usrId}
+	</select>
+
+	<insert id="save" parameterType="SysUser" useGeneratedKeys="true"
+		keyProperty="usrId">
+		insert into sys_user
+		values(#{usrId},#{usrName},#{usrPassword},#{sysRole.roleId},#{usrFlag})
+	</insert>
+
+	<delete id="delete">
+		delete from sys_user where usr_id = #{usrId}
+	</delete>
+	<select id="findByUsrName" resultMap="sysUserResultMap">
+		select * from sys_user
+		where usr_name = #{usrName}
+	</select>
+
+	<select id="findByUsrPassword" resultMap="sysUserResultMap">
+		select * from sys_user
+		where usr_password = #{usrPassword}
+	</select>
+
+	<select id="findByUsrFlag" resultMap="sysUserResultMap">
+		select * from sys_user
+		where usr_flag = #{usrFlag}
+	</select>
+
+	<select id="findByProperty" resultMap="sysUserResultMap">
+		select * from sys_user
+		<choose>
+			<when test="param1 == 'usrId'">
+				where usr_id = #{param2}
+			</when>
+			<when test="param1 == 'usrName'">
+				where usr_name = #{param2}
+			</when>
+			<when test="param1 == 'usrPassword'">
+				where usr_password = #{param2}
+			</when>
+			<when test="param1 == 'usrFlag'">
+				where usr_flag = #{param2}
+			</when>
+			<otherwise>
+				where 1 = 0
+			</otherwise>
+		</choose>
 	</select>
 </mapper>
