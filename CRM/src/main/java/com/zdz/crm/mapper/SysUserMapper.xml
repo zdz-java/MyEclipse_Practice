@@ -80,4 +80,24 @@
 			</otherwise>
 		</choose>
 	</select>
+	<select id="findByExample" resultMap="sysUserResultMap">
+		select * from sys_user
+		<where>
+			<if test="usrId != null">
+				usr_id = #{usrId}
+			</if>
+			<if test="usrName != null">
+				AND usr_name = #{usrName}
+			</if>
+			<if test="usrPassword != null">
+				AND usr_password = #{usrPassword}
+			</if>
+			<if test="usrFlag != null">
+				AND usr_flag = #{usrFlag}
+			</if>
+			<if test="sysRole != null">
+				AND usr_role_id = #{sysRole.roleId}
+			</if>
+		</where>
+	</select>
 </mapper>

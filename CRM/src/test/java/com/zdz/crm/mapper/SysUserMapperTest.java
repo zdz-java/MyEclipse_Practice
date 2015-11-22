@@ -121,4 +121,37 @@ public class SysUserMapperTest {
 		session.commit();
 		session.close();
 	}
+	
+	@Test
+	public void findByExampleTest() throws IOException {
+		SqlSession session = sqlSessionFactory.openSession();
+		SysUserMapper sysUserMapper = session.getMapper(SysUserMapper.class);
+		
+		SysUser user = new SysUser();
+		SysRole role = new SysRole();
+		role.setRoleId((long)6);
+
+		user.setSysRole(role);
+		user.setUsrFlag(1);
+		user.setUsrName("zdz");
+		user.setUsrPassword("121");
+		
+		sysUserMapper.save(user);
+		session.commit();
+		
+		SysUser example = new SysUser();
+//		example.setUsrFlag(1);
+//		example.setUsrName("zdz");
+		example.setSysRole(role);
+		
+		List<SysUser> users;
+		users = sysUserMapper.findByExample(example);
+		assertEquals(users.get(users.size()-1).getUsrPassword(),"121");
+		assertEquals(users.get(users.size()-1).getUsrName(),"zdz");
+		assertEquals((int)users.get(users.size()-1).getUsrFlag(),1);
+		
+		sysUserMapper.delete(user);
+		session.commit();
+		session.close();
+	}
 }

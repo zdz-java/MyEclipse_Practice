@@ -15,7 +15,7 @@ public interface SysUserMapper {
 	public abstract void delete(SysUser persistentInstance);
 
 	public abstract SysUser findById(java.lang.Long id);
-//	这个方法的业务逻辑不了解，留待
+
 	public abstract List findByExample(SysUser instance);
 
 	public abstract List findByProperty(String propertyName, Object value);
