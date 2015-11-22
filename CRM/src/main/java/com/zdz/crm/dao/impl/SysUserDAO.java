@@ -3,6 +3,8 @@ package com.zdz.crm.dao.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,16 @@ import com.zdz.crm.util.PageResult;
 @Component
 public class SysUserDAO implements ISysUserDAO {
 	private SqlSessionFactory sqlSessionFactory;
+	private static final Log log = LogFactory.getLog(SysUserDAO.class);
+
+	public Log getLog() {
+		return log;
+	}
 
 	public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}
+
 	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
@@ -62,12 +70,22 @@ public class SysUserDAO implements ISysUserDAO {
 
 	@Override
 	public void save(SysUser transientInstance) {
+		log.debug("saving SysUser instance");
+
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		SysUserMapper sysUserMapper = sqlSession.getMapper(SysUserMapper.class);
 
-		sysUserMapper.save(transientInstance);
-		sqlSession.commit();
-		sqlSession.close();
+		try {
+			sysUserMapper.save(transientInstance);
+			sqlSession.commit();
+			log.debug("save successful");
+		} catch (RuntimeException e) {
+			log.error("save failed", e);
+			throw e;
+		} finally {
+			sqlSession.close();
+		}
+
 	}
 
 	@Override
@@ -75,9 +93,17 @@ public class SysUserDAO implements ISysUserDAO {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		SysUserMapper sysUserMapper = sqlSession.getMapper(SysUserMapper.class);
 
-		sysUserMapper.delete(persistentInstance);
-		sqlSession.commit();
-		sqlSession.close();
+		log.debug("deleting SysUser instance");
+		try {
+			sysUserMapper.delete(persistentInstance);
+			sqlSession.commit();
+			log.debug("delete successful");
+		} catch (RuntimeException re) {
+			log.error("delete failed", re);
+			throw re;
+		} finally {
+			sqlSession.close();
+		}
 	}
 
 	@Override
