@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdz.am.mapper.ReplyMapper">
+	<resultMap type="Reply" id="replyResultMap">
+		<id property="replyID" column="replyID" />
+		<result property="replyContent" column="replyContent" />
+		<result property="employeeID" column="employeeID" />
+		<result property="replyTime" column="replyTime" />
+		<result property="messageID" column="messageID" />
+	</resultMap>
+	<insert id="addReplay" useGeneratedKeys="true"
+		keyProperty="replyID">
+		insert into tb_reply values
+		(null,#{replyContent},#{employeeID},#{replyTime},#{messageID})
+	</insert>
+	<select id="findReplayByMsgID" resultMap="replyResultMap">
+		select * from tb_reply where messageID = #{messageID}
+	</select>
+	<delete id="findCountByMsgID">
+		select count(*) from tb_reply where messageID = #{messageID}
+	</delete>
+</mapper>
