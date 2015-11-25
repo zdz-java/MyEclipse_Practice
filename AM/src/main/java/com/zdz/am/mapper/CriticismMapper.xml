@@ -10,11 +10,15 @@
 		<result property="criticismTime" column="criticismTime" />
 		<result property="messageID" column="messageID" />
 	</resultMap>
-	<insert id="addCriticism">
+	<insert id="addCriticism" useGeneratedKeys="true"
+		keyProperty="criticismID">
 		insert into tb_criticism values
-		(#{criticismID},#{criticismContent},#{employeeID},#{criticismTime},#{messageID})
+		(null,#{criticismContent},#{employeeID},#{criticismTime},#{messageID})
 	</insert>
 	<select id="findCriticismByMsgID" resultMap="criticismResultMap">
 		select * from tb_criticism where criticismID = #{criticismID}
 	</select>
+	<delete id="deleteCriticismByMsgID">
+		delete from tb_criticism where criticismID = #{criticismID}
+	</delete>
 </mapper>
