@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdz.am.mapper.CriticismMapper">
+	<resultMap type="Criticism" id="criticismResultMap">
+		<id property="criticismID" column="criticismID" />
+		<result property="criticismContent" column="criticismContent" />
+		<result property="employeeID" column="employeeID" />
+		<result property="criticismTime" column="criticismTime" />
+		<result property="messageID" column="messageID" />
+	</resultMap>
+	<insert id="addCriticism">
+		insert into tb_criticism values
+		(#{criticismID},#{criticismContent},#{employeeID},#{criticismTime},#{messageID})
+	</insert>
+	<select id="findCriticismByMsgID" resultMap="criticismResultMap">
+		select * from tb_criticism where criticismID = #{criticismID}
+	</select>
+</mapper>
