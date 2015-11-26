@@ -18,7 +18,7 @@
 	<select id="findReplayByMsgID" resultMap="replyResultMap">
 		select * from tb_reply where messageID = #{messageID}
 	</select>
-	<delete id="findCountByMsgID">
+	<select id="findCountByMsgID" resultType="int">
 		select count(*) from tb_reply where messageID = #{messageID}
-	</delete>
+	</select>
 </mapper>

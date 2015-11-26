@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdz.am.mapper.EmployeeMapper">
+	<resultMap type="Employee" id="employeeResultMap">
+		<id property="employeeID" column="employeeID" />
+		<result property="employeeName" column="employeeName" />
+		<result property="employeeSex" column="employeeSex" />
+		<result property="employeeBirth" column="employeeBirth" />
+		<result property="employeePhone" column="employeePhone" />
+		<result property="employeePlace" column="employeePlace" />
+		<result property="joinTime" column="joinTime" />
+		<result property="password" column="password" />
+		<result property="isLead" column="isLead" />
+	</resultMap>
+	<insert id="addEmployee" useGeneratedKeys="true" keyProperty="employeeID">
+		insert into tb_employee values
+		(null,#{employeeName},#{employeeSex},#{employeeBirth},#{employeePhone},#{employeePlace},#{joinTime},#{password},#{isLead})
+	</insert>
+	<delete id="deleteEmployee">
+		delete from tb_employee where employeeID =
+		#{employeeID}
+	</delete>
+	<select id="findAllEmployee" resultMap="employeeResultMap">
+		select * from tb_employee
+	</select>
+	<select id="findEmployeeById" resultMap="employeeResultMap">
+		select * from tb_employee
+		where employeeID = #{employeeID}
+	</select>
+	<update id="updateEmployee">
+		update tb_employee set
+		employeeName=#{employeeName},employeeSex=#{employeeSex},employeeBirth=#{employeeBirth},employeePhone=#{employeePhone},employeePlace=#{employeePlace},joinTime=#{joinTime},password=#{password},isLead=#{isLead}
+		where employeeID = #{employeeID}
+	</update>
+</mapper>

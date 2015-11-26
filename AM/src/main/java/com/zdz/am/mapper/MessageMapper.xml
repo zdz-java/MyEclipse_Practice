@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdz.am.mapper.MessageMapper">
+	<resultMap type="Message" id="messageResultMap">
+		<id property="messageID" column="messageID" />
+		<result property="messageTitle" column="messageTitle" />
+		<result property="messageContent" column="messageContent" />
+		<result property="employeeID" column="employeeID" />
+		<result property="publishTime" column="publishTime" />
+	</resultMap>
+	<insert id="addMessage" useGeneratedKeys="true" keyProperty="messageID">
+		insert into tb_message values
+		(null,#{messageTitle},#{messageContent},#{employeeID},#{publishTime})
+	</insert>
+	<delete id="deleteMessage">
+		delete from tb_message where messageID =
+		#{messageID}
+	</delete>
+	<select id="findAllMessage" resultMap="messageResultMap">
+		select * from tb_message
+	</select>
+	<select id="findMessageById" resultMap="messageResultMap">
+		select * from
+		tb_message
+		where messageID = #{messageID}
+	</select>
+	<update id="updateMessage">
+		update tb_message set
+		messageTitle=#{messageTitle},messageContent=#{messageContent},employeeID=#{employeeID},publishTime=#{publishTime}
+		where
+		messageID = #{messageID}
+	</update>
+	<select id="findAllCount" resultType="int">
+		select count(*) from tb_message
+	</select>
+</mapper>

@@ -37,4 +37,30 @@ public class ReplyMapperTest {
 		session.commit();
 		session.close();
 	}
+	@Test
+	public void findCountByMsgIDTest() throws IOException {
+		SqlSession session = sqlSessionFactory.openSession();
+		ReplyMapper replyMapper = session.getMapper(ReplyMapper.class);
+		
+		int count = replyMapper.findCountByMsgID(14);
+		assertEquals(count,3);
+		
+		session.commit();
+		session.close();
+	}
+//	@Test
+//	public void addReplayTest() throws IOException {
+//		SqlSession session = sqlSessionFactory.openSession();
+//		ReplyMapper replyMapper = session.getMapper(ReplyMapper.class);
+//		
+//		Reply reply = new Reply();
+//		reply.setReplyContent("temp");
+//		reply.setEmployeeID(3052);
+//		reply.setMessageID(14);
+//		
+//		replyMapper.addReplay(reply);
+//		
+//		session.commit();
+//		session.close();
+//	}
 }
