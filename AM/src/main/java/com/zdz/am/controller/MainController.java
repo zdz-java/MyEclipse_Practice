@@ -1,0 +1,23 @@
+package com.zdz.am.controller;
+
+import java.io.IOException;
+import java.io.Writer;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+@Controller
+public class MainController {
+	@RequestMapping("/helloTest")
+	public void test(HttpServletResponse httpServletResponse)
+	{
+		try (Writer writer = httpServletResponse.getWriter();){
+			writer.write("hello!");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}
