@@ -16,7 +16,7 @@
 		(null,#{replyContent},#{employeeID},#{replyTime},#{messageID})
 	</insert>
 	<select id="findReplayByMsgID" resultMap="replyResultMap">
-		select * from tb_reply where messageID = #{messageID}
+		select * from tb_reply where messageID = #{param1} limit #{param2.beginIndex},#{param2.everyPage}
 	</select>
 	<select id="findCountByMsgID" resultType="int">
 		select count(*) from tb_reply where messageID = #{messageID}

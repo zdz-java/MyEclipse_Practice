@@ -2,8 +2,9 @@ package com.zdz.am.dao;
 
 import java.util.List;
 
-import javax.mail.Message;
 
+
+import com.zdz.am.model.Message;
 import com.zdz.am.util.Page;
 
 

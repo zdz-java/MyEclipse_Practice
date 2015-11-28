@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.zdz.am.model.Reply;
+import com.zdz.am.util.Page;
 
 public class ReplyMapperTest {
 	private String resource;
@@ -31,7 +32,10 @@ public class ReplyMapperTest {
 		SqlSession session = sqlSessionFactory.openSession();
 		ReplyMapper replyMapper = session.getMapper(ReplyMapper.class);
 		
-		List<Reply> list = replyMapper.findReplayByMsgID(14);
+		Page page = new Page();
+		page.setBeginIndex(0);
+		page.setEveryPage(10);
+		List<Reply> list = replyMapper.findReplayByMsgID(14,page);
 		assertEquals(list.get(0).getEmployeeID(), 3052);
 		assertEquals(list.get(0).getReplyID(), 9);
 		session.commit();

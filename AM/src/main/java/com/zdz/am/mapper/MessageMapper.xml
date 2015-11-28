@@ -18,8 +18,8 @@
 		delete from tb_message where messageID =
 		#{messageID}
 	</delete>
-	<select id="findAllMessage" resultMap="messageResultMap">
-		select * from tb_message
+	<select id="findAllMessage" parameterType="Page" resultMap="messageResultMap">
+		select * from tb_message order by publishTime desc limit #{beginIndex},#{everyPage}
 	</select>
 	<select id="findMessageById" resultMap="messageResultMap">
 		select * from
@@ -32,7 +32,7 @@
 		where
 		messageID = #{messageID}
 	</update>
-	<select id="findAllCount" resultType="int">
-		select count(*) from tb_message
+	<select id="findAllCount"  resultType="int">
+		select count(*) from tb_message 
 	</select>
 </mapper>

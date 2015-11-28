@@ -1,57 +1,96 @@
 package com.zdz.am.dao.impl;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.zdz.am.dao.MessageDAO;
+import com.zdz.am.mapper.MessageMapper;
 import com.zdz.am.model.Message;
 import com.zdz.am.util.Page;
 
-
+@Component
 public class MessageDAOImpl implements MessageDAO{
-
+	private SqlSessionFactory sqlSessionFactory;
+	
+	public SqlSessionFactory getSqlSessionFactory() {
+		return sqlSessionFactory;
+	}
+	@Autowired
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
+	}
 	@Override
-	public void addMessage(javax.mail.Message message) {
-		// TODO Auto-generated method stub
+	public void addMessage(Message message) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
+		
+		messageMapper.addMessage(message);
+		
+		sqlSession.commit();
+		sqlSession.close();
 		
 	}
 
 	@Override
-	public void updateMessage(javax.mail.Message message) {
-		// TODO Auto-generated method stub
+	public void updateMessage(Message message) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
 		
+		messageMapper.updateMessage(message);
+		
+		sqlSession.commit();
+		sqlSession.close();		
 	}
 
 	@Override
 	public void deleteMessage(int messageID) {
-		// TODO Auto-generated method stub
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
 		
+		messageMapper.deleteMessage(messageID);;
+		
+		sqlSession.commit();
+		sqlSession.close();		
 	}
 
 	@Override
-	public List<javax.mail.Message> findAllMessagee(Page page) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Message> findAllMessagee(Page page) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
+		
+		List<Message> list = messageMapper.findAllMessage(page);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return list;
 	}
 
 	@Override
-	public javax.mail.Message findMessageById(int messageID) {
-		// TODO Auto-generated method stub
-		return null;
+	public Message findMessageById(int messageID) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
+		
+		Message message = messageMapper.findMessageById(messageID);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return message;
 	}
 
 	@Override
 	public int findAllCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MessageMapper messageMapper = sqlSession.getMapper(MessageMapper.class);
+		
+		int count = messageMapper.findAllCount();
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return count;
 	}
 
 }

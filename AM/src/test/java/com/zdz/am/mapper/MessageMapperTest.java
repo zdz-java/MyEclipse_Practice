@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import com.zdz.am.model.Employee;
 import com.zdz.am.model.Message;
+import com.zdz.am.util.Page;
 
 public class MessageMapperTest {
 	private String resource;
@@ -75,7 +76,10 @@ public class MessageMapperTest {
 		messageMapper.updateMessage(message);;
 		session.commit();
 		
-		List<Message> list = messageMapper.findAllMessage();
+		Page page = new Page();
+		page.setBeginIndex(0);
+		page.setEveryPage(10);
+		List<Message> list = messageMapper.findAllMessage(page );
 		assertEquals(list.get(list.size()-1).getMessageTitle(), "zdzdz");
 		
 		messageMapper.deleteMessage(toadd.getMessageID());
