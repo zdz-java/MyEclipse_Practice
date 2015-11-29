@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title>企业日常事务管理系统-消息列表</title>
-<link href="css.css" type="text/css" rel="stylesheet" media="all" />
+<link href="css/css.css" type="text/css" rel="stylesheet" media="all" />
 <link href="css/channel.css" type="text/css" rel="stylesheet" media="all" />
-<script src="menu.js" type="text/javascript"></script>
+<script src="js/menu.js" type="text/javascript"></script>
 <style type="text/css">
 <!--
 .STYLE2 {	color: #CCCCCC;
