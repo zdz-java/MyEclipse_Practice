@@ -65,7 +65,7 @@
 			</div>
 			<div id="employee">
 				<c:choose>
-					<c:when test="${empty employee}">
+					<c:when test="${empty sessionScope.employee}">
 			没有进行身份识别，请先进行身份识别!
 		</c:when>
 					<c:otherwise>

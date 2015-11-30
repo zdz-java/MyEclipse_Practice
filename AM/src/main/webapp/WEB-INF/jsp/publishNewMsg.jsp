@@ -38,7 +38,7 @@
 					<p>
 						<font color="red">${error}</font>
 					</p>
-					<sf:form action="MsgPublish" method="post" commandName="message">
+					<sf:form action="publishNewMsg" method="post" commandName="message">
 						<p>
 							消息标题： <sf:input type="text" path="messageTitle" size="50" />
 						</p>

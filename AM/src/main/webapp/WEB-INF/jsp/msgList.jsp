@@ -21,14 +21,16 @@
 <div id="topexplain">企业日常事务管理系统，为企业内部通信提供最简便的服务！</div>
 <div id="topmenu"><img src="images/banner.jpg" width="970" height="147" /></div>
 <div id="bookmunu">
-<div class="jsmenu" id="jsmenu">
-<ul>
-  <li class="normal"><a href="index.jsp" urn="#jsmenu1" rel="conmenu">首页</a></li>
-  <li class="active"><a urn="#default_Info" rel="conmenu" href="GetMessageList">消息列表</a></li>
-  <li class="normal"><a urn="jsmenu2" rel="conmenu" href="publishNewMsg.jsp">发布新消息</a></li>
-  <li class="normal"><a urn="jsmenu3" rel="conmenu" href="statusRecognise.jsp">身份识别</a></li>
-  </ul>
-</div>
+		<div class="jsmenu" id="jsmenu"></div>
+		<div>
+			<ul>
+				<li><a href="index">首页</a></li>
+				<li><a href="GetMessageList">消息列表</a></li>
+				<li><a href="publishNewMsg">发布新消息</a></li>
+				<li><a href="statusRecognise">身份识别</a></li>
+			</ul>
+		</div>
+	</div>
 <div id="conmenu"></div>
 <div id="place">当前位置：[<a href="index.jsp">首页</a>] - [消息列表]</div>
 <div id="channelcont">
