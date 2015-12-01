@@ -34,10 +34,10 @@
 		</div>
 		<div id="shenfenshibie">
 			<font color="red">${error}</font>
-			<sf:form action="statusRecognise" method="post" commandName="employee">
+			<sf:form action="statusRecognise" method="post" commandName="employeeToConfrim">
 		  	<p>员工编号：<sf:input type="text" path="employeeID"/></p>
 		  	<p>&nbsp;</p>
-		  	<p>系统口令：<sf:input type="password" path="password" value="${employee.password}"/></p>
+		  	<p>系统口令：<sf:input type="password" path="password" value="${employeeToConfrim.password}"/></p>
 		  	<p>&nbsp;</p>
 		  	<p><input type="submit" value="提交" />
 		    <input type="reset" value="重置" /></p>

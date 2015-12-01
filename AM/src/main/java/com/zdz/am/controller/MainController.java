@@ -1,20 +1,18 @@
 package com.zdz.am.controller;
 
-import java.io.IOException;
-import java.io.Writer;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.zdz.am.dao.CriticismDAO;
 import com.zdz.am.dao.EmployeeDAO;
@@ -28,6 +26,7 @@ import com.zdz.am.util.Page;
 import com.zdz.am.util.PageUtil;
 
 @Controller
+@SessionAttributes("employee")
 public class MainController {
 	private MessageDAO messageDAO;
 	private CriticismDAO criticismDAO;
@@ -70,19 +69,6 @@ public class MainController {
 		this.messageDAO = messageDAO;
 	}
 
-	@RequestMapping("/helloTest")
-	public void test(HttpServletResponse httpServletResponse) {
-		try (Writer writer = httpServletResponse.getWriter();) {
-			writer.write("hehe");
-			writer.write(messageDAO.findAllCount());
-			System.out.println(messageDAO.findAllCount());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	@RequestMapping("/index")
 	public String index(Model model) {
 		Page pageX = PageUtil.createPage(6, messageDAO.findAllCount(), 1);
@@ -94,24 +80,20 @@ public class MainController {
 	@RequestMapping(value = "/statusRecognise", method = RequestMethod.GET)
 	public String getStatusRecogniseForm(Model model) {
 		Employee employee = new Employee();
-		model.addAttribute("employee", employee);
+		model.addAttribute("employeeToConfrim", employee);
 		return "statusRecognise";
 	}
 
 	// 这里需要对employee进行检验，还有错误处理
 	@RequestMapping(value = "/statusRecognise", method = RequestMethod.POST)
-	public String statusRecogniseForm(Model model, Employee employee,
-			HttpServletRequest request) {
+	public String statusRecogniseForm(Model model,@ModelAttribute("employeeToConfrim") Employee employee) {
 		int employeeID = employee.getEmployeeID();
 		Employee toConfirm = employeeDAO.findEmployeeById(employeeID);
 		if (toConfirm == null) {
 			model.addAttribute("error", "不存在该用户ID");
 			return "redirect:/statusRecognise";
 		} else {
-			if (toConfirm.getPassword().endsWith(employee.getPassword())) {
-				HttpSession session = request.getSession(true);
-				session.setAttribute("employee", toConfirm);
-				// 不添加下者在index中取出的值只有ID的属性
+			if (toConfirm.getPassword().equals(employee.getPassword())) {
 				model.addAttribute("employee", toConfirm);
 				return "forward:/index";
 			} else {
@@ -131,12 +113,7 @@ public class MainController {
 	// 检验
 	@RequestMapping(value = "/publishNewMsg", method = RequestMethod.POST)
 	public String publishNewMsg(Model model, Message message,
-			HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Employee employee = (Employee) session.getAttribute("employee");
-		if (employee == null) {
-			return "forward:/statusRecognise";
-		}
+			HttpServletRequest request,Employee employee) {
 		message.setEmployeeID(employee.getEmployeeID());
 		message.setPublishTime(new Date());
 		messageDAO.addMessage(message);
@@ -157,13 +134,8 @@ public class MainController {
 
 	@RequestMapping(value = "/GetMessage")
 	public String getMessage(@RequestParam("messageID") int messageID,
-			Model model,HttpServletRequest request,
+			Model model,Employee employee,
 			@RequestParam(required = false, defaultValue = "1") int currentPage) {
-		HttpSession session = request.getSession();
-		Employee employee = (Employee) session.getAttribute("employee");
-		if (employee == null) {
-			return "forward:/statusRecognise";
-		}
 		
 		Page page = PageUtil.createPage(5,
 				replyDAO.findCountByMsgID(messageID), currentPage);// ���÷�ҳ��Ϣ
@@ -191,14 +163,8 @@ public class MainController {
 		return "forward:/GetMessage";
 	}
 	@RequestMapping(value="/CommitCriticism")
-	public String commitCriticism(Criticism criticism,HttpServletRequest request)
+	public String commitCriticism(Criticism criticism,Employee employee)
 	{
-		HttpSession session = request.getSession();
-		Employee employee = (Employee) session.getAttribute("employee");
-		if (employee == null) {
-			return "forward:/statusRecognise";
-		}
-System.out.println(criticism.getCriticismContent());
 		criticism.setCriticismTime(new Date());
 		criticism.setEmployeeID(employee.getEmployeeID());
 		criticismDAO.addCriticism(criticism);
