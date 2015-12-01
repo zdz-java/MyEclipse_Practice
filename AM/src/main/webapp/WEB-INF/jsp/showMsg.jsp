@@ -1,11 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>ÆóÒµÈÕ³£ÊÂÎñ¹ÜÀíÏµÍ³-²é¿´¾ßÌåÏûÏ¢</title>
+<title>ä¼ä¸šæ—¥å¸¸äº‹åŠ¡ç®¡ç†ç³»ç»Ÿ-æŸ¥çœ‹å…·ä½“æ¶ˆæ¯</title>
 <link href="css/css.css" type="text/css" rel="stylesheet" media="all" />
 <link href="css/channel.css" type="text/css" rel="stylesheet"
 	media="all" />
@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<div id="topexplain">ÆóÒµÈÕ³£ÊÂÎñ¹ÜÀíÏµÍ³£¬ÎªÆóÒµÄÚ²¿Í¨ĞÅÌá¹©×î¼ò±ãµÄ·şÎñ£¡</div>
+	<div id="topexplain">ä¼ä¸šæ—¥å¸¸äº‹åŠ¡ç®¡ç†ç³»ç»Ÿï¼Œä¸ºä¼ä¸šå†…éƒ¨é€šä¿¡æä¾›æœ€ç®€ä¾¿çš„æœåŠ¡ï¼</div>
 	<div id="topmenu">
 		<img src="images/banner.jpg" width="970" height="147" />
 	</div>
@@ -29,16 +29,16 @@
 		<div class="jsmenu" id="jsmenu"></div>
 		<div>
 			<ul>
-				<li><a href="index">Ê×Ò³</a></li>
-				<li><a href="GetMessageList">ÏûÏ¢ÁĞ±í</a></li>
-				<li><a href="publishNewMsg">·¢²¼ĞÂÏûÏ¢</a></li>
-				<li><a href="statusRecognise">Éí·İÊ¶±ğ</a></li>
+				<li><a href="index">é¦–é¡µ</a></li>
+				<li><a href="GetMessageList">æ¶ˆæ¯åˆ—è¡¨</a></li>
+				<li><a href="publishNewMsg">å‘å¸ƒæ–°æ¶ˆæ¯</a></li>
+				<li><a href="statusRecognise">èº«ä»½è¯†åˆ«</a></li>
 			</ul>
 		</div>
 	</div>
 	<div id="conmenu"></div>
 	<div id="place">
-		µ±Ç°Î»ÖÃ£º[<a href="index">Ê×Ò³</a>] - [ÏûÏ¢ÁĞ±í] - [²é¿´¾ßÌåÏûÏ¢]
+		å½“å‰ä½ç½®ï¼š[<a href="index">é¦–é¡µ</a>] - [æ¶ˆæ¯åˆ—è¡¨] - [æŸ¥çœ‹å…·ä½“æ¶ˆæ¯]
 	</div>
 	<div id="channelcont">
 		<div id="channelleft">
@@ -46,33 +46,33 @@
 				<br />
 				<h2 align="center">${message.messageTitle}</h2>
 				<br /> ${message.messageContent}
-				<div align="right">·¢²¼ÈËID£º${message.employeeID}
-					·¢²¼Ê±¼ä£º${message.publishTime}</div>
-				<!--Åú¸´-->
+				<div align="right">å‘å¸ƒäººIDï¼š${message.employeeID}
+					å‘å¸ƒæ—¶é—´ï¼š${message.publishTime}</div>
+				<!--æ‰¹å¤-->
 				<div>
-					<h5 style="color:red">Áìµ¼Åú¸´:${empty criticism ? "ÔİÎŞ":criticism.criticismContent}</h5>
+					<h5 style="color:red">é¢†å¯¼æ‰¹å¤:${empty criticism ? "æš‚æ— ":criticism.criticismContent}</h5>
 				</div>
 				<hr />
-				<!--»Ø¸´-->
+				<!--å›å¤-->
 				<c:forEach items="${replyList}" var="reply">
 					<div>
 						${reply.replyContent}
-						<div align="right">»Ø¸´ÈËID£º${reply.employeeID}
-							»Ø¸´Ê±¼ä£º${reply.replyTime}</div>
+						<div align="right">å›å¤äººIDï¼š${reply.employeeID}
+							å›å¤æ—¶é—´ï¼š${reply.replyTime}</div>
 						<hr />
 					</div>
 				</c:forEach>
 				<div align="center">
-					µÚ
+					ç¬¬
 					<c:forEach varStatus="stat" begin="1" end="${page.totalPage}">
 						<a
 							href="GetMessage?messageID=${message.messageID}&currentPage=${stat.index}">${stat.index}</a>
 					</c:forEach>
-					Ò³
+					é¡µ
 				</div>
 				<div>
 					<div align="left">
-						<p>»Ø¸´:</p>
+						<p>å›å¤:</p>
 						<p>
 							<font color="red">${error }</font>
 						</p>
@@ -80,14 +80,14 @@
 							<sf:textarea path="replyContent" height="100" width="100%" />
 							<sf:input type="hidden" path="messageID" value="${messageID}" />
 							<sf:input type="hidden" path="employeeID" value="${employeeID}" />
-							<input type="submit" value="Ìá½»" />
-							<input type="reset" value="ÖØÖÃ" />
+							<input type="submit" value="æäº¤" />
+							<input type="reset" value="é‡ç½®" />
 						</sf:form>
 					</div>
 
 					<c:if test="${sessionScope.employee.lead}">
 						<div align="left">
-							<p>Åú¸´:</p>
+							<p>æ‰¹å¤:</p>
 							<p>
 								<font color="red">${error }</font>
 							</p>
@@ -95,8 +95,8 @@
 								<sf:textarea path="criticismContent" height="100" width="100%" />
 								<sf:input type="hidden" path="messageID"
 									value="${messageID}" />
-								<input type="submit" value="Ìá½»" />
-								<input type="reset" value="ÖØÖÃ" />
+								<input type="submit" value="æäº¤" />
+								<input type="reset" value="é‡ç½®" />
 							</sf:form>
 						</div>
 					</c:if>
@@ -108,7 +108,7 @@
 	<div class="copyright">
 		<ul>
 			<li></li>
-			<li>ÆóÒµÈÕ³£ÊÂÎñ¹ÜÀíÏµÍ³ &nbsp;&copy;2009-2010</li>
+			<li>ä¼ä¸šæ—¥å¸¸äº‹åŠ¡ç®¡ç†ç³»ç»Ÿ &nbsp;&copy;2009-2010</li>
 		</ul>
 	</div>
 	<div class="end"></div>

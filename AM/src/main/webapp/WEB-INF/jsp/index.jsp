@@ -1,10 +1,10 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>��ҵ�ճ��������ϵͳ-��ҳ</title>
+<title>企业日常事务管理系统-首页</title>
 <link href="css/css.css" type="text/css" rel="stylesheet" media="all" />
 <script src="js/menu.js" type="text/javascript"></script>
 <style type="text/css">
@@ -26,7 +26,7 @@
 </head>
 
 <body>
-	<div id="topexplain">��ҵ�ճ��������ϵͳ��Ϊ��ҵ�ڲ�ͨ���ṩ����ķ���</div>
+	<div id="topexplain">企业日常事务管理系统，为企业内部通信提供最简便的服务！</div>
 	<div id="topmenu">
 		<img src="images/banner.jpg" width="970" height="147" />
 	</div>
@@ -34,10 +34,10 @@
 		<div class="jsmenu" id="jsmenu"></div>
 		<div>
 			<ul>
-				<li><a href="index">��ҳ</a></li>
-				<li><a href="GetMessageList">��Ϣ�б�</a></li>
-				<li><a href="publishNewMsg">��������Ϣ</a></li>
-				<li><a href="statusRecognise">����ʶ��</a></li>
+				<li><a href="index">首页</a></li>
+				<li><a href="GetMessageList">消息列表</a></li>
+				<li><a href="publishNewMsg">发布新消息</a></li>
+				<li><a href="statusRecognise">身份识别</a></li>
 			</ul>
 		</div>
 	</div>
@@ -46,7 +46,7 @@
 	<div id="indexfirst">
 		<div id="thenew">
 			<div class="tit">
-				<h1>������Ϣ</h1>
+				<h1>最新消息</h1>
 			</div>
 			<div class="STYLE1" id="therecom">
 
@@ -61,22 +61,22 @@
 		</div>
 		<div id="menunav">
 			<div class="tit">
-				<h1>Ա����Ϣ</h1>
+				<h1>员工信息</h1>
 			</div>
 			<div id="employee">
 				<c:choose>
 					<c:when test="${empty sessionScope.employee}">
-			û�н�������ʶ�����Ƚ�������ʶ��!
+			没有进行身份识别，请先进行身份识别!
 		</c:when>
 					<c:otherwise>
 						<ul>
-							<li>Ա����ţ�${employee.employeeID}</li>
-							<li>Ա��������${employee.employeeName}</li>
-							<li>Ա���Ա�${employee.employeeSex ? "��" : "Ů"}</li>
-							<li>�������ڣ�${employee.employeeBirth }</li>
-							<li>�칫�ҵ绰��${employee.employeePhone }</li>
-							<li>סַ��${employee.employeePlace }</li>
-							<li>�������쵼��${employee.lead ? '��' : '��'}</li>
+							<li>员工编号：${employee.employeeID}</li>
+							<li>员工姓名：${employee.employeeName}</li>
+							<li>员工性别：${employee.employeeSex ? "男" : "女"}</li>
+							<li>出生日期：${employee.employeeBirth }</li>
+							<li>办公室电话：${employee.employeePhone }</li>
+							<li>住址：${employee.employeePlace }</li>
+							<li>管理层领导：${employee.lead ? '是' : '否'}</li>
 						</ul>
 					</c:otherwise>
 				</c:choose>
@@ -87,7 +87,7 @@
 	<div class="copyright">
 		<ul>
 			<li></li>
-			<li>��ҵ�ճ��������ϵͳ &nbsp;&copy;2009-2010</li>
+			<li>企业日常事务管理系统 &nbsp;&copy;2009-2010</li>
 		</ul>
 	</div>
 	<div class="end"></div>

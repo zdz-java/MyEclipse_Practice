@@ -31,9 +31,9 @@ public class CriticismMapperTest {
 		SqlSession session = sqlSessionFactory.openSession();
 		CriticismMapper criticismMapper = session.getMapper(CriticismMapper.class);
 		
-		Criticism criticism = criticismMapper.findCriticismByMsgID(3);
+		Criticism criticism = criticismMapper.findCriticismByMsgID(14);
 		assertEquals(criticism.getEmployeeID(), 3052);
-		assertEquals(criticism.getCriticismContent(), "<p>不错，以后大家好好干活！！</p>");
+		assertEquals(criticism.getCriticismContent(), "a");
 		session.commit();
 		session.close();
 	}
@@ -50,10 +50,10 @@ public class CriticismMapperTest {
 		criticismMapper.addCriticism(toinsert);
 		session.commit();
 		
-		Criticism criticism = criticismMapper.findCriticismByMsgID(toinsert.getCriticismID());
+		Criticism criticism = criticismMapper.findCriticismByMsgID(toinsert.getMessageID());
 		assertEquals(criticism.getMessageID(), 16);
-		assertEquals(criticism.getCriticismContent(), "temp");
-		criticismMapper.deleteCriticismByMsgID(toinsert.getCriticismID());
+		assertEquals(criticism.getCriticismContent(), "<p>测试批复</p>");
+		criticismMapper.deleteCriticismByMsgID(toinsert.getMessageID());
 		session.commit();
 		session.close();
 	}

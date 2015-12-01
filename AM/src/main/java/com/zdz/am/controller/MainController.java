@@ -169,15 +169,13 @@ public class MainController {
 				replyDAO.findCountByMsgID(messageID), currentPage);// ���÷�ҳ��Ϣ
 		Message message = messageDAO.findMessageById(messageID);
 		Criticism criticism = criticismDAO.findCriticismByMsgID(messageID);
-System.out.println("==================");
-System.out.println(criticism.getCriticismContent());
-System.out.println("==================");
 		Criticism criticismToAdd = new Criticism();
 		criticismToAdd.setMessageID(messageID);
 		List<Reply> replyList = replyDAO.findReplayByMsgID(messageID, page);
 		Reply reply = new Reply();
 		reply.setMessageID(messageID);
 		reply.setEmployeeID(employee.getEmployeeID());
+		model.addAttribute("page",page);
 		model.addAttribute("reply",reply);
 		model.addAttribute("message", message);
 		model.addAttribute("criticism", criticism);
@@ -200,7 +198,7 @@ System.out.println("==================");
 		if (employee == null) {
 			return "forward:/statusRecognise";
 		}
-		
+System.out.println(criticism.getCriticismContent());
 		criticism.setCriticismTime(new Date());
 		criticism.setEmployeeID(employee.getEmployeeID());
 		criticismDAO.addCriticism(criticism);
