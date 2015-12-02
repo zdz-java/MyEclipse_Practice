@@ -2,14 +2,20 @@ package com.zdz.am.model;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 public class Employee {
-	private int employeeID;			//Ա�����
+	
+	private int employeeID;	
 	private String employeeName;	//Ա������
-	private boolean employeeSex;	//Ա���Ա�
+	private boolean employeeSex;
+//	只是为了测试数据验证，没有实际用途
+//	结果处出了一个小BUG，取出来的错误值为"{employeeID.not.null}"而不是对应的错误信息
+	@NotNull(message="{employeeID.not.null}")
 	private Date employeeBirth;		//��������
 	private String employeePhone;	//�칫�ҵ绰
-	private String employeePlace;	//סַ
-	private Date joinTime;			//¼��ʱ��
+	private String employeePlace;
+	private Date joinTime;	
 	private String password;		//ϵͳ����
 	private boolean isLead;			//�Ƿ�Ϊ������쵼
 	public int getEmployeeID() {

@@ -4,10 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -84,21 +87,27 @@ public class MainController {
 		return "statusRecognise";
 	}
 
-	// 这里需要对employee进行检验，还有错误处理
 	@RequestMapping(value = "/statusRecognise", method = RequestMethod.POST)
-	public String statusRecogniseForm(Model model,@ModelAttribute("employeeToConfrim") Employee employee) {
+	public String statusRecogniseForm(Model model,@Valid@ModelAttribute("employeeToConfrim") Employee employee,Errors errors) {
+		if(errors.hasErrors())
+		{
+//			这里只是进行测试，能够进行验证，但是验证后值是取得了错误名，没能取到对应的配置文件中的信息
+//			System.out.println("进入用户ID为空的错误处理了");	
+//			return "statusRecognise";
+		}
 		int employeeID = employee.getEmployeeID();
 		Employee toConfirm = employeeDAO.findEmployeeById(employeeID);
 		if (toConfirm == null) {
+//			这里的错误信息尚不知道如何添加到errors中去，还是说应该自己写验证的类，在那个类中赋进去
 			model.addAttribute("error", "不存在该用户ID");
-			return "redirect:/statusRecognise";
+			return "statusRecognise";
 		} else {
 			if (toConfirm.getPassword().equals(employee.getPassword())) {
 				model.addAttribute("employee", toConfirm);
 				return "forward:/index";
 			} else {
 				model.addAttribute("error", "用户密码错误");
-				return "redirect:/statusRecognise";
+				return "statusRecognise";
 			}
 		}
 	}
@@ -110,7 +119,6 @@ public class MainController {
 		return "publishNewMsg";
 	}
 
-	// 检验
 	@RequestMapping(value = "/publishNewMsg", method = RequestMethod.POST)
 	public String publishNewMsg(Model model, Message message,Employee employee) {
 		message.setEmployeeID(employee.getEmployeeID());
