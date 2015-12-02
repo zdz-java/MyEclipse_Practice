@@ -112,8 +112,7 @@ public class MainController {
 
 	// 检验
 	@RequestMapping(value = "/publishNewMsg", method = RequestMethod.POST)
-	public String publishNewMsg(Model model, Message message,
-			HttpServletRequest request,Employee employee) {
+	public String publishNewMsg(Model model, Message message,Employee employee) {
 		message.setEmployeeID(employee.getEmployeeID());
 		message.setPublishTime(new Date());
 		messageDAO.addMessage(message);
