@@ -7,12 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.zdz.bean.Vote;
 import com.zdz.dao.VoteDAO;
 import com.zdz.util.DBConnection;
 import com.zdz.util.Page;
 
-
+@Component
 public class VoteDAOImpl implements VoteDAO{
 
 	public void addVote(Vote vote) {

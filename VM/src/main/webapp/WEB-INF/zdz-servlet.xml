@@ -11,6 +11,8 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 	<context:component-scan base-package="com.zdz" />
 	<mvc:resources mapping="/images/**" location="/images/" />
+	<mvc:resources mapping="/admin/images/**" location="/admin/images/" />
+	<mvc:resources mapping="/*.html" location="/admin/" />
 	<mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
@@ -23,7 +25,7 @@
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="prefix" value="/admin/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 </beans>
