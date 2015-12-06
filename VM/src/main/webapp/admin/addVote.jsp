@@ -48,11 +48,11 @@
 	  			<option value="6">F1</option>
 	  		</sf:select><br/>
 	  		请输入投票名称:<sf:input type="text" path="voteName"/><br/>
-	  		<%-- <div id="voteOptionList">
-	  		选项1名称:<sf:input type="text" path="voteOption"/><br/>
-	  		选项2名称:<sf:input type="text" path="voteOption"/><br/>
-	  		选项3名称:<sf:input type="text" path="voteOption"/><br/>
-	  		</div> --%>
+	  		<div id="voteOptionList">
+	  		选项1名称:<input type="text" name="voteOption"/><br/>
+	  		选项2名称:<input type="text" name="voteOption"/><br/>
+	  		选项3名称:<input type="text" name="voteOption"/><br/>
+	  		</div>
 	  		<input type="button" value="新增投票选项" onclick="addVoteOption()"/>
 	  		<input type="submit" value="发布"/>
 	  		<input type="reset" value="重置"/>

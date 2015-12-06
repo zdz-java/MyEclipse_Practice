@@ -126,11 +126,11 @@ a:active {
 					<c:when test="${page.hasNextPage}">
                 	<td width="54" height="22" valign="middle">
                 	<div align="right">
-                		<a href="showVote?currentPage=${page.currentPage+1}"><img src="images/next.gif" border="0"/></a>
+                		<a href="showVote?currentPage=${page.currentPage+1}">下一页</a>
                 	</div></td>
                 	<td width="49" height="22" valign="middle">
                 	<div align="right">
-                		<a href="showVote?currentPage=${page.totalPage}"><img src="images/last.gif" border="0"/></a>
+                		<a href="showVote?currentPage=${page.totalPage}">最后一页</a>
                 	</div></td>
                 	</c:when>
 					<c:otherwise>

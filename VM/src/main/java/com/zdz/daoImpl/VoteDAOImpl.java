@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.mysql.jdbc.Statement;
 import com.zdz.bean.Vote;
 import com.zdz.dao.VoteDAO;
 import com.zdz.util.DBConnection;
@@ -23,10 +24,16 @@ public class VoteDAOImpl implements VoteDAO{
 				"tb_vote(voteName,channelID) values(?,?)";
 		PreparedStatement pstmt = null;					//����Ԥ�������
 		try {
-			pstmt = conn.prepareStatement(addSQL);		//���Ԥ������󲢸�ֵ
+			pstmt = conn.prepareStatement(addSQL,Statement.RETURN_GENERATED_KEYS);		//���Ԥ������󲢸�ֵ
 			pstmt.setString(1, vote.getVoteName());		//����ͶƱ���
 			pstmt.setInt(2, vote.getChannelID());		//����Ƶ��ID
 			pstmt.executeUpdate();								//ִ�����
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next())
+			{
+				long voteID = (long)rs.getObject(1);	
+				vote.setVoteID((int)voteID);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally{
