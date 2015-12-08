@@ -5,122 +5,123 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 import com.sanqing.hibernate.HibernateSessionFactory;
 import com.sanqing.po.Student;
 import com.sanqing.po.Subject;
 import com.sanqing.util.Page;
-
+@Component
 public class SubjectDAOImpl implements SubjectDAO{
 	public void addSubject(Subject subject){
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
-		Transaction  transaction = null;//ÉùÃ÷Ò»¸öÊÂÎñ¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
+		Transaction  transaction = null;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try{
-			transaction = session.beginTransaction();//¿ªÆôÊÂÎñ
-			session.save(subject);//±£´æÊÔÌâÐÅÏ¢
-			transaction.commit();//Ìá½»ÊÂÎñ
+			transaction = session.beginTransaction();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			session.save(subject);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+			transaction.commit();//ï¿½á½»ï¿½ï¿½ï¿½ï¿½
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			transaction.rollback();//ÊÂÎñ»Ø¹ö
+			transaction.rollback();//ï¿½ï¿½ï¿½ï¿½Ø¹ï¿½
 		}
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 	}
 
 	public Subject findSubjectByTitle(String subjectTitle) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Subject as sub where sub.subjectTitle = ?");
 		query.setString(0, subjectTitle);
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
-		HibernateSessionFactory.closeSession();		//¹Ø±ÕSession¶ÔÏó
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
+		HibernateSessionFactory.closeSession();		//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		if(list.size() == 0) {
-			return null;							//·µ»Ønull
+			return null;							//ï¿½ï¿½ï¿½ï¿½null
 		}else {
-			return (Subject) list.get(0);			//·µ»ØµÚÒ»¸öÊÔÌâ
+			return (Subject) list.get(0);			//ï¿½ï¿½ï¿½Øµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 	}
 
 	public List<Subject> findSubjectByPage(Page page) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Subject");
-		query.setMaxResults(page.getEveryPage());//ÉèÖÃ²éÑ¯¼ÇÂ¼Êý
-		query.setFirstResult(page.getBeginIndex());//ÉèÖÃ²éÑ¯¼ÇÂ¼ÆðÊ¼Î»ÖÃ
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		query.setMaxResults(page.getEveryPage());//ï¿½ï¿½ï¿½Ã²ï¿½Ñ¯ï¿½ï¿½Â¼ï¿½ï¿½
+		query.setFirstResult(page.getBeginIndex());//ï¿½ï¿½ï¿½Ã²ï¿½Ñ¯ï¿½ï¿½Â¼ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return list;
 	}
 
 	public int findSubjectCount() {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Subject");
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
 		int count = list.size();
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return count;
 	}
 
 	public Subject findSubjectByID(int subjectID) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Subject subject = (Subject) session.get(Subject.class, subjectID);
-		HibernateSessionFactory.closeSession();		//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();		//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return subject;
 	}
 
 	public void updateSubject(Subject subject) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
-		Transaction  transaction = null;//ÉùÃ÷Ò»¸öÊÂÎñ¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
+		Transaction  transaction = null;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try{
-			transaction = session.beginTransaction();//¿ªÆôÊÂÎñ
-			session.update(subject);//¸üÐÂÊÔÌâÐÅÏ¢
-			transaction.commit();//Ìá½»ÊÂÎñ
+			transaction = session.beginTransaction();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			session.update(subject);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+			transaction.commit();//ï¿½á½»ï¿½ï¿½ï¿½ï¿½
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			transaction.rollback();//ÊÂÎñ»Ø¹ö
+			transaction.rollback();//ï¿½ï¿½ï¿½ï¿½Ø¹ï¿½
 		}
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 	}
 
 	public void deleteSubject(int subjectID) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Subject subject = (Subject) session.get(Subject.class, subjectID);
-		Transaction  transaction = null;//ÉùÃ÷Ò»¸öÊÂÎñ¶ÔÏó
+		Transaction  transaction = null;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try{
-			transaction = session.beginTransaction();//¿ªÆôÊÂÎñ
+			transaction = session.beginTransaction();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			session.delete(subject);
-			transaction.commit();//Ìá½»ÊÂÎñ
+			transaction.commit();//ï¿½á½»ï¿½ï¿½ï¿½ï¿½
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			transaction.rollback();//ÊÂÎñ»Ø¹ö
+			transaction.rollback();//ï¿½ï¿½ï¿½ï¿½Ø¹ï¿½
 		}
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 	}
 
 	public List<Subject> likeQueryByTitle(String subjectTitle,Page page) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Subject as sub where sub.subjectTitle like :title ");
 		query.setString("title","%"+subjectTitle+"%");
-		query.setMaxResults(page.getEveryPage());//ÉèÖÃ²éÑ¯¼ÇÂ¼Êý
-		query.setFirstResult(page.getBeginIndex());//ÉèÖÃ²éÑ¯¼ÇÂ¼ÆðÊ¼Î»ÖÃ
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		query.setMaxResults(page.getEveryPage());//ï¿½ï¿½ï¿½Ã²ï¿½Ñ¯ï¿½ï¿½Â¼ï¿½ï¿½
+		query.setFirstResult(page.getBeginIndex());//ï¿½ï¿½ï¿½Ã²ï¿½Ñ¯ï¿½ï¿½Â¼ï¿½ï¿½Ê¼Î»ï¿½ï¿½
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return list;
 	}
 
 	public int findLinkQueryCount(String subjectTitle) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Subject as sub where sub.subjectTitle like :title ");
 		query.setString("title","%"+subjectTitle+"%");
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
 		int count = list.size();
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return count;
 	}
 
 	public List<Subject> randomFindSubject(int number) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Subject as sub order by rand()");
-		query.setMaxResults(number);//ÉèÖÃ²éÑ¯¼ÇÂ¼Êý
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		query.setMaxResults(number);//ï¿½ï¿½ï¿½Ã²ï¿½Ñ¯ï¿½ï¿½Â¼ï¿½ï¿½
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return list;
 	}
 }

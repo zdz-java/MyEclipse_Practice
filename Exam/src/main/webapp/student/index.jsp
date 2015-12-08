@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
 <title>开始考试</title>
@@ -81,7 +80,7 @@
         <td colspan="3" bgcolor="#999999" class="STYLE4">选择题(每小题5分，共20个)</td>
       </tr>
 	  <!--题目开始-->
-	 
+	 <%-- 
 	  <s:iterator value="#request.subjects" var="subject" status="sta">
 	  	 <tr>
 	  	 <input type="hidden" name="subjectID" value="${subject.subjectID}"/>
@@ -118,7 +117,7 @@
         </div></td>
       </tr>
     </table>
-     </form>
+     </form> --%>
     </td>
     <td width="113">&nbsp;</td>
   </tr>

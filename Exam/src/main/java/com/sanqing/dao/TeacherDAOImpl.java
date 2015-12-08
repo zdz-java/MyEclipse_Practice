@@ -1,15 +1,16 @@
 package com.sanqing.dao;
 
 import org.hibernate.Session;
+import org.springframework.stereotype.Component;
 
 import com.sanqing.hibernate.HibernateSessionFactory;
 import com.sanqing.po.Teacher;
-
+@Component
 public class TeacherDAOImpl implements TeacherDAO{
 	public Teacher findByTeacherID(String teacherID) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Teacher teacher = (Teacher) session.get(Teacher.class, teacherID);
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return teacher;
 	}
 }

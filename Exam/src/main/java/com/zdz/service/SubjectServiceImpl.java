@@ -2,18 +2,21 @@ package com.zdz.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.sanqing.dao.SubjectDAO;
 import com.sanqing.po.Subject;
 import com.sanqing.util.Page;
 import com.sanqing.util.PageResult;
-
+@Component
 public class SubjectServiceImpl implements SubjectService{
 	private SubjectDAO subjectDAO;
 	
 	public SubjectDAO getSubjectDAO() {
 		return subjectDAO;
 	}
-
+	@Autowired
 	public void setSubjectDAO(SubjectDAO subjectDAO) {
 		this.subjectDAO = subjectDAO;
 	}
@@ -68,7 +71,6 @@ public class SubjectServiceImpl implements SubjectService{
 //			throw new NullPointerException();
 			return 0;
 		}
-//		方法内变量不赋值可以吗？
 		int result = 0;
 		Subject subject = null;
 		int subjectID = 0;
@@ -80,7 +82,7 @@ public class SubjectServiceImpl implements SubjectService{
 			if(subject!=null&&subject.getSubjectAnswer().equals(studentAnswer))
 			{
 //				这里的分数计算方法要参考源代码
-				result += 10;
+				result += 5;
 			}
 		}
 		return result;

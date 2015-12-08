@@ -6,18 +6,18 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateSessionFactory {
 	private static String CONFIG_FILE_LOCATION 
-					= "/hibernate.cfg.xml";					//指定配置文件路径
+					= "/hibernate.cfg.xml";					//指锟斤拷锟斤拷锟斤拷锟侥硷拷路锟斤拷
 	private static final ThreadLocal<Session> threadLocal 
-					= new ThreadLocal<Session>();			//定义ThreadLocal对象
+					= new ThreadLocal<Session>();			//锟斤拷锟斤拷ThreadLocal锟斤拷锟斤拷
 	private  static Configuration configuration 
-					= new Configuration();					//定义Configuration对象
-	private static org.hibernate.SessionFactory sessionFactory;//定义SessionFactory对象
+					= new Configuration();					//锟斤拷锟斤拷Configuration锟斤拷锟斤拷
+	private static org.hibernate.SessionFactory sessionFactory;//锟斤拷锟斤拷SessionFactory锟斤拷锟斤拷
 	private static String configFile = CONFIG_FILE_LOCATION;
 	static {
 		try {
-			configuration.configure(configFile);//读取配置文件
+			configuration.configure(configFile);//锟斤拷取锟斤拷锟斤拷锟侥硷拷
 			sessionFactory = 
-				configuration.buildSessionFactory();//根据配置文件创建SessionFactory对象
+				configuration.buildSessionFactory();//锟斤拷锟斤拷锟斤拷锟斤拷募锟斤拷锟斤拷锟絊essionFactory锟斤拷锟斤拷
 		} catch (Exception e) {
 			System.err
 					.println("%%%% Error Creating SessionFactory %%%%");
@@ -27,22 +27,22 @@ public class HibernateSessionFactory {
 	private HibernateSessionFactory() {
 	}
 	public static Session getSession() throws HibernateException {
-		Session session = (Session) threadLocal.get();//从ThreadLocal对象中获得Session对象
-		if (session == null || !session.isOpen()) {//判断获得的Session对象是否为空或者未打开
-			if (sessionFactory == null) {//如果没有创建SessionFactory对象，则首先创建
+		Session session = (Session) threadLocal.get();//锟斤拷ThreadLocal锟斤拷锟斤拷锟叫伙拷锟絊ession锟斤拷锟斤拷
+		if (session == null || !session.isOpen()) {//锟叫断伙拷玫锟絊ession锟斤拷锟斤拷锟角凤拷为锟秸伙拷锟斤拷未锟斤拷
+			if (sessionFactory == null) {//锟斤拷锟矫伙拷写锟斤拷锟絊essionFactory锟斤拷锟斤拷锟斤拷锟斤拷锟饺达拷锟斤拷
 				rebuildSessionFactory();
 			}
-			//如果SessionFactory对象不为空，则调用其openSession方法创建Session对象
+			//锟斤拷锟絊essionFactory锟斤拷锟斤拷为锟秸ｏ拷锟斤拷锟斤拷锟斤拷锟給penSession锟斤拷锟斤拷锟斤拷锟斤拷Session锟斤拷锟斤拷
 			session = (sessionFactory != null) ? sessionFactory.openSession(): null;
-			threadLocal.set(session);//在ThreadLocal对象中保存该Session对象
+			threadLocal.set(session);//锟斤拷ThreadLocal锟斤拷锟斤拷锟叫憋拷锟斤拷锟絊ession锟斤拷锟斤拷
 		}
 		return session;
 	}
 	public static void rebuildSessionFactory() {
 		try {
-			configuration.configure(configFile);//读取配置文件
+			configuration.configure(configFile);//锟斤拷取锟斤拷锟斤拷锟侥硷拷
 			sessionFactory = 
-				configuration.buildSessionFactory();//根据配置文件创建sessionFactory对象
+				configuration.buildSessionFactory();//锟斤拷锟斤拷锟斤拷锟斤拷募锟斤拷锟斤拷锟絪essionFactory锟斤拷锟斤拷
 		} catch (Exception e) {
 			System.err
 					.println("%%%% Error Creating SessionFactory %%%%");
@@ -50,20 +50,20 @@ public class HibernateSessionFactory {
 		}
 	}
 	public static void closeSession() throws HibernateException {
-		Session session = (Session) threadLocal.get();//从ThreadLocal对象中获得Session对象
-		threadLocal.set(null);//将当前线程Session对象从ThreadLocal对象中移除
+		Session session = (Session) threadLocal.get();//锟斤拷ThreadLocal锟斤拷锟斤拷锟叫伙拷锟絊ession锟斤拷锟斤拷
+		threadLocal.set(null);//锟斤拷锟斤拷前锟竭筹拷Session锟斤拷锟斤拷锟絋hreadLocal锟斤拷锟斤拷锟斤拷锟狡筹拷
 		if (session != null) {
 			session.close();
 		}
 	}
-	public static org.hibernate.SessionFactory getSessionFactory() {//取得SessionFactory对象
+	public static org.hibernate.SessionFactory getSessionFactory() {//取锟斤拷SessionFactory锟斤拷锟斤拷
 		return sessionFactory;
 	}
-	public static void setConfigFile(String configFile) {//设置新的配置文件
+	public static void setConfigFile(String configFile) {//锟斤拷锟斤拷锟铰碉拷锟斤拷锟斤拷锟侥硷拷
 		HibernateSessionFactory.configFile = configFile;
 		sessionFactory = null;
 	}
-	public static Configuration getConfiguration() {//获得Configuration对象
+	public static Configuration getConfiguration() {//锟斤拷锟紺onfiguration锟斤拷锟斤拷
 		return configuration;
 	}
 }

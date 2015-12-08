@@ -6,48 +6,49 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 import com.sanqing.hibernate.HibernateSessionFactory;
 import com.sanqing.po.Student;
 import com.sanqing.po.Subject;
-
+@Component
 public class StudentDAOImpl implements StudentDAO{
 	public Student findByStudentID(String studentID) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Student student = (Student) session.get(Student.class, studentID);
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return student;
 	}
 
 	public void updateStudent(Student student) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
-		Transaction  transaction = null;//ÉùÃ÷Ò»¸öÊÂÎñ¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
+		Transaction  transaction = null;//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		try{
-			transaction = session.beginTransaction();//¿ªÆôÊÂÎñ
-			session.update(student);//¸üÐÂÑ§ÉúÐÅÏ¢
-			transaction.commit();//Ìá½»ÊÂÎñ
+			transaction = session.beginTransaction();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			session.update(student);//ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½Ï¢
+			transaction.commit();//ï¿½á½»ï¿½ï¿½ï¿½ï¿½
 		}catch(Exception ex) {
 			ex.printStackTrace();
-			transaction.rollback();//ÊÂÎñ»Ø¹ö
+			transaction.rollback();//ï¿½ï¿½ï¿½ï¿½Ø¹ï¿½
 		}
-		HibernateSessionFactory.closeSession();//¹Ø±ÕSession¶ÔÏó
+		HibernateSessionFactory.closeSession();//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 	}
 
 	public List<Student> findByStudentName(String studentName) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Student as stu where stu.studentName = ?");
 		query.setString(0, studentName);
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
-		HibernateSessionFactory.closeSession();		//¹Ø±ÕSession¶ÔÏó
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
+		HibernateSessionFactory.closeSession();		//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return list;
 	}
 
 	public List<Student> findByStudentClass(String sclass) {
-		Session session = HibernateSessionFactory.getSession();//»ñµÃSession¶ÔÏó
+		Session session = HibernateSessionFactory.getSession();//ï¿½ï¿½ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		Query query = session.createQuery("from Student as stu where stu.sclass = ?");
 		query.setString(0, sclass);
-		List list = query.list();					//²éÑ¯½á¹û±£´æµ½listÖÐ
-		HibernateSessionFactory.closeSession();		//¹Ø±ÕSession¶ÔÏó
+		List list = query.list();					//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½æµ½listï¿½ï¿½
+		HibernateSessionFactory.closeSession();		//ï¿½Ø±ï¿½Sessionï¿½ï¿½ï¿½ï¿½
 		return list;
 	}
 }

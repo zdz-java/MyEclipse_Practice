@@ -2,16 +2,19 @@ package com.zdz.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.sanqing.dao.StudentDAO;
 import com.sanqing.po.Student;
-
+@Component
 public class StudentServiceImpl implements StudentService {
 	private StudentDAO studentDAO;
 	
 	public StudentDAO getStudentDAO() {
 		return studentDAO;
 	}
-
+	@Autowired
 	public void setStudentDAO(StudentDAO studentDAO) {
 		this.studentDAO = studentDAO;
 	}
