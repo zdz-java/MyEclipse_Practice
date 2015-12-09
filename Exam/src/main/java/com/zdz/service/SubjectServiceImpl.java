@@ -79,9 +79,9 @@ public class SubjectServiceImpl implements SubjectService{
 		{
 			subjectID = subjectIDs.get(i);
 			subject = subjectDAO.findSubjectByID(subjectID);
+			studentAnswer = studentAnswers.get(i);
 			if(subject!=null&&subject.getSubjectAnswer().equals(studentAnswer))
 			{
-//				这里的分数计算方法要参考源代码
 				result += 5;
 			}
 		}

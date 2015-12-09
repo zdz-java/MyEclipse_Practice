@@ -1,7 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title>¿ªÊ¼¿¼ÊÔ</title>
+<title>å¼€å§‹è€ƒè¯•</title>
 <link href="student/images/css2.css" rel="stylesheet" type="text/css"/>
 <style type="text/css">
 <!--
@@ -11,8 +12,8 @@
 -->
 </style>
 <script type="text/javascript">
- var ksTime; //¶¨Òå¿¼ÊÔÊ±¼äÒÔ·ÖÖÓ¼ÆËã
- ksTime = 120;//ÉèÖÃÊ±¼ä ÕâÀïÉèÖÃÎª0.1´ú±íÊÇ6Ãë,²âÊÔÓÃ
+ var ksTime; //å®šä¹‰è€ƒè¯•æ—¶é—´ä»¥åˆ†é’Ÿè®¡ç®—
+ ksTime = 120;//è®¾ç½®æ—¶é—´ è¿™é‡Œè®¾ç½®ä¸º0.1ä»£è¡¨æ˜¯6ç§’,æµ‹è¯•ç”¨
  if(readCookie("ss")==""){
   setCookie("ss",new Date(),ksTime/60);
  }
@@ -21,7 +22,7 @@
   var lt  = parseInt((tti-new Date(readCookie("ss")))/1000)
   if((ksTime*60-lt)<0){
    setCookie("ss",new Date(),0);
-   alert("¿¼ÊÔÊ±¼äµ½!\n¼´½«Ìá½»ÊÔ¾í!");
+   alert("è€ƒè¯•æ—¶é—´åˆ°!\nå³å°†æäº¤è¯•å·!");
    document.forms[0].submit();
   }else{
   	lm = Math.floor(lt / 60);
@@ -29,7 +30,7 @@
 	allY = ksTime*60-lt;
 	ym = Math.floor(allY / 60);
 	ys = allY % 60;
-   document.getElementById("tTime").innerHTML = "¿¼ÊÔÒÑ¾­¿ªÊ¼ÁË" + lm + "·Ö" + ls + "Ãë" + ",Ê£Óà"  + ym + "·Ö" + ys + "Ãë";
+   document.getElementById("tTime").innerHTML = "è€ƒè¯•å·²ç»å¼€å§‹äº†" + lm + "åˆ†" + ls + "ç§’" + ",å‰©ä½™"  + ym + "åˆ†" + ys + "ç§’";
    var ttt = setTimeout("sT()",1000);
   }
  }
@@ -64,12 +65,12 @@
   <tr>
     <td width="149" height="485">&nbsp;</td>
     <td width="741" valign="top" class="rightbian">
-	 <form action="submitExam.action" method="post">
+	 <form action="calculateScore" method="post">
 	<table width="98%" border="0" align="center" cellpadding="0" cellspacing="10">
       <tr>
-        <td><div align="center" class="STYLE3">¿¼ÊÔÊ±¼ä£º120 ·ÖÖÓ</div></td>
-        <td><div align="center" class="STYLE3">¿¼Éú£º${sessionScope.studentInfo.studentName}</div></td>
-        <td><div align="center" class="STYLE3">×Ü·Ö £º100 ·Ö</div></td>
+        <td><div align="center" class="STYLE3">è€ƒè¯•æ—¶é—´ï¼š120 åˆ†é’Ÿ</div></td>
+        <td><div align="center" class="STYLE3">è€ƒç”Ÿï¼š${sessionScope.studentInfo.studentName}</div></td>
+        <td><div align="center" class="STYLE3">æ€»åˆ† ï¼š100 åˆ†</div></td>
       </tr>
       <tr>
         <td>&nbsp;</td>
@@ -77,29 +78,28 @@
         <td>&nbsp;</td>
       </tr>
       <tr>
-        <td colspan="3" bgcolor="#999999" class="STYLE4">Ñ¡ÔñÌâ(Ã¿Ğ¡Ìâ5·Ö£¬¹²20¸ö)</td>
+        <td colspan="3" bgcolor="#999999" class="STYLE4">é€‰æ‹©é¢˜(æ¯å°é¢˜5åˆ†ï¼Œå…±20ä¸ª)</td>
       </tr>
-	  <!--ÌâÄ¿¿ªÊ¼-->
-	 <%-- 
-	  <s:iterator value="#request.subjects" var="subject" status="sta">
+	  <!--é¢˜ç›®å¼€å§‹-->
+	  <c:forEach items="${subjects }" var="subject" varStatus="sta">
 	  	 <tr>
 	  	 <input type="hidden" name="subjectID" value="${subject.subjectID}"/>
-        <td colspan="3"><strong>µÚ<span class="STYLE5">${sta.index + 1}</span>Ìâ&nbsp;${subject.subjectTitle}</strong>		</td>
+        <td colspan="3"><strong>ç¬¬<span class="STYLE5">${sta.index + 1}</span>é¢˜&nbsp;${subject.subjectTitle}</strong>		</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>A£®</strong>${subject.subjectOptionA}</td>
+        <td colspan="3"><strong>Aï¼</strong>${subject.subjectOptionA}</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>B£®</strong>${subject.subjectOptionB}</td>
+        <td colspan="3"><strong>Bï¼</strong>${subject.subjectOptionB}</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>C£®</strong>${subject.subjectOptionC}</td>
+        <td colspan="3"><strong>Cï¼</strong>${subject.subjectOptionC}</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>D£®</strong>${subject.subjectOptionD}</td>
+        <td colspan="3"><strong>Dï¼</strong>${subject.subjectOptionD}</td>
       </tr>
       <tr>
-        <td height="32" colspan="3" bgcolor="#CCCCCC">Ñ¡Ôñ´ğ°¸£º
+        <td height="32" colspan="3" bgcolor="#CCCCCC">é€‰æ‹©ç­”æ¡ˆï¼š
           <input type="radio" name="subjectAnswer${sta.index}" value="A" checked="checked"/>
           A
           <input type="radio" name="subjectAnswer${sta.index}" value="B" />
@@ -109,15 +109,15 @@
           <input type="radio" name="subjectAnswer${sta.index}" value="D" />
           D</td>
       </tr>
-	  </s:iterator>
-	   <!--ÌâÄ¿½áÊø-->
+	  </c:forEach>
+	   <!--é¢˜ç›®ç»“æŸ-->
       <tr>
         <td colspan="3"><div align="center">
-          <input type="submit" value=" Ìá½»´ğ¾í " name="Submit" />
+          <input type="submit" value=" æäº¤ç­”å· " name="Submit" />
         </div></td>
       </tr>
     </table>
-     </form> --%>
+     </form>
     </td>
     <td width="113">&nbsp;</td>
   </tr>

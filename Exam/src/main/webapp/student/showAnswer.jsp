@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
@@ -34,7 +34,7 @@
         <td colspan="3" bgcolor="#999999" class="STYLE4">选择题(每小题5分，共20个)</td>
       </tr>
 	  <!--题目开始-->
-	  <s:iterator value="#request.subjects" var="subject" status="sta">
+	  <c:forEach items="${subjects }" var="subject" varStatus="sta">
       <tr>
         <td colspan="3"><strong>第<span class="STYLE5">${sta.index + 1}</span>题&nbsp;${subject.subjectTitle}</strong>		</td>
       </tr>
@@ -54,7 +54,7 @@
         <td height="32" colspan="3" bgcolor="#CCCCCC">
 		<strong>【正确答案】：${subject.subjectAnswer}</strong><br/>
         <strong>【参考解析】：${subject.subjectParse}</strong></tr>
-      </s:iterator>  
+      </c:forEach> 
 	   <!--题目结束-->
     </table></td>
     <td width="113">&nbsp;</td>

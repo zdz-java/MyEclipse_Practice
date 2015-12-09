@@ -1,9 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>考试结果</title>
+<title>鑰冭瘯缁撴灉</title>
 <link href="images/css2.css" rel="stylesheet" type="text/css"/>
 <style type="text/css">
 <!--
@@ -23,17 +22,17 @@
         <td height="35" colspan="2"></td>
       </tr>
       <tr>
-        <td height="49" colspan="2"><div align="center"><span class="STYLE4"><strong>eggpeijun</strong>考试情况表</span></div></td>
+        <td height="49" colspan="2"><div align="center"><span class="STYLE4"><strong></strong>鑰冭瘯鎯呭喌琛�</span></div></td>
       </tr>
       <tr>
         <td colspan="2">&nbsp;</td>
       </tr>
       <tr>
-        <td><div align="center">考试姓名:${request.studentName}</div></td>
-        <td><div align="center">考生得分:${request.GeneralPoint}分</div></td>
+        <td><div align="center">鑰冭瘯濮撳悕:${studentName}</div></td>
+        <td><div align="center">鑰冪敓寰楀垎:${GeneralPoint}鍒�</div></td>
       </tr>
       <tr>
-        <td colspan="2"><div align="center"><a href="showSubjectAnswer.action">查看答案</a></div></td>
+        <td colspan="2"><div align="center"><a href="showSubjectAnswer">鏌ョ湅绛旀</a></div></td>
       </tr>
     </table></td>
     <td width="113">&nbsp;</td>
