@@ -27,9 +27,20 @@ public class AuthenticationFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		
 		HttpSession session = req.getSession();
+		
 		Student student = (Student) session.getAttribute("studentInfo");
-//		Teacher teacher = (Teacher) session.getAttribute("teacherInfo");
-		if (student == null) {
+		
+//		session = req.getSession();
+//		if(session==null)
+//		{
+//			System.out.println("session is null");
+//		}
+		boolean teacher = false;
+		if(session.getAttribute("teacher")!=null)
+		{
+			teacher =  (boolean)session.getAttribute("teacher");
+		}
+		if (student == null&&teacher==false) {
 			req.getRequestDispatcher("login").forward(req, response);;
 		}
 		else {

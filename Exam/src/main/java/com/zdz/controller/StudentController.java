@@ -22,12 +22,21 @@ import com.sanqing.po.Student;
 import com.sanqing.po.Teacher;
 import com.zdz.service.StudentService;
 import com.zdz.service.SubjectService;
+import com.zdz.service.TeacherService;
 @Controller
-@SessionAttributes({"studentInfo","subjects"})
+@SessionAttributes({"studentInfo","subjects","teacher"})
 public class StudentController {
 	private StudentService studentService;
 	private SubjectService subjectService;
+	private TeacherService teacherService;
 	
+	public TeacherService getTeacherService() {
+		return teacherService;
+	}
+	@Autowired
+	public void setTeacherService(TeacherService teacherService) {
+		this.teacherService = teacherService;
+	}
 	public SubjectService getSubjectService() {
 		return subjectService;
 	}
@@ -63,21 +72,24 @@ public class StudentController {
 	{
 		if(role.equals("student"))
 		{
-			Student student = studentService.getStudentInfo(id);
-			if(student!=null&&student.getPassword().equals(password))
+			if(studentService.allowLogin(id, password))
 			{
+				Student student = studentService.getStudentInfo(id);
 				model.addAttribute("studentInfo", student);
+				return "redirect:/studentIndex";
 			}
 		}
-//		else if(role.equals("teacher"))
-//		{
-//			Teacher teacher = 
-//		}
-//		else 
-//		{
-//			return "login";
-//		}
-		return "redirect:/studentIndex";
+		else if(role.equals("teacher"))
+		{
+			System.out.println(id+" "+password);
+			if(teacherService.allowLogin(id, password))
+			{
+				System.out.println("come into teacherindex");
+				model.addAttribute("teacher", true);
+				return "redirect:/teacherIndex";				
+			}
+		}
+		return "redirect:/login";
 	}
 	@RequestMapping("/studentIndex")
 	public String studentIndex(Model model)
