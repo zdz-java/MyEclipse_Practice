@@ -1,8 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
   <head>
-    <title>试题模糊查询页面</title>
+    <title>璇曢妯＄硦鏌ヨ椤甸潰</title>
 	<style type="text/css">
 	<!--
 	body {
@@ -25,7 +24,7 @@
     <td width="17" valign="top" background="images/mail_leftbg.gif"><img src="images/left-top-right.gif" width="17" height="29" /></td>
     <td valign="top" background="images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
       <tr>
-        <td height="31"><div class="titlebt">查看试题</div></td>
+        <td height="31"><div class="titlebt">鏌ョ湅璇曢</div></td>
       </tr>
     </table></td>
     <td width="16" valign="top" background="images/mail_rightbg.gif"><img src="images/nav-right-bg.gif" width="16" height="29" /></td>
@@ -38,17 +37,17 @@
         </tr>
       <tr>
         <td valign="middle"><span class="left_txt">
-			<div id="showSubject" align="center"><!--模糊查询试题-->
+			<div id="showSubject" align="center"><!--妯＄硦鏌ヨ璇曢-->
 			<form action="subjectLikeQuery.action" method="post">
 			<table border="0" cellspacing="10" cellpadding="0">
 				  <tr>
-					<td>试题题目:</td>
+					<td>璇曢棰樼洰:</td>
 					<td><input name="subjectTitle" size="50" ></td>
 				  </tr>
 				  <tr>
 				    <td colspan="2"><div align="center">
-				      <input type="submit" name="Submit" value="查询">
-				      <input type="reset" name="Submit2" value="重置">
+				      <input type="submit" name="Submit" value="鏌ヨ">
+				      <input type="reset" name="Submit2" value="閲嶇疆">
 			        </div></td>
 			    </tr>
 			</table>

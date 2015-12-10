@@ -1,8 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
   <head>
-    <title>ÊÔÌâ¹ÜÀíÒ³Ãæ</title>
+    <title>è¯•é¢˜ç®¡ç†é¡µé¢</title>
 	<style type="text/css">
 	<!--
 	body {
@@ -25,7 +25,7 @@
     <td width="17" valign="top" background="images/mail_leftbg.gif"><img src="images/left-top-right.gif" width="17" height="29" /></td>
     <td valign="top" background="images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
       <tr>
-        <td height="31"><div class="titlebt">¹ÜÀíÊÔÌâ</div></td>
+        <td height="31"><div class="titlebt">ç®¡ç†è¯•é¢˜</div></td>
       </tr>
     </table></td>
     <td width="16" valign="top" background="images/mail_rightbg.gif"><img src="images/nav-right-bg.gif" width="16" height="29" /></td>
@@ -38,43 +38,48 @@
         </tr>
       <tr>
         <td valign="middle"><span class="left_txt">
-			<div id="manageSubject" align="center"><!--¹ÜÀíÊÔÌâ-->
+			<div id="manageSubject" align="center"><!--ç®¡ç†è¯•é¢˜-->
 			<table width="95%" cellspacing="10">
 				  <tr align="center">
-					<td>ÊÔÌâ±àºÅ</td>
-					<td>ÊÔÌâ±êÌâ</td>
-					<td>ÕıÈ·´ğ°¸</td>
-					<td>²é¿´ÊÔÌâ</td>
-					<td>¸üĞÂÊÔÌâ</td>
-					<td>É¾³ıÊÔÌâ</td>
+					<td>è¯•é¢˜ç¼–å·</td>
+					<td>è¯•é¢˜æ ‡é¢˜</td>
+					<td>æ­£ç¡®ç­”æ¡ˆ</td>
+					<td>æŸ¥çœ‹è¯•é¢˜</td>
+					<td>æ›´æ–°è¯•é¢˜</td>
+					<td>åˆ é™¤è¯•é¢˜</td>
 				  </tr>
-				  <s:iterator value="#request.subjects" var="subject">
+				  <c:forEach items="${pageResult.list}" var="subject">
 				  	 <tr align="center">
 							<td>${subject.subjectID}</td>
 							<td align="left">${subject.subjectTitle}</td>
 							<td>${subject.subjectAnswer}</td>
-							<td><a href="subjectParticular.action?subjectID=${subject.subjectID}">²é¿´</a></td>
-							<td><a href="subjectUpadateBefore.action?subjectID=${subject.subjectID}">¸üĞÂ</a></td>
-							<td><a href="subjectDelete?subjectID=${subject.subjectID}">É¾³ı</a></td>
+							<!-- è¿™ä¸‰ä¸ªè¶…é“¾æ¥æ˜å¤©å®ç° -->
+							<td><a href="subjectParticular.action?subjectID=${subject.subjectID}">æŸ¥çœ‹</a></td>
+							<td><a href="subjectUpadateBefore.action?subjectID=${subject.subjectID}">æ›´æ–°</a></td>
+							<td><a href="subjectDelete?subjectID=${subject.subjectID}">åˆ é™¤</a></td>
 					  </tr>
-				  </s:iterator>	
+   				</c:forEach>
 				  <tr>
 				  	<td colspan="6" align="center">
-				  		¹²${page.totalCount}Ìõ¼ÍÂ¼£¬µ±Ç°µÚ${page.currentPage}/${page.totalPage}Ò³£¬Ã¿Ò³${page.everyPage}Ìõ¼ÍÂ¼
-				  	<s:if test="#request.page.hasPrePage">
-                		<a href="subjectQuery.action?currentPage=1">Ê×Ò³</a> | 
-                		<a href="subjectQuery.action?currentPage=${page.currentPage - 1}">ÉÏÒ»Ò³</a> | 
+				  		å…±${pageResult.page.totalCount}æ¡çºªå½•ï¼Œå½“å‰ç¬¬${pageResult.page.currentPage}/${pageResult.page.totalPage}é¡µï¼Œæ¯é¡µ${pageResult.page.everyPage}æ¡çºªå½•
+				  	<c:choose>
+				  	<c:when test="pageResult.page.hasNextPage">
+                		<a href="subjectManage?currentPage=1">é¦–é¡µ</a> | 
+                		<a href="subjectManage?currentPage=${pageResult.page.currentPage + 1}">ä¸‹ä¸€é¡µ</a> | 
+               		</c:when>
+					<c:otherwise>
+               		é¦–é¡µ 
+					</c:otherwise>
+               		</c:choose>
+               		<!-- å› ä¸ºæ˜¯é‡å¤çš„ï¼Œè¿›è¡Œçœç•¥ -->
+               	<%-- 	<s:if test="#request.page.hasNextPage">
+                		<a href="subjectQuery.action?currentPage=${page.currentPage + 1}">ä¸‹ä¸€é¡µ</a> | 
+                		<a href="subjectQuery.action?currentPage=${page.totalPage}">å°¾é¡µ</a>
                		</s:if>
                		<s:else>
-               		Ê×Ò³ | ÉÏÒ»Ò³ | 
-               		</s:else>
-               		<s:if test="#request.page.hasNextPage">
-                		<a href="subjectQuery.action?currentPage=${page.currentPage + 1}">ÏÂÒ»Ò³</a> | 
-                		<a href="subjectQuery.action?currentPage=${page.totalPage}">Î²Ò³</a>
-               		</s:if>
-               		<s:else>
-               		ÏÂÒ»Ò³ | Î²Ò³
-               		</s:else>
+               		ä¸‹ä¸€é¡µ | å°¾é¡µ
+               		</s:else> --%>
+               		
 				  	</td>
 				  </tr>	  
 			</table>	

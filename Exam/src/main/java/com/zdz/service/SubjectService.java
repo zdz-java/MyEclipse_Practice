@@ -8,6 +8,8 @@ import com.sanqing.util.PageResult;
 
 public interface SubjectService {
 	// ������⣬�����жϸ���������Ƿ��Ѿ����ڣ�����Ѿ��������
+	public int findSubjectCount();
+	
 	public boolean saveSubject(Subject subject);
 	// ����ҳ��Ϣ��ѯ����
 	public PageResult querySubjectByPage(Page page);

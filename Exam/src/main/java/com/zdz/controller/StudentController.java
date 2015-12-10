@@ -57,7 +57,6 @@ public class StudentController {
 	{
 		Writer writer = response.getWriter();
 		writer.write("test");
-		System.out.println(studentService.getStudentInfo("0509302*21").getStudentName());
 		writer.flush();
 		writer.close();
 	}
@@ -81,10 +80,8 @@ public class StudentController {
 		}
 		else if(role.equals("teacher"))
 		{
-			System.out.println(id+" "+password);
 			if(teacherService.allowLogin(id, password))
 			{
-				System.out.println("come into teacherindex");
 				model.addAttribute("teacher", true);
 				return "redirect:/teacherIndex";				
 			}

@@ -87,5 +87,9 @@ public class SubjectServiceImpl implements SubjectService{
 		}
 		return result;
 	}
+	@Override
+	public int findSubjectCount() {
+		return subjectDAO.findSubjectCount();
+	}
 
 }
