@@ -38,7 +38,7 @@
       <tr>
         <td valign="middle"><span class="left_txt">
 			<div id="showSubject" align="center"><!--模糊查询试题-->
-			<form action="subjectLikeQuery.action" method="post">
+			<form action="subjectLikeQuery" method="post">
 			<table border="0" cellspacing="10" cellpadding="0">
 				  <tr>
 					<td>试题题目:</td>

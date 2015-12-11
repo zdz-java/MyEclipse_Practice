@@ -53,4 +53,15 @@ public class TeacherController {
 		model.addAttribute("pageResult", pageResult);
 		return "teacher/subjectManage";
 	}
+	@RequestMapping("/subjectQuery")
+	public String subjectQuery()
+	{
+		return "teacher/subjectQuery";
+	}
+	@RequestMapping("/subjectLikeQuery")
+	public String subjectLikeQuery(@RequestParam String subjectTitle)
+	{
+//		subjectService.
+		return "teacher/subjectShow";
+	}
 }

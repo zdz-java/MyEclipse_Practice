@@ -1,8 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
   <head>
-    <title>试题详细显示页面</title>
+    <title>璇曢璇︾粏鏄剧ず椤甸潰</title>
 	<style type="text/css">
 	<!--
 	body {
@@ -25,7 +24,7 @@
     <td width="17" valign="top" background="images/mail_leftbg.gif"><img src="images/left-top-right.gif" width="17" height="29" /></td>
     <td valign="top" background="images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
       <tr>
-        <td height="31"><div class="titlebt">查看试题</div></td>
+        <td height="31"><div class="titlebt">鏌ョ湅璇曢</div></td>
       </tr>
     </table></td>
     <td width="16" valign="top" background="images/mail_rightbg.gif"><img src="images/nav-right-bg.gif" width="16" height="29" /></td>
@@ -38,38 +37,38 @@
         </tr>
       <tr>
         <td valign="middle"><span class="left_txt">
-			<div id="showSubject" align="center"><!--显示试题-->
+			<div id="showSubject" align="center"><!--鏄剧ず璇曢-->
 			<table border="0" cellspacing="10" cellpadding="0">
 				  <tr>
-				    <td>试题编号:</td>
+				    <td>璇曢缂栧彿:</td>
 				    <td>${subject.subjectID}</td>
 			    </tr>
 				  <tr>
-					<td>试题题目:</td>
+					<td>璇曢棰樼洰:</td>
 					<td>${subject.subjectTitle}</td>
 				  </tr>
 				  <tr>
-					<td>选项A:</td>
+					<td>閫夐」A:</td>
 					<td>${subject.subjectOptionA}</td>
 				  </tr>
 				   <tr>
-					<td>选项B:</td>
+					<td>閫夐」B:</td>
 					<td>${subject.subjectOptionB}</td>
 				  </tr>
 				   <tr>
-					<td>选项C:</td>
+					<td>閫夐」C:</td>
 					<td>${subject.subjectOptionC}</td>
 				  </tr>
 				   <tr>
-					<td>选项D:</td>
+					<td>閫夐」D:</td>
 					<td>${subject.subjectOptionD}</td>
 				  </tr>
 				   <tr>
-					<td>答案:</td>
+					<td>绛旀:</td>
 					<td>${subject.subjectAnswer}</td>
 				  </tr>
 				  <tr>
-					<td valign="top">答案解析:</td>
+					<td valign="top">绛旀瑙ｆ瀽:</td>
 					<td valign="top">${subject.subjectParse}</td>
 				  </tr>
 			</table>
