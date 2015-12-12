@@ -54,6 +54,10 @@ public class SubjectServiceImpl implements SubjectService{
 	public PageResult likeQueryBySubjectTitle(String subjectTitle, Page page) {
 		List list = subjectDAO.likeQueryByTitle(subjectTitle, page);
 		PageResult pageResult = new PageResult(page, list);
+		if(list!=null)
+		{
+			page.setTotalCount(list.size());
+		}
 		return pageResult;
 	}
 

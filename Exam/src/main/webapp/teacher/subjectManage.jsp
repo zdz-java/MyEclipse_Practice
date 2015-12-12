@@ -54,8 +54,8 @@
 							<td align="left">${subject.subjectTitle}</td>
 							<td>${subject.subjectAnswer}</td>
 							<!-- 这三个超链接明天实现,暂留 -->
-							<td><a href="subjectParticular.action?subjectID=${subject.subjectID}">查看</a></td>
-							<td><a href="subjectUpadateBefore.action?subjectID=${subject.subjectID}">更新</a></td>
+							<td><a href="subjectParticular?subjectID=${subject.subjectID}">查看</a></td>
+							<td><a href="subjectUpadateBefore?subjectID=${subject.subjectID}">更新</a></td>
 							<td><a href="subjectDelete?subjectID=${subject.subjectID}">删除</a></td>
 					  </tr>
    				</c:forEach>

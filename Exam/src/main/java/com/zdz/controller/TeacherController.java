@@ -49,7 +49,6 @@ public class TeacherController {
 	{
 		Page page = PageUtil.createPage(10, subjectService.findSubjectCount(), currentPage);
 		PageResult pageResult = subjectService.querySubjectByPage(page);
-		System.out.println(page.isHasNextPage());
 		model.addAttribute("pageResult", pageResult);
 		return "teacher/subjectManage";
 	}
@@ -59,9 +58,37 @@ public class TeacherController {
 		return "teacher/subjectQuery";
 	}
 	@RequestMapping("/subjectLikeQuery")
-	public String subjectLikeQuery(@RequestParam String subjectTitle)
+	public String subjectLikeQuery(@RequestParam String subjectTitle,Model model,@RequestParam(required=false,defaultValue="1")int currentPage)
 	{
-//		subjectService.
+		Page page = PageUtil.createPage(10, 0, currentPage);
+		PageResult pageResult = subjectService.likeQueryBySubjectTitle(subjectTitle, page);
+		model.addAttribute("pageResult", pageResult);
+		return "teacher/subjectManage";
+	}
+	@RequestMapping("/subjectParticular")
+	public String subjectParticular(@RequestParam int subjectID,Model model)
+	{
+		Subject subject = subjectService.showSubjectParticular(subjectID);
+		model.addAttribute("subject", subject);
 		return "teacher/subjectShow";
+	}
+	@RequestMapping("/subjectUpadateBefore")
+	public String subjectUpadate(@RequestParam int subjectID,Model model)
+	{
+		Subject subject = subjectService.showSubjectParticular(subjectID);
+		model.addAttribute("subjectToUpdate", subject);
+		return "teacher/subjectUpdate";
+	}
+	@RequestMapping("/subjectUpdate")
+	public String updateSubjectForm(@ModelAttribute("subjectToUpdate")Subject subject)
+	{
+		subjectService.updateSubject(subject);
+		return "redirect:/subjectManage";
+	}
+	@RequestMapping("/subjectDelete")
+	public String subjectDelete(@RequestParam int subjectID)
+	{
+		subjectService.deleteSubject(subjectID);
+		return "redirect:/subjectManage";
 	}
 }

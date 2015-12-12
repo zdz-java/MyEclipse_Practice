@@ -1,8 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <html>
   <head>
-    <title>试题更新页面</title>
+    <title>璇曢鏇存柊椤甸潰</title>
 	<style type="text/css">
 	<!--
 	body {
@@ -25,7 +25,7 @@
     <td width="17" valign="top" background="images/mail_leftbg.gif"><img src="images/left-top-right.gif" width="17" height="29" /></td>
     <td valign="top" background="images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
       <tr>
-        <td height="31"><div class="titlebt">更新试题</div></td>
+        <td height="31"><div class="titlebt">鏇存柊璇曢</div></td>
       </tr>
     </table></td>
     <td width="16" valign="top" background="images/mail_rightbg.gif"><img src="images/nav-right-bg.gif" width="16" height="29" /></td>
@@ -38,63 +38,64 @@
         </tr>
       <tr>
         <td valign="middle"><span class="left_txt">
-			<div id="updateSubjectForm" align="center"><!--更新试题表单-->
-				<form action="subjectUpadate.action" method="post">
+			<div id="updateSubjectForm" align="center"><!--鏇存柊璇曢琛ㄥ崟-->
+				<sf:form action="subjectUpdate" commandName="subjectToUpdate" method="post">
 				<table border="0" cellspacing="10" cellpadding="0">
 					<tr>
-						<td colspan="2"><s:actionmessage/></td>
+						<td colspan="2"></td>
 					</tr>
 				  <tr>
-					<td>试题题目:</td>
+					<td>璇曢棰樼洰:</td>
 					<td>
-						<input name="subjectID" type="hidden" value="${subject.subjectID}">
-						<input name="subjectTitle" type="text" size="80"  value="${subject.subjectTitle}">
+						<sf:input path="subjectID" type="hidden"/>
+						<sf:input path="subjectTitle" type="text" size="80"/>
 					</td>
 				  </tr>
 				  <tr>
-					<td>选项A:</td>
-					<td><input type="text" name="subjectOptionA" size="20" value="${subject.subjectOptionA}"></td>
+					<td>閫夐」A:</td>
+					<td><sf:input type="text" path="subjectOptionA" size="20"/></td>
 				  </tr>
 				   <tr>
-					<td>选项B:</td>
-					<td><input type="text" name="subjectOptionB" size="20" value="${subject.subjectOptionB}"></td>
+					<td>閫夐」B:</td>
+					<td><sf:input type="text" path="subjectOptionB" size="20"/></td>
 				  </tr>
 				   <tr>
-					<td>选项C:</td>
-					<td><input type="text" name="subjectOptionC" size="20" value="${subject.subjectOptionC}"></td>
+					<td>閫夐」C:</td>
+					<td><sf:input type="text" path="subjectOptionC" size="20"/></td>
 				  </tr>
 				   <tr>
-					<td>选项D:</td>
-					<td><input type="text" name="subjectOptionD" size="20" value="${subject.subjectOptionD}"></td>
+					<td>閫夐」D:</td>
+					<td><sf:input type="text" path="subjectOptionD" size="20"/></td>
 				  </tr>
 				   <tr>
-					<td>答案:</td>
+					<td>绛旀:</td>
 					<td>
-						<input name="subjectAnswer" type="radio" value="A" 
-							${subject.subjectAnswer == "A" ? "checked" : ""}>A
-						<input name="subjectAnswer" type="radio" value="B"
-							${subject.subjectAnswer == "B" ? "checked" : ""}>B
-						<input name="subjectAnswer" type="radio" value="C"
-							${subject.subjectAnswer == "C" ? "checked" : ""}>C
-						<input name="subjectAnswer" type="radio" value="D"
-							${subject.subjectAnswer == "D" ? "checked" : ""}>D
+						<sf:input path="subjectAnswer" type="text"/>
+						<%-- <sf:input path="subjectAnswer" type="radio" value="A" 
+							${subject.subjectAnswer == "A" ? "checked " : ""}/>A
+						<sf:input path="subjectAnswer" type="radio" value="B"
+							${subject.subjectAnswer == "B" ? "checked " : ""}/>B
+						<sf:input path="subjectAnswer" type="radio" value="C"
+							${subject.subjectAnswer == "C" ? "checked " : ""}/>C
+						<sf:input path="subjectAnswer" type="radio" value="D"
+							${subject.subjectAnswer == "D" ? "checked " : ""}/>D --%>
 					</td>
 				  </tr>
 				  <tr>
-					<td valign="top">答案解析:</td>
+					<td valign="top">绛旀瑙ｆ瀽:</td>
 					<td>
-						<textarea name="answerParse" cols="76" rows="10" value="${subject.subjectParse}"></textarea>
+						<sf:textarea path="subjectParse" cols="76" rows="10"/>
 					</td>
 				  </tr>
 				  <tr>
 				  	<td colspan="2"><div align="center">
-				  	  <input type="submit" value="录入">				  	  
-				  	  <input type="reset" value="重置">
+				  	  <input type="submit" value="褰曞叆">				  	  
+				  	  <input type="reset" value="閲嶇疆">
 			  	  </div>
 				</td>
 				  </tr>
 			</table>
-			</form>	
+			</sf:form>	
 			</div>
 		</td>
         </tr>
