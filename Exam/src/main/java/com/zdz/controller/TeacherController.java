@@ -14,12 +14,21 @@ import com.sanqing.po.Subject;
 import com.sanqing.util.Page;
 import com.sanqing.util.PageResult;
 import com.sanqing.util.PageUtil;
+import com.zdz.service.StudentService;
 import com.zdz.service.SubjectService;
 import com.zdz.service.TeacherService;
 @Controller
 public class TeacherController {
 	private SubjectService subjectService;
+	private StudentService studentService;
 	
+	public StudentService getStudentService() {
+		return studentService;
+	}
+	@Autowired
+	public void setStudentService(StudentService studentService) {
+		this.studentService = studentService;
+	}
 	public SubjectService getSubjectService() {
 		return subjectService;
 	}
@@ -90,5 +99,29 @@ public class TeacherController {
 	{
 		subjectService.deleteSubject(subjectID);
 		return "redirect:/subjectManage";
+	}
+	@RequestMapping(value="/studentQueryByName",method=RequestMethod.GET)
+	public String preStudentQueryByName()
+	{
+		return "teacher/studentQueryByName";
+	}
+	@RequestMapping(value="/queryStudentByName",method=RequestMethod.POST)
+	public String queryStudentByName(@RequestParam String studentName,Model model)
+	{
+		List list = studentService.getStudentByName(studentName);
+		model.addAttribute("students", list);
+		return "teacher/studentManage";
+	}
+	@RequestMapping(value="/studentQueryByClass",method=RequestMethod.GET)
+	public String preStudentQueryByClass()
+	{
+		return "teacher/studentQueryByClass";
+	}
+	@RequestMapping(value="/queryStudentByClass",method=RequestMethod.POST)
+	public String studentQueryByClass(@RequestParam String sclass,Model model)
+	{
+		List list = studentService.getStudentByClass(sclass);
+		model.addAttribute("students", list);
+		return "teacher/studentManage";
 	}
 }

@@ -1,5 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gbk"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="images/skin.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
@@ -21,7 +21,7 @@ body {
     <td width="17" valign="top" background="images/mail_leftbg.gif"><img src="images/left-top-right.gif" width="17" height="29" /></td>
     <td valign="top" background="images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
       <tr>
-        <td height="31"><div class="titlebt">¹ÜÀíÑ§Éú</div></td>
+        <td height="31"><div class="titlebt">ç®¡ç†å­¦ç”Ÿ</div></td>
       </tr>
     </table></td>
     <td width="16" valign="top" background="images/mail_rightbg.gif"><img src="images/nav-right-bg.gif" width="16" height="29" /></td>
@@ -34,22 +34,22 @@ body {
         </tr>
       <tr>
         <td valign="middle"><span class="left_txt">
-			<div id="manageSubject" align="center"><!--¹ÜÀíÊÔÌâ-->
+			<div id="manageSubject" align="center"><!--ç®¡ç†è¯•é¢˜-->
 			<table width="95%" cellspacing="10">
 			  <tr align="center">
-				<td>Ñ§Éú±àºÅ</td>
-				<td>ËùÊô°à¼¶</td>
-				<td>Ñ§ÉúĞÕÃû</td>
-				<td>³É¼¨</td>
+				<td>å­¦ç”Ÿç¼–å·</td>
+				<td>æ‰€å±ç­çº§</td>
+				<td>å­¦ç”Ÿå§“å</td>
+				<td>æˆç»©</td>
 			  </tr>
-			  <s:iterator value="#request.students" var="student">
+			  <c:forEach items="${students}" var="student">
 			  <tr align="center">
 				<td>${student.studentID}</td>
 				<td>${student.sclass}</td>
 				<td>${student.studentName}</td>
 				<td>${student.result}</td>
 			  </tr>
-			  </s:iterator>
+			  </c:forEach>
 			</table>	
 			</div>
 		</td>
