@@ -52,14 +52,6 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 
-	@RequestMapping("/test")
-	public void test(HttpServletResponse response) throws IOException
-	{
-		Writer writer = response.getWriter();
-		writer.write("test");
-		writer.flush();
-		writer.close();
-	}
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String preLogin()
 	{

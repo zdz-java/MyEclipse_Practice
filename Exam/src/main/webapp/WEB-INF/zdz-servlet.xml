@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<context:component-scan base-package="com" />
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<mvc:resources mapping="/student/images/**" location="/student/images/" />
 	<mvc:resources mapping="/teacher/images/**" location="/teacher/images/" />
 	<mvc:resources mapping="/images/**" location="/teacher/images/" />
@@ -30,4 +34,18 @@
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+
+	<bean id="examtimeCount" class="com.zdz.aop.ExamtimeCount"></bean>
+	<aop:config>
+		<aop:aspect ref="examtimeCount">
+			<aop:pointcut id="studentExam"
+				expression="execution(* com.zdz.controller.StudentController.studentIndex(..))" />
+			<aop:before pointcut-ref="studentExam" method="beforeEnter" />
+			<aop:after pointcut="execution(* com.zdz.controller.StudentController.calculateScore(..))" method="afterEnter" />
+			<aop:around pointcut-ref="studentExam" method="countTime"/>
+		</aop:aspect>
+	</aop:config>
+
+
 </beans>
