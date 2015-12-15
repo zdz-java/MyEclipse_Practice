@@ -2,11 +2,13 @@ package com.sanqing.dao;
 
 import java.util.List;
 
-import com.sanqing.po.Student;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.sanqing.po.Student;
+@Transactional
 public interface StudentDAO {
-	public Student findByStudentID(String studentID);//²éÑ¯·½·¨£¬¸ù¾İÑ§ÉúID²éÑ¯
-	public void updateStudent(Student student);//¸üĞÂÑ§ÉúĞÅÏ¢
-	public List<Student> findByStudentName(String studentName);//¸ù¾İÑ§ÉúĞÕÃû²éÕÒÑ§Éú
-	public List<Student> findByStudentClass(String sclass);//¸ù¾İ°à¼¶²éÕÒÑ§Éú
+	public Student findByStudentID(String studentID);//ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½IDï¿½ï¿½Ñ¯
+	public void updateStudent(Student student);//ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½Ï¢
+	public List<Student> findByStudentName(String studentName);//ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½
+	public List<Student> findByStudentClass(String sclass);//ï¿½ï¿½İ°à¼¶ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½
 }

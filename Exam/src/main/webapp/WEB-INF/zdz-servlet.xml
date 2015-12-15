@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
+     	http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
@@ -13,13 +15,32 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 	<context:component-scan base-package="com" />
-	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<mvc:resources mapping="/student/images/**" location="/student/images/" />
 	<mvc:resources mapping="/teacher/images/**" location="/teacher/images/" />
 	<mvc:resources mapping="/images/**" location="/teacher/images/" />
 	<mvc:resources mapping="/js/**" location="/teacher/js/" />
 	<mvc:resources mapping="/*.html" location="/teacher/" />
 	<mvc:annotation-driven />
+
+	<aop:aspectj-autoproxy />
+	<tx:annotation-driven/>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="updateStudent" isolation="SERIALIZABLE" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:advisor pointcut="execution(* *..DAO.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config> -->
+
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
 	</bean>
@@ -35,17 +56,12 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-
 	<bean id="examtimeCount" class="com.zdz.aop.ExamtimeCount"></bean>
-	<aop:config>
-		<aop:aspect ref="examtimeCount">
-			<aop:pointcut id="studentExam"
-				expression="execution(* com.zdz.controller.StudentController.studentIndex(..))" />
-			<aop:before pointcut-ref="studentExam" method="beforeEnter" />
-			<aop:after pointcut="execution(* com.zdz.controller.StudentController.calculateScore(..))" method="afterEnter" />
-			<aop:around pointcut-ref="studentExam" method="countTime"/>
-		</aop:aspect>
-	</aop:config>
-
+	<!-- <aop:config> <aop:aspect ref="examtimeCount"> <aop:pointcut id="studentExam" 
+		expression="execution(* com.zdz.controller.StudentController.studentIndex(..))" 
+		/> <aop:before pointcut-ref="studentExam" method="beforeEnter" /> <aop:after 
+		pointcut="execution(* com.zdz.controller.StudentController.calculateScore(..))" 
+		method="afterEnter" /> <aop:around pointcut-ref="studentExam" method="countTime"/> 
+		</aop:aspect> </aop:config> -->
 
 </beans>

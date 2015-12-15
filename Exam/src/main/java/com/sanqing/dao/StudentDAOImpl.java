@@ -7,6 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sanqing.hibernate.HibernateSessionFactory;
 import com.sanqing.po.Student;
@@ -19,7 +21,7 @@ public class StudentDAOImpl implements StudentDAO{
 		HibernateSessionFactory.closeSession();//�ر�Session����
 		return student;
 	}
-
+//	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateStudent(Student student) {
 		Session session = HibernateSessionFactory.getSession();//���Session����
 		Transaction  transaction = null;//����һ���������
@@ -32,6 +34,7 @@ public class StudentDAOImpl implements StudentDAO{
 			transaction.rollback();//����ع�
 		}
 		HibernateSessionFactory.closeSession();//�ر�Session����
+		throw new NullPointerException();
 	}
 
 	public List<Student> findByStudentName(String studentName) {
