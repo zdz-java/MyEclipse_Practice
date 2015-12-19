@@ -32,6 +32,8 @@ public class AdminMapperTest {
 		admin.setAdminType(1);
 		adminMapper.addAdmin(admin);
 		
+//		sqlSession.commit();
+		adminMapper.delAdmin(admin.getId());
 		sqlSession.commit();
 		sqlSession.close();
 	}
