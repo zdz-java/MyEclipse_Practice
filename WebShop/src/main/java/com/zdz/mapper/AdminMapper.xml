@@ -3,10 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdz.mapper.AdminMapper">
+	<resultMap id="adminResultMap" type="Admin">
+  <id property="id" column="id" />
+  <result property="adminType" column="adminType"/>
+  <result property="adminName" column="adminName"/>
+  <result property="loginName" column="loginName"/>
+  <result property="loginPwd" column="loginPwd"/>
+</resultMap>
   <insert id="addAdmin" useGeneratedKeys="true"  keyProperty="id">
   	insert into admin values(null,#{adminType},#{adminName},#{loginName},#{loginPwd})
   </insert>
   <delete id="delAdmin" >
   	delete from admin where ID=#{id}
   </delete>
+  <select id="loadAdmin" resultMap="adminResultMap">
+  	select * from admin where ID=#{id}
+  </select>
 </mapper>

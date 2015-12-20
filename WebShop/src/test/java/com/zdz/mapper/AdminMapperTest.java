@@ -7,8 +7,11 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+//import static org.junit.
+
 
 import com.zdz.model.Admin;
 
@@ -31,7 +34,8 @@ public class AdminMapperTest {
 		admin.setAdminName("zdz");
 		admin.setAdminType(1);
 		adminMapper.addAdmin(admin);
-		
+		Admin admin2 = adminMapper.loadAdmin(admin.getId());
+		Assert.assertEquals(admin2.getAdminName(), admin.getAdminName());
 //		sqlSession.commit();
 		adminMapper.delAdmin(admin.getId());
 		sqlSession.commit();
