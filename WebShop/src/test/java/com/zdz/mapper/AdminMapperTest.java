@@ -2,6 +2,7 @@ package com.zdz.mapper;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 //import static org.junit.
+
 
 
 import com.zdz.model.Admin;
@@ -25,7 +27,7 @@ public class AdminMapperTest {
 		sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 	}
 	@Test
-	public void addAdminTest()
+	public void addAdminAndOtherTest()
 	{
 		SqlSession sqlSession = sessionFactory.openSession();
 		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
@@ -36,8 +38,22 @@ public class AdminMapperTest {
 		adminMapper.addAdmin(admin);
 		Admin admin2 = adminMapper.loadAdmin(admin.getId());
 		Assert.assertEquals(admin2.getAdminName(), admin.getAdminName());
-//		sqlSession.commit();
+		admin.setAdminName("zdzdz");
+		adminMapper.updateAdmin(admin);
+		Admin afterUpdateAdmin = adminMapper.loadAdmin(admin.getId());
+		Assert.assertEquals(afterUpdateAdmin.getAdminName(), admin.getAdminName());
 		adminMapper.delAdmin(admin.getId());
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	@Test
+	public void browseAdminTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
+		
+		List<Admin> list = adminMapper.browseAdmin();
+		Assert.assertEquals(list.get(0).getAdminName(), "商品管理员");
 		sqlSession.commit();
 		sqlSession.close();
 	}

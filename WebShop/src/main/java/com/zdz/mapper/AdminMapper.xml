@@ -19,4 +19,10 @@
   <select id="loadAdmin" resultMap="adminResultMap">
   	select * from admin where ID=#{id}
   </select>
+  <update id="updateAdmin">
+  	update admin set adminType=#{adminType},adminName=#{adminName},loginName=#{loginName},loginPwd=#{loginPwd} where id = #{id}
+  </update>
+  <select id="browseAdmin" resultMap="adminResultMap">
+  	select * from admin
+  </select>
 </mapper>
