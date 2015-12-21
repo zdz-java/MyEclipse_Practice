@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdz.mapper.CartMapper">
+	<resultMap id="cartResultMap" type="Cart">
+		<id property="id" column="id" />
+		<result property="money" column="money" />
+		<result property="cartStatus" column="cartStatus" />
+		<association property="member" javaType="Member">
+			<id property="id" column="id" />
+			<result property="loginName" column="loginName" />
+			<result property="loginPwd" column="loginPwd" />
+			<result property="memberName" column="memberName" />
+			<result property="phone" column="phone" />
+			<result property="address" column="address" />
+			<result property="zip" column="zip" />
+			<result property="regDate" column="regDate" />
+			<result property="lastDate" column="lastDate" />
+			<result property="loginTimes" column="loginTimes" />
+			<result property="email" column="email" />
+			<association property="memberlevel" javaType="Memberlevel">
+				<id property="id" column="id" />
+				<result property="levelName" column="levelName" />
+				<result property="favourable" column="favourable" />
+			</association>
+		</association>
+	</resultMap>
+	<!-- <insert id="addCart" useGeneratedKeys="true" keyProperty="id">
+		insert into cart
+		values(null,#{member.id},#{money},#{cartStatus})
+	</insert> -->
+	<delete id="clearCart"  parameterType="Member">
+		delete from cart where Member=#{id}
+	</delete>
+	<delete id="delCart">
+		delete from cart where id=#{id}
+	</delete>
+	<select id="loadCart" resultMap="cartResultMap">
+		select * from cart where
+		ID=#{id}
+	</select>
+	<update id="updateCart">
+		update cart set
+		adminType=#{adminType},adminName=#{adminName},loginName=#{loginName},loginPwd=#{loginPwd}
+		where id = #{id}
+	</update>
+	<!-- 正确性存疑 -->
+	<update id="modiCart">
+		update cartselectedmer set
+		number=#{param2}
+		where id = #{param1}
+	</update>
+	<select id="browseCart" parameterType="Member" resultMap="cartResultMap">
+		select
+		* from cart where Member = #{id}
+	</select>
+</mapper>

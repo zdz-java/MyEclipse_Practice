@@ -5,6 +5,10 @@
 <configuration>
 	<typeAliases>
 		 <typeAlias alias="Admin" type="com.zdz.model.Admin"/>
+		 <typeAlias alias="Member" type="com.zdz.model.Member"/>
+		 <typeAlias alias="Cart" type="com.zdz.model.Cart"/>
+		 <typeAlias alias="Cartselectedmer" type="com.zdz.model.Cartselectedmer"/>
+		 <typeAlias alias="Memberlevel" type="com.zdz.model.Memberlevel"/>
 	</typeAliases>
   <environments default="development">
     <environment id="development">
@@ -19,5 +23,6 @@
   </environments>
   <mappers>
     <mapper resource="com/zdz/mapper/AdminMapper.xml"/>
+    <mapper resource="com/zdz/mapper/CartMapper.xml"/>
   </mappers>
 </configuration>
