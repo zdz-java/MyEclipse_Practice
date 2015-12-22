@@ -7,7 +7,7 @@ import com.zdz.model.Member;
 import com.zdz.model.Merchandise;
 
 public interface CartMapper {
-//	未完成
+//	未完成,好像应该分解为两个方法
 	public boolean addCart(Member member,Merchandise mer,int number);
 	/** �鿴���ﳵ�е�ѡ����Ʒ */
 	public List browseCart(Member member);		
