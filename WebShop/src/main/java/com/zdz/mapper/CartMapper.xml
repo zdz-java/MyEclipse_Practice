@@ -26,10 +26,14 @@
 			</association>
 		</association>
 	</resultMap>
-	<!-- <insert id="addCart" useGeneratedKeys="true" keyProperty="id">
+	<insert id="newCart" useGeneratedKeys="true" keyProperty="id">
 		insert into cart
 		values(null,#{member.id},#{money},#{cartStatus})
-	</insert> -->
+	</insert>
+	<insert id="addCartselectedmer" parameterType="Cartselectedmer" useGeneratedKeys="true" keyProperty="id">
+		insert into cartselectedmer
+		values(null,#{cart},#{merchandise},#{number},#{price},#{money})
+	</insert>
 	<delete id="clearCart"  parameterType="Member">
 		delete from cart where Member=#{id}
 	</delete>
@@ -38,14 +42,14 @@
 	</delete>
 	<select id="loadCart" parameterType="Member" resultMap="cartResultMap">
 		select * from cart where
-		Member = #{id}
+		member = #{id} limit 1
 	</select>
 	<update id="updateCart">
 		update cart set
 		money=#{money},cartStatus=#{cartStatus},member=#{member.id}
 		where id = #{id}
 	</update>
-	<!-- 正确性存疑 -->
+	<!-- 正确性存疑 ,好像相应的价钱也要更改-->
 	<update id="modiCart">
 		update cartselectedmer set
 		number=#{param2}
