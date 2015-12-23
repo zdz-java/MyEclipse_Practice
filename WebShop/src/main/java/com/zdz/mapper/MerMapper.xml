@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zdz.mapper.Merchandise">
+<mapper namespace="com.zdz.mapper.MerMapper">
 	<resultMap id="merchandiseResultMap" type="Merchandise">
 		<id property="id" column="id" />
 		<result property="merName" column="merName" />
@@ -55,12 +55,6 @@
 		id
 		=
 		#{id}
-	</select>
-	<select id="loadCategory" resultMap="categoryResultMap">
-		select *
-		from category
-		where
-		id = #{id}
 	</select>
 	<update id="updateCategory">
 		update category set

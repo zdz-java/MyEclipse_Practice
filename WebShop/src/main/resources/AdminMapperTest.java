@@ -1,4 +1,4 @@
-package com.zdz.mapper;
+
 
 import java.io.IOException;
 import java.io.Reader;
@@ -15,6 +15,8 @@ import org.junit.Test;
 
 
 
+
+import com.zdz.mapper.AdminMapper;
 import com.zdz.model.Admin;
 
 public class AdminMapperTest {
