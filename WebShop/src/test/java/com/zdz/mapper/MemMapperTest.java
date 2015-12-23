@@ -30,12 +30,49 @@ public class MemMapperTest {
 	{
 		SqlSession sqlSession = sessionFactory.openSession();
 		MemMapper memMapper = sqlSession.getMapper(MemMapper.class);
-		
+	 	
 		List<Member> members = memMapper.browseMember();
 		List<Memberlevel> memberlevels = memMapper.browseMemberLevel();
 		
 		Assert.assertEquals(members.get(0).getMemberName(), "刘桥");
 		Assert.assertEquals(memberlevels.get(0).getLevelName(), "普通会员");
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	@Test
+	public void loadTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		MemMapper memMapper = sqlSession.getMapper(MemMapper.class);
+		
+		Member member = memMapper.loadMember(1);
+		Memberlevel memberlevel = memMapper.loadMemberLevel(1);
+		
+		Assert.assertEquals(member.getMemberName(), "刘桥");
+		Assert.assertEquals(memberlevel.getLevelName(), "普通会员");
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	@Test
+	public void addDelUpdateTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		MemMapper memMapper = sqlSession.getMapper(MemMapper.class);
+		
+		Member toAdd = new Member();
+		Memberlevel memberlevel = new Memberlevel();
+		memberlevel.setLevelName("testLevel");
+		memberlevel.setId(1);;
+		toAdd.setMemberlevel(memberlevel);
+		toAdd.setMemberName("zdz");
+		memMapper.addMember(toAdd);
+		Member member = memMapper.loadMember(toAdd.getId());
+		Assert.assertEquals(member.getMemberName(), "zdz");
+		member.setMemberName("zdzdz");
+		memMapper.updateMember(member);
+		member = memMapper.loadMember(toAdd.getId());
+		Assert.assertEquals(member.getMemberName(), "zdzdz");
+		memMapper.delMember(member.getId());
 		sqlSession.commit();
 		sqlSession.close();
 	}
