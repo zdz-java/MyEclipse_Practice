@@ -10,6 +10,8 @@
 		 <typeAlias alias="Cartselectedmer" type="com.zdz.model.Cartselectedmer"/>
 		 <typeAlias alias="Memberlevel" type="com.zdz.model.Memberlevel"/>
 		 <typeAlias alias="Member" type="com.zdz.model.Member"/>
+		 <typeAlias alias="Merchandise" type="com.zdz.model.Merchandise"/>
+		 <typeAlias alias="Category" type="com.zdz.model.Category"/>
 	</typeAliases>
   <environments default="development">
     <environment id="development">
@@ -26,5 +28,6 @@
     <mapper resource="com/zdz/mapper/AdminMapper.xml"/>
     <mapper resource="com/zdz/mapper/CartMapper.xml"/>
     <mapper resource="com/zdz/mapper/MemMapper.xml"/>
+    <mapper resource="com/zdz/mapper/MerMapper.xml"/>
   </mappers>
 </configuration>

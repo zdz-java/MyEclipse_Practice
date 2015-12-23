@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdz.mapper.Merchandise">
+	<resultMap id="merchandiseResultMap" type="Merchandise">
+		<id property="id" column="id" />
+		<result property="merName" column="merName" />
+		<result property="price" column="price" />
+		<result property="sprice" column="sprice" />
+		<result property="merModel" column="merModel" />
+		<result property="picture" column="picture" />
+		<result property="merDesc" column="merDesc" />
+		<result property="manufacturer" column="manufacturer" />
+		<result property="leaveFactoryDate" column="leaveFactoryDate" />
+		<result property="special" column="special" />
+		<association property="category" resultMap="categoryResultMap">
+		</association>
+	</resultMap>
+	<resultMap id="categoryResultMap" type="Category">
+		<id property="id" column="id" />
+		<result property="cateName" column="cateName" />
+		<result property="cateDesc" column="cateDesc" />
+	</resultMap>
+		<update id="updateMer">
+		update category set
+		merName=#{merName},price=#{price},sprice=#{sprice},merModel=#{merModel},picture=#{picture},merDesc=#{merDesc},manufacturer=#{manufacturer},leaveFactoryDate=#{leaveFactoryDate},special=#{special},category=#{category.id}
+		where id =
+		#{id}
+	</update>
+	<insert id="addMer" useGeneratedKeys="true" keyProperty="id">
+		insert
+		into merchandise
+		values(null,#{category.id},#{merName},#{price},#{sprice},#{merModel},#{picture},#{merDesc},#{manufacturer},#{leaveFactoryDate},#{special})
+	</insert>
+	<insert id="addCategory" useGeneratedKeys="true" keyProperty="id">
+		insert into category
+		values(null,#{cateName},#{cateDesc})
+	</insert>
+	<delete id="delMer">
+		delete from merchandise where id=#{id}
+	</delete>
+	<delete id="delCategory">
+		delete from category where id=#{id}
+	</delete>
+	<select id="loadCategory" resultMap="categoryResultMap">
+		select *
+		from category where
+		id =
+		#{id}
+	</select>
+	<select id="loadMer" resultMap="merchandiseResultMap">
+		select *
+		from merchandise where
+		id
+		=
+		#{id}
+	</select>
+	<select id="loadCategory" resultMap="categoryResultMap">
+		select *
+		from category
+		where
+		id = #{id}
+	</select>
+	<update id="updateCategory">
+		update category set
+		cateName=#{cateName},cateDesc=#{cateDesc}
+		where id =
+		#{id}
+	</update>
+
+	<select id="browseCategory" resultMap="categoryResultMap">
+		select
+		* from
+		category
+	</select>
+	<select id="browseMer" resultMap="merchandiseResultMap">
+		select
+		* from merchandise where merName like "%#{param}%"
+	</select>
+	<select id="countRecord" resultType="int">
+		select
+		count(*) from merchandise where merName like "%#{param}%"
+	</select>
+</mapper>
