@@ -16,11 +16,7 @@
 		<result property="loginTimes" column="loginTimes" />
 		<result property="email" column="email" />
 		<!-- 改为引用 -->
-		<association property="memberlevel" javaType="Memberlevel">
-			<id property="id" column="id" />
-			<result property="levelName" column="levelName" />
-			<result property="favourable" column="favourable" />
-		</association>
+		<association property="memberlevel" resultMap="memberlevelResultMap"/>
 	</resultMap>
 	<resultMap type="Memberlevel" id="memberlevelResultMap">
 		<id property="id" column="id" />
@@ -40,7 +36,7 @@
 		id =
 		#{id}
 	</select>
-	<select id="loadMemberLevel" resultMap="memberLevelResultMap">
+	<select id="loadMemberLevel" resultMap="memberlevelResultMap">
 		select *
 		from memberlevel
 		where
@@ -52,7 +48,7 @@
 		where id =
 		#{id}
 	</update>
-	<select id="browseMemberLevel" resultMap="memberLevelResultMap">
+	<select id="browseMemberLevel" resultMap="memberlevelResultMap">
 		select
 		* from
 		memberLevel
