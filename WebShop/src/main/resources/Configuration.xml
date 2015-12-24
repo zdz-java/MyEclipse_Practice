@@ -12,6 +12,7 @@
 		 <typeAlias alias="Member" type="com.zdz.model.Member"/>
 		 <typeAlias alias="Merchandise" type="com.zdz.model.Merchandise"/>
 		 <typeAlias alias="Category" type="com.zdz.model.Category"/>
+		 <typeAlias alias="Orders" type="com.zdz.model.Orders"/>
 	</typeAliases>
   <environments default="development">
     <environment id="development">
@@ -29,5 +30,6 @@
     <mapper resource="com/zdz/mapper/CartMapper.xml"/>
     <mapper resource="com/zdz/mapper/MemMapper.xml"/>
     <mapper resource="com/zdz/mapper/MerMapper.xml"/>
+    <mapper resource="com/zdz/mapper/OrderMapper.xml"/>
   </mappers>
 </configuration>
