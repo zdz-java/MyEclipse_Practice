@@ -23,7 +23,7 @@
 		<result property="cateDesc" column="cateDesc" />
 	</resultMap>
 		<update id="updateMer">
-		update category set
+		update merchandise set
 		merName=#{merName},price=#{price},sprice=#{sprice},merModel=#{merModel},picture=#{picture},merDesc=#{merDesc},manufacturer=#{manufacturer},leaveFactoryDate=#{leaveFactoryDate},special=#{special},category=#{category.id}
 		where id =
 		#{id}
@@ -68,12 +68,12 @@
 		* from
 		category
 	</select>
-	<select id="browseMer" resultMap="merchandiseResultMap">
+	<select id="browseMer" parameterType="java.lang.String" resultMap="merchandiseResultMap">
 		select
-		* from merchandise where merName like "%#{param}%"
+		* from merchandise where merName like #{hql}
 	</select>
-	<select id="countRecord" resultType="int">
+	<select id="countRecord" parameterType="String" resultType="int">
 		select
-		count(*) from merchandise where merName like "%#{param}%"
+		count(*) from merchandise where merName like #{hql,jdbcType=VARCHAR}
 	</select>
 </mapper>

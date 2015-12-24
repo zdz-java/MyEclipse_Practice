@@ -11,16 +11,17 @@ public interface MerMapper {
 	public List browseMer(int pageSize,int pageNo,int cateId,boolean isSpecial);
 	/** ������Ʒ */
 	public List browseMer(int pageSize,int pageNo,String hql);	
-	
 	public List browseCategory();	
 	public Category loadCategory(Integer id);	
 	public boolean delCategory(Integer id);	
 	public boolean addCategory(Category cate);	
 	public boolean updateCategory(Category cate);
+//	存在BUG暂留
 	public List browseMer(String hql);	
 	public Merchandise loadMer(Integer id);	
 	public boolean delMer(Integer id);	
 	public boolean addMer(Merchandise mer);	
 	public boolean updateMer(Merchandise mer);
+//	存在BUG
 	public int countRecord(String hql);	
 }

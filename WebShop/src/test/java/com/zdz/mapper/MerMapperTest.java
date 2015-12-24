@@ -32,49 +32,61 @@ public class MerMapperTest {
 		SqlSession sqlSession = sessionFactory.openSession();
 	 	MerMapper merMapper = sqlSession.getMapper(MerMapper.class);
 		
-		List<Merchandise> merchandises = merMapper.browseMer("理是");
+		List<Merchandise> merchandises = merMapper.browseMer("%理是%");
 		List<Category> categories = merMapper.browseCategory();
 		
+		Assert.assertEquals(merMapper.countRecord("%是%"), 2);
 		Assert.assertEquals(merchandises.get(0).getMerName(), "管理是什么");
 		Assert.assertEquals(categories.get(0).getCateName(), "计算机类");
 		sqlSession.commit();
 		sqlSession.close();
 	}
-//	@Test
-//	public void loadTest()
-//	{
-//		SqlSession sqlSession = sessionFactory.openSession();
-//		MemMapper memMapper = sqlSession.getMapper(MemMapper.class);
-//		
-//		Member member = memMapper.loadMember(1);
-//		Memberlevel memberlevel = memMapper.loadMemberLevel(1);
-//		
-//		Assert.assertEquals(member.getMemberName(), "刘桥");
-//		Assert.assertEquals(memberlevel.getLevelName(), "普通会员");
-//		sqlSession.commit();
-//		sqlSession.close();
-//	}
-//	@Test
-//	public void addDelUpdateTest()
-//	{
-//		SqlSession sqlSession = sessionFactory.openSession();
-//		MemMapper memMapper = sqlSession.getMapper(MemMapper.class);
-//		
-//		Member toAdd = new Member();
-//		Memberlevel memberlevel = new Memberlevel();
-//		memberlevel.setLevelName("testLevel");
-//		memberlevel.setId(1);;
-//		toAdd.setMemberlevel(memberlevel);
-//		toAdd.setMemberName("zdz");
-//		memMapper.addMember(toAdd);
-//		Member member = memMapper.loadMember(toAdd.getId());
-//		Assert.assertEquals(member.getMemberName(), "zdz");
-//		member.setMemberName("zdzdz");
-//		memMapper.updateMember(member);
-//		member = memMapper.loadMember(toAdd.getId());
-//		Assert.assertEquals(member.getMemberName(), "zdzdz");
-//		memMapper.delMember(member.getId());
-//		sqlSession.commit();
-//		sqlSession.close();
-//	}
+	@Test
+	public void loadTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);		
+		
+		Category category = merMapper.loadCategory(1);
+		Merchandise merchandise = merMapper.loadMer(15);
+		
+		Assert.assertEquals(category.getCateName(), "计算机类");
+		Assert.assertEquals(merchandise.getMerName(), "管理是什么");
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	@Test
+	public void addDelUpdateTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);		
+		
+		Category category = new Category();
+		category.setCateName("zdz");
+		merMapper.addCategory(category);
+		Category category2 = merMapper.loadCategory(category.getId());
+		Assert.assertEquals(category2.getCateName(), "zdz");
+		category.setCateName("zdzdz");
+		merMapper.updateCategory(category);
+		category2 = merMapper.loadCategory(category.getId());
+		Assert.assertEquals(category2.getCateName(), "zdzdz");
+		
+		Merchandise merchandise = new Merchandise();
+		merchandise.setMerName("zdz");
+		merchandise.setCategory(category);
+		merMapper.addMer(merchandise);
+		Merchandise merchandise2 = merMapper.loadMer(merchandise.getId());
+		Assert.assertEquals(merchandise2.getMerName(), "zdz");
+		merchandise.setMerName("zdzdz");
+		merMapper.updateMer(merchandise);
+		merchandise2 = merMapper.loadMer(merchandise.getId());
+		Assert.assertEquals(merchandise2.getMerName(), "zdzdz");
+		
+		merMapper.delMer(merchandise.getId());
+		merMapper.delCategory(category.getId());
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
 }
