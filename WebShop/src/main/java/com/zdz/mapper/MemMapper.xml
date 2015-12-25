@@ -15,7 +15,6 @@
 		<result property="lastDate" column="lastDate" />
 		<result property="loginTimes" column="loginTimes" />
 		<result property="email" column="email" />
-		<!-- 改为引用 -->
 		<association property="memberlevel" resultMap="memberlevelResultMap"/>
 	</resultMap>
 	<resultMap type="Memberlevel" id="memberlevelResultMap">

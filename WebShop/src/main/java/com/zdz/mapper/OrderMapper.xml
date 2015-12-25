@@ -12,6 +12,25 @@
 		<association property="cart" resultMap="cartResultMap">
 		</association>
 	</resultMap>
+	<resultMap id="memberResultMap" type="Member">
+		<id property="id" column="id" />
+		<result property="loginName" column="loginName" />
+		<result property="loginPwd" column="loginPwd" />
+		<result property="memberName" column="memberName" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="zip" column="zip" />
+		<result property="regDate" column="regDate" />
+		<result property="lastDate" column="lastDate" />
+		<result property="loginTimes" column="loginTimes" />
+		<result property="email" column="email" />
+		<association property="memberlevel" resultMap="memberlevelResultMap"/>
+	</resultMap>
+	<resultMap type="Memberlevel" id="memberlevelResultMap">
+		<id property="id" column="id" />
+		<result property="levelName" column="levelName" />
+		<result property="favourable" column="favourable" />
+	</resultMap>
 	<resultMap id="cartResultMap" type="Cart">
 		<id property="id" column="id" />
 		<result property="member" column="member" />
@@ -44,7 +63,7 @@
 		where id =
 		#{id}
 	</update>
-	<select id="browseOrder" resultMap="ordersResultMap">
+	<select id="browseOrder" parameterType="Member" resultMap="ordersResultMap">
 		select
 		* from
 		orders
@@ -52,7 +71,7 @@
 			where member = #{member.id}
 		</if>
 	</select>
-	<select id="browseOrderMer" resultMap="ordersResultMap">
+	<select id="browseOrderMer" parameterType="cart" resultMap="ordersResultMap">
 		select
 		* from
 		orders

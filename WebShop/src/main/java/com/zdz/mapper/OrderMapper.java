@@ -8,11 +8,9 @@ import com.zdz.model.Orders;
 
 public interface OrderMapper {
 	public boolean addOrder(Orders order);
-	/** ���ĳ��Ա�����ж��� */
+//	此重载方法不知道是否正确实现了
 	public List browseOrder(Member member);
-	/** ������ж��� */
 	public List browseOrder();
-	/** ���ĳ������������Ʒ��¼ */
 	public List browseOrderMer(Cart cart);			
 	public boolean delOrder(Integer id);	
 	public Orders loadOrder(Integer id);
