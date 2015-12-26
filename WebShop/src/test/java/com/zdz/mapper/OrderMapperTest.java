@@ -62,37 +62,24 @@ public class OrderMapperTest {
 		sqlSession.commit();
 		sqlSession.close();
 	}
-//	@Test
-//	public void addDelUpdateTest()
-//	{
-//		SqlSession sqlSession = sessionFactory.openSession();
-//		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);		
-//		
-//		Category category = new Category();
-//		category.setCateName("zdz");
-//		merMapper.addCategory(category);
-//		Category category2 = merMapper.loadCategory(category.getId());
-//		Assert.assertEquals(category2.getCateName(), "zdz");
-//		category.setCateName("zdzdz");
-//		merMapper.updateCategory(category);
-//		category2 = merMapper.loadCategory(category.getId());
-//		Assert.assertEquals(category2.getCateName(), "zdzdz");
-//		
-//		Merchandise merchandise = new Merchandise();
-//		merchandise.setMerName("zdz");
-//		merchandise.setCategory(category);
-//		merMapper.addMer(merchandise);
-//		Merchandise merchandise2 = merMapper.loadMer(merchandise.getId());
-//		Assert.assertEquals(merchandise2.getMerName(), "zdz");
-//		merchandise.setMerName("zdzdz");
-//		merMapper.updateMer(merchandise);
-//		merchandise2 = merMapper.loadMer(merchandise.getId());
-//		Assert.assertEquals(merchandise2.getMerName(), "zdzdz");
-//		
-//		merMapper.delMer(merchandise.getId());
-//		merMapper.delCategory(category.getId());
-//		
-//		sqlSession.commit();
-//		sqlSession.close();
-//	}
+	@Test
+	public void addDelUpdateTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+		
+		Orders order = new Orders();
+		order.setOrderNo("123");
+		orderMapper.addOrder(order);
+		Orders order2 = orderMapper.loadOrder(order.getId());
+		Assert.assertEquals(order2.getOrderNo(), "123");
+		order2.setOrderNo("321");
+		orderMapper.updateOrder(order2);
+		order2 = orderMapper.loadOrder(order.getId());
+		Assert.assertEquals(order2.getOrderNo(), "321");
+		orderMapper.delOrder(order.getId());
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
 }
