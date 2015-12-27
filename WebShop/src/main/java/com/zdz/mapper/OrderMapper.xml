@@ -5,12 +5,11 @@
 <mapper namespace="com.zdz.mapper.OrderMapper">
 	<resultMap id="ordersResultMap" type="Orders">
 		<id property="id" column="id" />
-		<result property="member" column="member" />
 		<result property="orderNo" column="orderNo" />
 		<result property="orderDate" column="orderDate" />
 		<result property="orderStatus" column="orderStatus" />
-		<association property="cart" resultMap="cartResultMap">
-		</association>
+		<association property="member" resultMap="memberResultMap"/>
+		<association property="cart" resultMap="cartResultMap"/>
 	</resultMap>
 	<resultMap id="memberResultMap" type="Member">
 		<id property="id" column="id" />
@@ -24,7 +23,7 @@
 		<result property="lastDate" column="lastDate" />
 		<result property="loginTimes" column="loginTimes" />
 		<result property="email" column="email" />
-		<association property="memberlevel" resultMap="memberlevelResultMap"/>
+		<association property="memberlevel" resultMap="memberlevelResultMap" />
 	</resultMap>
 	<resultMap type="Memberlevel" id="memberlevelResultMap">
 		<id property="id" column="id" />
@@ -33,11 +32,11 @@
 	</resultMap>
 	<resultMap id="cartResultMap" type="Cart">
 		<id property="id" column="id" />
-		<result property="member" column="member" />
 		<result property="money" column="money" />
 		<result property="cartStatus" column="cartStatus" />
+		<association property="member" resultMap="memberResultMap"/>
 	</resultMap>
-		<update id="updateOrder">
+	<update id="updateOrder">
 		update orders set
 		member=#{member},orderNo=#{orderNo},orderDate=#{orderDate},orderStatus=#{orderStatus},cart=#{cart.id}
 		where id =
@@ -71,7 +70,7 @@
 			where member = #{member.id}
 		</if>
 	</select>
-	<select id="browseOrderMer" parameterType="cart" resultMap="ordersResultMap">
+	<select id="browseOrderMer" parameterType="Cart" resultMap="ordersResultMap">
 		select
 		* from
 		orders
@@ -79,5 +78,5 @@
 			where cart = #{cart.id}
 		</if>
 	</select>
-	
+
 </mapper>
