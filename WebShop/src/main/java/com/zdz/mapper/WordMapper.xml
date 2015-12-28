@@ -3,26 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdz.mapper.MerMapper">
-	<resultMap id="merchandiseResultMap" type="Merchandise">
+	<resultMap id="leavewordResultMap" type="Leaveword">
 		<id property="id" column="id" />
-		<result property="merName" column="merName" />
-		<result property="price" column="price" />
-		<result property="sprice" column="sprice" />
-		<result property="merModel" column="merModel" />
-		<result property="picture" column="picture" />
-		<result property="merDesc" column="merDesc" />
-		<result property="manufacturer" column="manufacturer" />
-		<result property="leaveFactoryDate" column="leaveFactoryDate" />
-		<result property="special" column="special" />
-		<association property="category" resultMap="categoryResultMap">
-		</association>
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="leaveDate" column="leaveDate" />
+		<result property="answerContent" column="answerContent" />
+		<result property="answerDate" column="answerDate" />
+		<association property="member" resultMap="memberResultMap" />
+		<association property="admin" resultMap="adminResultMap" />
 	</resultMap>
-	<resultMap id="categoryResultMap" type="Category">
+	<resultMap id="memberResultMap" type="Member">
 		<id property="id" column="id" />
-		<result property="cateName" column="cateName" />
-		<result property="cateDesc" column="cateDesc" />
+		<result property="loginName" column="loginName" />
+		<result property="loginPwd" column="loginPwd" />
+		<result property="memberName" column="memberName" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="zip" column="zip" />
+		<result property="regDate" column="regDate" />
+		<result property="lastDate" column="lastDate" />
+		<result property="loginTimes" column="loginTimes" />
+		<result property="email" column="email" />
+		<association property="memberlevel" resultMap="memberlevelResultMap" />
 	</resultMap>
-		<update id="updateMer">
+	<resultMap type="Memberlevel" id="memberlevelResultMap">
+		<id property="id" column="id" />
+		<result property="levelName" column="levelName" />
+		<result property="favourable" column="favourable" />
+	</resultMap>
+	<resultMap id="adminResultMap" type="Admin">
+		<id property="id" column="id" />
+		<result property="adminType" column="adminType" />
+		<result property="adminName" column="adminName" />
+		<result property="loginName" column="loginName" />
+		<result property="loginPwd" column="loginPwd" />
+	</resultMap>
+	<update id="updateMer">
 		update merchandise set
 		merName=#{merName},price=#{price},sprice=#{sprice},merModel=#{merModel},picture=#{picture},merDesc=#{merDesc},manufacturer=#{manufacturer},leaveFactoryDate=#{leaveFactoryDate},special=#{special},category=#{category.id}
 		where id =
@@ -68,12 +85,14 @@
 		* from
 		category
 	</select>
-	<select id="browseMer" parameterType="java.lang.String" resultMap="merchandiseResultMap">
+	<select id="browseMer" parameterType="java.lang.String"
+		resultMap="merchandiseResultMap">
 		select
 		* from merchandise where merName like #{hql}
 	</select>
 	<select id="countRecord" parameterType="String" resultType="int">
 		select
-		count(*) from merchandise where merName like #{hql,jdbcType=VARCHAR}
+		count(*) from merchandise where merName like
+		#{hql,jdbcType=VARCHAR}
 	</select>
 </mapper>
