@@ -34,18 +34,18 @@
 		<id property="id" column="id" />
 		<result property="money" column="money" />
 		<result property="cartStatus" column="cartStatus" />
-		<association property="member" resultMap="memberResultMap"/>
+		<!-- <association property="member" resultMap="memberResultMap"/> -->
 	</resultMap>
 	<update id="updateOrder">
 		update orders set
-		member=#{member},orderNo=#{orderNo},orderDate=#{orderDate},orderStatus=#{orderStatus},cart=#{cart.id}
+		member=#{member.id},orderNo=#{orderNo},orderDate=#{orderDate},orderStatus=#{orderStatus},cart=#{cart.id}
 		where id =
 		#{id}
 	</update>
 	<insert id="addOrder" useGeneratedKeys="true" keyProperty="id">
 		insert
-		into merchandise
-		values(null,#{member},#{cart.id},#{orderNo},#{orderDate},#{orderStatus})
+		into orders
+		values(null,#{member.id},#{cart.id},#{orderNo},#{orderDate},#{orderStatus})
 	</insert>
 	<delete id="delOrder">
 		delete from orders where id=#{id}
@@ -56,27 +56,21 @@
 		id =
 		#{id}
 	</select>
-	<update id="updateCategory">
-		update category set
-		cateName=#{cateName},cateDesc=#{cateDesc}
-		where id =
-		#{id}
-	</update>
 	<select id="browseOrder" parameterType="Member" resultMap="ordersResultMap">
 		select
 		* from
 		orders
-		<if test="member!=null">
-			where member = #{member.id}
-		</if>
+		<!-- <if test="param1!=null"> -->
+			where member = #{id}
+		<!-- </if> -->
 	</select>
 	<select id="browseOrderMer" parameterType="Cart" resultMap="ordersResultMap">
 		select
 		* from
 		orders
-		<if test="cart!=null">
-			where cart = #{cart.id}
-		</if>
+		<!-- <if test="param1!=null"> -->
+			where cart = #{id}
+		<!-- </if> -->
 	</select>
 
 </mapper>
