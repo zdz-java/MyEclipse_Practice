@@ -32,6 +32,6 @@
     <mapper resource="com/zdz/mapper/MemMapper.xml"/>
     <mapper resource="com/zdz/mapper/MerMapper.xml"/>
     <mapper resource="com/zdz/mapper/OrderMapper.xml"/>
-<!--     <mapper resource="com/zdz/mapper/WordMapper.xml"/> -->
+    <mapper resource="com/zdz/mapper/WordMapper.xml"/>
   </mappers>
 </configuration>

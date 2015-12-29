@@ -27,28 +27,28 @@ public class OrderMapperTest {
 		Reader reader = Resources.getResourceAsReader(source); 
 		sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 	}
-	@Test
-	public void browseTest()
-	{
-		SqlSession sqlSession = sessionFactory.openSession();
-		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-	 	
-		Member member = new Member();
-		member.setId(2);
-		Cart cart = new Cart();
-		cart.setId(6);
-		
-		List<Orders> orders = orderMapper.browseOrder(null);
-		List<Orders> orders2 = orderMapper.browseOrder(member);
-		List<Orders> orders3 = orderMapper.browseOrderMer(cart);
-		
-		Assert.assertEquals((int)orders.get(0).getId(),2);
-		Assert.assertEquals((int)orders2.get(0).getId(),5);
-		Assert.assertEquals((int)orders3.get(0).getId(),5);
-		
-		sqlSession.commit();
-		sqlSession.close();
-	}
+//	@Test
+//	public void browseTest()
+//	{
+//		SqlSession sqlSession = sessionFactory.openSession();
+//		OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+//	 	
+//		Member member = new Member();
+//		member.setId(2);
+//		Cart cart = new Cart();
+//		cart.setId(6);
+//		
+//		List<Orders> orders = orderMapper.browseOrder(null);
+//		List<Orders> orders2 = orderMapper.browseOrder(member);
+//		List<Orders> orders3 = orderMapper.browseOrderMer(cart);
+//		
+//		Assert.assertEquals((int)orders.get(0).getId(),2);
+//		Assert.assertEquals((int)orders2.get(0).getId(),5);
+//		Assert.assertEquals((int)orders3.get(0).getId(),5);
+//		
+//		sqlSession.commit();
+//		sqlSession.close();
+//	}
 //	@Test
 //	public void loadTest()
 //	{
