@@ -60,4 +60,18 @@ public class AdminMapperTest {
 		sqlSession.commit();
 		sqlSession.close();
 	}
+	@Test
+	public void loginTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
+
+		Admin admin = adminMapper.adminLogin("loginName", "loginPwd");
+		Assert.assertNull(admin);
+		admin = adminMapper.adminLogin("Admin1", "Admin1");
+		Assert.assertEquals(admin.getAdminName(), "商品管理员");
+		
+		sqlSession.commit();
+		sqlSession.close();
+	}
 }

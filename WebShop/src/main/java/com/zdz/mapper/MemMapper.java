@@ -6,10 +6,10 @@ import com.zdz.model.Member;
 import com.zdz.model.Memberlevel;
 
 public interface MemMapper {
+	public Member memLogin(String loginName, String loginPwd);
 	public List browseMemberLevel();
 	public Memberlevel loadMemberLevel(Integer id);
-//	应该不需要
-//	public boolean chkLoginName(String loginName);	
+	public boolean chkLoginName(String loginName);	
 	public boolean addMember(Member member);
 	public boolean updateMember(Member member);
 	public List browseMember();

@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.zdz.model.Admin;
 import com.zdz.model.Cart;
 import com.zdz.model.Member;
 import com.zdz.model.Memberlevel;
@@ -73,6 +74,25 @@ public class MemMapperTest {
 		member = memMapper.loadMember(toAdd.getId());
 		Assert.assertEquals(member.getMemberName(), "zdzdz");
 		memMapper.delMember(member.getId());
+		sqlSession.commit();
+		sqlSession.close();
+	}
+	@Test
+	public void loginTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		MemMapper memMapper = sqlSession.getMapper(MemMapper.class);
+
+		Member member = memMapper.memLogin("loginName", "loginPwd");
+		Assert.assertNull(member);
+		member = memMapper.memLogin("liuqiao", "liuqiao");
+		Assert.assertEquals(member.getMemberName(), "刘桥");
+		
+		boolean e = memMapper.chkLoginName("loginName");
+		Assert.assertFalse(e);
+		e = memMapper.chkLoginName("liuqiao");
+		Assert.assertTrue(e);
+		
 		sqlSession.commit();
 		sqlSession.close();
 	}

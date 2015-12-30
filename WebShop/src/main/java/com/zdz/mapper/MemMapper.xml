@@ -15,7 +15,7 @@
 		<result property="lastDate" column="lastDate" />
 		<result property="loginTimes" column="loginTimes" />
 		<result property="email" column="email" />
-		<association property="memberlevel" resultMap="memberlevelResultMap"/>
+		<association property="memberlevel" resultMap="memberlevelResultMap" />
 	</resultMap>
 	<resultMap type="Memberlevel" id="memberlevelResultMap">
 		<id property="id" column="id" />
@@ -52,8 +52,16 @@
 		* from
 		memberLevel
 	</select>
+	<select id="memLogin" resultMap="memberResultMap">
+		select
+		* from member where loginName=#{param1} and loginPwd=#{param2}
+	</select>
+	<select id="chkLoginName" resultType="boolean">
+		select
+		count(*) from member where loginName=#{param1}
+	</select>
 	<select id="browseMember" resultMap="memberResultMap">
 		select
-		* from member
+		* from member 
 	</select>
 </mapper>

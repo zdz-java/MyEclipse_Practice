@@ -25,4 +25,7 @@
   <select id="browseAdmin" resultMap="adminResultMap">
   	select * from admin
   </select>
+   <select id="adminLogin" resultMap="adminResultMap">
+  	select * from admin where loginName=#{param1} and loginPwd=#{param2} limit 1
+  </select>
 </mapper>
