@@ -1,10 +1,8 @@
-<%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>${website.title}</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body class="body">
@@ -13,14 +11,12 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align="absmiddle"> 
-		<INPUT id="qKey" name="qKey" value="…Ã∆∑πÿº¸◊÷" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="ÂïÜÂìÅÂÖ≥ÈîÆÂ≠ó" onClick="this.value=''"> 
         <select id="category">
-       	<option value="0">À˘”–…Ã∆∑</option>
-		  <logic:present name="cateList">
-		  	<logic:iterate id="cate" name="cateList" type="com.ORM.Category">
-				<option value="${cate.id}">${cate.cateName}</option>					  		
-		  	</logic:iterate>
-		  </logic:present>	       	
+       	<option value="0">ÊâÄÊúâÂïÜÂìÅ</option>
+		  <c:forEach items="${cateList}" var="cate">
+		  		<option value="${cate.id}">${cate.cateName}</option>
+		  </c:forEach>
         </select>		
 		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absmiddle" border="0"></A>    	
 	</TD>
@@ -98,12 +94,12 @@
 	                      <TD>
 							  <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
 		                           <TR height="30">
-		                             <TD class="text"><bean:message key="member.login.name"/>£∫
+		                             <TD class="text"><bean:message key="member.login.name"/>Ôºö
 								 	<html:text property="loginName" size="10" styleClass="textBox"/>
 								  </TD>
 		                           </TR>
 		                           <TR height="30">
-		                             <TD class="text"><bean:message key="member.login.pwd"/>£∫
+		                             <TD class="text"><bean:message key="member.login.pwd"/>Ôºö
 									  <html:password property="loginPwd" size="10" styleClass="textBox"/>
 								  </TD>
 		                           </TR>
@@ -197,10 +193,10 @@
 		                   <td><a href="mer.do?method=showMer&id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a></td>
 		                 </tr>
 		                 <tr align="center" height="20">
-		                   <td class="text"><bean:message key="mer.price"/>£∫ £§${mer.price} </td>
+		                   <td class="text"><bean:message key="mer.price"/>Ôºö Ôø•${mer.price} </td>
 		                 </tr>
 		                 <tr align="center" height="20">
-		                   <td class="text"><bean:message key="mer.sprice"/>£∫ £§${mer.sprice} </td>
+		                   <td class="text"><bean:message key="mer.sprice"/>Ôºö Ôø•${mer.sprice} </td>
 		                 </tr>
 		                 <tr>
 		                   <td>
@@ -245,7 +241,7 @@
 		                   <td><a href="mer.do?method=showMer&id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a></td>
 		                 </tr>
 		                 <tr align="center" height="20">
-		                   <td class="text"><bean:message key="mer.price"/>£∫ £§${mer.price} </td>
+		                   <td class="text"><bean:message key="mer.price"/>Ôºö Ôø•${mer.price} </td>
 		                 </tr>
 		                 <tr>
 		                   <td class=GoodsItem_buy>
@@ -278,16 +274,16 @@
   </tr>
 </table>
 <script type="text/javascript">
-	//ª·‘±◊¢≤·
+	//‰ºöÂëòÊ≥®ÂÜå
 	function reg(){
 		window.location = "reg.jsp";
 	}
 	
-	//À—À˜…Ã∆∑
+	//ÊêúÁ¥¢ÂïÜÂìÅ
 	function QuickSearch(){
 		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="…Ã∆∑πÿº¸◊÷" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="ÂïÜÂìÅÂÖ≥ÈîÆÂ≠ó" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 </script>
