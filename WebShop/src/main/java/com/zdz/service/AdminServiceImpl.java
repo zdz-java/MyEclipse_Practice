@@ -2,9 +2,11 @@ package com.zdz.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.zdz.mapper.AdminMapper;
 import com.zdz.model.Admin;
-
+@Component
 public class AdminServiceImpl implements AdminService {
 	private AdminMapper adminMapper;
 
