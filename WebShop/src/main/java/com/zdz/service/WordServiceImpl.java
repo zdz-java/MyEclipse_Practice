@@ -2,23 +2,34 @@ package com.zdz.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.zdz.mapper.OrderMapper;
 import com.zdz.mapper.WordMapper;
 import com.zdz.model.Leaveword;
 
 public class WordServiceImpl implements WordService {
-	private WordMapper wordMapper;
+	private SqlSessionFactory sqlSessionFactory;
 
-	public WordMapper getWordMapper() {
-		return wordMapper;
+	public SqlSessionFactory getSqlSessionFactory() {
+		return sqlSessionFactory;
 	}
 
-	public void setWordMapper(WordMapper wordMapper) {
-		this.wordMapper = wordMapper;
+	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
+		this.sqlSessionFactory = sqlSessionFactory;
 	}
 
 	@Override
 	public boolean addWord(Leaveword word) throws Exception {
-		return wordMapper.addWord(word);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		WordMapper wordMapper = sqlSession.getMapper(WordMapper.class);
+
+		boolean b = wordMapper.addWord(word);
+
+		sqlSession.commit();
+		sqlSession.close();
+		return b;
 	}
 
 //	未实现
@@ -29,27 +40,62 @@ public class WordServiceImpl implements WordService {
 
 	@Override
 	public List browseWord() throws Exception {
-		return wordMapper.browseWord();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		WordMapper wordMapper = sqlSession.getMapper(WordMapper.class);
+
+		List list = wordMapper.browseWord();
+
+		sqlSession.commit();
+		sqlSession.close();
+		return list;
 	}
 
 	@Override
 	public int countWord() throws Exception {
-		return wordMapper.countWord();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		WordMapper wordMapper = sqlSession.getMapper(WordMapper.class);
+
+		int i = wordMapper.countWord();
+
+		sqlSession.commit();
+		sqlSession.close();
+		return i;
 	}
 
 	@Override
 	public boolean delWord(Integer id) throws Exception {
-		return wordMapper.delWord(id);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		WordMapper wordMapper = sqlSession.getMapper(WordMapper.class);
+
+		boolean b = wordMapper.delWord(id);
+
+		sqlSession.commit();
+		sqlSession.close();
+		return b;
 	}
 
 	@Override
 	public Leaveword loadWord(Integer id) throws Exception {
-		return wordMapper.loadWord(id);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		WordMapper wordMapper = sqlSession.getMapper(WordMapper.class);
+
+		Leaveword leaveword = wordMapper.loadWord(id);
+
+		sqlSession.commit();
+		sqlSession.close();
+		return leaveword;
 	}
 
 	@Override
 	public boolean updateWord(Leaveword word) throws Exception {
-		return wordMapper.updateWord(word);
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		WordMapper wordMapper = sqlSession.getMapper(WordMapper.class);
+
+		boolean b = wordMapper.updateWord(word);
+
+		sqlSession.commit();
+		sqlSession.close();
+		return b;
 	}
 	
 }
