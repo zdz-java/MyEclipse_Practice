@@ -4,19 +4,21 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.zdz.mapper.CartMapper;
 import com.zdz.mapper.MemMapper;
 import com.zdz.model.Member;
 import com.zdz.model.Memberlevel;
-
+@Component
 public class MemServiceImpl implements MemService {
 	private SqlSessionFactory sqlSessionFactory;
 
 	public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}
-
+	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}

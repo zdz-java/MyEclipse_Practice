@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.zdz.mapper.AdminMapper;
 import com.zdz.mapper.CartMapper;
@@ -12,14 +14,14 @@ import com.zdz.model.Cart;
 import com.zdz.model.Cartselectedmer;
 import com.zdz.model.Member;
 import com.zdz.model.Merchandise;
-
+@Component
 public class CartServiceImpl implements CartService {
 private SqlSessionFactory sqlSessionFactory;
 	
 	public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}
-
+	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}

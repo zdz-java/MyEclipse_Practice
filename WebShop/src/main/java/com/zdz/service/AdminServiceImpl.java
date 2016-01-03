@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.zdz.mapper.AdminMapper;
@@ -15,7 +16,7 @@ public class AdminServiceImpl implements AdminService {
 	public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}
-
+	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}

@@ -15,7 +15,7 @@
 		 <typeAlias alias="Orders" type="com.zdz.model.Orders"/>
 		 <typeAlias alias="Leaveword" type="com.zdz.model.Leaveword"/>
 	</typeAliases>
-  <environments default="development">
+ <!--  <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
@@ -25,7 +25,7 @@
         <property name="password" value="root"/>
       </dataSource>
     </environment>
-  </environments>
+  </environments> -->
   <mappers>
     <mapper resource="com/zdz/mapper/AdminMapper.xml"/>
     <mapper resource="com/zdz/mapper/CartMapper.xml"/>

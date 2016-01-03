@@ -4,18 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.zdz.mapper.OrderMapper;
 import com.zdz.mapper.WordMapper;
 import com.zdz.model.Leaveword;
-
+@Component
 public class WordServiceImpl implements WordService {
 	private SqlSessionFactory sqlSessionFactory;
 
 	public SqlSessionFactory getSqlSessionFactory() {
 		return sqlSessionFactory;
 	}
-
+	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
