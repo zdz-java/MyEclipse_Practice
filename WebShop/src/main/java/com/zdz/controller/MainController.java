@@ -83,8 +83,14 @@ public class MainController {
 	public String defaultMethod(Model model) throws Exception
 	{
 		List<Category> cateList = merService.browseCategory();
-		System.out.println(cateList.get(0).getCateName());
+//		System.out.println(cateList.get(0).getCateName());
 		model.addAttribute("cateList", cateList);
+		model.addAttribute("item1", "商城首页");
+		model.addAttribute("item2", "购物车管理");
+		model.addAttribute("item3", "订单管理");
+		model.addAttribute("item4", "顾客留言");
+		model.addAttribute("item5", "修改注册资料");
+		model.addAttribute("loginLabel", "会员登录");
 		return "jsp/default";
 	}
 }

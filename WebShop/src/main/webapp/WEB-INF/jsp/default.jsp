@@ -29,23 +29,23 @@
         <TR align="center">
           <TD valign="top" width="9"><IMG src="images/icon02.gif"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mer.do?method=browseIndexMer"><span class="whiteTitle"><bean:message key="menu.item1"/></span></A>
+		  	<A href="mer.do?method=browseIndexMer"><span class="whiteTitle">${item1}</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="cart.do?method=browseCart"><span class="whiteTitle"><bean:message key="menu.item2"/></span></A>
+		  	<A href="cart.do?method=browseCart"><span class="whiteTitle">${item2}</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="order.do?method=browseOrder"><span class="whiteTitle"><bean:message key="menu.item3"/></span></A>
+		  	<A href="order.do?method=browseOrder"><span class="whiteTitle">${item3}</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=browseWord"><span class="whiteTitle"><bean:message key="menu.item4"/></span></A>
+		  	<A href="mem.do?method=browseWord"><span class="whiteTitle">${item4}</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=loadMember"><span class="whiteTitle"><bean:message key="menu.item5"/></span></A>
+		  	<A href="mem.do?method=loadMember"><span class="whiteTitle">${item5}</span></A>
 		  </TD>
           <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
         </TR>
@@ -62,10 +62,11 @@
             </TR>
             <TR>
               <TD class="C_Item_bg">
-              	<logic:present name="member">
+              	<!-- 如果登录了 -->
+              	<!-- <logic:present name="member"> -->
 				  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
                     <TR>
-                      <TD class="C_login_Title"><bean:message key="member.login.label"/></TD>
+                      <TD class="C_login_Title">${loginLabel}</TD>
                     </TR>
                     <TR>
                       <TD>
@@ -76,37 +77,38 @@
 	                           </TR>
 	                           <TR height="30">
 	                             <TD align="center">
-	                   			   <a href="login.do?method=logout"><span class="blueText"><bean:message key="member.logout"/></span></a>          
+	                   			   <a href="login.do?method=logout"><span class="blueText">登出</span></a>          
 							    </TD>
 	                         </TR>
                       </TABLE> 
 					</TR>
 				  </TABLE>              	
-              	</logic:present>
-              	<logic:notPresent name="member">
+              	<!-- </logic:present> -->
+              	<!-- 如果没有登录 -->
+              	<!-- <logic:notPresent name="member"> -->
 	                <html:javascript formName="memLoginForm"/>
-					<html:form action="/login.do?method=login" style="margin:0px;" onsubmit="return validateMemLoginForm(this);">
+					<form action="/login?method=login" style="margin:0px;" onsubmit="return validateMemLoginForm(this);">
 					  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
 	                    <TR>
-	                      <TD class="C_login_Title"><bean:message key="member.login.label"/></TD>
+	                      <TD class="C_login_Title">会员登录</TD>
 	                    </TR>
 	                    <TR>
 	                      <TD>
 							  <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
 		                           <TR height="30">
-		                             <TD class="text"><bean:message key="member.login.name"/>：
-								 	<html:text property="loginName" size="10" styleClass="textBox"/>
+		                             <TD class="text">用户帐号：
+								 	<input type=text id="loginName" size="10" styleClass="textBox"/>
 								  </TD>
 		                           </TR>
 		                           <TR height="30">
-		                             <TD class="text"><bean:message key="member.login.pwd"/>：
-									  <html:password property="loginPwd" size="10" styleClass="textBox"/>
+		                             <TD class="text">用户密码：
+									  <input type=password id="loginPwd" size="10" styleClass="textBox"/>
 								  </TD>
 		                           </TR>
 		                           <TR height="30">
 		                             <TD class="UserRegster" align="right">
-		                               <html:button property="btn" onclick="reg()"><bean:message key="member.reg.text"/></html:button>
-								  	<html:submit><bean:message key="member.login.text"/></html:submit>
+		                               <button property="btn" onclick="reg()">注册</button>
+								  	<input type=submit name="登录"/>
 								  </TD>
 		                         </TR>
 	                      </TABLE> 
@@ -117,8 +119,8 @@
 					  		alert('<html:errors property="loginError"/>');
 					  	</script>
 					  </logic:messagesPresent>
-					</html:form>              	
-              	</logic:notPresent>
+					</form>              	
+              	<!-- </logic:notPresent> -->
 			  </TD>
             </TR>
             <TR>
@@ -133,24 +135,23 @@
                 <TD class="C_Item_bg" valign="top">
 					<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
 					  <TR>
-						<TD class="C_Sort_Title"><bean:message key="mer.category"/></TD>
+						<TD class="C_Sort_Title">商品类别</TD>
 					  </TR>
-					  <logic:notPresent name="cateList">
+					 <!--  <logic:notPresent name="cateList">
 						  <TR>
 							<TD class="redText"><bean:message key="cate.notExist"/></TD>
 						  </TR>					  
 					  </logic:notPresent>
 					  <TR height="10"><TD></TD></TR>	
-					  <logic:present name="cateList">
-					  	<logic:iterate id="cate" name="cateList" type="com.ORM.Category">
+					  <logic:present name="cateList"> -->
+					  	<c:forEach items="${cateList}" var="cate">
 						  <TR>
 							<TD class="text">
 								&nbsp;<img src="images/cateIcon.gif" border="0">
 								<a href="mer.do?method=searchMer&cateid=${cate.id}">${cate.cateName}</a>
 							</TD>
-						  </TR>						  		
-					  	</logic:iterate>
-					  </logic:present>
+						  </TR>		
+						  </c:forEach>				  		
 					</TABLE>
 				</TD>
               </TR>
@@ -171,13 +172,13 @@
           </TABLE>
           <TABLE class="C_Goods_Border" cellSpacing=0 cellPadding=0 width="100%" border=0>
               <TR>
-           		<logic:notPresent name="smerList">
+           		<!-- <logic:notPresent name="smerList">
            			<TD valign="top" class="redText" colspan="3">
            				<bean:message key="mer.notExist"/>
            			</TD>
-           		</logic:notPresent>
-           		<logic:present name="smerList">
-					<logic:iterate id="mer" name="smerList" type="com.ORM.Merchandise">
+           		</logic:notPresent> -->
+					<!-- <logic:iterate id="mer" name="smerList" type="com.ORM.Merchandise"> -->
+					<c:forEach items="merList1" var="mer">
 		               <TD valign="top" width="33%">
 					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
 		                 <tr>
@@ -205,9 +206,8 @@
 						  </td>
 		                 </tr>
 		               </table>
-		               </TD>						
-					</logic:iterate>
-           		</logic:present>
+		               </TD>	
+		               </c:forEach>					
 			  </TR>
           </TABLE><br>		  
 		  <TABLE class=C_Goods_Title cellSpacing=0 cellPadding=0 width="100%" border=0>            
@@ -219,13 +219,12 @@
           </TABLE>
           <TABLE class="C_Goods_Border" cellSpacing=0 cellPadding=0 width="100%" border=0>
               <TR>
-           		<logic:notPresent name="merList">
+           		<!-- <logic:notPresent name="merList">
            			<TD valign="top" class="redText" colspan="3">
            				<bean:message key="mer.notExist"/>
            			</TD>
-           		</logic:notPresent>
-           		<logic:present name="merList">
-					<logic:iterate id="mer" name="merList" type="com.ORM.Merchandise">
+           		</logic:notPresent> -->
+					<c:forEach items="merList2" var="mer">
 		               <TD valign="top" width="33%">
 					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
 		                 <tr>
@@ -250,9 +249,8 @@
 						  </td>
 		                 </tr>
 		               </table>
-		               </TD>						
-					</logic:iterate>
-           		</logic:present>
+		               </TD>					
+		               </c:forEach>	
 			  </TR>
           </TABLE>          
 		  </td>
@@ -266,7 +264,7 @@
   <tr>
     <td>&nbsp;</td>
     <td height="30" bgcolor="#4282CE" class="whiteText" align="center">
-		<bean:message key="website.foot"/>	</td>
+		本电子商城系统仅供学习交流使用，未经授权严禁用于商业用途！！ 	</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
