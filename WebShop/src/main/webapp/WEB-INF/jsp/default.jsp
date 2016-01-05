@@ -9,6 +9,7 @@
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
   <tr>
     <td width="20">&nbsp;</td>
+          <!-- 不确定目标跳转页面，暂时搁置 -->
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align="absmiddle"> 
 		<INPUT id="qKey" name="qKey" value="商品关键字" onClick="this.value=''"> 
@@ -64,30 +65,36 @@
               <TD class="C_Item_bg">
               	<!-- 如果登录了 -->
               	<!-- <logic:present name="member"> -->
+              	<c:if test="${!empty sessionScope.loginMember}">
 				  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
                     <TR>
-                      <TD class="C_login_Title">${loginLabel}</TD>
+                      <TD class="C_login_Title">用户登录成功</TD>
                     </TR>
                     <TR>
                       <TD>
 						  <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
 	                           <TR height="10"><TD></TD></TR>						  
 	                           <TR height="30" class="text">
-	                             <TD><bean:message key="member.logined" arg0="${member.memberName}" arg1="${member.memberlevel.levelName}"/></TD>
+	                             <TD>${member.memberName}</TD>
+	                           </TR>
+	                            <TR height="30" class="text">
+	                             <TD>${member.memberlevel.levelName}</TD>
 	                           </TR>
 	                           <TR height="30">
 	                             <TD align="center">
-	                   			   <a href="login.do?method=logout"><span class="blueText">登出</span></a>          
+	                   			   <a href="logout"><span class="blueText">登出</span></a>          
 							    </TD>
 	                         </TR>
                       </TABLE> 
 					</TR>
-				  </TABLE>              	
+				  </TABLE>    
+				  </c:if>          	
               	<!-- </logic:present> -->
               	<!-- 如果没有登录 -->
               	<!-- <logic:notPresent name="member"> -->
+              	<c:if test="${empty sessionScope.loginMember}">
 	                <html:javascript formName="memLoginForm"/>
-					<form action="/login?method=login" style="margin:0px;" onsubmit="return validateMemLoginForm(this);">
+					
 					  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
 	                    <TR>
 	                      <TD class="C_login_Title">会员登录</TD>
@@ -95,6 +102,7 @@
 	                    <TR>
 	                      <TD>
 							  <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
+							  <form action="login" style="margin:0px;">
 		                           <TR height="30">
 		                             <TD class="text">用户帐号：
 								 	<input type=text id="loginName" size="10" styleClass="textBox"/>
@@ -109,17 +117,19 @@
 		                             <TD class="UserRegster" align="right">
 		                               <button property="btn" onclick="reg()">注册</button>
 								  	<input type=submit name="登录"/>
+								  	</form>    
 								  </TD>
 		                         </TR>
 	                      </TABLE> 
 						</TR>
 					  </TABLE>
-					  <logic:messagesPresent>
+					<!--   <logic:messagesPresent>
 					  	<script language="javascript">
 					  		alert('<html:errors property="loginError"/>');
 					  	</script>
-					  </logic:messagesPresent>
-					</form>              	
+					  </logic:messagesPresent> -->
+					  
+				</c:if>        	
               	<!-- </logic:notPresent> -->
 			  </TD>
             </TR>
@@ -178,7 +188,7 @@
            			</TD>
            		</logic:notPresent> -->
 					<!-- <logic:iterate id="mer" name="smerList" type="com.ORM.Merchandise"> -->
-					<c:forEach items="merList1" var="mer">
+					<c:forEach items="${merList1}" var="mer">
 		               <TD valign="top" width="33%">
 					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
 		                 <tr>
@@ -224,7 +234,7 @@
            				<bean:message key="mer.notExist"/>
            			</TD>
            		</logic:notPresent> -->
-					<c:forEach items="merList2" var="mer">
+					<c:forEach items="${merList2}" var="mer">
 		               <TD valign="top" width="33%">
 					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
 		                 <tr>
@@ -274,12 +284,12 @@
 <script type="text/javascript">
 	//会员注册
 	function reg(){
-		window.location = "reg.jsp";
+		window.location = "reg";
 	}
 	
 	//搜索商品
 	function QuickSearch(){
-		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
+		var url = "searchMer?cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
 		if (key !=null && key!="商品关键字" && key.length>0)url = url+"&key="+key;
 		window.location = url;
