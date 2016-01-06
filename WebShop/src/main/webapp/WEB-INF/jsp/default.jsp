@@ -75,10 +75,10 @@
 						  <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
 	                           <TR height="10"><TD></TD></TR>						  
 	                           <TR height="30" class="text">
-	                             <TD>${member.memberName}</TD>
+	                             <TD>${sessionScope.loginMember.memberName}</TD>
 	                           </TR>
 	                            <TR height="30" class="text">
-	                             <TD>${member.memberlevel.levelName}</TD>
+	                             <TD>${sessionScope.loginMember.memberlevel.levelName}</TD>
 	                           </TR>
 	                           <TR height="30">
 	                             <TD align="center">
@@ -93,7 +93,7 @@
               	<!-- 如果没有登录 -->
               	<!-- <logic:notPresent name="member"> -->
               	<c:if test="${empty sessionScope.loginMember}">
-	                <html:javascript formName="memLoginForm"/>
+	                <!-- <html:javascript formName="memLoginForm"/> -->
 					
 					  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
 	                    <TR>
@@ -101,26 +101,28 @@
 	                    </TR>
 	                    <TR>
 	                      <TD>
+	                       <form action="login" style="margin:0px;">
 							  <TABLE cellSpacing=0 cellPadding=0 width="90%" align=center border=0>
-							  <form action="login" style="margin:0px;">
+							 
 		                           <TR height="30">
 		                             <TD class="text">用户帐号：
-								 	<input type=text id="loginName" size="10" styleClass="textBox"/>
+								 	<input type=text name="loginName" size="10" styleClass="textBox"/>
 								  </TD>
 		                           </TR>
 		                           <TR height="30">
 		                             <TD class="text">用户密码：
-									  <input type=password id="loginPwd" size="10" styleClass="textBox"/>
+									  <input type=password name="loginPwd" size="10" styleClass="textBox"/>
 								  </TD>
 		                           </TR>
 		                           <TR height="30">
 		                             <TD class="UserRegster" align="right">
 		                               <button property="btn" onclick="reg()">注册</button>
-								  	<input type=submit name="登录"/>
-								  	</form>    
+								  	<input type="submit" value="登录" name="Submit" />
+								  	   
 								  </TD>
 		                         </TR>
 	                      </TABLE> 
+	                      </form> 
 						</TR>
 					  </TABLE>
 					<!--   <logic:messagesPresent>

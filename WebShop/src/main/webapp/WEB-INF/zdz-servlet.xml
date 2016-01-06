@@ -12,6 +12,7 @@
 	<context:component-scan base-package="com.zdz" />
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/CSS/**" location="/CSS/" />
+	<mvc:resources mapping="/Picture/**" location="/Picture/" />
 	<mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">

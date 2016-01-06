@@ -2,7 +2,11 @@ package com.zdz.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,9 +91,9 @@ public class MainController {
 	public String defaultMethod(Model model) throws Exception
 	{
 		List<Category> cateList = merService.browseCategory();
-//		merService.b
-//		List merList1 = merService.browseMer("是");
-//		List merList2 = merService.browseMer("的");
+//		这两个列表应该是由merService.browseMer(pageSize, pageNo, cateId, isSpecial)的重载方法取出的
+		List merList1 = merService.browseMer("是");
+		List merList2 = merService.browseMer("的");
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("item1", "商城首页");
 		model.addAttribute("item2", "购物车管理");
@@ -97,8 +101,8 @@ public class MainController {
 		model.addAttribute("item4", "顾客留言");
 		model.addAttribute("item5", "修改注册资料");
 		model.addAttribute("loginLabel", "会员登录");
-//		model.addAttribute("merList1", merList1);
-//		model.addAttribute("merList2", merList2);
+		model.addAttribute("merList1", merList1);
+		model.addAttribute("merList2", merList2);
 		return "jsp/default";
 	}
 	
@@ -115,19 +119,24 @@ public class MainController {
 		if(member!=null)
 		{
 			model.addAttribute("loginMember", member);
-			System.out.println("login in");
 		}
 		else {
-			System.out.println(loginName+"  "+loginPwd);
 			System.out.println("验证失败");
 		}
 		return "redirect:default";
 	}
 //	取消session中的loginMember
 	@RequestMapping("/logout")
-	public void logout()
+	public String logout(HttpServletRequest request)
 	{
-		
+//		下面两种方法都无法让session失效
+//		可以使用拦截器拦截此方法来避免使用ServletApi
+//		session.removeAttribute("loginMember");
+//		session.invalidate();
+//		怀疑是通过SpringMVC而添加到session范围的，不能通过servletAPI来取消,但是modelAPI中没有提供移除方法
+		request.getSession().removeAttribute("loginMember");
+		System.out.println("进入到了session失效方法");
+		return "redirect:default";
 	}
 	
 	@RequestMapping("/reg")
