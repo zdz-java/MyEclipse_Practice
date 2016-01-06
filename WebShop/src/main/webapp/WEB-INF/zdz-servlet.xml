@@ -13,6 +13,7 @@
 	<mvc:resources mapping="/images/**" location="/images/" />
 	<mvc:resources mapping="/CSS/**" location="/CSS/" />
 	<mvc:resources mapping="/Picture/**" location="/Picture/" />
+	<mvc:resources mapping="/JS/**" location="/JS/" />
 	<mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">

@@ -2,6 +2,7 @@ package com.zdz.controller;
 
 import java.util.List;
 
+import javax.enterprise.inject.New;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -81,12 +84,6 @@ public class MainController {
 		this.wordService = wordService;
 	}
 
-	@RequestMapping("/test")
-	public String testController()
-	{
-		return "test";
-	}
-	
 	@RequestMapping("/default")
 	public String defaultMethod(Model model) throws Exception
 	{
@@ -95,11 +92,6 @@ public class MainController {
 		List merList1 = merService.browseMer("是");
 		List merList2 = merService.browseMer("的");
 		model.addAttribute("cateList", cateList);
-		model.addAttribute("item1", "商城首页");
-		model.addAttribute("item2", "购物车管理");
-		model.addAttribute("item3", "订单管理");
-		model.addAttribute("item4", "顾客留言");
-		model.addAttribute("item5", "修改注册资料");
 		model.addAttribute("loginLabel", "会员登录");
 		model.addAttribute("merList1", merList1);
 		model.addAttribute("merList2", merList2);
@@ -139,9 +131,16 @@ public class MainController {
 		return "redirect:default";
 	}
 	
-	@RequestMapping("/reg")
-	public String reg()
+	@RequestMapping(value="/reg",method=RequestMethod.GET)
+	public String preReg(Model model)
 	{
-		return "reg";
+		model.addAttribute("memberToReg", new Member());
+		return "jsp/reg";
+	}
+	@RequestMapping(value="/reg",method=RequestMethod.POST)
+	public String reg(@ModelAttribute("memberToReg") Member member) throws Exception
+	{
+		memService.addMember(member);
+		return "redirect:default";
 	}
 }

@@ -1,182 +1,195 @@
-<%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-%>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>æ³¨å†Œ</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
 <body class="body">
-<table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
-  <tr>
-    <td width="20">&nbsp;</td>
-    <TD height="50" align="right" valign="bottom">
-		<IMG src="images/icon_login.gif" align=absMiddle> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
-		<SELECT id="category" name="category">
-			<option value="0">ËùÓĞÉÌÆ·</option>
-		</SELECT>
-		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absMiddle" border="0"></A>
-    </TD>
-    <td width="20">&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>
-	<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
-        <TR align="center">
-          <TD valign="top" width="9"><IMG src="images/icon02.gif"></TD>
-          <TD class="header_menu" align="middle">
-		  	<A href="mer.do?method=browseIndexMer"><span class="whiteTitle"><bean:message key="menu.item1"/></span></A>
-		  </TD>
-          <TD background="images/Bule_06.gif" width="2"></TD>
-          <TD class="header_menu" align="middle">
-		  	<A href="cart.do?method=browseCart"><span class="whiteTitle"><bean:message key="menu.item2"/></span></A>
-		  </TD>
-          <TD background="images/Bule_06.gif" width="2"></TD>
-          <TD class="header_menu" align="middle">
-		  	<A href="order.do?method=browseOrder"><span class="whiteTitle"><bean:message key="menu.item3"/></span></A>
-		  </TD>
-          <TD background="images/Bule_06.gif" width="2"></TD>
-          <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=browseWord"><span class="whiteTitle"><bean:message key="menu.item4"/></span></A>
-		  </TD>
-          <TD background="images/Bule_06.gif" width="2"></TD>
-          <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=loadMember"><span class="whiteTitle"><bean:message key="menu.item5"/></span></A>
-		  </TD>
-          <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
-        </TR>
-    </TABLE></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>
-    <html:javascript formName="memberForm"/>
-	<html:form action="/mem.do?method=reg" style="margin:0px;" onsubmit="return validateMemberForm(this);">
-		<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#FFFFFF">
-		  <tr>
-			<td height="80" colspan="2"><IMG src="images/icon_regster.gif"></td>
-			</tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.level"/>£º</td>
-			<td height="26"><html:select property="memberlevel"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.realname"/>£º</td>
-			<td height="26"><html:text property="memberName" size="30" styleClass="textBox"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.login.name"/>£º</td>
-			<td height="26"><html:text property="loginName" size="30" styleClass="textBox" onblur="checkLoginName()"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.login.pwd"/>£º</td>
-			<td height="26"><html:password property="loginPwd" size="30" styleClass="textBox"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.login.repwd"/>£º</td>
-			<td height="26"><input type="password" id="reLoginPwd" size="30" class="textBox" onblur="checkPwd()"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.phone"/>£º</td>
-			<td height="26"><html:text property="phone" size="30" styleClass="textBox"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.address"/>£º</td>
-			<td height="26"><html:text property="address" size="30" styleClass="textBox"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.zip"/>£º</td>
-			<td height="26"><html:text property="zip" size="30" styleClass="textBox"/></td>
-		  </tr>
-		  <tr bgcolor="#F7F3F7">
-			<td width="260" height="26" class="text" align="right"><bean:message key="member.email"/>£º</td>
-			<td height="26"><html:text property="email" size="30" styleClass="textBox"/></td>
-		  </tr>
-		  <tr>
-			<td height="40" colspan="2" align="center">
-				<html:submit property="C_Input" styleClass="C_Input">
-					<bean:message key="member.reg.text"/>
-				</html:submit><br>
-				<span class="redText"><html:errors property="addMemStatus"/></span>
+	<table width="780" border="0" align="center" cellpadding="0"
+		cellspacing="0" bgcolor="#FFFFFF"
+		style="border:1px; border-style:solid; border-color:#888888">
+		<tr>
+			<td width="20">&nbsp;</td>
+			<TD height="50" align="right" valign="bottom"><IMG
+				src="images/icon_login.gif" align=absMiddle> <INPUT id="qKey"
+				name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> <SELECT
+				id="category" name="category">
+					<option value="0">æ‰€æœ‰å•†å“</option>
+			</SELECT> <A href="javascript:QuickSearch()"><IMG
+					src="images/icon_search.gif" align="absMiddle" border="0"></A></TD>
+			<td width="20">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+					<TR align="center">
+						<TD valign="top" width="9"><IMG src="images/icon02.gif"></TD>
+						<TD class="header_menu" align="middle"><A
+							href="mer.do?method=browseIndexMer"><span class="whiteTitle">å•†åŸé¦–é¡µ</span></A>
+						</TD>
+						<TD background="images/Bule_06.gif" width="2"></TD>
+						<TD class="header_menu" align="middle"><A
+							href="cart.do?method=browseCart"><span class="whiteTitle">è´­ç‰©è½¦ç®¡ç†</span></A>
+						</TD>
+						<TD background="images/Bule_06.gif" width="2"></TD>
+						<TD class="header_menu" align="middle"><A
+							href="order.do?method=browseOrder"><span class="whiteTitle">è®¢å•ç®¡ç†</span></A>
+						</TD>
+						<TD background="images/Bule_06.gif" width="2"></TD>
+						<TD class="header_menu" align="middle"><A
+							href="mem.do?method=browseWord"><span class="whiteTitle">é¡¾å®¢ç•™è¨€</span></A>
+						</TD>
+						<TD background="images/Bule_06.gif" width="2"></TD>
+						<TD class="header_menu" align="middle"><A
+							href="mem.do?method=loadMember"><span class="whiteTitle">ä¿®æ”¹æ³¨å†Œèµ„æ–™</span></A>
+						</TD>
+						<TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
+					</TR>
+				</TABLE>
 			</td>
-		  </tr>
-		</table>
-	</html:form>              	
-	</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td height="30">&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td height="30" bgcolor="#4282CE" class="whiteText" align="center">
-		<bean:message key="website.foot"/>	</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td height="20">&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-<script language="javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
-	jsonrpc = new JSONRpcClient("JSON-RPC");
-	var result = jsonrpc.ajax.getCategory();
-	for (var i=0;i<result.length;i++){
-		option =document.createElement("OPTION");
-		option.value = result[i][0];
-		option.text = result[i][1];
-		document.all.category.options.add(option);
-	}
-	
-	//¹¹Ôì»áÔ±¼¶±ğÏÂÀ­ÁĞ±í
-	result = jsonrpc.ajax.getMemberLevel();
-	for (var i=0;i<result.length;i++){
-		option =document.createElement("OPTION");
-		option.value = result[i][0];
-		option.text = result[i][1];
-		document.all.memberlevel.options.add(option);
-	}
-	
-	//ÃÜÂëºË¶Ô
-	function checkPwd(){
-		if (document.all.loginPwd.value != document.all.reLoginPwd.value){
-			alert('¶Ô²»Æğ£¬Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ£¬ÇëÖØĞÂÊäÈë£¡');
-			document.all.loginPwd.value = "";
-			document.all.reLoginPwd.value ="";
-			document.all.loginPwd.focus();
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<sf:form action="reg" style="margin:0px;"
+					onsubmit="return validateMemberForm(this);" commandName="memberToReg">
+					<table width="100%" border="0" cellpadding="0" cellspacing="1"
+						bgcolor="#FFFFFF">
+						<tr>
+							<td height="80" colspan="2"><IMG
+								src="images/icon_regster.gif"></td>
+						</tr>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">ä¼šå‘˜çº§åˆ«ï¼š</td>
+							<td height="26"><sf:select path="memberlevel.id">
+									<option value="1">æ™®é€šä¼šå‘˜</option>
+									<option value="2">é»„é‡‘ä¼šå‘˜</option>
+									<option value="3">ç™½é‡‘ä¼šå‘˜</option>
+									<option value="4">é’»çŸ³ä¼šå‘˜</option>
+							</sf:select></td>
+						</tr>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">çœŸå®å§“åï¼š</td>
+							<td height="26"><sf:input type="text" path="memberName"
+								size="30" value="" class="textBox"/></td>
+						</tr>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">ç™»å½•å¸å·ï¼š</td>
+							<td height="26"><sf:input type="text" path="loginName"
+								size="30" value="" onblur="checkLoginName()" class="textBox"/></td>
+						</tr>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">ç™»å½•å¯†ç ï¼š</td>
+							<td height="26"><sf:input type="password" path="loginPwd"
+								size="30" value="" class="textBox"/></td>
+						</tr>
+						<%-- <tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">æ ¸å¯¹å¯†ç ï¼š</td>
+							<td height="26"><sf:input type="password" path="reLoginPwd"
+								size="30" class="textBox" onblur="checkPwd()" /></td>
+						</tr> --%>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">è”ç³»ç”µè¯ï¼š</td>
+							<td height="26"><sf:input type="text" path="phone" size="30"
+								value="" class="textBox"/></td>
+						</tr>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">è”ç³»åœ°å€ï¼š</td>
+							<td height="26"><sf:input type="text" path="address" size="30"
+								value="" class="textBox"/></td>
+						</tr>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">é‚®æ”¿ç¼–ç ï¼š</td>
+							<td height="26"><sf:input type="text" path="zip" size="30"
+								value="" class="textBox"/></td>
+						</tr>
+						<tr bgcolor="#F7F3F7">
+							<td width="260" height="26" class="text" align="right">ç”µå­é‚®ç®±ï¼š</td>
+							<td height="26"><sf:input type="text" path="email" size="30"
+								value="" class="textBox"/></td>
+						</tr>
+						<tr>
+							<td height="40" colspan="2" align="center"><input
+								type="submit" name="C_Input" value="æ³¨å†Œ" class="C_Input"><br>
+								<span class="redText"></span></td>
+						</tr>
+					</table>
+
+				</sf:form>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td height="30">&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td height="30" bgcolor="#4282CE" class="whiteText" align="center">
+				<bean:message key="website.foot" />
+			</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td height="20">&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+	</table>
+	<script language="javascript">
+		//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
+		jsonrpc = new JSONRpcClient("JSON-RPC");
+		var result = jsonrpc.ajax.getCategory();
+		for (var i = 0; i < result.length; i++) {
+			option = document.createElement("OPTION");
+			option.value = result[i][0];
+			option.text = result[i][1];
+			document.all.category.options.add(option);
 		}
-	}
-	
-	//µÇÂ¼ÕÊºÅÓĞĞ§ĞÔ¼ì²é
-	function checkLoginName(){
-		var lname = document.all.loginName.value;
-		if ((lname !=null)&&(lname.length>0)&&(!jsonrpc.ajax.chkLoginName(lname))){
-			alert('¶Ô²»Æğ£¬¸ÃµÇÂ¼ÕÊºÅÒÑ±»Õ¼ÓÃ£¬ÇëÖØĞÂÊäÈë£¡');
-			document.all.loginName.focus();
+
+		//æ„é€ ä¼šå‘˜çº§åˆ«ä¸‹æ‹‰åˆ—è¡¨
+		result = jsonrpc.ajax.getMemberLevel();
+		for (var i = 0; i < result.length; i++) {
+			option = document.createElement("OPTION");
+			option.value = result[i][0];
+			option.text = result[i][1];
+			document.all.memberlevel.options.add(option);
 		}
-	}	
-	
-	//ËÑË÷ÉÌÆ·
-	function QuickSearch(){
-		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
-		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
-		window.location = url;
-	}
-</script>	
+
+		//å¯†ç æ ¸å¯¹
+		function checkPwd() {
+			if (document.all.loginPwd.value != document.all.reLoginPwd.value) {
+				alert('å¯¹ä¸èµ·ï¼Œä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´ï¼Œè¯·é‡æ–°è¾“å…¥ï¼');
+				document.all.loginPwd.value = "";
+				document.all.reLoginPwd.value = "";
+				document.all.loginPwd.focus();
+			}
+		}
+
+		//ç™»å½•å¸å·æœ‰æ•ˆæ€§æ£€æŸ¥
+		function checkLoginName() {
+			var lname = document.all.loginName.value;
+			if ((lname != null) && (lname.length > 0)
+					&& (!jsonrpc.ajax.chkLoginName(lname))) {
+				alert('å¯¹ä¸èµ·ï¼Œè¯¥ç™»å½•å¸å·å·²è¢«å ç”¨ï¼Œè¯·é‡æ–°è¾“å…¥ï¼');
+				document.all.loginName.focus();
+			}
+		}
+
+		//æœç´¢å•†å“
+		function QuickSearch() {
+			var url = "mer.do?method=searchMer&cateid="
+					+ document.all.category.value;
+			var key = document.all.qKey.value;
+			if (key != null && key != "å•†å“å…³é”®å­—" && key.length > 0)
+				url = url + "&key=" + key;
+			window.location = url;
+		}
+	</script>
 </body>
 </html>

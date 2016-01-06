@@ -30,23 +30,23 @@
         <TR align="center">
           <TD valign="top" width="9"><IMG src="images/icon02.gif"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mer.do?method=browseIndexMer"><span class="whiteTitle">${item1}</span></A>
+		  	<A href="mer.do?method=browseIndexMer"><span class="whiteTitle">商城首页</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="cart.do?method=browseCart"><span class="whiteTitle">${item2}</span></A>
+		  	<A href="cart.do?method=browseCart"><span class="whiteTitle">购物车管理</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="order.do?method=browseOrder"><span class="whiteTitle">${item3}</span></A>
+		  	<A href="order.do?method=browseOrder"><span class="whiteTitle">订单管理</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=browseWord"><span class="whiteTitle">${item4}</span></A>
+		  	<A href="mem.do?method=browseWord"><span class="whiteTitle">顾客留言</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=loadMember"><span class="whiteTitle">${item5}</span></A>
+		  	<A href="mem.do?method=loadMember"><span class="whiteTitle">修改注册资料</span></A>
 		  </TD>
           <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
         </TR>
@@ -116,7 +116,7 @@
 		                           </TR>
 		                           <TR height="30">
 		                             <TD class="UserRegster" align="right">
-		                               <button property="btn" onclick="reg()">注册</button>
+		                               <a href="reg">注册</a>
 								  	<input type="submit" value="登录" name="Submit" />
 								  	   
 								  </TD>
