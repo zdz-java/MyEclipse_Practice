@@ -63,13 +63,13 @@
 								src="images/EditUser_01.gif"></td>
 						</tr>
 						<tr bgcolor="#F7F3F7">
-							<td width="260" height="26" class="text" align="right">会员级别：</td>
-							<%-- <td height="26"><sf:select path="memberlevel.id">
+							<td width="260" height="26" class="text" align="right">会员级别：(当前为${memberToModi.memberlevel.levelName})</td>
+							<td height="26"><sf:select path="memberlevel.id">
 									<option value="1">普通会员</option>
 									<option value="2">黄金会员</option>
 									<option value="3">白金会员</option>
 									<option value="4">钻石会员</option>
-							</sf:select></td> --%>
+							</sf:select></td>
 						</tr>
 						<tr bgcolor="#F7F3F7">
 							<td width="260" height="26" class="text" align="right">真实姓名：</td>
@@ -84,7 +84,7 @@
 						<tr bgcolor="#F7F3F7">
 							<td width="260" height="26" class="text" align="right">登录密码：</td>
 							<td height="26"><sf:input type="password" path="loginPwd"
-								size="30" value="" class="textBox"/></td>
+								size="30" class="textBox"/></td>
 						</tr>
 						<%-- <tr bgcolor="#F7F3F7">
 							<td width="260" height="26" class="text" align="right">核对密码：</td>
@@ -94,7 +94,7 @@
 						<tr bgcolor="#F7F3F7">
 							<td width="260" height="26" class="text" align="right">联系电话：</td>
 							<td height="26"><sf:input type="text" path="phone" size="30"
-								value="" class="textBox"/></td>
+								 class="textBox"/></td>
 						</tr>
 						<tr bgcolor="#F7F3F7">
 							<td width="260" height="26" class="text" align="right">联系地址：</td>
