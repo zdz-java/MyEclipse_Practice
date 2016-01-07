@@ -110,6 +110,7 @@ public class MainController {
 	{
 //		验证语句应该取出整个member
 		Member member = memService.memLogin(loginName, loginPwd); 
+		Member member2 = memService.loadMember(2);
 		if(member!=null)
 		{
 			model.addAttribute("loginMember", member);

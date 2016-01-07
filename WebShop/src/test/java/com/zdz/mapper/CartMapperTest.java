@@ -36,6 +36,7 @@ public class CartMapperTest {
 		member.setId(2);
 		Cart cart = cartMapper.loadCart(member);
 		Assert.assertEquals((int)cart.getId(), 2);
+		Assert.assertEquals((int)cart.getMember().getId(), 2);
 		cart.setCartStatus(10);
 		cartMapper.updateCart(cart);
 		Assert.assertEquals((int)cart.getCartStatus(), 10);

@@ -169,5 +169,11 @@ public class Member implements java.io.Serializable {
 	public void setOrders(Set orders) {
 		this.orders = orders;
 	}
+	@Override
+	public String toString() {
+		return "member["+id+" "+memberlevel.getLevelName()+" "+loginName+" "+loginPwd+" "+memberName+" "+phone+"...]";
+	}
+	
+	
 
 }
