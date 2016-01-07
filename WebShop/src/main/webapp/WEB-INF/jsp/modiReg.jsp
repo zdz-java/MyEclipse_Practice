@@ -63,13 +63,16 @@
 								src="images/EditUser_01.gif"></td>
 						</tr>
 						<tr bgcolor="#F7F3F7">
-							<td width="260" height="26" class="text" align="right">会员级别：(当前为${memberToModi.memberlevel.levelName})</td>
+							<%-- <td width="260" height="26" class="text" align="right">会员级别：(当前为${memberToModi.memberlevel.levelName})</td>
+							<!-- 使用文字来显示会在提交的时候无法保留原来的，在这里进行隐藏 -->
 							<td height="26"><sf:select path="memberlevel.id">
 									<option value="1">普通会员</option>
 									<option value="2">黄金会员</option>
 									<option value="3">白金会员</option>
 									<option value="4">钻石会员</option>
-							</sf:select></td>
+							</sf:select></td> --%>
+							<td height="26"><sf:input type="hidden" path="memberlevel.id"/>
+							</td>
 						</tr>
 						<tr bgcolor="#F7F3F7">
 							<td width="260" height="26" class="text" align="right">真实姓名：</td>

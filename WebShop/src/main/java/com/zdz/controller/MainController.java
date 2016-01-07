@@ -115,6 +115,7 @@ public class MainController {
 			model.addAttribute("loginMember", member);
 			member.setLastDate(new Date());
 			member.setLoginTimes(member.getLoginTimes()+1);
+			memService.updateMember(member);
 		}
 		else {
 			System.out.println("验证失败");
@@ -155,7 +156,14 @@ public class MainController {
 	public String loadMember(@ModelAttribute("loginMember") Member member,Model model)
 	{
 		model.addAttribute("memberToModi", member);
-		System.out.println(member.getPhone());
 		return "jsp/modiReg";
+	}
+	@RequestMapping("/modiReg")
+	public String modiReg(@ModelAttribute("memberToModi") Member member,Model model) throws Exception
+	{
+		memService.updateMember(member);
+		System.out.println(member.getMemberlevel().getLevelName());
+		model.addAttribute("loginMember", member);
+		return "redirect:default";
 	}
 }
