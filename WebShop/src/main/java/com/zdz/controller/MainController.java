@@ -1,5 +1,6 @@
 package com.zdz.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.inject.New;
@@ -107,10 +108,13 @@ public class MainController {
 	@RequestMapping("/login")
 	public String login(@RequestParam String loginName,@RequestParam String loginPwd,Model model) throws Exception
 	{
+//		验证语句应该取出整个member
 		Member member = memService.memLogin(loginName, loginPwd); 
 		if(member!=null)
 		{
 			model.addAttribute("loginMember", member);
+			member.setLastDate(new Date());
+			member.setLoginTimes(member.getLoginTimes()+1);
 		}
 		else {
 			System.out.println("验证失败");
@@ -137,10 +141,20 @@ public class MainController {
 		model.addAttribute("memberToReg", new Member());
 		return "jsp/reg";
 	}
+//	应该添加数据认证的JS和进入后台的认证
 	@RequestMapping(value="/reg",method=RequestMethod.POST)
 	public String reg(@ModelAttribute("memberToReg") Member member) throws Exception
 	{
+		member.setLoginTimes(0);
+		member.setLastDate(new Date());
+		member.setRegDate(new Date());
 		memService.addMember(member);
 		return "redirect:default";
+	}
+	@RequestMapping("/loadMember")
+	public String loadMember(@ModelAttribute("memberToReg") Member member,Model model)
+	{
+		model.addAttribute("memberToModi", member);
+		return "jsp/modiReg";
 	}
 }
