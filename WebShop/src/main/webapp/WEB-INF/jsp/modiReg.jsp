@@ -71,7 +71,7 @@
 									<option value="3">白金会员</option>
 									<option value="4">钻石会员</option>
 							</sf:select></td> --%>
-							<td height="26"><sf:input type="hidden" path="memberlevel.id"/>
+							<td height="26"><sf:input type="hidden" path="memberlevel.id" value="${memberlevel.id}"/>
 							</td>
 						</tr>
 						<tr bgcolor="#F7F3F7">

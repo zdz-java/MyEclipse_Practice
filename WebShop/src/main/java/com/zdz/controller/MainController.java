@@ -108,18 +108,28 @@ public class MainController {
 	@RequestMapping("/login")
 	public String login(@RequestParam String loginName,@RequestParam String loginPwd,Model model) throws Exception
 	{
+		System.out.println("进入到登录方法");
 //		验证语句应该取出整个member
 		Member member = memService.memLogin(loginName, loginPwd); 
+		System.out.println("验证时从数据库中取出的level的id"+member.getMemberlevel().getId());
 		if(member!=null)
 		{
+			System.out.println("验证通过");
 			model.addAttribute("loginMember", member);
 			member.setLastDate(new Date());
-			member.setLoginTimes(member.getLoginTimes()+1);
+			int beforeTime = 0;
+			if(member.getLoginTimes()!=null)
+			{
+				beforeTime = member.getLoginTimes();
+			}
+			member.setLoginTimes(beforeTime+1);
 			memService.updateMember(member);
+			System.out.println("在default页面更新后level的id"+member.getMemberlevel().getId());
 		}
 		else {
 			System.out.println("验证失败");
 		}
+		System.out.println("离开登录方法");
 		return "redirect:default";
 	}
 //	取消session中的loginMember
@@ -150,19 +160,25 @@ public class MainController {
 		member.setLastDate(new Date());
 		member.setRegDate(new Date());
 		memService.addMember(member);
+		System.out.println("提交到数据库时level的id"+member.getMemberlevel().getId());
 		return "redirect:default";
 	}
 	@RequestMapping("/loadMember")
 	public String loadMember(@ModelAttribute("loginMember") Member member,Model model)
 	{
 		model.addAttribute("memberToModi", member);
+		System.out.println("更改前加载到更改页面的level的id"+member.getMemberlevel().getId());
+		System.out.println("更改前加载到更改页面的level的name"+member.getMemberlevel().getLevelName());
 		return "jsp/modiReg";
 	}
 	@RequestMapping("/modiReg")
 	public String modiReg(@ModelAttribute("memberToModi") Member member,Model model) throws Exception
 	{
+		System.out.println("提交到更改前的level的id"+member.getMemberlevel().getId());
+		System.out.println("提交到更改前的level的name"+member.getMemberlevel().getLevelName());
 		memService.updateMember(member);
-		System.out.println(member.getMemberlevel().getLevelName());
+		System.out.println("提交到更改后的level的id"+member.getMemberlevel().getId());
+		System.out.println("提交到更改后的level的name"+member.getMemberlevel().getLevelName());
 		model.addAttribute("loginMember", member);
 		return "redirect:default";
 	}

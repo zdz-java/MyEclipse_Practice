@@ -18,7 +18,7 @@
 		<association property="memberlevel" column="email" javaType="Memberlevel" resultMap="memberlevelResultMap" ></association>
 	</resultMap>
 	<resultMap type="Memberlevel" id="memberlevelResultMap">
-		<id property="id" column="id" />
+		<id property="id" column="mid" />
 		<result property="levelName" column="levelName" />
 		<result property="favourable" column="favourable" />
 	</resultMap>
@@ -30,7 +30,7 @@
 		delete from member where id=#{id}
 	</delete>
 	<select id="loadMember" resultMap="memberResultMap">
-		select m.*,ml.* from member m,memberlevel ml where
+		select m.*,ml.id mid,ml.* from member m,memberlevel ml where
 		m.memberlevel = ml.id and m.id =
 		#{id}
 	</select>
@@ -52,7 +52,7 @@
 		memberLevel
 	</select>
 	<select id="memLogin" resultMap="memberResultMap">
-		select m.*,ml.* from member m,memberlevel ml where
+		select m.*,ml.id mid,ml.* from member m,memberlevel ml where
 		m.memberlevel = ml.id and m.loginName=#{param1} and m.loginPwd=#{param2}
 	</select>
 	<select id="chkLoginName" resultType="boolean">
