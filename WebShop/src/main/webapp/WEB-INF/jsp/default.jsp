@@ -89,12 +89,7 @@
 					</TR>
 				  </TABLE>    
 				  </c:if>          	
-              	<!-- </logic:present> -->
-              	<!-- 如果没有登录 -->
-              	<!-- <logic:notPresent name="member"> -->
               	<c:if test="${empty sessionScope.loginMember}">
-	                <!-- <html:javascript formName="memLoginForm"/> -->
-					
 					  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
 	                    <TR>
 	                      <TD class="C_login_Title">会员登录</TD>
@@ -125,14 +120,7 @@
 	                      </form> 
 						</TR>
 					  </TABLE>
-					<!--   <logic:messagesPresent>
-					  	<script language="javascript">
-					  		alert('<html:errors property="loginError"/>');
-					  	</script>
-					  </logic:messagesPresent> -->
-					  
 				</c:if>        	
-              	<!-- </logic:notPresent> -->
 			  </TD>
             </TR>
             <TR>
