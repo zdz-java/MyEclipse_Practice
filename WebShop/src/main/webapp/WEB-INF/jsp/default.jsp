@@ -172,12 +172,6 @@
           </TABLE>
           <TABLE class="C_Goods_Border" cellSpacing=0 cellPadding=0 width="100%" border=0>
               <TR>
-           		<!-- <logic:notPresent name="smerList">
-           			<TD valign="top" class="redText" colspan="3">
-           				<bean:message key="mer.notExist"/>
-           			</TD>
-           		</logic:notPresent> -->
-					<!-- <logic:iterate id="mer" name="smerList" type="com.ORM.Merchandise"> -->
 					<c:forEach items="${merList1}" var="mer">
 		               <TD valign="top" width="33%">
 					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
@@ -219,11 +213,6 @@
           </TABLE>
           <TABLE class="C_Goods_Border" cellSpacing=0 cellPadding=0 width="100%" border=0>
               <TR>
-           		<!-- <logic:notPresent name="merList">
-           			<TD valign="top" class="redText" colspan="3">
-           				<bean:message key="mer.notExist"/>
-           			</TD>
-           		</logic:notPresent> -->
 					<c:forEach items="${merList2}" var="mer">
 		               <TD valign="top" width="33%">
 					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
