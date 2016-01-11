@@ -8,7 +8,7 @@ import com.zdz.model.Merchandise;
 public interface MerMapper {
 //	还没有搞懂hql具体指的是什么，猜测为标题的搜索内容，两个关于分页的暂留
 	/** ��ҳ�����Ʒ */
-	public List browseMer(int pageSize,int pageNo,int cateId,boolean isSpecial);
+	public List browseMerByDetail(int pageSize,int pageNo,int cateId,Boolean isSpecial);
 	/** ������Ʒ */
 	public List browseMer(int pageSize,int pageNo,String hql);	
 	public List browseCategory();	

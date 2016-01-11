@@ -25,8 +25,15 @@ public class MerServiceImpl implements MerService{
 //	该方法没有实现
 	@Override
 	public List browseMer(int pageSize, int pageNo, int cateId,
-			boolean isSpecial) throws Exception {
-		return null;
+			Boolean isSpecial) throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);
+
+		List list = merMapper.browseMerByDetail(pageSize, pageNo, cateId, isSpecial);
+
+		sqlSession.commit();
+		sqlSession.close();
+		return list;
 	}
 	
 	@Override

@@ -76,4 +76,16 @@
 		select
 		count(*) from merchandise where merName like #{hql,jdbcType=VARCHAR}
 	</select>
+	<select id="browseMerByDetail" resultMap="merchandiseResultMap">
+		select
+		* from merchandise
+		<where>
+			<if test="param3!=0">
+			category = #{param3}
+			</if>
+			<if test="param4!=null">
+			and special = #{param4}
+			</if>
+		</where>
+	</select>
 </mapper>

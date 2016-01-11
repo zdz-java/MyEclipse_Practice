@@ -89,4 +89,19 @@ public class MerMapperTest {
 		sqlSession.commit();
 		sqlSession.close();
 	}
+	@Test
+	public void browseMerByDetailTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);		
+		
+		List<Merchandise> list = merMapper.browseMerByDetail(0, 0, 2, true);
+		Assert.assertEquals(list.get(0).getMerName(), "管理是什么");
+		
+		List<Merchandise> list2 = merMapper.browseMerByDetail(0, 0, 2, null);
+		Assert.assertEquals(list2.get(0).getMerName(), "巴菲特教你读财报");
+
+		sqlSession.commit();
+		sqlSession.close();
+	}
 }

@@ -182,4 +182,11 @@ public class MainController {
 		model.addAttribute("loginMember", member);
 		return "redirect:default";
 	}
+	@RequestMapping("/listMerByCate")
+	public String listMerByCate(@RequestParam int cateid,Model model) throws Exception
+	{
+		List list = merService.browseMer(0, 0, cateid, null);
+		model.addAttribute("merList", list);
+		return "jsp/merchandise";
+	}
 }

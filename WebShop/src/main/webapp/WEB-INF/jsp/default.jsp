@@ -137,18 +137,11 @@
 					  <TR>
 						<TD class="C_Sort_Title">商品类别</TD>
 					  </TR>
-					 <!--  <logic:notPresent name="cateList">
-						  <TR>
-							<TD class="redText"><bean:message key="cate.notExist"/></TD>
-						  </TR>					  
-					  </logic:notPresent>
-					  <TR height="10"><TD></TD></TR>	
-					  <logic:present name="cateList"> -->
 					  	<c:forEach items="${cateList}" var="cate">
 						  <TR>
 							<TD class="text">
 								&nbsp;<img src="images/cateIcon.gif" border="0">
-								<a href="mer.do?method=searchMer&cateid=${cate.id}">${cate.cateName}</a>
+								<a href="listMerByCate?cateid=${cate.id}">${cate.cateName}</a>
 							</TD>
 						  </TR>		
 						  </c:forEach>				  		

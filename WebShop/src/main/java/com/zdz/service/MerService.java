@@ -30,7 +30,7 @@ public interface MerService {
 	public boolean updateMer(Merchandise mer) throws Exception;
 	
 	/** ��ҳ�����Ʒ */
-	public List browseMer(int pageSize,int pageNo,int cateId,boolean isSpecial) throws Exception;
+	public List browseMer(int pageSize,int pageNo,int cateId,Boolean isSpecial) throws Exception;
 	/** ������Ʒ */
 	public List browseMer(int pageSize,int pageNo,String hql) throws Exception;	
 	/** ͳ�Ƽ�¼���� */
