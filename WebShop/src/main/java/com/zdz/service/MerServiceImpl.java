@@ -157,18 +157,18 @@ public class MerServiceImpl implements MerService{
 	}
 
 
-	@Override
-	public List browseMer(int pageSize, int pageNo, String hql)
-			throws Exception {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);
-
-		List list = merMapper.browseMer(pageSize, pageNo, "%"+hql+"%");
-
-		sqlSession.commit();
-		sqlSession.close();
-		return list;
-	}
+//	@Override
+//	public List browseMer(int pageSize, int pageNo, String hql)
+//			throws Exception {
+//		SqlSession sqlSession = sqlSessionFactory.openSession();
+//		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);
+//
+//		List list = merMapper.browseMer(pageSize, pageNo, "%"+hql+"%");
+//
+//		sqlSession.commit();
+//		sqlSession.close();
+//		return list;
+//	}
 
 	@Override
 	public int countRecord(String hql) throws Exception {
@@ -180,6 +180,19 @@ public class MerServiceImpl implements MerService{
 		sqlSession.commit();
 		sqlSession.close();
 		return i;
+	}
+	
+	@Override
+	public List browseMerBySearch(int pageSize, int pageNo, String hql,
+			Integer cateid) throws Exception {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);
+
+		List list = merMapper.browseMerBySearch(0, 0, "%"+hql+"%", cateid);
+
+		sqlSession.commit();
+		sqlSession.close();
+		return list;
 	}
 
 }

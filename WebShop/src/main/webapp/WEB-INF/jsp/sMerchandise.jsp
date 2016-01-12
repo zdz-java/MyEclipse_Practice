@@ -1,33 +1,7 @@
-<%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-
-	//µÃµ½±¾Ò³µÄ²ÎÊıÄÚÈİ
-	int totals=0,totalPages=1,pageNo=1,prePageNo=1,nextPageNo=1,preOk=1,nextOk=1;
-	String action = "mer.do?method=browseSMer&";
-	if (request.getAttribute("totals")!=null) totals = Integer.parseInt(request.getAttribute("totals").toString());
-	if (request.getAttribute("totalPages")!=null) totalPages = Integer.parseInt(request.getAttribute("totalPages").toString());
-	if (request.getAttribute("pageNo")!=null) pageNo = Integer.parseInt(request.getAttribute("pageNo").toString());
-	if (totalPages<1)totalPages=1;
-	
-	//¼ÆËãÉÏÒ»Ò³ºÍÏÂÒ»Ò³µÄÒ³Âë¼°°´Å¥µÄ×´Ì¬
-	prePageNo = pageNo;
-	nextPageNo = pageNo;
-	if (pageNo > 1) prePageNo--;
-		else prePageNo = 1;
-	if (pageNo < totalPages) nextPageNo++;
-		else nextPageNo = totalPages;
-	if (pageNo == 1) preOk=0;
-	if (pageNo == totalPages) nextOk=0;
-%>
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>å•†å“è¯¦æƒ…</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -37,9 +11,9 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align="absmiddle"> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> 
         <select id="category">
-       	<option value="0">ËùÓĞÉÌÆ·</option>
+       	<option value="0">æ‰€æœ‰å•†å“</option>
 		  <logic:present name="cateList">
 		  	<logic:iterate id="cate" name="cateList" type="com.ORM.Category">
 				<option value="${cate.id}">${cate.cateName}</option>					  		
@@ -110,9 +84,9 @@
 					  </td>
 					  <td width="160" class="text">
 						  <a href="mer.do?method=showMer&id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a><br>
-						  <bean:message key="mer.price"/>£º £¤${mer.price}<br>
-						  <bean:message key="mer.sprice"/>£º £¤${mer.sprice}<br>
-						  <bean:message key="mer.manufacturer"/>£º${mer.manufacturer}<br>
+						  <bean:message key="mer.price"/>ï¼š ï¿¥${mer.price}<br>
+						  <bean:message key="mer.sprice"/>ï¼š ï¿¥${mer.sprice}<br>
+						  <bean:message key="mer.manufacturer"/>ï¼š${mer.manufacturer}<br>
 					  </td>
 					  <td class="text">${mer.merDesc}</td>
 					  <td width="100">
@@ -127,22 +101,22 @@
 			</logic:present>
             <tr>
               <td colspan="4" height="30" bgcolor="#F7F3F7" class="text" align="center">
-				<a href="<%=action%>pageNo=1" class="blueText"><span class="blueText">Ê×Ò³</span></a>&nbsp;
+				<a href="<%=action%>pageNo=1" class="blueText"><span class="blueText">é¦–é¡µ</span></a>&nbsp;
 				<%if (preOk==1){%>
-					<a href="<%=action%>pageNo=<%=prePageNo%>" class="blueText"><span class="blueText">ÉÏÒ»Ò³</span></a>&nbsp;
+					<a href="<%=action%>pageNo=<%=prePageNo%>" class="blueText"><span class="blueText">ä¸Šä¸€é¡µ</span></a>&nbsp;
 				<%}else{%>
-					<span class="grayText">ÉÏÒ»Ò³</span>&nbsp;
+					<span class="grayText">ä¸Šä¸€é¡µ</span>&nbsp;
 				<%}%>
 				<%if (nextOk==1){%>
-					<a href="<%=action%>pageNo=<%=nextPageNo%>" class="blueText"><span class="blueText">ÏÂÒ»Ò³</span></a>&nbsp;
+					<a href="<%=action%>pageNo=<%=nextPageNo%>" class="blueText"><span class="blueText">ä¸‹ä¸€é¡µ</span></a>&nbsp;
 				<%}else{%>
-					<span class="grayText">ÏÂÒ»Ò³</span>&nbsp;
+					<span class="grayText">ä¸‹ä¸€é¡µ</span>&nbsp;
 				<%}%>
-					<a href="<%=action%>pageNo=<%=totalPages%>" class="blueText"><span class="blueText">Ä©Ò³</span></a>¡¡
-				È¥µÚ<input type="text" id="willGoPage" name="willGoPage" class="control" size="2" onKeyPress="return isNumber()">
-				Ò³<input type="button" class="button" id="go" value="GO" name="go" onClick="goPage()">   ¡¡
-				µÚ<span class="redText"><%=pageNo%></span>Ò³/¹²<span class="redText"><%=totalPages%></span>Ò³¡¡
-			×ÜÊı<span class="redText"><%=totals%></span>			  
+					<a href="<%=action%>pageNo=<%=totalPages%>" class="blueText"><span class="blueText">æœ«é¡µ</span></a>ã€€
+				å»ç¬¬<input type="text" id="willGoPage" name="willGoPage" class="control" size="2" onKeyPress="return isNumber()">
+				é¡µ<input type="button" class="button" id="go" value="GO" name="go" onClick="goPage()">   ã€€
+				ç¬¬<span class="redText"><%=pageNo%></span>é¡µ/å…±<span class="redText"><%=totalPages%></span>é¡µã€€
+			æ€»æ•°<span class="redText"><%=totals%></span>			  
 			  </td>
             </tr>
           </table></td>
@@ -164,7 +138,7 @@
   </tr>
 </table>
 <script type="text/javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
+	//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
 	jsonrpc = new JSONRpcClient("JSON-RPC");
 	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
@@ -174,18 +148,18 @@
 		document.all.category.options.add(option);
 	}
 
-	//ÊÇ·ñÊäÈëÊı×Ö
+	//æ˜¯å¦è¾“å…¥æ•°å­—
 	function isNumber(){
 		return ((event.keyCode>47)&&(event.keyCode<58));
 	}
 	
-	//ÏìÓ¦¡°GO¡±°´Å¥
+	//å“åº”â€œGOâ€æŒ‰é’®
 	function goPage(goPageNo){
 		var maxPageNo = <%=totalPages%>;
 		var goPageNo = document.all.willGoPage.value;
 		var url = "<%=action%>pageNo="+goPageNo;
 		if (goPageNo<1 || goPageNo>maxPageNo || goPageNo==''){
-			alert("¶Ô²»Æğ£¬ÄúÊäÈëµÄÒ³ºÅÎŞĞ§£¬ÇëÄúºË¶ÔºóÖØĞÂÊäÈë£¡");
+			alert("å¯¹ä¸èµ·ï¼Œæ‚¨è¾“å…¥çš„é¡µå·æ— æ•ˆï¼Œè¯·æ‚¨æ ¸å¯¹åé‡æ–°è¾“å…¥ï¼");
 			return ;
 		}else
 		{
@@ -193,11 +167,11 @@
 		}
 	}	
 	
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	function QuickSearch(){
 		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="å•†å“å…³é”®å­—" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 </script>

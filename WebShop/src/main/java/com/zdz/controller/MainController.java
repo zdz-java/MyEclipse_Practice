@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.zdz.model.Admin;
 import com.zdz.model.Category;
 import com.zdz.model.Member;
+import com.zdz.model.Merchandise;
 import com.zdz.service.AdminService;
 import com.zdz.service.CartService;
 import com.zdz.service.MemService;
@@ -186,6 +187,28 @@ public class MainController {
 	public String listMerByCate(@RequestParam int cateid,Model model) throws Exception
 	{
 		List list = merService.browseMer(0, 0, cateid, null);
+		model.addAttribute("merList", list);
+		return "jsp/merchandise";
+	}
+	@RequestMapping("/showMer")
+	public String showMer(@RequestParam int id,Model model) throws Exception
+	{
+		Merchandise merchandise = merService.loadMer(id);
+		model.addAttribute("mer", merchandise);
+		return "jsp/merInfo";
+	}
+	@RequestMapping("/searchMer")
+	public String searchMer(@RequestParam int cateid,@RequestParam String key,Model model) throws Exception
+	{
+		System.out.println("key is "+key+" "+"cateid is "+cateid);
+		List list = null;
+		if(cateid==0)
+		{
+			list = merService.browseMerBySearch(0,0,key,null);
+		}
+		else{
+			list = merService.browseMerBySearch(0, 0, key, cateid);
+		}
 		model.addAttribute("merList", list);
 		return "jsp/merchandise";
 	}

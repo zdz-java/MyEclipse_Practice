@@ -2,6 +2,8 @@ package com.zdz.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.zdz.model.Category;
 import com.zdz.model.Merchandise;
 
@@ -9,6 +11,8 @@ public interface MerMapper {
 //	还没有搞懂hql具体指的是什么，猜测为标题的搜索内容，两个关于分页的暂留
 	/** ��ҳ�����Ʒ */
 	public List browseMerByDetail(int pageSize,int pageNo,int cateId,Boolean isSpecial);
+	public List browseMerBySearch(int pageSize, int pageNo, String hql,
+			Integer cateid);
 	/** ������Ʒ */
 	public List browseMer(int pageSize,int pageNo,String hql);	
 	public List browseCategory();	

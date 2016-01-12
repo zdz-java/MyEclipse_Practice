@@ -88,4 +88,14 @@
 			</if>
 		</where>
 	</select>
+	<select id="browseMerBySearch" resultMap="merchandiseResultMap">
+		select
+		* from merchandise
+		<where>
+			merName like #{param3}
+			<if test="param4!=null">
+			and category = #{param4}
+			</if>
+		</where>
+	</select>
 </mapper>

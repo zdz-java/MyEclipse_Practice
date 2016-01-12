@@ -178,17 +178,19 @@
 							</td>
 		                 </tr>
 		                 <tr align="center" height="30">
-		                   <td><a href="mer.do?method=showMer&id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a></td>
+		                   <td><a href="showMer?id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a></td>
 		                 </tr>
 		                 <tr align="center" height="20">
-		                   <td class="text"><bean:message key="mer.price"/>： ￥${mer.price} </td>
+		                   <td class="text">单价： ￥${mer.price} </td>
 		                 </tr>
+		                 <c:if test="${mer.sprice!=0}">
 		                 <tr align="center" height="20">
-		                   <td class="text"><bean:message key="mer.sprice"/>： ￥${mer.sprice} </td>
+		                   <td class="text">特价： ￥${mer.sprice} </td>
 		                 </tr>
+		                 </c:if>
 		                 <tr>
 		                   <td>
-							<a href="mer.do?method=showMer&id=${mer.id}"><img src="images/icon_car.gif" border=0></a> 
+							<a href="showMer?id=${mer.id}"><img src="images/icon_car.gif" border=0></a> 
 							<a href="cart.do?method=addCart&id=${mer.id}"><img alt="" src="images/icon_buy.gif" border=0></a>
 						  </td>
 		                 </tr>

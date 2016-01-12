@@ -32,7 +32,7 @@ public interface MerService {
 	/** ��ҳ�����Ʒ */
 	public List browseMer(int pageSize,int pageNo,int cateId,Boolean isSpecial) throws Exception;
 	/** ������Ʒ */
-	public List browseMer(int pageSize,int pageNo,String hql) throws Exception;	
+	public List browseMerBySearch(int pageSize,int pageNo,String hql,Integer cateid) throws Exception;	
 	/** ͳ�Ƽ�¼���� */
 	public int countRecord(String hql) throws Exception;	
 }

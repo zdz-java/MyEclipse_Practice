@@ -104,4 +104,19 @@ public class MerMapperTest {
 		sqlSession.commit();
 		sqlSession.close();
 	}
+	@Test
+	public void browseMerBySearchTest()
+	{
+		SqlSession sqlSession = sessionFactory.openSession();
+		MerMapper merMapper = sqlSession.getMapper(MerMapper.class);		
+		
+		List<Merchandise> list = merMapper.browseMerBySearch(0, 0, "%的%", null);
+		Assert.assertEquals(list.get(0).getMerName(), "无懈可击的Web设计:利用XHTML和CSS提高网站的灵活性与适应性");
+		
+		List<Merchandise> list2 = merMapper.browseMerBySearch(0, 0, "%的%", 4);
+		Assert.assertEquals(list2.get(0).getMerName(), "身份的证明");
+
+		sqlSession.commit();
+		sqlSession.close();
+	}
 }

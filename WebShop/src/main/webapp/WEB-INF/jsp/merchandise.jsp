@@ -80,16 +80,18 @@
 			<c:forEach items="${merList}" var="mer">
 					<tr valign="middle" bgcolor="#FFFFFF">
 					  <td width="100" align="center" >
-						<a href="mer.do?method=showMer&id=${mer.id}" target=_blank> <img src=".${mer.picture}" width="60" height="60" border="1"> </a>
+						<a href="showMer?id=${mer.id}" target=_blank> <img src=".${mer.picture}" width="60" height="60" border="1"> </a>
 					  </td>
 					  <td width="160" class="text">
-						  <a href="mer.do?method=showMer&id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a><br>
-						  <bean:message key="mer.price"/>： ￥${mer.price}<br>
-						  <bean:message key="mer.manufacturer"/>：${mer.manufacturer}<br>
+						  <a href="showMer?id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a><br>
+						     单价： ￥${mer.price}<br>
+						    <c:if test="${mer.sprice!=0}">
+		                   		特价： ￥${mer.sprice} <br>
+		         			</c:if>
 					  </td>
 					  <td class="text">${mer.merDesc}</td>
 					  <td width="100">
-						<a href="mer.do?method=showMer&id=${mer.id}"><img src="images/icon_car.gif" border=0></a><br>
+						<a href="showMer?id=${mer.id}"><img src="images/icon_car.gif" border=0></a><br>
 						<a href="cart.do?method=addCart&id=${mer.id}"><img alt="" src="images/icon_buy.gif" border=0></a>
 					  </td>
 					</tr>

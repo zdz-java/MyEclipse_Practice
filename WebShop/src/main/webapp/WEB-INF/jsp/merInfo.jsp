@@ -1,15 +1,8 @@
-<%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>å•†å“è¯¦æƒ…</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -19,9 +12,9 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align=absMiddle> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> 
 		<SELECT id="category" name="category">
-			<option value="0">ËùÓĞÉÌÆ·</option>
+			<option value="0">æ‰€æœ‰å•†å“</option>
 		</SELECT>
 		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absMiddle" border="0"></A>
     </TD>
@@ -69,19 +62,22 @@
 		  </tr>
 		  <tr>
 			<td height="40" colspan="2" align="left" class="text">
-              	<logic:present name="mer" property="picture">
-					<img src=".${mer.picture}" border="0" align="left">
-				</logic:present>
-				&nbsp;<bean:message key="mer.category"/>£º${mer.category.cateName}<br>
-				&nbsp;<bean:message key="mer.name"/>£º${mer.merName}<br>
-				&nbsp;<bean:message key="mer.model"/>£º${mer.merModel}<br>
-				&nbsp;<bean:message key="mer.price"/>£º£¤${mer.price}<br>
-				<logic:equal name="mer" property="special" value="1">
-					&nbsp;<bean:message key="mer.sprice"/>£º£¤${mer.sprice}<br>
-				</logic:equal>				
-				&nbsp;<bean:message key="mer.manufacturer"/>£º${mer.manufacturer}<br>
-				&nbsp;<bean:message key="mer.leaveFactoryDate"/>£º${mer.leaveFactoryDate}<br>
-				&nbsp;<bean:message key="mer.desc"/>£º${mer.merDesc}<br>
+				<c:if test="${empty mer}">
+					å°šæœªé€‰ä¸­ä»»ä½•å•†å“
+				</c:if>
+				&nbsp;ç±»åˆ«ï¼š${mer.category.cateName}<br>
+				&nbsp;åå­—ï¼š${mer.merName}<br>
+				&nbsp;æ ·å¼ï¼š${mer.merModel}<br>
+				&nbsp;å•ä»·ï¼šï¿¥${mer.price}<br>
+				<%-- <logic:equal name="mer" property="special" value="1">
+					&nbsp;<bean:message key="mer.sprice"/>ï¼šï¿¥${mer.sprice}<br>
+				</logic:equal> --%>				
+				  <c:if test="${mer.sprice!=0}">
+		                   ç‰¹ä»·ï¼š ï¿¥${mer.sprice} <br>
+		          </c:if>
+				&nbsp;å‚å•†ï¼š${mer.manufacturer}<br>
+				&nbsp;å‡ºå‚æ—¥æœŸï¼š${mer.leaveFactoryDate}<br>
+				&nbsp;æ‘˜è¦ï¼š${mer.merDesc}<br>
 			</td>
 		  </tr>
 		  <tr>
@@ -111,7 +107,7 @@
   </tr>
 </table>
 <script language="javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
+	//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
 	jsonrpc = new JSONRpcClient("JSON-RPC");
 	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
@@ -121,11 +117,11 @@
 		document.all.category.options.add(option);
 	}
 	
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	function QuickSearch(){
 		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="å•†å“å…³é”®å­—" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 </script>	
