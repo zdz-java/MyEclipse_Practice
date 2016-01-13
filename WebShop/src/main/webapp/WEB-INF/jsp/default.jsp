@@ -9,7 +9,6 @@
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
   <tr>
     <td width="20">&nbsp;</td>
-          <!-- 不确定目标跳转页面，暂时搁置 -->
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align="absmiddle"> 
 		<INPUT id="qKey" name="qKey" value="商品关键字" onClick="this.value=''"> 

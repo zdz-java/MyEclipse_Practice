@@ -12,13 +12,16 @@
   <tr>
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
-		<IMG src="images/icon_login.gif" align=absMiddle> 
+		<IMG src="images/icon_login.gif" align="absmiddle"> 
 		<INPUT id="qKey" name="qKey" value="商品关键字" onClick="this.value=''"> 
-		<SELECT id="category" name="category">
-			<option value="0">所有商品</option>
-		</SELECT>
-		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absMiddle" border="0"></A>
-    </TD>
+        <select id="category">
+       	<option value="0">所有商品</option>
+		  <c:forEach items="${cateList}" var="cate">
+		  		<option value="${cate.id}">${cate.cateName}</option>
+		  </c:forEach>
+        </select>		
+		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absmiddle" border="0"></A>    	
+	</TD>
     <td width="20">&nbsp;</td>
   </tr>
   <tr>
@@ -49,6 +52,7 @@
           <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
         </TR>
     </TABLE></td>
+
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -165,7 +169,7 @@
 	
 	//搜索商品
 	function QuickSearch(){
-		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
+		var url = "searchMer?cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
 		if (key !=null && key!="商品关键字" && key.length>0)url = url+"&key="+key;
 		window.location = url;
