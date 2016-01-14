@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.zdz.model.Cart;
+import com.zdz.model.Cartselectedmer;
 import com.zdz.model.Category;
 import com.zdz.model.Member;
 import com.zdz.model.Merchandise;
@@ -40,11 +41,11 @@ public class OrderMapperTest {
 //		这样的使用方法是不对的
 //		List<Orders> orders = orderMapper.browseOrder(null);
 		List<Orders> orders2 = orderMapper.browseOrder(member);
-		List<Orders> orders3 = orderMapper.browseOrderMer(cart);
+		List<Cartselectedmer> cartselectedmers = orderMapper.browseOrderMer(cart);
 		
 //		Assert.assertEquals((int)orders.get(0).getId(),2);
 		Assert.assertEquals((int)orders2.get(0).getId(),5);
-		Assert.assertEquals((int)orders3.get(0).getId(),5);
+		Assert.assertEquals((int)cartselectedmers.get(0).getId(),19);
 		
 		sqlSession.commit();
 		sqlSession.close();

@@ -3,6 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdz.mapper.OrderMapper">
+	<resultMap id="cartselectedmerResultMap" type="Cartselectedmer">
+		<id property="id" column="id"/>
+		<result property="cart" column="cart" />
+		<result property="merchandise" column="merchandise" />
+		<result property="number" column="number" />
+		<result property="price" column="price" />
+		<result property="money" column="money" />
+	</resultMap>
 	<resultMap id="ordersResultMap" type="Orders">
 		<id property="id" column="id" />
 		<result property="orderNo" column="orderNo" />
@@ -64,7 +72,7 @@
 			where member = #{id}
 		<!-- </if> -->
 	</select>
-	<select id="browseOrderMer" parameterType="Cart" resultMap="ordersResultMap">
+	<select id="browseOrderMer" parameterType="Cart" resultMap="cartselectedmerResultMap">
 		select
 		* from
 		cartselectedmer

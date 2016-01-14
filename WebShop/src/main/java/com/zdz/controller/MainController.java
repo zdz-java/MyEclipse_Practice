@@ -1,7 +1,10 @@
 package com.zdz.controller;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.inject.New;
 import javax.servlet.http.HttpServletRequest;
@@ -216,7 +219,7 @@ public class MainController {
 	}
 	@RequestMapping("/cartManage")
 //	这里还需要添加可选参数，如要购买的商品
-	public String cartManage(@ModelAttribute("loginMember") Member member) throws Exception
+	public String cartManage(@ModelAttribute("loginMember") Member member,Model model) throws Exception
 	{
 		Cart cart = cartService.loadCart(member);
 		if(cart == null)
@@ -224,6 +227,15 @@ public class MainController {
 			
 		}
 		List<Cartselectedmer> cartselectedmers = orderService.browseOrderMer(cart);
-		return "";
+		Map<Cartselectedmer,Merchandise> row = new LinkedHashMap<Cartselectedmer,Merchandise>();
+		Iterator<Cartselectedmer> iterator = cartselectedmers.iterator();
+		Cartselectedmer ct = null;
+		while(iterator.hasNext())
+		{
+			ct = iterator.next();
+			row.put(ct, merService.loadMer(ct.getMerchandise()));
+		}
+		
+		return "jsp/cart";
 	}
 }
