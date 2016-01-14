@@ -42,7 +42,7 @@
 	</delete>
 	<select id="loadCart" parameterType="Member" resultMap="cartResultMap">
 		select * from cart where
-		member = #{id} limit 1
+		member = #{id} and cartstatus = 0 order by id desc limit 1
 	</select>
 	<update id="updateCart">
 		update cart set

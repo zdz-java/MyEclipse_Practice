@@ -67,7 +67,7 @@
 	<select id="browseOrderMer" parameterType="Cart" resultMap="ordersResultMap">
 		select
 		* from
-		orders
+		cartselectedmer
 		<!-- <if test="param1!=null"> -->
 			where cart = #{id}
 		<!-- </if> -->

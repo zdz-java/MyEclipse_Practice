@@ -1,15 +1,7 @@
-<%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-%>
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>è´­ç‰©è½¦ç®¡ç†</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -19,9 +11,9 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align=absMiddle> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> 
 		<SELECT id="category" name="category">
-			<option value="0">ËùÓĞÉÌÆ·</option>
+			<option value="0">æ‰€æœ‰å•†å“</option>
 		</SELECT>
 		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absMiddle" border="0"></A>    </TD>
     <td width="20">&nbsp;</td>
@@ -61,13 +53,13 @@
         <td><table cellspacing="0" cellpadding="0" border="0">
             <tr valign="center">
               <td><img hspace="5" src="images/Car_07.gif" /></td>
-              <td class="C_Carbg_Current"><bean:message key="cart.step1"/></td>
+              <td class="C_Carbg_Current">æŸ¥çœ‹è´­ç‰©è½¦</td>
               <td><img height="39" src="images/Car_15.gif" width="1" /></td>
               <td align="middle"><img hspace="5" src="images/Car_09.gif" /></td>
-              <td class="C_Carbg_Default"><bean:message key="cart.step2"/></td>
+              <td class="C_Carbg_Default">æ£€æŸ¥è®¢å•</td>
               <td><img height="39" src="images/Car_15.gif" width="1" /></td>
               <td align="middle"><img hspace="5" src="images/Car_11.gif" /></td>
-              <td class="C_Carbg_Default"><bean:message key="cart.step3"/></td>
+              <td class="C_Carbg_Default">æäº¤è®¢å•</td>
               <td><img height="39" src="images/Car_15.gif" width="1" /></td>
             </tr>
         </table></td>
@@ -76,29 +68,24 @@
         <td align="center">
 			<table cellspacing="1" cellpadding="0" width="94%" border="0" bgcolor="#F7F3F7">
               <tr height="26">
-                <td class="blackTitle" align="center"><bean:message key="mer.name"/></td>
-                <td class="blackTitle" align="center"><bean:message key="mer.price"/></td>
-                <td class="blackTitle" align="center"><bean:message key="sel.price"/></td>
-                <td class="blackTitle" align="center"><bean:message key="sel.number"/></td>
-                <td class="blackTitle" align="center"><bean:message key="sel.money"/></td>
-                <td class="blackTitle" align="center"><bean:message key="cart.delete"/></td>
+                <td class="blackTitle" align="center">å•†å“åç§°</td>
+                <td class="blackTitle" align="center">å•†å“åŸä»·</td>
+                <td class="blackTitle" align="center">å”®ä»·</td>
+                <td class="blackTitle" align="center">æ•°é‡</td>
+                <td class="blackTitle" align="center">æ€»ä»·</td>
+                <td class="blackTitle" align="center">åˆ é™¤</td>
               </tr>
-			<logic:notPresent name="result">
-              <tr align="center" bgcolor="#FFFFFF">
-                <td colspan="6" height="26" class="redText"><bean:message key="cart.empty"/></td>
-              </tr>				
-			</logic:notPresent>
-			<logic:present name="result">
+              <!-- å¦‚æœä¸å­˜åœ¨è´­ç‰©è½¦ï¼š -->
 				<logic:iterate id="row" name="result" type="java.util.Map">
 				  <tr class="text" align="center" bgcolor="#FFFFFF">
 					<td>
 						&nbsp;<a href="mer.do?method=showMer&id=${row.merId}" target="_blank"> 
 						  <span class="blueText">${row.merName}</span>
 						</a>					</td>
-					<td>£¤${row.price}</td>
-					<td>£¤<span id="price${row.selId}">${row.memprice}</span></td>
+					<td>ï¿¥${row.price}</td>
+					<td>ï¿¥<span id="price${row.selId}">${row.memprice}</span></td>
 					<td><input type="text" class="textBox" onChange="modiNum(${row.selId},this.value)" value="${row.number}" size="4"/></td>
-					<td>£¤<span id="money${row.selId}">${row.money}</span></td>
+					<td>ï¿¥<span id="money${row.selId}">${row.money}</span></td>
 					<td><input onClick="delCart(${row.selId})" type="image" src="images/delete_01.gif" border="0"/></td>
 				  </tr>
 				</logic:iterate>
@@ -106,7 +93,6 @@
                 <td colspan="6" class="Order_Total"><img hspace="5" src="images/me03.gif" align="absmiddle" /> 
 				<bean:message key="cart.totalmoney"/><span id="totalMoney">${totalMoney}</span><bean:message key="cart.memo"/>				</td>
               </tr>				
-			</logic:present>						
         </table></td>
       </tr>
 	  <tr height="20"><td colspan="5"></td></tr>	  
@@ -137,7 +123,7 @@
   </tr>
 </table>
 <script language="javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
+	//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
 	jsonrpc = new JSONRpcClient("JSON-RPC");
 	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
@@ -147,15 +133,15 @@
 		document.all.category.options.add(option);
 	}
 	
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	function QuickSearch(){
 		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="å•†å“å…³é”®å­—" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 	
-	//ĞŞ¸ÄÑ¡¹ºÊıÁ¿
+	//ä¿®æ”¹é€‰è´­æ•°é‡
 	function modiNum(selid,newNum){
 		if (jsonrpc.ajax.modiCart(selid,newNum)){
 			var oldMoney = document.getElementById("money"+selid).innerText;
@@ -170,25 +156,25 @@
 		}
 	}
 	
-	//É¾³ıÑ¡¹º¼ÇÂ¼
+	//åˆ é™¤é€‰è´­è®°å½•
 	function delCart(selid){
 		var url = "cart.do?method=delCart&id="+selid;
 		window.location = url;
 	}
 	
-	//Çå¿Õ¹ºÎï³µ
+	//æ¸…ç©ºè´­ç‰©è½¦
 	function clearCart(){
 		var url = "cart.do?method=clearCart";
 		window.location = url;
 	}
 	
-	//¼ÌĞø¹ºÎï
+	//ç»§ç»­è´­ç‰©
 	function continueBuy(){
 		var url = "mer.do?method=searchMer&cateid=0";
 		window.location = url;
 	}
 
-	//½øÈëÏÂÒ»²½
+	//è¿›å…¥ä¸‹ä¸€æ­¥
 	function next(){
 		var url = "cart.do?method=checkOrder";
 		window.location = url;
