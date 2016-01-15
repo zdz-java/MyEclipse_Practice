@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>购物车管理</title>
@@ -76,22 +77,22 @@
                 <td class="blackTitle" align="center">删除</td>
               </tr>
               <!-- 如果不存在购物车： -->
-				<logic:iterate id="row" name="result" type="java.util.Map">
+				<c:forEach items="${rows}" var="row">
 				  <tr class="text" align="center" bgcolor="#FFFFFF">
 					<td>
-						&nbsp;<a href="mer.do?method=showMer&id=${row.merId}" target="_blank"> 
-						  <span class="blueText">${row.merName}</span>
+						&nbsp;<a href="mer.do?method=showMer&id=${row.value.id}" target="_blank"> 
+						  <span class="blueText">${row.value.merName}</span>
 						</a>					</td>
-					<td>￥${row.price}</td>
-					<td>￥<span id="price${row.selId}">${row.memprice}</span></td>
-					<td><input type="text" class="textBox" onChange="modiNum(${row.selId},this.value)" value="${row.number}" size="4"/></td>
-					<td>￥<span id="money${row.selId}">${row.money}</span></td>
-					<td><input onClick="delCart(${row.selId})" type="image" src="images/delete_01.gif" border="0"/></td>
+					<td>￥${row.value.price}</td>
+					<td>￥<span id="price${row.key.id}">${row.key.price}</span></td>
+					<td><input type="text" class="textBox" onChange="modiNum(${row.key.id},this.value)" value="${row.key.number}" size="4"/></td>
+					<td>￥<span id="money${row.key.id}">${row.key.money}</span></td>
+					<td><input onClick="delCart(${row.key.id})" type="image" src="images/delete_01.gif" border="0"/></td>
 				  </tr>
-				</logic:iterate>
+				  </c:forEach>
               <tr>
                 <td colspan="6" class="Order_Total"><img hspace="5" src="images/me03.gif" align="absmiddle" /> 
-				<bean:message key="cart.totalmoney"/><span id="totalMoney">${totalMoney}</span><bean:message key="cart.memo"/>				</td>
+				购物车总金额<span id="totalMoney">${totalMoney}</span><bean:message key="cart.memo"/>				</td>
               </tr>				
         </table></td>
       </tr>

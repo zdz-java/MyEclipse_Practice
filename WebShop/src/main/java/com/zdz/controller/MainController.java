@@ -227,15 +227,17 @@ public class MainController {
 			
 		}
 		List<Cartselectedmer> cartselectedmers = orderService.browseOrderMer(cart);
-		Map<Cartselectedmer,Merchandise> row = new LinkedHashMap<Cartselectedmer,Merchandise>();
+		Map<Cartselectedmer,Merchandise> rows = new LinkedHashMap<Cartselectedmer,Merchandise>();
 		Iterator<Cartselectedmer> iterator = cartselectedmers.iterator();
 		Cartselectedmer ct = null;
 		while(iterator.hasNext())
 		{
 			ct = iterator.next();
-			row.put(ct, merService.loadMer(ct.getMerchandise()));
+			rows.put(ct, merService.loadMer(ct.getMerchandise()));
 		}
-		
+		double totalMoney = 110;
+		model.addAttribute("rows", rows);
+		model.addAttribute("totalMoney", totalMoney);
 		return "jsp/cart";
 	}
 }
