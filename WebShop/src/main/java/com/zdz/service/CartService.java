@@ -3,12 +3,13 @@ package com.zdz.service;
 import java.util.*;
 
 import com.zdz.model.Cart;
+import com.zdz.model.Cartselectedmer;
 import com.zdz.model.Member;
 import com.zdz.model.Merchandise;
 
 public interface CartService {
 	/** ѡ����Ʒ */	
-	public boolean addCart(Member member,Merchandise mer,int number) throws Exception;
+	public boolean addCart(Cart cart) throws Exception;
 	/** �鿴���ﳵ�е�ѡ����Ʒ */
 	public List browseCart(Member member) throws Exception;		
 	/** ��չ��ﳵ */	
@@ -21,4 +22,5 @@ public interface CartService {
 	public Cart loadCart(Member member) throws Exception;
 	/** ���¹��ﳵ */	
 	public boolean updateCart(Cart cart) throws Exception;
+	public void addCartselectedmer(Cartselectedmer cartselectedmer);
 }

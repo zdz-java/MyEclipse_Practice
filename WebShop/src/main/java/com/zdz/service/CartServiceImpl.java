@@ -27,26 +27,17 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 	
 	@Override
-	public boolean addCart(Member member, Merchandise mer, int number)
+	public boolean addCart(Cart cart)
 			throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
-		Cart cart = new Cart();
-		cart.setMember(member);
-		cart.getMerchandises().add(mer);
-		cartMapper.newCart(cart);
-		Cartselectedmer cartselectedmer = new Cartselectedmer();
-		cartselectedmer.setMerchandise(mer.getId());
-		cartselectedmer.setCart(cart.getId());
-		cartselectedmer.setNumber(number);
-		cartselectedmer.setPrice(100.0);// price应该是从数据库中取出才对
-		cartselectedmer.setMoney(number*100.0);
+		boolean b = cartMapper.newCart(cart);
 
 		sqlSession.commit();
 		sqlSession.close();
 
-		return cartMapper.addCartselectedmer(cartselectedmer);
+		return b;
 	}
 
 	@Override
@@ -119,6 +110,17 @@ private SqlSessionFactory sqlSessionFactory;
 		sqlSession.commit();
 		sqlSession.close();
 		return b;
+	}
+	@Override
+	public void addCartselectedmer(Cartselectedmer cartselectedmer) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
+		
+		cartMapper.addCartselectedmer(cartselectedmer);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		
 	}
 	
 }

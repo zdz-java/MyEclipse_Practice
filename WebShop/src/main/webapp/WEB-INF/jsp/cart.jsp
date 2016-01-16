@@ -80,7 +80,7 @@
 				<c:forEach items="${rows}" var="row">
 				  <tr class="text" align="center" bgcolor="#FFFFFF">
 					<td>
-						&nbsp;<a href="mer.do?method=showMer&id=${row.value.id}" target="_blank"> 
+						&nbsp;<a href="showMer?id=${row.value.id}" target="_blank"> 
 						  <span class="blueText">${row.value.merName}</span>
 						</a>					</td>
 					<td>￥${row.value.price}</td>
@@ -181,7 +181,7 @@
 		window.location = url;
 	}		
 </script>
-<logic:messagesPresent property="addCartStatus">
+<!-- <logic:messagesPresent property="addCartStatus">
 	<script language="javascript">
 		alert('<html:errors property="addCartStatus"/>');
 	</script>
@@ -195,6 +195,6 @@
 	<script language="javascript">
 		alert('<html:errors property="clearCartStatus"/>');
 	</script>
-</logic:messagesPresent>
+</logic:messagesPresent> -->
 </body>
 </html>

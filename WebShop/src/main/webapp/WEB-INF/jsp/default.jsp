@@ -33,7 +33,7 @@
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="cart.do?method=browseCart"><span class="whiteTitle">购物车管理</span></A>
+		  	<A href="cartManage"><span class="whiteTitle">购物车管理</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
@@ -190,7 +190,7 @@
 		                 <tr>
 		                   <td>
 							<a href="showMer?id=${mer.id}"><img src="images/icon_car.gif" border=0></a> 
-							<a href="cart.do?method=addCart&id=${mer.id}"><img alt="" src="images/icon_buy.gif" border=0></a>
+							<a href="cartManage?mid=${mer.id}"><img alt="" src="images/icon_buy.gif" border=0></a>
 						  </td>
 		                 </tr>
 		               </table>
@@ -208,7 +208,7 @@
           <TABLE class="C_Goods_Border" cellSpacing=0 cellPadding=0 width="100%" border=0>
               <TR>
 					<c:forEach items="${merList2}" var="mer">
-		               <TD valign="top" width="33%">
+		                <TD valign="top" width="33%">
 					 	<table cellspacing=0 cellpadding=0 width=180 border=0>
 		                 <tr>
 		                   <td align="TOP">
@@ -220,19 +220,24 @@
 							</td>
 		                 </tr>
 		                 <tr align="center" height="30">
-		                   <td><a href="mer.do?method=showMer&id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a></td>
+		                   <td><a href="showMer?id=${mer.id}" target=_blank><span  class="blueText">${mer.merName}</span></a></td>
 		                 </tr>
 		                 <tr align="center" height="20">
-		                   <td class="text"><bean:message key="mer.price"/>： ￥${mer.price} </td>
+		                   <td class="text">单价： ￥${mer.price} </td>
 		                 </tr>
+		                 <c:if test="${mer.sprice!=0}">
+		                 <tr align="center" height="20">
+		                   <td class="text">特价： ￥${mer.sprice} </td>
+		                 </tr>
+		                 </c:if>
 		                 <tr>
-		                   <td class=GoodsItem_buy>
-							<a href="mer.do?method=showMer&id=${mer.id}"><img src="images/icon_car.gif" border=0></a> 
-							<a href="cart.do?method=addCart&id=${mer.id}"><img alt="" src="images/icon_buy.gif" border=0></a>
+		                   <td>
+							<a href="showMer?id=${mer.id}"><img src="images/icon_car.gif" border=0></a> 
+							<a href="cartManage?mid=${mer.id}"><img alt="" src="images/icon_buy.gif" border=0></a>
 						  </td>
 		                 </tr>
 		               </table>
-		               </TD>					
+		               </TD>				
 		               </c:forEach>	
 			  </TR>
           </TABLE>          

@@ -30,7 +30,7 @@
 		insert into cart
 		values(null,#{member.id},#{money},#{cartStatus})
 	</insert>
-	<insert id="add" parameterType="Cartselectedmer" useGeneratedKeys="true" keyProperty="id">
+	<insert id="addCartselectedmer" parameterType="Cartselectedmer" useGeneratedKeys="true" keyProperty="id">
 		insert into cartselectedmer
 		values(null,#{cart},#{merchandise},#{number},#{price},#{money})
 	</insert>
