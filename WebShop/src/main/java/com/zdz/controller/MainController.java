@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.enterprise.inject.New;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import com.zdz.model.Cartselectedmer;
 import com.zdz.model.Category;
 import com.zdz.model.Member;
 import com.zdz.model.Merchandise;
+import com.zdz.model.Orders;
 import com.zdz.service.AdminService;
 import com.zdz.service.CartService;
 import com.zdz.service.MemService;
@@ -274,5 +276,46 @@ public class MainController {
 	public String checkOrder()
 	{
 		return "jsp/checkOrder";
+	}
+	@RequestMapping("/submitOrder")
+	public String submitOrder(@ModelAttribute("loginMember") Member member,@RequestParam String memName,@RequestParam String phone,@RequestParam String zip,@RequestParam String address,Model model) throws Exception
+	{
+System.out.println("submitOrder memName is"+memName);		
+		member.setMemberName(memName);
+		member.setPhone(phone);
+		member.setZip(zip);
+		member.setAddress(address);
+		memService.updateMember(member);
+		model.addAttribute("loginMember", member);
+		
+		Cart cart = cartService.loadCart(member);
+		
+		Orders orders = new Orders();
+		orders.setCart(cart);
+		orders.setMember(member);
+		orders.setOrderDate(new Date());
+		orders.setOrderStatus(0);
+		
+		String preOrderNo = UUID.randomUUID().toString();
+		StringBuilder orderNo = new StringBuilder();
+		int indexOfIll = 0;
+		for(int i=0;i<13;i++)
+		{
+			while(preOrderNo.charAt(indexOfIll)=='-')
+			{
+				indexOfIll++;
+			}
+			orderNo = orderNo.append(preOrderNo.charAt(indexOfIll));
+			indexOfIll++;
+		}
+		
+		orders.setOrderNo(orderNo.toString());
+		cart.setCartStatus(1);
+		cartService.updateCart(cart);
+		
+		orderService.addOrder(orders);
+		model.addAttribute("order", orders);
+		
+		return "jsp/submitOrder";
 	}
 }

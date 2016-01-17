@@ -1,7 +1,7 @@
-<%@ page contentType="text/html; charset=gb2312" %>
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
-<title>¶©µ¥¼ì²é</title>
+<title>è®¢å•æ£€æŸ¥</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -11,9 +11,9 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align=absMiddle> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> 
 		<SELECT id="category" name="category">
-			<option value="0">ËùÓĞÉÌÆ·</option>
+			<option value="0">æ‰€æœ‰å•†å“</option>
 		</SELECT>
 		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absMiddle" border="0"></A>    </TD>
     <td width="20">&nbsp;</td>
@@ -53,13 +53,13 @@
         <td><table cellspacing="0" cellpadding="0" border="0">
             <tr valign="center">
               <td><img hspace="5" src="images/Car_07.gif" /></td>
-              <td class="C_Carbg_Default">²é¿´¹ºÎï³µ</td>
+              <td class="C_Carbg_Default">æŸ¥çœ‹è´­ç‰©è½¦</td>
               <td><img height="39" src="images/Car_15.gif" width="1" /></td>
               <td align="middle"><img hspace="5" src="images/Car_09.gif" /></td>
-              <td class="C_Carbg_Current">¼ì²é¶©µ¥</td>
+              <td class="C_Carbg_Current">æ£€æŸ¥è®¢å•</td>
               <td><img height="39" src="images/Car_15.gif" width="1" /></td>
               <td align="middle"><img hspace="5" src="images/Car_11.gif" /></td>
-              <td class="C_Carbg_Default">Ìá½»¶©µ¥</td>
+              <td class="C_Carbg_Default">æäº¤è®¢å•</td>
               <td><img height="39" src="images/Car_15.gif" 
               width="1" /></td>
             </tr>
@@ -70,27 +70,27 @@
 			<form name="form1" action="submitOrder" method="post" style="margin:0px;">
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#FFFFFF">
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right">ÓÃ»§µÈ¼¶£º</td>
+              <td width="260" height="26" align="right">ç”¨æˆ·ç­‰çº§ï¼š</td>
               <td>&nbsp;${loginMember.memberlevel.levelName}</td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right">¶©µ¥ÕÛ¿Û£º</td>
+              <td width="260" height="26" align="right">è®¢å•æŠ˜æ‰£ï¼š</td>
               <td>&nbsp;${loginMember.memberlevel.favourable}<bean:message key="order.zhe"/></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right">ÊÕ¼şÈË£º</td>
+              <td width="260" height="26" align="right">æ”¶ä»¶äººï¼š</td>
               <td>&nbsp;<input type="text" name="memName" id="memName" class="textBox" size="40" value="${loginMember.memberName}"></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right">ÊÕ¼şµç»°£º</td>
+              <td width="260" height="26" align="right">æ”¶ä»¶ç”µè¯ï¼š</td>
               <td>&nbsp;<input type="text" name="phone" id="phone" class="textBox" size="40" value="${loginMember.phone}"></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right">ÓÊ±à£º</td>
+              <td width="260" height="26" align="right">é‚®ç¼–ï¼š</td>
               <td>&nbsp;<input type="text" name="zip" id="zip" class="textBox" size="40" value="${loginMember.zip}"></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right">ÓÃ»§µØÖ·£º</td>
+              <td width="260" height="26" align="right">ç”¨æˆ·åœ°å€ï¼š</td>
               <td>&nbsp;<input type="text" name="address" id="address" class="textBox" size="40" value="${loginMember.address}"></td>
             </tr>							
         </table>
@@ -124,7 +124,7 @@
   </tr>
 </table>
 <script language="javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
+	//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
 	jsonrpc = new JSONRpcClient("JSON-RPC");
 	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
@@ -134,30 +134,30 @@
 		document.all.category.options.add(option);
 	}
 	
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	function QuickSearch(){
 		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="å•†å“å…³é”®å­—" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 	
-	//½øÈëÉÏÒ»²½
+	//è¿›å…¥ä¸Šä¸€æ­¥
 	function pre(){
 		var url = "cart.do?method=browseCart";
 		window.location = url;
 	}	
 
-	//½øÈëÏÂÒ»²½
+	//è¿›å…¥ä¸‹ä¸€æ­¥
 	function next(){
 		if (document.all.memName.value==''){
-			alert('ÊÕ»õÈËĞÕÃû²»ÄÜÎª¿Õ£¡');
+			alert('æ”¶è´§äººå§“åä¸èƒ½ä¸ºç©ºï¼');
 		}else if (document.all.phone.value==''){
-			alert('ÊÕ»õÈËµç»°²»ÄÜÎª¿Õ£¡');
+			alert('æ”¶è´§äººç”µè¯ä¸èƒ½ä¸ºç©ºï¼');
 		}else if (document.all.zip.value==''){
-			alert('ÊÕ»õÈËÓÊ±à²»ÄÜÎª¿Õ£¡');
+			alert('æ”¶è´§äººé‚®ç¼–ä¸èƒ½ä¸ºç©ºï¼');
 		}else if (document.all.address.value==''){
-			alert('ÊÕ»õÈËµØÖ·²»ÄÜÎª¿Õ£¡');
+			alert('æ”¶è´§äººåœ°å€ä¸èƒ½ä¸ºç©ºï¼');
 		}else{
 			document.all.form1.submit();
 		}				

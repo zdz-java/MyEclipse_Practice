@@ -4,6 +4,7 @@ package com.zdz.mapper;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -13,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 //import static org.junit.
+
 
 
 
@@ -28,6 +30,20 @@ public class AdminMapperTest {
 	{
 		Reader reader = Resources.getResourceAsReader(source); 
 		sessionFactory = new SqlSessionFactoryBuilder().build(reader);
+		
+		String preOrderNo = UUID.randomUUID().toString();
+		StringBuilder orderNo = new StringBuilder();
+		int indexOfIll = 0;
+		for(int i=0;i<13;i++)
+		{
+			while(preOrderNo.charAt(indexOfIll)=='-')
+			{
+				indexOfIll++;
+			}
+			orderNo = orderNo.append(preOrderNo.charAt(indexOfIll));
+			indexOfIll++;
+		}
+		System.out.println(orderNo);
 	}
 	@Test
 	public void addAdminAndOtherTest()

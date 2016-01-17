@@ -1,16 +1,7 @@
 <%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-%>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>提交订单</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -80,14 +71,13 @@
               <td height="26">&nbsp;<bean:message key="order.suc"/></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td height="26">&nbsp;<bean:message key="order.no"/>：${order.orderNo}</td>
+              <td height="26">&nbsp;订单号：${order.orderNo}</td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td height="26">&nbsp;<bean:message key="cart.totalmoney"/>${order.cart.money}</td>
+              <td height="26">&nbsp;订单总金额：${order.cart.money}</td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-			  <fmt:formatDate value="${order.orderDate}" var="orderDateTime" type="both" pattern="yyyy年MM月dd日 hh:mm:ss"/>			
-              <td height="26">&nbsp;<bean:message key="order.date"/>：${orderDateTime}</td>
+              <td height="26">&nbsp;订单日期：${order.orderDate}</td>
             </tr>
         </table></td>
       </tr>
