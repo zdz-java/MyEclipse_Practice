@@ -100,8 +100,8 @@
       <tr align="right">
         <td>
 			<input type="image" src="images/Car_icon_01.gif" style="BORDER: 0px;WIDTH: 126px; HEIGHT: 39px;" onClick="clearCart()">
-			<img style="CURSOR: hand" onClick="continueBuy()" src="images/Car_icon_02.gif" />
-			<img src="images/Car_icon_03.gif" onClick="next()" border="0" style="CURSOR: hand"/>
+			<a href="searchMer?cateid=0&key="><img style="CURSOR: hand" onClick="continueBuy()" src="images/Car_icon_02.gif" /></a>
+			<a href="checkOrder"><img src="images/Car_icon_03.gif" onClick="next()" border="0" style="CURSOR: hand"/></a>
 		</td>
       </tr>
       <tr align="right">
@@ -171,13 +171,13 @@
 	
 	//继续购物
 	function continueBuy(){
-		var url = "mer.do?method=searchMer&cateid=0";
+		var url = "searchMer?cateid=0";
 		window.location = url;
 	}
 
 	//进入下一步
 	function next(){
-		var url = "cart.do?method=checkOrder";
+		var url = "checkOrder";
 		window.location = url;
 	}		
 </script>

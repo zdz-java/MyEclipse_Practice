@@ -1,15 +1,7 @@
 <%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-%>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>订单检查</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -61,13 +53,13 @@
         <td><table cellspacing="0" cellpadding="0" border="0">
             <tr valign="center">
               <td><img hspace="5" src="images/Car_07.gif" /></td>
-              <td class="C_Carbg_Default"><bean:message key="cart.step1"/></td>
+              <td class="C_Carbg_Default">查看购物车</td>
               <td><img height="39" src="images/Car_15.gif" width="1" /></td>
               <td align="middle"><img hspace="5" src="images/Car_09.gif" /></td>
-              <td class="C_Carbg_Current"><bean:message key="cart.step2"/></td>
+              <td class="C_Carbg_Current">检查订单</td>
               <td><img height="39" src="images/Car_15.gif" width="1" /></td>
               <td align="middle"><img hspace="5" src="images/Car_11.gif" /></td>
-              <td class="C_Carbg_Default"><bean:message key="cart.step3"/></td>
+              <td class="C_Carbg_Default">提交订单</td>
               <td><img height="39" src="images/Car_15.gif" 
               width="1" /></td>
             </tr>
@@ -75,31 +67,31 @@
       </tr>
       <tr>
         <td>
-			<form name="form1" action="cart.do?method=submitOrder" method="post" style="margin:0px;">
+			<form name="form1" action="submitOrder" method="post" style="margin:0px;">
 			<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#FFFFFF">
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right"><bean:message key="member.level"/>：</td>
-              <td>&nbsp;${member.memberlevel.levelName}</td>
+              <td width="260" height="26" align="right">用户等级：</td>
+              <td>&nbsp;${loginMember.memberlevel.levelName}</td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right"><bean:message key="order.favourable"/>：</td>
-              <td>&nbsp;${member.memberlevel.favourable}<bean:message key="order.zhe"/></td>
+              <td width="260" height="26" align="right">订单折扣：</td>
+              <td>&nbsp;${loginMember.memberlevel.favourable}<bean:message key="order.zhe"/></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right"><bean:message key="order.consignee"/>：</td>
-              <td>&nbsp;<input type="text" name="memName" id="memName" class="textBox" size="40" value="${member.memberName}"></td>
+              <td width="260" height="26" align="right">收件人：</td>
+              <td>&nbsp;<input type="text" name="memName" id="memName" class="textBox" size="40" value="${loginMember.memberName}"></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right"><bean:message key="order.phone"/>：</td>
-              <td>&nbsp;<input type="text" name="phone" id="phone" class="textBox" size="40" value="${member.phone}"></td>
+              <td width="260" height="26" align="right">收件电话：</td>
+              <td>&nbsp;<input type="text" name="phone" id="phone" class="textBox" size="40" value="${loginMember.phone}"></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right"><bean:message key="order.zip"/>：</td>
-              <td>&nbsp;<input type="text" name="zip" id="zip" class="textBox" size="40" value="${member.zip}"></td>
+              <td width="260" height="26" align="right">邮编：</td>
+              <td>&nbsp;<input type="text" name="zip" id="zip" class="textBox" size="40" value="${loginMember.zip}"></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td width="260" height="26" align="right"><bean:message key="order.address"/>：</td>
-              <td>&nbsp;<input type="text" name="address" id="address" class="textBox" size="40" value="${member.address}"></td>
+              <td width="260" height="26" align="right">用户地址：</td>
+              <td>&nbsp;<input type="text" name="address" id="address" class="textBox" size="40" value="${loginMember.address}"></td>
             </tr>							
         </table>
 		</form>

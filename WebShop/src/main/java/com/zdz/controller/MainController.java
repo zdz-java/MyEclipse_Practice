@@ -218,7 +218,7 @@ public class MainController {
 		return "jsp/merchandise";
 	}
 	@RequestMapping("/cartManage")
-//	这里还需要添加可选参数，如要购买的商品
+//	该页面中的Ajax实现暂时留待
 	public String cartManage(@RequestParam(value="mid",required=false,defaultValue="0") int mid,@ModelAttribute("loginMember") Member member,Model model) throws Exception
 	{
 //		这里不明白为什么使用购买键进入此方法时，将会使得member的id变为商品的id
@@ -263,7 +263,6 @@ public class MainController {
 				
 				rows.put(cartselectedmer, merService.loadMer(mid));
 			}
-			
 		}
 		
 		double totalMoney = 110;
@@ -271,57 +270,9 @@ public class MainController {
 		model.addAttribute("totalMoney", totalMoney);
 		return "jsp/cart";
 	}
-//	@RequestMapping("/addManage")
-//	public String addManage(@RequestParam int merId,@ModelAttribute("loginMember") Member member,Model model) throws Exception
-//	{
-////		这里不明白为什么使用购买键进入此方法时，将会使得member的id变为商品的id
-//		Cart cart = cartService.loadCart(member);
-//		System.out.println("接收的member的id为"+member.getId());
-//		if(cart == null)
-//		{
-//			System.out.println("缺乏购物车对象，创建购物车中");
-//			cart = new Cart();
-//			cart.setMember(member);
-//			cart.setCartStatus(0);
-//			cartService.addCart(cart);
-//		}
-//		List<Cartselectedmer> cartselectedmers = orderService.browseOrderMer(cart);
-//		Map<Cartselectedmer,Merchandise> rows = new LinkedHashMap<Cartselectedmer,Merchandise>();
-//		Iterator<Cartselectedmer> iterator = cartselectedmers.iterator();
-//		Cartselectedmer ct = null;
-//		boolean isExist = false;
-//		while(iterator.hasNext())
-//		{
-//			ct = iterator.next();
-//			if(ct.getMerchandise()==merId)
-//			{
-//				isExist = true;
-//				ct.setNumber(ct.getNumber()+1);
-//				ct.setMoney(ct.getMoney()+ct.getPrice());
-//			}
-//			rows.put(ct, merService.loadMer(ct.getMerchandise()));
-//		}
-//		if(!isExist)
-//		{
-////			此处应该进行更详尽的id检查
-//			if(id!=0)
-//			{
-//				Cartselectedmer cartselectedmer = new Cartselectedmer();
-//				cartselectedmer.setCart(cart.getId());
-//				cartselectedmer.setMerchandise(id);
-//				cartselectedmer.setPrice(merService.loadMer(id).getPrice());//这里需要乘以折扣，还需要对id进行检验
-//				cartselectedmer.setNumber(1);
-//				cartselectedmer.setMoney(merService.loadMer(id).getPrice());
-//				cartService.addCartselectedmer(cartselectedmer);
-//				
-//				rows.put(cartselectedmer, merService.loadMer(id));
-//			}
-//			
-//		}
-//		
-//		double totalMoney = 110;
-//		model.addAttribute("rows", rows);
-//		model.addAttribute("totalMoney", totalMoney);
-//		return "jsp/cart";
-//	}
+	@RequestMapping("/checkOrder")
+	public String checkOrder()
+	{
+		return "jsp/checkOrder";
+	}
 }
