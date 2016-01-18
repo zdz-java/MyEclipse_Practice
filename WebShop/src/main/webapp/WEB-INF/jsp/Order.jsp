@@ -1,16 +1,7 @@
-<%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-%>
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>æŸ¥çœ‹è®¢å•</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -20,9 +11,9 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align=absMiddle> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> 
 		<SELECT id="category" name="category">
-			<option value="0">ËùÓĞÉÌÆ·</option>
+			<option value="0">æ‰€æœ‰å•†å“</option>
 		</SELECT>
 		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absMiddle" border="0"></A>    </TD>
     <td width="20">&nbsp;</td>
@@ -63,22 +54,16 @@
         <td align="center">
 			<table cellspacing="1" cellpadding="0" width="94%" border="0" bgcolor="#F7F3F7">
               <tr height="26">
-                <td class="blackTitle" align="center"><bean:message key="order.no"/></td>
-                <td class="blackTitle" align="center"><bean:message key="sel.money"/></td>
-                <td class="blackTitle" align="center"><bean:message key="order.date"/></td>
-                <td class="blackTitle" align="center"><bean:message key="order.status"/></td>
-                <td class="blackTitle" align="center"><bean:message key="order.edit"/></td>
+                <td class="blackTitle" align="center">è®¢å•å·</td>
+                <td class="blackTitle" align="center">è®¢å•æ€»ä»·</td>
+                <td class="blackTitle" align="center">è®¢å•æ—¥æœŸ</td>
+                <td class="blackTitle" align="center">è®¢å•çŠ¶æ€</td>
+                <td class="blackTitle" align="center">è®¢å•ç¼–è¾‘ï¼Ÿ</td>
               </tr>
-			<logic:notPresent name="result">
-              <tr align="center" bgcolor="#FFFFFF">
-                <td colspan="5" height="26" class="redText"><bean:message key="order.empty"/></td>
-              </tr>				
-			</logic:notPresent>
-			<logic:present name="result">
 				<logic:iterate id="order" name="result" type="com.ORM.Orders">
 				  <tr height="26" class="text" align="center" bgcolor="#FFFFFF">
 					<td>${order.orderNo}</td>
-					<td class="redText">£¤${order.cart.money}</td>
+					<td class="redText">ï¿¥${order.cart.money}</td>
 				     <fmt:formatDate value="${order.orderDate}" var="orderDate" type="both" pattern="yyyy-MM-dd"/>			
 					<td>${orderDate}</td>
 					<td>
@@ -105,7 +90,7 @@
               <tr>
                 <td colspan="5">&nbsp;</td>
               </tr>				
-			</logic:present>						
+
         </table></td>
       </tr>
 	  <tr height="20"><td colspan="5"></td></tr>	  
@@ -130,7 +115,7 @@
   </tr>
 </table>
 <script language="javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
+	//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
 	jsonrpc = new JSONRpcClient("JSON-RPC");
 	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
@@ -140,11 +125,11 @@
 		document.all.category.options.add(option);
 	}
 	
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	function QuickSearch(){
 		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="å•†å“å…³é”®å­—" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 </script>
