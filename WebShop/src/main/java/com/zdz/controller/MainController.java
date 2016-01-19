@@ -294,7 +294,7 @@ System.out.println("submitOrder memName is"+memName);
 		orders.setCart(cart);
 		orders.setMember(member);
 		orders.setOrderDate(new Date());
-		orders.setOrderStatus(0);
+		orders.setOrderStatus(1);
 		
 		String preOrderNo = UUID.randomUUID().toString();
 		StringBuilder orderNo = new StringBuilder();
@@ -317,5 +317,38 @@ System.out.println("submitOrder memName is"+memName);
 		model.addAttribute("order", orders);
 		
 		return "jsp/submitOrder";
+	}
+	@RequestMapping("/browseOrder")
+	public String browseOrder(@ModelAttribute("loginMember") Member member,Model model) throws Exception
+	{
+		List list = orderService.browseOrder(member);
+		model.addAttribute("orders", list);
+		return "jsp/Order";
+	}
+	@RequestMapping("/delOrder")
+	public String delOrder(@RequestParam int oid) throws Exception
+	{
+		orderService.delOrder(oid);
+		return "redirect:browseOrder";
+	}
+	@RequestMapping("/viewOrder")
+	public String viewOrder(@RequestParam int oid,Model model) throws Exception
+	{
+		Orders order = orderService.loadOrder(oid);
+		
+		List<Cartselectedmer> cartselectedmers = orderService.browseOrderMer(order.getCart());
+		Map<Cartselectedmer,Merchandise> rows = new LinkedHashMap<Cartselectedmer,Merchandise>();
+		Iterator<Cartselectedmer> iterator = cartselectedmers.iterator();
+		Cartselectedmer ct = null;
+		while(iterator.hasNext())
+		{
+			ct = iterator.next();
+			rows.put(ct, merService.loadMer(ct.getMerchandise()));
+		}
+		model.addAttribute("rows", rows);
+		model.addAttribute("totalMoney", order.getCart().getMoney());
+		model.addAttribute("order", order);
+		
+		return "jsp/OrderInfo";
 	}
 }

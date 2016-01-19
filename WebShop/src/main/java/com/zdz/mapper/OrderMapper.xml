@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdz.mapper.OrderMapper">
 	<resultMap id="cartselectedmerResultMap" type="Cartselectedmer">
-		<id property="id" column="id"/>
+		<id property="id" column="id" />
 		<result property="cart" column="cart" />
 		<result property="merchandise" column="merchandise" />
 		<result property="number" column="number" />
@@ -16,11 +16,11 @@
 		<result property="orderNo" column="orderNo" />
 		<result property="orderDate" column="orderDate" />
 		<result property="orderStatus" column="orderStatus" />
-		<association property="member" resultMap="memberResultMap"/>
-		<association property="cart" resultMap="cartResultMap"/>
+		<association property="member" resultMap="memberResultMap" />
+		<association property="cart" resultMap="cartResultMap" />
 	</resultMap>
 	<resultMap id="memberResultMap" type="Member">
-		<id property="id" column="id" />
+		<id property="id" column="mid" />
 		<result property="loginName" column="loginName" />
 		<result property="loginPwd" column="loginPwd" />
 		<result property="memberName" column="memberName" />
@@ -34,12 +34,12 @@
 		<association property="memberlevel" resultMap="memberlevelResultMap" />
 	</resultMap>
 	<resultMap type="Memberlevel" id="memberlevelResultMap">
-		<id property="id" column="id" />
+		<id property="id" column="mlid" />
 		<result property="levelName" column="levelName" />
 		<result property="favourable" column="favourable" />
 	</resultMap>
 	<resultMap id="cartResultMap" type="Cart">
-		<id property="id" column="id" />
+		<id property="id" column="cid" />
 		<result property="money" column="money" />
 		<result property="cartStatus" column="cartStatus" />
 		<!-- <association property="member" resultMap="memberResultMap"/> -->
@@ -59,25 +59,26 @@
 		delete from orders where id=#{id}
 	</delete>
 	<select id="loadOrder" resultMap="ordersResultMap">
-		select *
-		from orders where
-		id =
-		#{id}
+		select o.*,c.id as cid,c.*,m.id as mid, m.*,ml.id as mlid,ml.*
+		from orders o, cart c,member m ,memberlevel ml where
+		o.id =
+		#{id} and o.member
+		= m.id and o.cart = c.id and m.memberlevel=ml.id
 	</select>
 	<select id="browseOrder" parameterType="Member" resultMap="ordersResultMap">
-		select
-		* from
-		orders
-		<!-- <if test="param1!=null"> -->
-			where member = #{id}
-		<!-- </if> -->
+		select o.*,c.id as cid,c.*,m.id as mid, m.*,ml.id as mlid,ml.*
+		from orders o, cart c,member m ,memberlevel ml where
+		o.member =
+		#{id} and o.member
+		= m.id and o.cart = c.id and m.memberlevel=ml.id
 	</select>
-	<select id="browseOrderMer" parameterType="Cart" resultMap="cartselectedmerResultMap">
+	<select id="browseOrderMer" parameterType="Cart"
+		resultMap="cartselectedmerResultMap">
 		select
 		* from
 		cartselectedmer
 		<!-- <if test="param1!=null"> -->
-			where cart = #{id}
+		where cart = #{id}
 		<!-- </if> -->
 	</select>
 
