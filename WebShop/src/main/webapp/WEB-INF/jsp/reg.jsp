@@ -6,8 +6,7 @@
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
-<body class="body">
-	<table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
+<table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
   <tr>
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
@@ -34,15 +33,15 @@
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="cart.do?method=browseCart"><span class="whiteTitle">购物车管理</span></A>
+		  	<A href="cartManage"><span class="whiteTitle">购物车管理</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="order.do?method=browseOrder"><span class="whiteTitle">订单管理</span></A>
+		  	<A href="browseOrder"><span class="whiteTitle">订单管理</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=browseWord"><span class="whiteTitle">顾客留言</span></A>
+		  	<A href="leaveword"><span class="whiteTitle">顾客留言</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
@@ -51,7 +50,7 @@
           <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
         </TR>
     </TABLE></td>
-
+    <td>&nbsp;</td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>

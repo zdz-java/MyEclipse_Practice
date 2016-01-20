@@ -37,7 +37,7 @@ import com.zdz.service.OrderService;
 import com.zdz.service.WordService;
 
 @Controller
-@SessionAttributes("loginMember")
+@SessionAttributes({"loginMember","cateList"})
 public class MainController {
 	private AdminService adminService;
 	private CartService cartService;

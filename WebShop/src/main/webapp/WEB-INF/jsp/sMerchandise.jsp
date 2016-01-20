@@ -14,11 +14,9 @@
 		<INPUT id="qKey" name="qKey" value="商品关键字" onClick="this.value=''"> 
         <select id="category">
        	<option value="0">所有商品</option>
-		  <logic:present name="cateList">
-		  	<logic:iterate id="cate" name="cateList" type="com.ORM.Category">
-				<option value="${cate.id}">${cate.cateName}</option>					  		
-		  	</logic:iterate>
-		  </logic:present>	       	
+		  <c:forEach items="${cateList}" var="cate">
+		  		<option value="${cate.id}">${cate.cateName}</option>
+		  </c:forEach>
         </select>		
 		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absmiddle" border="0"></A>    	
 	</TD>
@@ -31,23 +29,23 @@
         <TR align="center">
           <TD valign="top" width="9"><IMG src="images/icon02.gif"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mer.do?method=browseIndexMer"><span class="whiteTitle"><bean:message key="menu.item1"/></span></A>
+		  	<A href="default"><span class="whiteTitle">商城首页</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="cart.do?method=browseCart"><span class="whiteTitle"><bean:message key="menu.item2"/></span></A>
+		  	<A href="cartManage"><span class="whiteTitle">购物车管理</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="order.do?method=browseOrder"><span class="whiteTitle"><bean:message key="menu.item3"/></span></A>
+		  	<A href="browseOrder"><span class="whiteTitle">订单管理</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=browseWord"><span class="whiteTitle"><bean:message key="menu.item4"/></span></A>
+		  	<A href="leaveword"><span class="whiteTitle">顾客留言</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=loadMember"><span class="whiteTitle"><bean:message key="menu.item5"/></span></A>
+		  	<A href="loadMember"><span class="whiteTitle">修改注册资料</span></A>
 		  </TD>
           <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
         </TR>
