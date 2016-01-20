@@ -25,6 +25,7 @@ import com.zdz.model.Admin;
 import com.zdz.model.Cart;
 import com.zdz.model.Cartselectedmer;
 import com.zdz.model.Category;
+import com.zdz.model.Leaveword;
 import com.zdz.model.Member;
 import com.zdz.model.Merchandise;
 import com.zdz.model.Orders;
@@ -350,5 +351,25 @@ System.out.println("submitOrder memName is"+memName);
 		model.addAttribute("order", order);
 		
 		return "jsp/OrderInfo";
+	}
+	@RequestMapping("/leaveword")
+	public String leaveWord(Model model) throws Exception
+	{
+		List list = wordService.browseWord();
+		model.addAttribute("words", list);
+		return "jsp/leaveword";
+	}
+	@RequestMapping("/addWord")
+	public String addWord(@RequestParam String wordTitle,@RequestParam String content,@ModelAttribute("loginMember") Member member) throws Exception
+	{
+		Leaveword leaveword = new Leaveword();
+		leaveword.setContent(content);
+		leaveword.setMember(member);
+		leaveword.setTitle(wordTitle);
+		leaveword.setLeaveDate(new Date());
+		
+		wordService.addWord(leaveword);
+		
+		return "redirect:leaveword";
 	}
 }

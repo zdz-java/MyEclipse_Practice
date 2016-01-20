@@ -41,7 +41,7 @@
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="mem.do?method=browseWord"><span class="whiteTitle">顾客留言</span></A>
+		  	<A href="leaveword"><span class="whiteTitle">顾客留言</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">

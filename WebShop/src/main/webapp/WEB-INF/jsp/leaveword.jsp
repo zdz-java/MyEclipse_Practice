@@ -1,35 +1,8 @@
-<%@ page contentType="text/html; charset=gb2312" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="JSONRPCBridge" scope="session" class="com.metaparadigm.jsonrpc.JSONRPCBridge"/>
-<jsp:useBean id="ajax" class="com.base.AjaxBean"></jsp:useBean>
-<%
-	JSONRPCBridge.registerObject("ajax",ajax);
-	
-	//µÃµ½±¾Ò³µÄ²ÎÊıÄÚÈİ
-	int totals=0,totalPages=1,pageNo=1,prePageNo=1,nextPageNo=1,preOk=1,nextOk=1;
-	String action = "mem.do?method=browseWord&";
-	if (request.getAttribute("totals")!=null) totals = Integer.parseInt(request.getAttribute("totals").toString());
-	if (request.getAttribute("totalPages")!=null) totalPages = Integer.parseInt(request.getAttribute("totalPages").toString());
-	if (request.getAttribute("pageNo")!=null) pageNo = Integer.parseInt(request.getAttribute("pageNo").toString());
-	if (totalPages<1)totalPages=1;
-	
-	//¼ÆËãÉÏÒ»Ò³ºÍÏÂÒ»Ò³µÄÒ³Âë¼°°´Å¥µÄ×´Ì¬
-	prePageNo = pageNo;
-	nextPageNo = pageNo;
-	if (pageNo > 1) prePageNo--;
-		else prePageNo = 1;
-	if (pageNo < totalPages) nextPageNo++;
-		else nextPageNo = totalPages;
-	if (pageNo == 1) preOk=0;
-	if (pageNo == totalPages) nextOk=0;
-	
-%>
+<%@ page contentType="text/html; charset=utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title><bean:message key="website.title"/></title>
+<title>ç”¨æˆ·ç•™è¨€</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -39,9 +12,9 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align=absMiddle> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> 
 		<SELECT id="category" name="category">
-			<option value="0">ËùÓĞÉÌÆ·</option>
+			<option value="0">æ‰€æœ‰å•†å“</option>
 		</SELECT>
 		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absMiddle" border="0"></A>    </TD>
     <td width="20">&nbsp;</td>
@@ -81,59 +54,32 @@
           </tr>
           <tr>
             <td height="26" align="center">
-			<logic:notPresent name="wordList">
-				<span class="redText"><bean:message key="word.empty"/></span>
-			</logic:notPresent>
-			<logic:present name="wordList">
-			  <logic:iterate id="word" name="wordList" type="com.ORM.Leaveword">
-				<fmt:formatDate value="${word.leaveDate}" var="leaveDate" type="both" pattern="yyyyÄêMMÔÂddÈÕ"/>			
+			  <c:forEach items="${words}" var="word">
 				<table width="90%" border="0" cellpadding="4" cellspacing="0" style="border:1px; border-color:black; border-style:solid;">
 				  <tr bgcolor="#F7F3F7">
-					<td class="text"><span class="blackTitle"><bean:message key="word.title"/></span>£º${word.title}</td>
+					<td class="text"><span class="blackTitle">æ ‡é¢˜</span>ï¼š${word.title}</td>
 					<td align="right" class="text">
 						<span class="blackTitle">
-						<bean:message key="word.user"/></span>£º${word.member.memberName}&nbsp;
-						<span class="blackTitle"><bean:message key="word.date"/></span>£º${leaveDate}</td>
+						ç”¨æˆ·</span>ï¼š${word.member.memberName}&nbsp;
+						<span class="blackTitle">è¯„è®ºæ—¶é—´</span>ï¼š${word.leaveDate}</td>
 				  </tr>
 				  <tr>
 					<td class="text" colspan="2">${word.content}</td>
 				  </tr>
-				  <logic:present name="word" property="answerContent">
 				  <tr>
-					<td colspan="2" bgcolor="#F7F3F7" class="blackTitle"><bean:message key="answer.text"/>£º</td>
+					<td colspan="2" bgcolor="#F7F3F7" class="blackTitle">ç­”å¤å†…å®¹ï¼š</td>
 				  </tr>
 				  <tr>
 					<td class="text" colspan="2">${word.answerContent}</td>
 				  </tr>
-				  </logic:present>
 				</table>
 				<table cellpadding="0" cellspacing="0"><tr height="10"><td></td></tr></table>
-			</logic:iterate>
-		</logic:present>			</td>
-          </tr>
-          <tr bgcolor="#F7F3F7">
-            <td height="26" bgcolor="#FFFFFF" align="center" class="text">
-				<a href="<%=action%>pageNo=1" class="blueText"><span class="blueText">Ê×Ò³</span></a>&nbsp;
-				<%if (preOk==1){%>
-					<a href="<%=action%>pageNo=<%=prePageNo%>" class="blueText"><span class="blueText">ÉÏÒ»Ò³</span></a>&nbsp;
-				<%}else{%>
-					<span class="grayText">ÉÏÒ»Ò³</span>&nbsp;
-				<%}%>
-				<%if (nextOk==1){%>
-					<a href="<%=action%>pageNo=<%=nextPageNo%>" class="blueText"><span class="blueText">ÏÂÒ»Ò³</span></a>&nbsp;
-				<%}else{%>
-					<span class="grayText">ÏÂÒ»Ò³</span>&nbsp;
-				<%}%>
-					<a href="<%=action%>pageNo=<%=totalPages%>" class="blueText"><span class="blueText">Ä©Ò³</span></a>¡¡
-				È¥µÚ<input type="text" id="willGoPage" name="willGoPage" class="control" size="2" onKeyPress="return isNumber()">
-				Ò³<input type="button" class="button" id="go" value="GO" name="go" onClick="goPage()">   ¡¡
-				µÚ<span class="redText"><%=pageNo%></span>Ò³/¹²<span class="redText"><%=totalPages%></span>Ò³¡¡
-			×ÜÊı<span class="redText"><%=totals%></span>			  
-			</td>
+				</c:forEach>
+		</td>
           </tr>
           <tr bgcolor="#F7F3F7">
             <td height="26" bgcolor="#FFFFFF">
-			<form name="form1" action="mem.do?method=addWord" method="post" style="margin:0px;">
+			<form name="form1" action="addWord" method="post" style="margin:0px;">
 			   <table width="94%" border="0" align="center" cellpadding="0" cellspacing="0">
                   <tr>
                     <td colspan="2"><img src="images/icon_LeaveWord.gif" width="140" height="45" /></td>
@@ -142,16 +88,16 @@
                     <td colspan="2">&nbsp;</td>
                   </tr>
                   <tr>
-                    <td height="30" align="right" class="blackTitle"><bean:message key="word.title"/>£º</td>
+                    <td height="30" align="right" class="blackTitle">è¯„è®ºæ ‡é¢˜ï¼š</td>
                     <td height="30"><input type="text" id="wordTitle" name="wordTitle" class="textBox" size="61"/></td>
                   </tr>
                   <tr>
-                    <td align="right" class="blackTitle"><bean:message key="word.content"/>£º</td>
+                    <td align="right" class="blackTitle">è¯„è®ºå†…å®¹ï¼š</td>
                     <td><textarea id="content" name="content" rows="4" cols="60" class="textBox"></textarea></td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
-                    <td height="35"><input type="button" class="C_Input" onClick="checkForm()" value="Ìá½»ÁôÑÔ"/></td>
+                    <td height="35"><input type="button" class="C_Input" onClick="checkForm()" value="æäº¤ç•™è¨€"/></td>
                   </tr>
             </table>
 			</form>
@@ -180,7 +126,7 @@
   </tr>
 </table>
 <script language="javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
+	//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
 	jsonrpc = new JSONRpcClient("JSON-RPC");
 	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
@@ -190,39 +136,27 @@
 		document.all.category.options.add(option);
 	}
 	
-	//ÊÇ·ñÊäÈëÊı×Ö
+	//æ˜¯å¦è¾“å…¥æ•°å­—
 	function isNumber(){
 		return ((event.keyCode>47)&&(event.keyCode<58));
 	}
 	
-	//ÏìÓ¦¡°GO¡±°´Å¥
-	function goPage(goPageNo){
-		var maxPageNo = <%=totalPages%>;
-		var goPageNo = document.all.willGoPage.value;
-		var url = "<%=action%>pageNo="+goPageNo;
-		if (goPageNo<1 || goPageNo>maxPageNo || goPageNo==''){
-			alert("¶Ô²»Æğ£¬ÄúÊäÈëµÄÒ³ºÅÎŞĞ§£¬ÇëÄúºË¶ÔºóÖØĞÂÊäÈë£¡");
-			return ;
-		}else
-		{
-			window.location = url;
-		}
-	}	
+	//å“åº”â€œGOâ€æŒ‰é’®
 	
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	function QuickSearch(){
 		var url = "mer.do?method=searchMer&cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="å•†å“å…³é”®å­—" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 	
-	//¼ì²âÁôÑÔ±íµ¥
+	//æ£€æµ‹ç•™è¨€è¡¨å•
 	function checkForm(){
 		if (document.all.wordTitle.value==''){
-			alert("¶Ô²»Æğ£¬ÁôÑÔ±êÌâ²»ÄÜÎª¿Õ£¡");
+			alert("å¯¹ä¸èµ·ï¼Œç•™è¨€æ ‡é¢˜ä¸èƒ½ä¸ºç©ºï¼");
 		}else if (document.all.content.value==''){
-			alert("¶Ô²»Æğ£¬ÁôÑÔÄÚÈİ²»ÄÜÎª¿Õ£¡");
+			alert("å¯¹ä¸èµ·ï¼Œç•™è¨€å†…å®¹ä¸èƒ½ä¸ºç©ºï¼");
 		}else{
 			document.all.form1.submit();
 		}
