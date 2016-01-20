@@ -108,22 +108,12 @@ public class MainController {
 		return "jsp/default";
 	}
 	
-//	@RequestMapping("/searchMer")
-//	public String searchMer()
-//	{
-//		
-//	}
-	
 	@RequestMapping("/login")
 	public String login(@RequestParam String loginName,@RequestParam String loginPwd,Model model) throws Exception
 	{
-		System.out.println("进入到登录方法");
-//		验证语句应该取出整个member
 		Member member = memService.memLogin(loginName, loginPwd); 
-		System.out.println("验证时从数据库中取出的level的id"+member.getMemberlevel().getId());
 		if(member!=null)
 		{
-			System.out.println("验证通过");
 			model.addAttribute("loginMember", member);
 			member.setLastDate(new Date());
 			int beforeTime = 0;
@@ -133,12 +123,10 @@ public class MainController {
 			}
 			member.setLoginTimes(beforeTime+1);
 			memService.updateMember(member);
-			System.out.println("在default页面更新后level的id"+member.getMemberlevel().getId());
 		}
 		else {
 			System.out.println("验证失败");
 		}
-		System.out.println("离开登录方法");
 		return "redirect:default";
 	}
 //	取消session中的loginMember
@@ -169,25 +157,18 @@ public class MainController {
 		member.setLastDate(new Date());
 		member.setRegDate(new Date());
 		memService.addMember(member);
-		System.out.println("提交到数据库时level的id"+member.getMemberlevel().getId());
 		return "redirect:default";
 	}
 	@RequestMapping("/loadMember")
 	public String loadMember(@ModelAttribute("loginMember") Member member,Model model)
 	{
 		model.addAttribute("memberToModi", member);
-		System.out.println("更改前加载到更改页面的level的id"+member.getMemberlevel().getId());
-		System.out.println("更改前加载到更改页面的level的name"+member.getMemberlevel().getLevelName());
 		return "jsp/modiReg";
 	}
 	@RequestMapping("/modiReg")
 	public String modiReg(@ModelAttribute("memberToModi") Member member,Model model) throws Exception
 	{
-		System.out.println("提交到更改前的level的id"+member.getMemberlevel().getId());
-		System.out.println("提交到更改前的level的name"+member.getMemberlevel().getLevelName());
 		memService.updateMember(member);
-		System.out.println("提交到更改后的level的id"+member.getMemberlevel().getId());
-		System.out.println("提交到更改后的level的name"+member.getMemberlevel().getLevelName());
 		model.addAttribute("loginMember", member);
 		return "redirect:default";
 	}
@@ -208,7 +189,6 @@ public class MainController {
 	@RequestMapping("/searchMer")
 	public String searchMer(@RequestParam int cateid,@RequestParam String key,Model model) throws Exception
 	{
-		System.out.println("key is "+key+" "+"cateid is "+cateid);
 		List list = null;
 		if(cateid==0)
 		{
@@ -226,10 +206,8 @@ public class MainController {
 	{
 //		这里不明白为什么使用购买键进入此方法时，将会使得member的id变为商品的id
 		Cart cart = cartService.loadCart(member);
-		System.out.println("接收的member的id为"+member.getId());
 		if(cart == null)
 		{
-			System.out.println("缺乏购物车对象，创建购物车中");
 			cart = new Cart();
 			cart.setMember(member);
 			cart.setCartStatus(0);
@@ -281,7 +259,6 @@ public class MainController {
 	@RequestMapping("/submitOrder")
 	public String submitOrder(@ModelAttribute("loginMember") Member member,@RequestParam String memName,@RequestParam String phone,@RequestParam String zip,@RequestParam String address,Model model) throws Exception
 	{
-System.out.println("submitOrder memName is"+memName);		
 		member.setMemberName(memName);
 		member.setPhone(phone);
 		member.setZip(zip);
@@ -329,6 +306,7 @@ System.out.println("submitOrder memName is"+memName);
 	@RequestMapping("/delOrder")
 	public String delOrder(@RequestParam int oid) throws Exception
 	{
+//		应该把对应的购物车与购物项都删除
 		orderService.delOrder(oid);
 		return "redirect:browseOrder";
 	}

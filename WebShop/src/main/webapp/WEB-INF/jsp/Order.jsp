@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <title>查看订单</title>
@@ -77,13 +78,14 @@
 									<tr height="26" class="text" align="center" bgcolor="#FFFFFF">
 										<td>${order.orderNo}</td>
 										<td class="redText">￥${order.cart.money}</td>
-										<td>${order.orderDate}</td>
+										<td>
+										<fmt:formatDate value="${order.orderDate}" type="both"/></td>
 										<td><c:if test="${order.orderStatus==1}">
-						状态一
+						已提交
 					</c:if> <c:if test="${order.orderStatus==2}">
-						状态二
+						已查阅
 					</c:if> <c:if test="${order.orderStatus==3}">
-						状态三
+						已完成
 					</c:if></td>
 										<td><a href="viewOrder?oid=${order.id}"><span
 												class="blueText">查看订单详情</span></a>

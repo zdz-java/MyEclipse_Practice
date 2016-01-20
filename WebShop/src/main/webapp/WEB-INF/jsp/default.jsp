@@ -252,7 +252,7 @@
   <tr>
     <td>&nbsp;</td>
     <td height="30" bgcolor="#4282CE" class="whiteText" align="center">
-		本电子商城系统仅供学习交流使用，未经授权严禁用于商业用途！！ 	</td>
+		</td>
     <td>&nbsp;</td>
   </tr>
   <tr>

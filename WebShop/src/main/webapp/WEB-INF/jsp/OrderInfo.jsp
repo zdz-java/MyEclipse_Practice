@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <title>订单详情</title>
@@ -73,7 +74,7 @@
               </tr>
               <tr bgcolor="#F7F3F7" class="text">
                 <td width="220" height="26" align="right">订单日期：</td>
-                <td>&nbsp;${order.orderDate}</td>
+                <td>&nbsp;<fmt:formatDate value="${order.orderDate}" type="both"/></td>
               </tr>
               <tr bgcolor="#F7F3F7" class="text">
                 <td width="220" height="26" align="right">会员等级：</td>
@@ -84,7 +85,7 @@
                 <td>&nbsp;${order.member.memberlevel.favourable} 折</td>
               </tr>
               <tr bgcolor="#F7F3F7" class="text">
-                <td width="220" height="26" align="right">有机地址：</td>
+                <td width="220" height="26" align="right">邮寄地址：</td>
                 <td>&nbsp;${order.member.memberName}</td>
               </tr>
               <tr bgcolor="#F7F3F7" class="text">
