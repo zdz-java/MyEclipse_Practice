@@ -22,7 +22,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Admin adminLogin(String loginName, String loginPwd) throws Exception {
+	public Admin adminLogin(String loginName, String loginPwd) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
 		
@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List browseAdmin() throws Exception {
+	public List browseAdmin() {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
 		
@@ -47,7 +47,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Admin loadAdmin(Integer id) throws Exception {
+	public Admin loadAdmin(Integer id){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
 		
@@ -59,7 +59,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean delAdmin(Integer id) throws Exception {
+	public boolean delAdmin(Integer id) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
 		
@@ -71,7 +71,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean addAdmin(Admin admin) throws Exception {
+	public boolean addAdmin(Admin admin) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
 		
@@ -83,7 +83,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean updateAdmin(Admin admin) throws Exception {
+	public boolean updateAdmin(Admin admin){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		AdminMapper adminMapper = sqlSession.getMapper(AdminMapper.class);
 		

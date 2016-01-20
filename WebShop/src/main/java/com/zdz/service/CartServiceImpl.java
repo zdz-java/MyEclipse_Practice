@@ -28,7 +28,7 @@ private SqlSessionFactory sqlSessionFactory;
 	
 	@Override
 	public boolean addCart(Cart cart)
-			throws Exception {
+			{
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
@@ -41,7 +41,7 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 
 	@Override
-	public List browseCart(Member member) throws Exception {
+	public List browseCart(Member member) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
@@ -53,7 +53,7 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 
 	@Override
-	public boolean clearCart(Member member) throws Exception {
+	public boolean clearCart(Member member) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
@@ -65,7 +65,7 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 
 	@Override
-	public boolean modiCart(Integer id, int number) throws Exception {
+	public boolean modiCart(Integer id, int number){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
@@ -77,7 +77,7 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 
 	@Override
-	public boolean delCart(Integer id) throws Exception {
+	public boolean delCart(Integer id){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
@@ -89,7 +89,7 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 
 	@Override
-	public Cart loadCart(Member member) throws Exception {
+	public Cart loadCart(Member member){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
@@ -101,7 +101,7 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 
 	@Override
-	public boolean updateCart(Cart cart) throws Exception {
+	public boolean updateCart(Cart cart){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		

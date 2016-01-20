@@ -4,20 +4,16 @@ import java.util.*;
 
 import com.zdz.model.Admin;
 
-/** ϵͳ�û�����ӿ� */
 public interface AdminService {
 
-	/** ϵͳ����Ա��¼ */
-	public Admin adminLogin(String loginName,String loginPwd) throws Exception;
-	
-	/** �������Ա */
-	public List browseAdmin() throws Exception;	
+	public Admin adminLogin(String loginName,String loginPwd);
+	public List browseAdmin();	
 	/** װ��ָ���Ĺ���Ա */	
-	public Admin loadAdmin(Integer id) throws Exception;	
+	public Admin loadAdmin(Integer id);	
 	/** ɾ��ָ���Ĺ���Ա */	
-	public boolean delAdmin(Integer id) throws Exception;	
+	public boolean delAdmin(Integer id);	
 	/** ��������Ա */	
-	public boolean addAdmin(Admin admin) throws Exception;	
+	public boolean addAdmin(Admin admin);	
 	/** ���¹���Ա */	
-	public boolean updateAdmin(Admin admin) throws Exception;	
+	public boolean updateAdmin(Admin admin);	
 }
