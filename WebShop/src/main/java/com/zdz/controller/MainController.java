@@ -27,6 +27,7 @@ import com.zdz.model.Cartselectedmer;
 import com.zdz.model.Category;
 import com.zdz.model.Leaveword;
 import com.zdz.model.Member;
+import com.zdz.model.Memberlevel;
 import com.zdz.model.Merchandise;
 import com.zdz.model.Orders;
 import com.zdz.service.AdminService;
@@ -129,7 +130,6 @@ public class MainController {
 		}
 		return "redirect:default";
 	}
-//	取消session中的loginMember
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request)
 	{
@@ -168,6 +168,8 @@ public class MainController {
 	@RequestMapping("/modiReg")
 	public String modiReg(@ModelAttribute("memberToModi") Member member,Model model) throws Exception
 	{
+		Memberlevel memberlevel = memService.loadMemberLevel(member.getMemberlevel().getId());
+		member.setMemberlevel(memberlevel);
 		memService.updateMember(member);
 		model.addAttribute("loginMember", member);
 		return "redirect:default";
@@ -204,7 +206,6 @@ public class MainController {
 //	该页面中的Ajax实现暂时留待
 	public String cartManage(@RequestParam(value="mid",required=false,defaultValue="0") int mid,@ModelAttribute("loginMember") Member member,Model model) throws Exception
 	{
-//		这里不明白为什么使用购买键进入此方法时，将会使得member的id变为商品的id
 		Cart cart = cartService.loadCart(member);
 		if(cart == null)
 		{
@@ -217,6 +218,7 @@ public class MainController {
 		Map<Cartselectedmer,Merchandise> rows = new LinkedHashMap<Cartselectedmer,Merchandise>();
 		Iterator<Cartselectedmer> iterator = cartselectedmers.iterator();
 		Cartselectedmer ct = null;
+		double total = 0;
 		boolean isExist = false;
 		while(iterator.hasNext())
 		{
@@ -228,6 +230,7 @@ public class MainController {
 				ct.setMoney(ct.getMoney()+ct.getPrice());
 			}
 			rows.put(ct, merService.loadMer(ct.getMerchandise()));
+			total += ct.getMoney();
 		}
 		if(!isExist)
 		{
@@ -237,18 +240,25 @@ public class MainController {
 				Cartselectedmer cartselectedmer = new Cartselectedmer();
 				cartselectedmer.setCart(cart.getId());
 				cartselectedmer.setMerchandise(mid);
-				cartselectedmer.setPrice(merService.loadMer(mid).getPrice());//这里需要乘以折扣，还需要对id进行检验
+				if(merService.loadMer(mid).getSpecial()==1)
+				{
+					cartselectedmer.setPrice(merService.loadMer(mid).getSprice());
+				}
+				else {
+					cartselectedmer.setPrice(merService.loadMer(mid).getPrice());
+				}
 				cartselectedmer.setNumber(1);
-				cartselectedmer.setMoney(merService.loadMer(mid).getPrice());
+				cartselectedmer.setMoney(cartselectedmer.getPrice());
 				cartService.addCartselectedmer(cartselectedmer);
+				
+				total += cartselectedmer.getPrice();
 				
 				rows.put(cartselectedmer, merService.loadMer(mid));
 			}
 		}
-		
-		double totalMoney = 110;
+		cart.setMoney(total);
 		model.addAttribute("rows", rows);
-		model.addAttribute("totalMoney", totalMoney);
+		model.addAttribute("totalMoney", total);
 		return "jsp/cart";
 	}
 	@RequestMapping("/checkOrder")
@@ -267,7 +277,8 @@ public class MainController {
 		model.addAttribute("loginMember", member);
 		
 		Cart cart = cartService.loadCart(member);
-		
+		System.out.println(cart.getMoney());
+		System.out.println(cart.getId());
 		Orders orders = new Orders();
 		orders.setCart(cart);
 		orders.setMember(member);
@@ -349,5 +360,10 @@ public class MainController {
 		wordService.addWord(leaveword);
 		
 		return "redirect:leaveword";
+	}
+	@RequestMapping("/sorry")
+	public String sorry()
+	{
+		return "jsp/sorry";
 	}
 }

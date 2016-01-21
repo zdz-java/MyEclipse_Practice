@@ -1,7 +1,7 @@
-<%@ page contentType="text/html; charset=gb2312" %>
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
-<title>Ìá½»¶©µ¥</title>
+<title>æäº¤è®¢å•</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
 </head>
@@ -11,9 +11,9 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align="absmiddle"> 
-		<INPUT id="qKey" name="qKey" value="ÉÌÆ·¹Ø¼ü×Ö" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="å•†å“å…³é”®å­—" onClick="this.value=''"> 
         <select id="category">
-       	<option value="0">ËùÓĞÉÌÆ·</option>
+       	<option value="0">æ‰€æœ‰å•†å“</option>
 		  <c:forEach items="${cateList}" var="cate">
 		  		<option value="${cate.id}">${cate.cateName}</option>
 		  </c:forEach>
@@ -29,23 +29,23 @@
         <TR align="center">
           <TD valign="top" width="9"><IMG src="images/icon02.gif"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="default"><span class="whiteTitle">ÉÌ³ÇÊ×Ò³</span></A>
+		  	<A href="default"><span class="whiteTitle">å•†åŸé¦–é¡µ</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="cartManage"><span class="whiteTitle">¹ºÎï³µ¹ÜÀí</span></A>
+		  	<A href="cartManage"><span class="whiteTitle">è´­ç‰©è½¦ç®¡ç†</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="browseOrder"><span class="whiteTitle">¶©µ¥¹ÜÀí</span></A>
+		  	<A href="browseOrder"><span class="whiteTitle">è®¢å•ç®¡ç†</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="leaveword"><span class="whiteTitle">¹Ë¿ÍÁôÑÔ</span></A>
+		  	<A href="leaveword"><span class="whiteTitle">é¡¾å®¢ç•™è¨€</span></A>
 		  </TD>
           <TD background="images/Bule_06.gif" width="2"></TD>
           <TD class="header_menu" align="middle">
-		  	<A href="loadMember"><span class="whiteTitle">ĞŞ¸Ä×¢²á×ÊÁÏ</span></A>
+		  	<A href="loadMember"><span class="whiteTitle">ä¿®æ”¹æ³¨å†Œèµ„æ–™</span></A>
 		  </TD>
           <TD vAlign=top width=7><IMG src="images/icon07.gif"></TD>
         </TR>
@@ -80,13 +80,13 @@
               <td height="26">&nbsp;<bean:message key="order.suc"/></td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td height="26">&nbsp;¶©µ¥ºÅ£º${order.orderNo}</td>
+              <td height="26">&nbsp;è®¢å•å·ï¼š${order.orderNo}</td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td height="26">&nbsp;¶©µ¥×Ü½ğ¶î£º${order.cart.money}</td>
+              <td height="26">&nbsp;è®¢å•æ€»é‡‘é¢ï¼š${order.cart.money}</td>
             </tr>
             <tr bgcolor="#F7F3F7" class="text">
-              <td height="26">&nbsp;¶©µ¥ÈÕÆÚ£º${order.orderDate}</td>
+              <td height="26">&nbsp;è®¢å•æ—¥æœŸï¼š${order.orderDate}</td>
             </tr>
         </table></td>
       </tr>
@@ -110,7 +110,7 @@
   </tr>
 </table>
 <script language="javascript">
-	//¹¹ÔìÉÌÆ··ÖÀàÏÂÀ­ÁĞ±í
+	//æ„é€ å•†å“åˆ†ç±»ä¸‹æ‹‰åˆ—è¡¨
 	jsonrpc = new JSONRpcClient("JSON-RPC");
 	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
@@ -120,11 +120,11 @@
 		document.all.category.options.add(option);
 	}
 	
-	//ËÑË÷ÉÌÆ·
+	//æœç´¢å•†å“
 	function QuickSearch(){
 		var url = "searchMer?cateid="+document.all.category.value;
 		var key = document.all.qKey.value;
-		if (key !=null && key!="ÉÌÆ·¹Ø¼ü×Ö" && key.length>0)url = url+"&key="+key;
+		if (key !=null && key!="å•†å“å…³é”®å­—" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
 </script>
