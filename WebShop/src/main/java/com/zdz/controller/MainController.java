@@ -133,8 +133,6 @@ public class MainController {
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request)
 	{
-//		下面两种方法都无法让session失效
-//		可以使用拦截器拦截此方法来避免使用ServletApi
 //		session.removeAttribute("loginMember");
 //		session.invalidate();
 //		怀疑是通过SpringMVC而添加到session范围的，不能通过servletAPI来取消,但是modelAPI中没有提供移除方法
@@ -149,7 +147,6 @@ public class MainController {
 		model.addAttribute("memberToReg", new Member());
 		return "jsp/reg";
 	}
-//	应该添加数据认证的JS和进入后台的认证
 	@RequestMapping(value="/reg",method=RequestMethod.POST)
 	public String reg(@ModelAttribute("memberToReg") Member member) throws Exception
 	{
