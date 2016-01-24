@@ -1,10 +1,24 @@
 package com.zdz.spider.util;
 
+import java.util.List;
+
 public class Page {
 	private String url;
 	private String content;
 	private int statusCode;
+	private List<String> nextUrls;
 	
+
+	public List<String> getNextUrls() {
+//		应该返回一份拷贝以防止被修改
+		return nextUrls;
+	}
+
+	
+	public void setNextUrls(List<String> nextUrls) {
+		this.nextUrls = nextUrls;
+	}
+
 
 	public int getStatusCode() {
 		return statusCode;

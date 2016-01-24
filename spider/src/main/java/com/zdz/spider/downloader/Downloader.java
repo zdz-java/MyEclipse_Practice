@@ -1,6 +1,8 @@
 package com.zdz.spider.downloader;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,6 +21,9 @@ public class Downloader {
 	{
 		Page page = new Page();
 		page.setUrl(r.getUrl());
+		List<String> nextUrls = new LinkedList<String>();
+//		nextUrls.add("http://www.zhihu.com/");
+		page.setNextUrls(nextUrls);
 		CloseableHttpClient httpclient = HttpClients.createDefault(); 
 		HttpGet httpget = new HttpGet(r.getUrl());
 		CloseableHttpResponse response;
