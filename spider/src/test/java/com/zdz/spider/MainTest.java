@@ -21,25 +21,25 @@ import com.zdz.spider.util.Request;
 import com.zdz.spider.util.ResultItem;
 
 public class MainTest {
-	@Test
-	public void downloaderTest()
-	{
-		Downloader d = new Downloader();
-		Request r = new Request();
-		
-		String url = "http://www.baidu.com/";
-		r.setUrl(url);
-		
-		Scheduler s = new Scheduler();
-		s.put(r);
-		Request r2 = s.take();
-		
-		
-		Page p = d.download(r2);
-
-		Assert.assertEquals(p.getUrl(), url);
-		Assert.assertEquals(p.getStatusCode(), 200);
-	}
+//	@Test
+//	public void downloaderTest()
+//	{
+//		Downloader d = new Downloader();
+//		Request r = new Request();
+//		
+//		String url = "http://www.baidu.com/";
+//		r.setUrl(url);
+//		
+//		Scheduler s = new Scheduler();
+//		s.put(r);
+//		Request r2 = s.take();
+//		
+//		
+//		Page p = d.download(r2);
+//
+//		Assert.assertEquals(p.getUrl(), url);
+//		Assert.assertEquals(p.getStatusCode(), 200);
+//	}
 	@Test
 	public void pageProcesserTest()
 	{
@@ -57,15 +57,15 @@ public class MainTest {
 		Assert.assertEquals(s.take().getUrl(), url);
 		
 	}
-	
+	@Test
 	public void pipelineTest()
 	{
 		FilePipeline p = new FilePipeline();
-		String path = "";
+		String path = "c:/_forjavatest";
 		p.setPath(path);
 		ResultItem resultItem = new ResultItem();
-		String url = "";
-		String html = "";
+		String url = "www.zdz.com";
+		String html = "this is the result html";
 		resultItem.setUrl(url);
 		resultItem.setHtml(html);
 		p.process(resultItem);
