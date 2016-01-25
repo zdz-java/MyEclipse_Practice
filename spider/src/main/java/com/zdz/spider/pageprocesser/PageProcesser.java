@@ -20,7 +20,7 @@ public class PageProcesser {
 	
 	public ResultItem process(Page page)
 	{
-		
+//		对Page的内容进行解析
 		List<String> nextUrl = page.getNextUrls();
 		for(String str:nextUrl)
 		{

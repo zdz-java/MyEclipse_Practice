@@ -21,27 +21,27 @@ import com.zdz.spider.util.Request;
 import com.zdz.spider.util.ResultItem;
 
 public class MainTest {
-//	@Test
-//	public void downloaderTest()
-//	{
-//		Downloader d = new Downloader();
-//		Request r = new Request();
-//		
-//		String url = "http://www.baidu.com/";
-//		r.setUrl(url);
-//		
-//		Scheduler s = new Scheduler();
-//		s.put(r);
-//		Request r2 = s.take();
-//		
-//		
-//		Page p = d.download(r2);
-//
-//		Assert.assertEquals(p.getUrl(), url);
-//		Assert.assertEquals(p.getStatusCode(), 200);
-//	}
 	@Test
-	public void pageProcesserTest()
+	public void downloaderTest()
+	{
+		Downloader d = new Downloader();
+		Request r = new Request();
+		
+		String url = "http://localhost:8080/WebShop/default";
+		r.setUrl(url);
+		
+		Scheduler s = new Scheduler();
+		s.put(r);
+		Request r2 = s.take();
+		
+		
+		Page p = d.download(r2);
+
+		Assert.assertEquals(p.getUrl(), url);
+		Assert.assertEquals(p.getStatusCode(), 200);
+	}
+	@Test
+	public void pageProcesserPutIntoSchedulerTest()
 	{
 		Page page = new Page();
 		List<String> nextUrls = new LinkedList<String>();
@@ -71,10 +71,11 @@ public class MainTest {
 		p.process(resultItem);
 		
 		File file = new File(path+"/"+url);
+		BufferedReader bufferedReader = null;
 		try {
 		FileInputStream	fileInputStream = new FileInputStream(file);
 		StringBuilder fileContent = new StringBuilder();
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+		bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
 		String temp = bufferedReader.readLine();
 		while(temp!=null)
 		{
@@ -86,6 +87,50 @@ public class MainTest {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}finally
+		{
+			try {
+				bufferedReader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
+	@Test
+	public void pageProcesserTest()
+	{
+		Downloader d = new Downloader();
+		Request r = new Request();
+		
+		String url = "http://localhost:8080/WebShop/default";
+		r.setUrl(url);
+		
+		Scheduler s = new Scheduler();
+		s.put(r);
+		Request r2 = s.take();
+		
+		
+		Page p = d.download(r2);
+		
+		PageProcesser pageProcesser = new PageProcesser();
+		
+		pageProcesser.setScheduler(s);
+		pageProcesser.process(p);
+		
+//		Assert.assertEquals(s.take().getUrl(), "javascript:QuickSearch()");
+//		由于此处的take当为空时为阻塞，所以会在最后一个url输出时卡住，如果要遍历则应该给出阻塞队列的对应不阻塞的方法
+		String str = s.take().getUrl();
+		while(str!=null)
+		{
+			System.out.println(str);
+		}
+	}
+//	@Test
+//	public void spiderTest()
+//	{
+//		Spider spider = new Spider();
+//		String beginUrl = "http://localhost:8080/WebShop/default";
+//		spider.putUrl();
+//		spider.start();
+//	}
 }

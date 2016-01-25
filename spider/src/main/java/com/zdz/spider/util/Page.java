@@ -37,6 +37,7 @@ public class Page {
 	}
 
 	public String getContent() {
+		String contentAfterHandleTagA = UrlUtils.fixAllRelativeHrefs(content, url);
 		return content;
 	}
 
