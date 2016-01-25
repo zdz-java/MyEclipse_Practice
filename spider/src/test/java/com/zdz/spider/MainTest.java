@@ -3,6 +3,8 @@ package com.zdz.spider;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,6 +14,7 @@ import org.junit.Test;
 
 import com.zdz.spider.downloader.Downloader;
 import com.zdz.spider.pageprocesser.PageProcesser;
+import com.zdz.spider.pipeline.FilePipeline;
 import com.zdz.spider.scheduler.Scheduler;
 import com.zdz.spider.util.Page;
 import com.zdz.spider.util.Request;
@@ -68,7 +71,8 @@ public class MainTest {
 		p.process(resultItem);
 		
 		File file = new File(path+"/"+url);
-		FileInputStream fileInputStream = new FileInputStream(file);
+		try {
+		FileInputStream	fileInputStream = new FileInputStream(file);
 		StringBuilder fileContent = new StringBuilder();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
 		String temp = bufferedReader.readLine();
@@ -78,6 +82,10 @@ public class MainTest {
 			temp = bufferedReader.readLine();
 		}
 		Assert.assertEquals(html, fileContent.toString());
-		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
