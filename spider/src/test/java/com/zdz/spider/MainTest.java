@@ -19,17 +19,15 @@ import com.zdz.spider.scheduler.Scheduler;
 import com.zdz.spider.util.Page;
 import com.zdz.spider.util.Request;
 import com.zdz.spider.util.ResultItem;
+import com.zdz.spider.util.Spider;
 
 public class MainTest {
 	@Test
 	public void downloaderTest()
 	{
 		Downloader d = new Downloader();
-		Request r = new Request();
-		
 		String url = "http://localhost:8080/WebShop/default";
-		r.setUrl(url);
-		
+		Request r = new Request(url);
 		Scheduler s = new Scheduler();
 		s.put(r);
 		Request r2 = s.take();
@@ -100,11 +98,8 @@ public class MainTest {
 	public void pageProcesserTest()
 	{
 		Downloader d = new Downloader();
-		Request r = new Request();
-		
 		String url = "http://localhost:8080/WebShop/default";
-		r.setUrl(url);
-		
+		Request r = new Request(url);
 		Scheduler s = new Scheduler();
 		s.put(r);
 		Request r2 = s.take();
@@ -119,18 +114,22 @@ public class MainTest {
 		
 //		Assert.assertEquals(s.take().getUrl(), "javascript:QuickSearch()");
 //		由于此处的take当为空时为阻塞，所以会在最后一个url输出时卡住，如果要遍历则应该给出阻塞队列的对应不阻塞的方法
-		String str = s.take().getUrl();
-		while(str!=null)
-		{
-			System.out.println(str);
-		}
+//		String str = s.take().getUrl();
+//		while(str!=null)
+//		{
+//			System.out.println(str);
+//		}
 	}
-//	@Test
-//	public void spiderTest()
-//	{
-//		Spider spider = new Spider();
-//		String beginUrl = "http://localhost:8080/WebShop/default";
-//		spider.putUrl();
-//		spider.start();
-//	}
+	@Test
+	public void spiderTest()
+	{
+		Spider spider = new Spider();
+		String beginUrl = "http://localhost:8080/WebShop/default";
+		spider.putUrl(beginUrl);
+//		FilePipeline pipeline = new FilePipeline();
+//		pipeline.setPath("");
+//		spider.setPipline(pipeline);
+//		spider.
+		spider.start();
+	}
 }

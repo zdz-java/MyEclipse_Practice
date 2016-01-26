@@ -24,8 +24,7 @@ public class PageProcesser {
 		List<String> nextUrl = page.getNextUrls();
 		for(String str:nextUrl)
 		{
-			Request request = new Request();
-			request.setUrl(str);
+			Request request = new Request(str);
 			scheduler.put(request);
 		}
 		ResultItem resultItem = new ResultItem();
