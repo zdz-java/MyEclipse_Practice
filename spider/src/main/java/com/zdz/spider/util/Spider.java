@@ -16,8 +16,8 @@ public class Spider implements Callable<Boolean>,Runnable{
 	private Downloader downloader;
 	private PageProcesser pageProcesser;
 	private FilePipeline filePipeline;
-	private Scheduler scheduler;
-	private ExecutorService executorService = Executors.newCachedThreadPool();
+	private Scheduler scheduler = new Scheduler();
+	private ExecutorService executorService = Executors.newFixedThreadPool(2);
 
 	public void setDownloader(Downloader downloader) {
 		this.downloader = downloader;
@@ -31,10 +31,6 @@ public class Spider implements Callable<Boolean>,Runnable{
 		this.filePipeline = filePipeline;
 	}
 
-	public void setScheduler(Scheduler scheduler) {
-		this.scheduler = scheduler;
-	}
-
 	public void setExecutorService(ExecutorService executorService) {
 		this.executorService = executorService;
 	}
@@ -44,13 +40,9 @@ public class Spider implements Callable<Boolean>,Runnable{
 		return this;
 	}
 
-	public Spider scheduler(Scheduler scheduler) {
-		setScheduler(scheduler);
-		return this;
-	}
-
 	public Spider pageProcesser(PageProcesser pageProcesser) {
 		setPageProcesser(pageProcesser);
+		pageProcesser.setScheduler(scheduler);
 		return this;
 	}
 
@@ -60,35 +52,35 @@ public class Spider implements Callable<Boolean>,Runnable{
 	}
 
 	public Boolean call() throws Exception {
-		// while(true)
-		// {
-		// if(Thread.currentThread().isInterrupted())
-		// {
-		// break;
-		// }
-		// executorService.submit(new Runnable() {
-		// public void run() {
-		// Request request = scheduler.take();
-		// Page page = downloader.download(request);
-		// ResultItem resultItem = pageProcesser.process(page);
-		// filePipeline.process(resultItem);
-		// }
-		// });
-		// }
-		for (int i = 0; i < 20; i++) {
-			executorService.execute(new Runnable() {
-				public void run() {
-					System.out.println("进入到线程池中任务的run方法中");
-					Request request = scheduler.take();
-					System.out.println("run方法中的测试节点二");
-					Page page = downloader.download(request);
-					System.out.println("run方法中的测试节点一");
-					ResultItem resultItem = pageProcesser.process(page);
-					filePipeline.process(resultItem);
-					System.out.println("完成线程池中任务的run方法");
-				}
-			});
-		}
+		 while(true)
+		 {
+		 if(Thread.currentThread().isInterrupted())
+		 {
+		 break;
+		 }
+		 executorService.submit(new Runnable() {
+		 public void run() {
+		 Request request = scheduler.take();
+		 Page page = downloader.download(request);
+		 ResultItem resultItem = pageProcesser.process(page);
+		 filePipeline.process(resultItem);
+		 }
+		 });
+		 }
+//		for (int i = 0; i < 20; i++) {
+//			executorService.execute(new Runnable() {
+//				public void run() {
+//					System.out.println("进入到线程池中任务的run方法中");
+//					Request request = scheduler.take();
+//					System.out.println("run方法中的测试节点二");
+//					Page page = downloader.download(request);
+//					System.out.println("run方法中的测试节点一");
+//					ResultItem resultItem = pageProcesser.process(page);
+//					filePipeline.process(resultItem);
+//					System.out.println("完成线程池中任务的run方法");
+//				}
+//			});
+//		}
 
 		return null;
 	}
@@ -98,7 +90,7 @@ public class Spider implements Callable<Boolean>,Runnable{
 			scheduler.put(new Request(url));
 		}
 		try {
-//			call();
+			call();
 			
 //			System.out.println("进入到线程池中任务的run方法中");
 //			Request request = scheduler.take();
@@ -109,8 +101,12 @@ public class Spider implements Callable<Boolean>,Runnable{
 //			filePipeline.process(resultItem);
 //			System.out.println("完成线程池中任务的run方法");
 
-			Thread thread = new Thread(this);
-			thread.start();
+//			Thread thread = new Thread(this);
+//			thread.start();
+			
+			System.out.println("主线程进入休眠");
+			Thread.sleep(50000);
+			System.out.println("主线程休眠结束");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

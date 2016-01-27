@@ -22,14 +22,18 @@ public class PageProcesser {
 	
 	public ResultItem process(Page page)
 	{
+		System.out.println("进入到PageProcess的处理方法中");
 		List<String> nextUrl = page.getNextUrls();
+		System.out.println("Page中链接的个数为"+nextUrl.size());
 		for(String str:nextUrl)
 		{
-			if(str==null||str=="")
-				break;
-			Request request = new Request(str);
-			System.out.println("正在将连接："+str+"放入调度器中");
-			scheduler.put(request);
+			if(str!=null&&str!="")
+			{
+				Request request = new Request(str);
+				System.out.println("正在将连接："+str+"放入调度器中");
+				scheduler.put(request);
+			}
+			
 		}
 		ResultItem resultItem = new ResultItem();
 		resultItem.setUrl(page.getUrl());

@@ -141,7 +141,7 @@ public class MainTest {
 		spider.putUrl(beginUrl);
 		FilePipeline pipeline = new FilePipeline();
 		pipeline.setPath("c:/_forjavatest");
-		spider.pipeline(pipeline).downloader(new Downloader()).pageProcesser(new PageProcesser()).scheduler(new Scheduler());
+		spider.pipeline(pipeline).downloader(new Downloader()).pageProcesser(new PageProcesser());
 		spider.start();
 	}
 }
