@@ -6,12 +6,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Random;
 
 import com.zdz.spider.util.ResultItem;
 
 public class FilePipeline {
 	private	String path;
-
+	
 	public String getPath() {
 		return path;
 	}
@@ -21,11 +22,14 @@ public class FilePipeline {
 	}
 
 	public void process(ResultItem resultItem) {
+		System.out.println("enter into the pipeline process method");
 		if(resultItem == null)
 		{
 			throw new NullPointerException("null resultItem");
 		}
-		File file = new File(path+"/"+resultItem.getUrl()+".txt");
+		String name = Integer.toString(new Random().nextInt(1000));
+		File file = new File(path+"/"+name+".txt");
+//		File file = new File(path+"/"+resultItem.getUrl()+".txt");
 		try {
 			file.createNewFile();
 			FileOutputStream fileOutputStream = new FileOutputStream(file);

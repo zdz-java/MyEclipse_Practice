@@ -11,86 +11,128 @@ import com.zdz.spider.pageprocesser.PageProcesser;
 import com.zdz.spider.pipeline.FilePipeline;
 import com.zdz.spider.scheduler.Scheduler;
 
-public class Spider implements Callable<Boolean>{
+public class Spider implements Callable<Boolean>,Runnable{
 	private BlockingQueue<String> urls = new LinkedBlockingQueue<String>(10);
 	private Downloader downloader;
 	private PageProcesser pageProcesser;
 	private FilePipeline filePipeline;
 	private Scheduler scheduler;
 	private ExecutorService executorService = Executors.newCachedThreadPool();
-	
+
 	public void setDownloader(Downloader downloader) {
 		this.downloader = downloader;
 	}
+
 	public void setPageProcesser(PageProcesser pageProcesser) {
 		this.pageProcesser = pageProcesser;
 	}
+
 	public void setFilePipeline(FilePipeline filePipeline) {
 		this.filePipeline = filePipeline;
 	}
+
 	public void setScheduler(Scheduler scheduler) {
 		this.scheduler = scheduler;
 	}
+
 	public void setExecutorService(ExecutorService executorService) {
 		this.executorService = executorService;
 	}
-	public Spider downloader(Downloader downloader)
-	{
+
+	public Spider downloader(Downloader downloader) {
 		setDownloader(downloader);
 		return this;
 	}
-	public Spider scheduler(Scheduler scheduler)
-	{
+
+	public Spider scheduler(Scheduler scheduler) {
 		setScheduler(scheduler);
 		return this;
 	}
-	public Spider pageProcesser(PageProcesser pageProcesser)
-	{
+
+	public Spider pageProcesser(PageProcesser pageProcesser) {
 		setPageProcesser(pageProcesser);
 		return this;
 	}
-	public Spider pipeline(FilePipeline filePipeline)
-	{
+
+	public Spider pipeline(FilePipeline filePipeline) {
 		setFilePipeline(filePipeline);
 		return this;
 	}
+
 	public Boolean call() throws Exception {
-		while(true)
-		{
-			if(Thread.currentThread().isInterrupted())
-			{
-				break;
-			}
-			executorService.submit(new Runnable() {
+		// while(true)
+		// {
+		// if(Thread.currentThread().isInterrupted())
+		// {
+		// break;
+		// }
+		// executorService.submit(new Runnable() {
+		// public void run() {
+		// Request request = scheduler.take();
+		// Page page = downloader.download(request);
+		// ResultItem resultItem = pageProcesser.process(page);
+		// filePipeline.process(resultItem);
+		// }
+		// });
+		// }
+		for (int i = 0; i < 20; i++) {
+			executorService.execute(new Runnable() {
 				public void run() {
+					System.out.println("进入到线程池中任务的run方法中");
 					Request request = scheduler.take();
+					System.out.println("run方法中的测试节点二");
 					Page page = downloader.download(request);
+					System.out.println("run方法中的测试节点一");
 					ResultItem resultItem = pageProcesser.process(page);
-					filePipeline.process(resultItem);	
+					filePipeline.process(resultItem);
+					System.out.println("完成线程池中任务的run方法");
 				}
 			});
 		}
-		
+
 		return null;
 	}
-	public void start()
-	{
-		for(String url:urls)
-		{
+
+	public void start() {
+		for (String url : urls) {
 			scheduler.put(new Request(url));
 		}
 		try {
-			call();
+//			call();
+			
+//			System.out.println("进入到线程池中任务的run方法中");
+//			Request request = scheduler.take();
+//			System.out.println("run方法中的测试节点二");
+//			Page page = downloader.download(request);
+//			System.out.println("run方法中的测试节点一");
+//			ResultItem resultItem = pageProcesser.process(page);
+//			filePipeline.process(resultItem);
+//			System.out.println("完成线程池中任务的run方法");
+
+			Thread thread = new Thread(this);
+			thread.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void putUrl(String url)
-	{
+
+	public void putUrl(String url) {
 		try {
 			urls.put(url);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
+
+	public void run() {
+		System.out.println("进入到线程池中任务的run方法中");
+		Request request = scheduler.take();
+		System.out.println("run方法中的测试节点二");
+		Page page = downloader.download(request);
+		System.out.println("run方法中的测试节点一");
+		ResultItem resultItem = pageProcesser.process(page);
+		filePipeline.process(resultItem);
+		System.out.println("完成线程池中任务的run方法");		
+	}
+	
 }

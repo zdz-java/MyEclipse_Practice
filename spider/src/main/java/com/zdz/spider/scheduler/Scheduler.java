@@ -24,9 +24,11 @@ public class Scheduler {
 	}
 	public Request take()
 	{
+		System.out.println("进入到调度器的take方法,此时阻塞队列的size是："+requests.size());
 		Request toMove = null;
 		try {
 			toMove = requests.take();
+			System.out.println("离开调度器的take方法,此时阻塞队列的size是"+requests.size());
 		} catch (InterruptedException e) {
 			log.debug("等待从Scheduler中获取Request被打断");
 			e.printStackTrace();
