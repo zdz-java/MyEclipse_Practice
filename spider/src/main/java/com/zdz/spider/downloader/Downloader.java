@@ -33,7 +33,7 @@ public class Downloader {
 			response = httpclient.execute(httpget);
 			 HttpEntity entity = response.getEntity();  
 	          page.setStatusCode(response.getStatusLine().getStatusCode());
-	          if (entity != null) {  
+	          if (entity != null) {   
 	        	  System.out.println("下载器中测试节点2");
 	        	  page.setContent(EntityUtils.toString(entity));
 	          }  

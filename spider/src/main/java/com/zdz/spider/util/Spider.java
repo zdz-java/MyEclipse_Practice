@@ -1,10 +1,14 @@
 package com.zdz.spider.util;
 
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.zdz.spider.downloader.Downloader;
 import com.zdz.spider.pageprocesser.PageProcesser;
@@ -12,12 +16,13 @@ import com.zdz.spider.pipeline.FilePipeline;
 import com.zdz.spider.scheduler.Scheduler;
 
 public class Spider implements Callable<Boolean>{
+	private Log log = LogFactory.getLog(this.getClass());
 	private BlockingQueue<String> urls = new LinkedBlockingQueue<String>(10);
 	private Downloader downloader;
 	private PageProcesser pageProcesser;
 	private FilePipeline filePipeline;
 	private Scheduler scheduler = new Scheduler();
-	private ExecutorService executorService = Executors.newFixedThreadPool(2);
+	private ExecutorService executorService = Executors.newFixedThreadPool(1);
 
 	public void setDownloader(Downloader downloader) {
 		this.downloader = downloader;
@@ -42,7 +47,6 @@ public class Spider implements Callable<Boolean>{
 
 	public Spider pageProcesser(PageProcesser pageProcesser) {
 		setPageProcesser(pageProcesser);
-		pageProcesser.setScheduler(scheduler);
 		return this;
 	}
 
@@ -61,6 +65,14 @@ public class Spider implements Callable<Boolean>{
 					Request request = scheduler.take();
 					Page page = downloader.download(request);
 					ResultItem resultItem = pageProcesser.process(page);
+					
+					List<String> nextUrls = page.getNextUrls();
+					for(String s:nextUrls)
+					{
+						log.info(Thread.currentThread().getName()+":正在申请将链接放于调度器中："+s);
+						scheduler.put(new Request(s));
+					}
+					
 					filePipeline.process(resultItem);
 				}
 			});
@@ -74,10 +86,6 @@ public class Spider implements Callable<Boolean>{
 		}
 		try {
 			call();
-
-			System.out.println("主线程进入休眠");
-			Thread.sleep(50000);
-			System.out.println("主线程休眠结束");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,4 +99,14 @@ public class Spider implements Callable<Boolean>{
 		}
 	}
 
+//	public static void main(String[] args)
+//	{
+//		Spider spider = new Spider();
+//		String beginUrl = "http://localhost:8080/WebShop/default";
+//		spider.putUrl(beginUrl);
+//		FilePipeline pipeline = new FilePipeline();
+//		pipeline.setPath("c:/_forjavatest");
+//		spider.pipeline(pipeline).downloader(new Downloader()).pageProcesser(new PageProcesser());
+//		spider.start();
+//	}
 }
