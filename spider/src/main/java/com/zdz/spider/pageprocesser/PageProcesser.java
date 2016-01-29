@@ -28,6 +28,11 @@ public class PageProcesser {
 					nextUrl.remove(str);
 					log.info(Thread.currentThread().getName()+":移除了链接："+str);
 				}
+				if(str.indexOf("http://localhost:8080")==-1)
+				{
+					nextUrl.remove(str);
+					log.info(Thread.currentThread().getName()+":移除了链接："+str);
+				}
 			}
 			
 		}

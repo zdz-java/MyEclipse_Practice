@@ -22,7 +22,7 @@ public class Spider implements Callable<Boolean>{
 	private PageProcesser pageProcesser;
 	private FilePipeline filePipeline;
 	private Scheduler scheduler = new Scheduler();
-	private ExecutorService executorService = Executors.newFixedThreadPool(1);
+	private ExecutorService executorService = Executors.newFixedThreadPool(3);
 
 	public void setDownloader(Downloader downloader) {
 		this.downloader = downloader;
@@ -99,14 +99,14 @@ public class Spider implements Callable<Boolean>{
 		}
 	}
 
-//	public static void main(String[] args)
-//	{
-//		Spider spider = new Spider();
-//		String beginUrl = "http://localhost:8080/WebShop/default";
-//		spider.putUrl(beginUrl);
-//		FilePipeline pipeline = new FilePipeline();
-//		pipeline.setPath("c:/_forjavatest");
-//		spider.pipeline(pipeline).downloader(new Downloader()).pageProcesser(new PageProcesser());
-//		spider.start();
-//	}
+	public static void main(String[] args)
+	{
+		Spider spider = new Spider();
+		String beginUrl = "http://localhost:8080/WebShop/default";
+		spider.putUrl(beginUrl);
+		FilePipeline pipeline = new FilePipeline();
+		pipeline.setPath("c:/_forjavatest");
+		spider.pipeline(pipeline).downloader(new Downloader()).pageProcesser(new PageProcesser());
+		spider.start();
+	}
 }
