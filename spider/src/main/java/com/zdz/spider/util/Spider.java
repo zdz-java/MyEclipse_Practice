@@ -62,7 +62,12 @@ public class Spider implements Callable<Boolean>{
 			}
 			executorService.submit(new Runnable() {
 				public void run() {
-					Request request = scheduler.take();
+					
+					Request request = scheduler.poll();
+					if(request==null)
+					{
+						return;
+					}
 					Page page = downloader.download(request);
 					ResultItem resultItem = pageProcesser.process(page);
 					

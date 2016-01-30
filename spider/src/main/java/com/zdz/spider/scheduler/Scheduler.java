@@ -47,4 +47,8 @@ public class Scheduler {
 		}
 		return toMove;
 	}
+	public Request poll()
+	{
+		return requests.poll();
+	}
 }
