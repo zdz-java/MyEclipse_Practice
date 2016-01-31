@@ -134,8 +134,6 @@
 </table>
 <script language="javascript">
 	//构造商品分类下拉列表
-	jsonrpc = new JSONRpcClient("JSON-RPC");
-	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
 		option =document.createElement("OPTION");
 		option.value = result[i][0];
@@ -190,20 +188,5 @@
 		window.location = url;
 	}		
 </script>
-<!-- <logic:messagesPresent property="addCartStatus">
-	<script language="javascript">
-		alert('<html:errors property="addCartStatus"/>');
-	</script>
-</logic:messagesPresent>
-<logic:messagesPresent property="delCartStatus">
-	<script language="javascript">
-		alert('<html:errors property="delCartStatus"/>');
-	</script>
-</logic:messagesPresent>
-<logic:messagesPresent property="clearCartStatus">
-	<script language="javascript">
-		alert('<html:errors property="clearCartStatus"/>');
-	</script>
-</logic:messagesPresent> -->
 </body>
 </html>

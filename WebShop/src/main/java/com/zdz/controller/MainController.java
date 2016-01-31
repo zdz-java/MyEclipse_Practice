@@ -113,6 +113,7 @@ public class MainController {
 	public String login(@RequestParam String loginName,@RequestParam String loginPwd,Model model) throws Exception
 	{
 		Member member = memService.memLogin(loginName, loginPwd); 
+		System.out.println("提交登录网站的用户名与密码为："+loginName+"   "+loginPwd);
 		if(member!=null)
 		{
 			model.addAttribute("loginMember", member);
