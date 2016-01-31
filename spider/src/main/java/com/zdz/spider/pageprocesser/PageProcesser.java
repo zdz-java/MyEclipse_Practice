@@ -22,7 +22,6 @@ public class PageProcesser {
 		{
 			if(str!=null&&str!="")
 			{
-//				如果不满足条件就移除
 				if(str.indexOf("http://localhost:8080/WebShop/cart.do")!=-1)
 				{
 					nextUrl.remove(str);

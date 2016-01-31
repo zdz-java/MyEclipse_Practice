@@ -13,7 +13,6 @@ public class UrlUtils {
 	private static Pattern patternForHrefWithQuote = Pattern.compile("(<a[^<>]*href=)[\"']([^\"'<>]*)[\"']", Pattern.CASE_INSENSITIVE);
     private static Pattern patternForHrefWithoutQuote = Pattern.compile("(<a[^<>]*href=)([^\"'<>\\s]+)", Pattern.CASE_INSENSITIVE);
 
-//	该方法为拷贝webmagic项目的
 	public static String fixAllRelativeHrefs(String content, String url) {
 		content = replaceByPattern(content, url, patternForHrefWithQuote);
 		content = replaceByPattern(content, url, patternForHrefWithoutQuote);
@@ -57,7 +56,6 @@ public class UrlUtils {
         }
     }
 	 public static String encodeIllegalCharacterInUrl(String url) {
-	        //TODO more charator support
 	        return url.replace(" ", "%20");
 	    }
 }
