@@ -136,8 +136,6 @@
 </table>
 <script language="javascript">
 	//构造商品分类下拉列表
-	jsonrpc = new JSONRpcClient("JSON-RPC");
-	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
 		option =document.createElement("OPTION");
 		option.value = result[i][0];
@@ -149,8 +147,6 @@
 	function isNumber(){
 		return ((event.keyCode>47)&&(event.keyCode<58));
 	}
-	
-	//响应“GO”按钮
 	
 	//搜索商品
 	function QuickSearch(){
@@ -171,10 +167,5 @@
 		}
 	}
 </script>
-<logic:messagesPresent property="addWordStatus">
-	<script language="javascript">
-		alert('<html:errors property="addWordStatus"/>');
-	</script>
-</logic:messagesPresent>
 </body>
 </html>

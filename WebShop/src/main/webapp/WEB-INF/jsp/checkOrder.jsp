@@ -134,8 +134,6 @@
 </table>
 <script language="javascript">
 	//构造商品分类下拉列表
-	jsonrpc = new JSONRpcClient("JSON-RPC");
-	var result = jsonrpc.ajax.getCategory();
 	for (var i=0;i<result.length;i++){
 		option =document.createElement("OPTION");
 		option.value = result[i][0];
@@ -150,12 +148,6 @@
 		if (key !=null && key!="商品关键字" && key.length>0)url = url+"&key="+key;
 		window.location = url;
 	}
-	
-	//进入上一步
-	function pre(){
-		var url = "cart.do?method=browseCart";
-		window.location = url;
-	}	
 
 	//进入下一步
 	function next(){

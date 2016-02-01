@@ -1,6 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="gb2312"%>
-<%@ taglib uri="http://struts-menu.sf.net/tag" prefix="menu" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <html>
   <head>
 	<title><bean:message key="admin.pageTitle"/></title>
