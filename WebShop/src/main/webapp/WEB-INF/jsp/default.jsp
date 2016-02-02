@@ -4,6 +4,8 @@
 <head>
 <title>首页</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="JS/jquery-1.12.0.js"></script>
+<script type="text/javascript" src="JS/default.js"></script>
 </head>
 <body class="body">
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
@@ -11,14 +13,14 @@
     <td width="20">&nbsp;</td>
     <TD height="50" align="right" valign="bottom">
 		<IMG src="images/icon_login.gif" align="absmiddle"> 
-		<INPUT id="qKey" name="qKey" value="商品关键字" onClick="this.value=''"> 
+		<INPUT id="qKey" name="qKey" value="商品关键字"> 
         <select id="category">
        	<option value="0">所有商品</option>
 		  <c:forEach items="${cateList}" var="cate">
 		  		<option value="${cate.id}">${cate.cateName}</option>
 		  </c:forEach>
         </select>		
-		<A href="javascript:QuickSearch()"><IMG src="images/icon_search.gif" align="absmiddle" border="0"></A>    	
+		<A id="searchButton"><IMG src="images/icon_search.gif" align="absmiddle" border="0"></A>    	
 	</TD>
     <td width="20">&nbsp;</td>
   </tr>
@@ -259,19 +261,5 @@
     <td height="20" colspan="3">&nbsp;</td>
   </tr>
 </table>
-<script type="text/javascript">
-	//会员注册
-	function reg(){
-		window.location = "reg";
-	}
-	
-	//搜索商品
-	function QuickSearch(){
-		var url = "searchMer?cateid="+document.all.category.value;
-		var key = document.all.qKey.value;
-		if (key !=null && key!="商品关键字" && key.length>0)url = url+"&key="+key;
-		window.location = url;
-	}
-</script>
 </body>
 </html>
