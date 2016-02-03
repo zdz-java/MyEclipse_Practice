@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.zdz.model.Admin;
@@ -363,5 +364,13 @@ public class MainController {
 	public String sorry()
 	{
 		return "jsp/sorry";
+	}
+	@RequestMapping("/changeNum")
+	@ResponseBody
+	public void changeNum(@ModelAttribute("loginMember") Member member,@RequestParam()int mid,@RequestParam int amount)
+	{
+		System.out.println("进入到修改数量方法");
+		Cart cart = cartService.loadCart(member);
+		cartService.modiCart(cart.getId(),mid, amount);
 	}
 }

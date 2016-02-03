@@ -52,8 +52,8 @@
 	<!-- 正确性存疑 ,好像相应的价钱也要更改-->
 	<update id="modiCart">
 		update cartselectedmer set
-		number=#{param2}
-		where id = #{param1}
+		number=#{param3}
+		where cart = #{param1} and merchandise = #{param2}
 	</update>
 	<select id="browseCart" parameterType="Member" resultMap="cartResultMap">
 		select

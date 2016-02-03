@@ -65,11 +65,11 @@ private SqlSessionFactory sqlSessionFactory;
 	}
 
 	@Override
-	public boolean modiCart(Integer id, int number){
+	public boolean modiCart(Integer cid,int mid, int number){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		CartMapper cartMapper = sqlSession.getMapper(CartMapper.class);
 		
-		boolean b = cartMapper.modiCart(id, number);
+		boolean b = cartMapper.modiCart(cid,mid, number);
 		
 		sqlSession.commit();
 		sqlSession.close();

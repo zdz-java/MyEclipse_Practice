@@ -113,7 +113,7 @@
 		                           <TR height="30">
 		                             <TD class="UserRegster" align="right">
 		                               <a href="reg">注册</a>
-								  	<input type="submit" value="登录" name="Submit" />
+								  	<input id="submit" type="submit" value="登录" name="Submit" />
 								  	   
 								  </TD>
 		                         </TR>

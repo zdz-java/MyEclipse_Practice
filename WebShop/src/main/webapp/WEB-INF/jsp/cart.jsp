@@ -4,7 +4,9 @@
 <head>
 <title>购物车管理</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="JS/jquery-1.12.0.js"></script>
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
+<script type="text/javascript" src="JS/cart.js"></script>
 </head>
 <body class="body">
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
@@ -76,7 +78,7 @@
       </tr>
       <tr>
         <td align="center">
-			<table cellspacing="1" cellpadding="0" width="94%" border="0" bgcolor="#F7F3F7">
+			<table id="cartlist" cellspacing="1" cellpadding="0" width="94%" border="0" bgcolor="#F7F3F7">
               <tr height="26">
                 <td class="blackTitle" align="center">商品名称</td>
                 <td class="blackTitle" align="center">商品原价</td>
@@ -85,7 +87,6 @@
                 <td class="blackTitle" align="center">总价</td>
                 <td class="blackTitle" align="center">删除</td>
               </tr>
-              <!-- 如果不存在购物车： -->
 				<c:forEach items="${rows}" var="row">
 				  <tr class="text" align="center" bgcolor="#FFFFFF">
 					<td>
@@ -94,7 +95,7 @@
 						</a>					</td>
 					<td>￥${row.value.price}</td>
 					<td>￥<span id="price${row.key.id}">${row.key.price}</span></td>
-					<td><input type="text" class="textBox" onChange="modiNum(${row.key.id},this.value)" value="${row.key.number}" size="4"/></td>
+					<td><input type="text" class="textBox" onChange="changeNum(${row.key.id},this.value)" value="${row.key.number}" size="4"/></td>
 					<td>￥<span id="money${row.key.id}">${row.key.money}</span></td>
 					<td><input onClick="delCart(${row.key.id})" type="image" src="images/delete_01.gif" border="0"/></td>
 				  </tr>
@@ -132,7 +133,7 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-<script language="javascript">
+<!-- <script language="javascript">
 	//构造商品分类下拉列表
 	for (var i=0;i<result.length;i++){
 		option =document.createElement("OPTION");
@@ -187,6 +188,6 @@
 		var url = "checkOrder";
 		window.location = url;
 	}		
-</script>
+</script> -->
 </body>
 </html>

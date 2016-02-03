@@ -18,7 +18,7 @@ public interface CartMapper {
 	/** ��չ��ﳵ */	
 	public boolean clearCart(Member member);		
 //正确性存疑
-	public boolean modiCart(Integer id,int number);	
+	public boolean modiCart(Integer id,int number, int number2);	
 //是否这两个方法都需要先删除关联表中的内容
 	public boolean delCart(Integer id);
 //	该方法与browseCart方法是否为重复了

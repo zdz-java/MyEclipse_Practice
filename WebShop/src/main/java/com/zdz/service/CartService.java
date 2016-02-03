@@ -15,7 +15,7 @@ public interface CartService {
 	/** ��չ��ﳵ */	
 	public boolean clearCart(Member member);		
 	/** ����ѡ����Ʒ������ */	
-	public boolean modiCart(Integer id,int number);	
+	public boolean modiCart(Integer cid,int mid,int number);	
 	/** ɾ����ѡ����Ʒ */	
 	public boolean delCart(Integer id);
 	/** װ��ָ����Ա�Ĺ��ﳵ */	

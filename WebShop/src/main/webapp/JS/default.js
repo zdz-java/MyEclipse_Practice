@@ -13,5 +13,8 @@ $(function(){
 		alert(url);
 		location.href = url;
 	});
+	$("#login #submit").click(function(){
+		
+	});
 	
 });
