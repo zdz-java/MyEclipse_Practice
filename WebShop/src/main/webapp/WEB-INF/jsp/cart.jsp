@@ -109,7 +109,7 @@
 	  <tr height="20"><td colspan="5"></td></tr>	  
       <tr align="right">
         <td>
-			<input type="image" src="images/Car_icon_01.gif" style="BORDER: 0px;WIDTH: 126px; HEIGHT: 39px;" onClick="clearCart()">
+			<input id="deleteButton" type="image" src="images/Car_icon_01.gif" style="BORDER: 0px;WIDTH: 126px; HEIGHT: 39px;">
 			<a href="searchMer?cateid=0&key="><img style="CURSOR: hand" onClick="continueBuy()" src="images/Car_icon_02.gif" /></a>
 			<a href="checkOrder"><img src="images/Car_icon_03.gif" onClick="next()" border="0" style="CURSOR: hand"/></a>
 		</td>

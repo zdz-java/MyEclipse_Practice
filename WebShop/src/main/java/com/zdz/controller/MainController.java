@@ -373,4 +373,12 @@ public class MainController {
 		Cart cart = cartService.loadCart(member);
 		cartService.modiCart(cart.getId(),mid, amount);
 	}
+	@RequestMapping("/deleteCart")
+	@ResponseBody
+	public void deleteCart(@ModelAttribute("loginMember") Member member)
+	{
+		System.out.println("进入到删除购物车方法");
+		Cart cart = cartService.loadCart(member);
+		cartService.delCart(cart.getId());
+	}
 }

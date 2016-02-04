@@ -1,6 +1,11 @@
 $(function(){
 	alert("jQuery is used");
-	
+	$("#deleteButton").click(function(){
+		alert("按下了清空购物车按钮");
+		$(this).get("deleteCart",function(){
+			alert("修改成功");
+		});
+	});
 });
 function changeNum(id,amount){
 	var url = "changeNum?mid="+id+"&amount="+amount;
