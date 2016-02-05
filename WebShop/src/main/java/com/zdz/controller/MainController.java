@@ -369,7 +369,6 @@ public class MainController {
 	@ResponseBody
 	public void changeNum(@ModelAttribute("loginMember") Member member,@RequestParam()int mid,@RequestParam int amount)
 	{
-		System.out.println("进入到修改数量方法");
 		Cart cart = cartService.loadCart(member);
 		cartService.modiCart(cart.getId(),mid, amount);
 	}
