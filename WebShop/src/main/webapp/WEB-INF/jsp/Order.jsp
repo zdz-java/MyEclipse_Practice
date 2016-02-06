@@ -6,6 +6,8 @@
 <title>查看订单</title>
 <link href="CSS/stylesheet.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="JS/jsonrpc.js"></script>
+<script type="text/javascript" src="JS/jquery-1.12.0.js"></script>
+<script type="text/javascript" src="JS/order.js"></script>
 </head>
 <body class="body">
 	<table width="780" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="border:1px; border-style:solid; border-color:#888888">
@@ -90,7 +92,7 @@
 										<td><a href="viewOrder?oid=${order.id}"><span
 												class="blueText">查看订单详情</span></a>
 											&nbsp; 
-											<a href="delOrder?oid=${order.id}">
+											<a onClick="deleteOrder(${order.id})">
 												<span class="blueText">删除订单</span>
 											</a></td>
 									</tr>
@@ -116,7 +118,6 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td height="30" bgcolor="#4282CE" class="whiteText" align="center">
-				<bean:message key="website.foot" />
 			</td>
 			<td>&nbsp;</td>
 		</tr>
@@ -145,10 +146,5 @@
 		window.location = url;
 	}
 	</script>
-	<logic:messagesPresent property="delOrderStatus">
-		<script language="javascript">
-			alert('<html:errors property="delOrderStatus"/>');
-		</script>
-	</logic:messagesPresent>
 </body>
 </html>
