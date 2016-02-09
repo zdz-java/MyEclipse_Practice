@@ -24,10 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.zdz.model.Admin;
-import com.zdz.model.Cart;
-import com.zdz.model.Cartselectedmer;
-import com.zdz.model.Category;
 import com.zdz.model.Leaveword;
 import com.zdz.model.Member;
 import com.zdz.model.Memberlevel;
