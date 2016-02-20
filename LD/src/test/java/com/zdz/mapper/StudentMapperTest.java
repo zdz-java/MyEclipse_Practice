@@ -1,8 +1,6 @@
 package com.zdz.mapper;
 
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -16,16 +14,12 @@ import org.junit.Test;
 
 import com.zdz.model.Student;
 
-
-
 public class StudentMapperTest {
-	private String resource;
-	private InputStream inputStream;
 	private SqlSessionFactory sqlSessionFactory;
 	@Before
 	public void prepare() throws IOException {
-		resource = "Mybatis.xml";
-		inputStream = Resources.getResourceAsStream(resource);
+		String resource = "Mybatis.xml";
+		InputStream inputStream = Resources.getResourceAsStream(resource);
 		sqlSessionFactory = new SqlSessionFactoryBuilder()
 				.build(inputStream);
 	}
