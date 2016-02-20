@@ -1,9 +1,8 @@
-package com.zdz.mapper;
+package com.zdz.service;
 
 import com.zdz.model.Student;
 
-public interface StudentMapper {
+public interface StudentService {
 	public void addStudent(Student student);
 	public void updateStudent(Student student);
-	public Student selectStudent(String sid);
 }
