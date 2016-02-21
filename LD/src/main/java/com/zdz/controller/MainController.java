@@ -17,7 +17,15 @@ public class MainController {
 	@RequestMapping("/test")
 	public void test()
 	{
-		System.out.println(studentService.selectStudent("zdz").getStudentName());
+		if(studentService==null)
+		{
+			System.out.println("spring error");
+		}
+		if(studentService.selectStudent("123")==null)
+		{
+			System.out.println("sql error");
+		}
+		System.out.println(studentService.selectStudent("123").getStudentName());
 		System.out.println("first controller test work");
 	}
 }
