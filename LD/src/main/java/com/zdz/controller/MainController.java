@@ -15,7 +15,7 @@ public class MainController {
 	}
 
 	@RequestMapping("/test")
-	public void test()
+	public String test()
 	{
 		if(studentService==null)
 		{
@@ -27,5 +27,6 @@ public class MainController {
 		}
 		System.out.println(studentService.selectStudent("123").getStudentName());
 		System.out.println("first controller test work");
+		return "test";
 	}
 }
