@@ -29,4 +29,9 @@ public class MainController {
 		System.out.println("first controller test work");
 		return "test";
 	}
+	@RequestMapping("/test2")
+	public String test2()
+	{
+		return "test2";
+	}
 }
